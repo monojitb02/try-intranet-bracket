@@ -1,0 +1,97 @@
+/* body {
+    background-color: #e4e7ea !important;
+} */
+
+.p-b-30 {
+    padding-bottom: 30px;
+}
+/************ library override *********/
+
+.ckbox label:before {
+    top: 3px !important;
+}
+.ckbox label:after {
+    top: 3px !important;
+}
+.alert {
+    margin: 20px 0;
+}
+.input-group-btn {
+    vertical-align: top !important;
+}
+/**************** Generic ***************************/
+
+.m-r-3 {
+    margin-right: 3px;
+}
+.margin-reset {
+    margin: 0 !important;
+}
+/*************** registration page *********************/
+
+.header-searchbox {
+    position: absolute;
+    top: 15px;
+    right: 0;
+}
+.search-btn-header {
+    border-radius: 0 3px 3px 0 !important;
+    border: 0 !important;
+    top: 0px;
+    padding: 8px 10px !important;
+    margin-right: 0 !important;
+}
+.id-submit-btn {
+    padding: 8px 15px !important;
+}
+.calender-btn {
+    padding: 8px 15px !important;
+}
+.clear-both {
+    clear: both;
+}
+.tag-suggestion {
+    background: #fff;
+    padding-left: 0;
+    min-height: 39px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 100% !important;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    z-index: 10;
+    -webkit-box-shadow: 1px 10px 20px 2px #757575;
+    box-shadow: 1px 10px 20px 2px #757575;
+}
+.tag-suggestion ul {
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+}
+.tag-suggestion li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #CCCCCC;
+    clear: both;
+    float: left;
+    list-style: none outside none;
+    margin: 0px !important;
+    padding: 6px 0px;
+    width: 100%;
+}
+.search-result-close-block {
+    width: 100%;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+/************************* view candidate list page*****************/
+
+.candidate-list-header, .participant-info-modal {
+    overflow: auto;
+}
+.candidate-list-pagination {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

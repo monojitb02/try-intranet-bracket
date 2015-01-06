@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "data": [{
+    "_id": "1",
+    "companyDetails": {
+      "name": {
+        "first": "Abhisek",
+        "middle": "",
+        "last": "Kundu"
+      },
+      "email": "abhisek.kundu@Abhisek.com",
+      "designation": "Software Engineer",
+      "gender": "M",
+      "manager": {
+        "_id": "",
+        "name": {
+          "first": "",
+          "middle": "",
+          "last": ""
+        },
+        "photoUrl": ""
+      }
+    }
+  }]
+}

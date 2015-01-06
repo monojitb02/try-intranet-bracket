@@ -1,0 +1,75 @@
+<div ng-controller="ViewAttendance">
+
+  <div class="pageheader">
+
+    <h2><i class="fa fa-list"></i>Attendance List(For Admin)</h2>
+
+  </div>
+
+  <!-- Pageheader end -->
+
+  <div class="contentpanel">
+
+    <div class="panel panel-default">
+      <form id="select_date" class="form-horizontal">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">
+            Choose Date
+          </label>
+
+          <div class="col-sm-6">
+
+            <div class="input-group col-sm-7 pull-left">
+              <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />
+
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hidaction table-striped mb30">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>E. Code</th>
+              <th>Name</th>
+              <th>Shift</th>
+              <th>In Time</th>
+              <th>Out Time</th>
+              <th>Work Duration</th>
+              <th>Over Time</th>
+              <th>Total Duration</th>
+              <th>Status</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="eachEmpolyee in allEmployee">
+              <td>{{$index+1}}</td>
+              <td>{{eachEmpolyee.empCode}}</td>
+              <td>{{eachEmpolyee.name | name}}</td>
+              <td>{{eachEmpolyee.shift}}</td>
+              <td>{{eachEmpolyee.inTime}}</td>
+              <td>{{eachEmpolyee.outTime}}</td>
+              <td>{{eachEmpolyee.workDuration}}</td>
+              <td>{{eachEmpolyee.overTime}}</td>
+              <td>{{eachEmpolyee.totalDuration}}</td>
+              <td>{{eachEmpolyee.status}}</td>
+              <td>{{eachEmpolyee.remarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

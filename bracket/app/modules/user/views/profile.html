@@ -1,0 +1,203 @@
+<div ng-controller="ProfileController">
+
+  <div class="pageheader">
+
+    <h2><i class="fa fa-user"></i> Employee Profile</h2>
+
+  </div>
+
+  <!-- Pageheader end -->
+
+  <div>
+    <div class="contentpanel">
+      <div class="row">
+        <div class="col-sm-3">
+
+          <div class="relative">
+
+            <img ng-src="{{userDetails.personalProfile.photoUrl | url}}" class="thumbnail img-responsive" alt="" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+
+            <div ng-click="activateChangeEvent()" class="change-btn change-img-btn edit-image-button">
+              <input class="upload" type="file" id="choose" />
+              <a class="btn btn-default"><i class="fa fa-pencil"></i></a>
+            </div>
+
+          </div>
+
+          <div class="mb10"></div>
+
+          <!--   <div ng-if="userDetails.personalProfile.bioData" class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">About</div>
+          </div>
+          <p class="panel-body">{{userDetails.personalProfile.bioData}}</p>
+        </div> -->
+
+          <div class="mb10"></div>
+
+          <div ng-if="userDetails.leaveDetails" class="panel panel-default">
+
+            <div class="panel-heading">
+              <div class="panel-title">Leave Details</div>
+            </div>
+            <div class="panel-body">
+              <!-- {{userDetails.personalProfile.bioData}} -->
+              <!-- <div> -->
+
+              <strong>For</strong>
+              <div>
+                <span class="text-muted">{{userDetails.leaveDetails.duration.from | date:'MMMM d, y'}}</span>
+                to
+                <span class="text-muted">{{userDetails.leaveDetails.duration.to | date:'MMMM d, y'}}</span>
+              </div>
+
+              <strong>Max CL:</strong>
+              <span>{{userDetails.leaveDetails.maxCL}}</span>
+              <br>
+              <strong>Max EL:</strong>
+              <span>{{userDetails.leaveDetails.maxEL}}</span>
+              <br>
+              <strong>Carried forward EL:</strong>
+              <span>{{userDetails.leaveDetails.carriedForwardEL}}</span>
+              <br>
+              <strong>Availble CL:</strong>
+              <span>{{userDetails.leaveDetails.maxCL - userDetails.leaveDetails.takenCL.length}}</span>
+              <br>
+              <strong>Availble EL:</strong>
+              <span>{{userDetails.leaveDetails.maxEL - userDetails.leaveDetails.takenEL.length}}</span>
+              <br>
+              <strong>Taken casual leaves:</strong>
+              <br>
+              <div class="date-padding" ng-show="userDetails.leaveDetails.takenCL.length" ng-repeat="date in userDetails.leaveDetails.takenCL">{{date | date:'MMMM d, y'}}</div>
+
+              <strong>Taken earned leaves:</strong>
+              <br>
+              <div class="date-padding" ng-show="userDetails.leaveDetails.takenEL.length" ng-repeat="date in userDetails.leaveDetails.takenEL">{{date | date:'MMMM d, y'}}</div>
+
+              <strong>Taken without pay leaves:</strong>
+              <br>
+              <div class="date-padding" ng-show="userDetails.leaveDetails.takenLWP.length" ng-repeat="date in userDetails.leaveDetails.takenLWP">{{date | date:'MMMM d, y'}}</div>
+              <!-- </div> -->
+
+            </div>
+          </div>
+        </div>
+        <!-- Left Side End -->
+        <div class="col-sm-9">
+          <div class="clearfix">
+            <div class="profile-header pull-left">
+              <h2 class="profile-name">{{userDetails.companyProfile.name | name}}</h2>
+              <div class="profile-location">
+                <i class="fa fa-map-marker"></i> {{getCurrentLocation() | fullAddress}}</span>
+              </div>
+              <div class="profile-position"><i class="fa fa-briefcase"></i> {{userDetails.companyProfile.designation.post}} at
+                <strong>{{userDetails.companyProfile.company.name}}</strong>
+              </div>
+            </div>
+            <div class="pull-right" ng-click="loadEditView()">
+              <a class="btn btn-primary">
+                <i class="fa fa-edit edit-event"></i>Edit
+              </a>
+            </div>
+          </div>
+          <div>
+            <form id="EmployeeDetails" class="form-horizontal normal-form panel-form">
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Permanent Address
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label text-left normal-font-weight">{{userDetails.personalProfile.permanentAddress | fullAddress}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  DOB
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.DOB | date:'MMM d, y'}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Contact Details
+                </label>
+                <div class="col-sm-6">
+                  <label class="col-sm-3 control-label">
+                    Phone No.
+                  </label>
+                  <div class="col-sm-8 clearfix">
+                    <div class="control-label normal-font-weight text-left" ng-repeat="number in userDetails.personalProfile.contactNumbers">
+                      {{number}}
+                    </div>
+
+                  </div>
+                  <br>
+                  <label class="col-sm-3 control-label">
+                    Email
+                  </label>
+                  <div class="col-sm-8 clearfix">
+                    <div class="control-label normal-font-weight text-left">
+                      {{userDetails.companyProfile.email}}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Gender
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.gender | gender}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  DOJ
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.DOJ | date:'MMM d, y'}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Manager
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.manager.companyProfile.name | name}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Employee Id
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.empId}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  Machine Id
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.attendanceId}}</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">
+                  PAN
+                </label>
+                <div class="col-sm-6">
+                  <label class="control-label normal-font-weight">{{userDetails.companyProfile.panId}}</label>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

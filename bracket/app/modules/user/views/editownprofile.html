@@ -1,0 +1,101 @@
+<div ng-controller="EditOwnProfileController">
+  <div class="dialog-header">
+    <button type="button" class="close" ng-click="close()">×</button>
+    <h4 class="">
+      <span class="fa fa-cog"></span>Edit Profile
+    </h4>
+  </div>
+  <form id="editProfile" class="normal-form">
+    <div class="dialog-body">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Permanent Address
+          <span class="asterisk">*</span>
+        </label>
+        <div class="form-div-group col-sm-7">
+          <div>
+            <input name="permanentFullAddress" type="text" ng-model="employee.permanentAddress.fullAddress" placeholder="Address" class="form-control">
+          </div>
+          <div class="clearfix">
+            <div class="no-padding-left col-sm-4">
+              <input name="permanentCity" type="text" ng-model="employee.permanentAddress.city" placeholder="City" class="form-control">
+            </div>
+
+            <div class="col-sm-4">
+              <input name="permanentState" type="text" ng-model="employee.permanentAddress.state" placeholder="State" class="form-control">
+            </div>
+
+            <div class="no-padding-right col-sm-4">
+              <input name="permanentCountry" type="text" ng-model="employee.permanentAddress.country" placeholder="Country" class="form-control">
+            </div>
+
+          </div>
+          <div>
+            <input name="permanentPin" type="text" ng-model="employee.permanentAddress.PIN" placeholder="Pin Code" class="form-control">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Current Address
+
+        </label>
+        <div class="form-div-group col-sm-7">
+
+          <div class="checkbox block">
+            <div class="ckbox ckbox-primary block">
+              <input type="checkbox" id="int_website" ng-model="checked" class="ng-pristine ng-untouched ng-valid">
+              <label for="int_website">Same as "Permanent Address?"</label>
+            </div>
+          </div>
+
+          <div>
+            <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.currentAddress.fullAddress" placeholder="Address" class="form-control">
+          </div>
+          <div class="clearfix">
+            <div class="no-padding-left col-sm-4">
+              <input name="city" type="text" ng-disabled="checked" ng-model="employee.currentAddress.city" placeholder="City" class="form-control">
+            </div>
+
+            <div class="col-sm-4">
+              <input name="state" type="text" ng-disabled="checked" ng-model="employee.currentAddress.state" placeholder="State" class="form-control">
+            </div>
+
+            <div class="no-padding-right col-sm-4">
+              <input name="country" type="text" ng-disabled="checked" ng-model="employee.currentAddress.country" placeholder="Country" class="form-control">
+            </div>
+
+          </div>
+          <div>
+            <input name="pin" type="text" ng-disabled="checked" ng-model="employee.currentAddress.PIN" placeholder="Pin Code" class="form-control">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Contact Numbers
+
+        </label>
+        <div class="col-sm-7">
+          <div id="website_list" class="form-div-group no-style">
+            <div ng-repeat="eachContact in employee.contactNumbers">
+              <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control" name="phoneNumber">
+            </div>
+          </div>
+          <button type="button" ng-click="addContactNumber()" class="btn btn-primary pull-right mt10">
+            Add Phone
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="dialog-footer text-right">
+    <span ng-show="loading">
+      <i class="fa fa-spinner fa-spin"></i>
+    </span>
+    <button type="button" class="btn btn-primary dialog-form-btn" ng-click="save()">
+      Save
+    </button>
+  </div>
+</div>

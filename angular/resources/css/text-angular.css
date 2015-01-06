@@ -1,0 +1,66 @@
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+.ta-editor, .ta-editor > .ta-bind {
+    min-height: 600px;
+}
+.red {
+    color: red;
+}
+.statictoolbar {
+    position: fixed;
+    top: 12px;
+    z-index: 200;
+}
+img[ta-insert-video] {
+    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32.812 -22.812 80 80" preserveAspectRatio="xMinYMin meet" width="100%" height="100%"><path d="M27.188,4.875v1.094h-4.5V4.875H8.062v1.094h-4.5V4.875h-1v21.25h1v-1.094h4.5v1.094h14.625v-1.094h4.5v1.094h1.25V4.875H27.188zM8.062,23.719h-4.5v-3.125h4.5V23.719zM8.062,19.281h-4.5v-3.125h4.5V19.281zM8.062,14.844h-4.5v-3.125h4.5V14.844zM8.062,10.406h-4.5V7.281h4.5V10.406zM11.247,20.59V9.754l9.382,5.418L11.247,20.59zM27.188,23.719h-4.5v-3.125h4.5V23.719zM27.188,19.281h-4.5v-3.125h4.5V19.281zM27.188,14.844h-4.5v-3.125h4.5V14.844zM27.188,10.406h-4.5V7.281h4.5V10.406z"></path></svg>');
+    border: 1px solid black;
+}
+.text-lg {
+    font-size: 1.5em;
+}
+.text-med {
+    font-size: 1.2em;
+}
+.text-xlg {
+    font-size: 2.4em;
+}
+.border-around {
+    background: rgba(255, 255, 255, 0.7);
+}
+.text-red {
+    color: #E52A3A;
+}
+.text-gray {
+    color: #5f5f5f;
+}
+.roboto {
+    font-family: "Roboto", sans-serif;
+}
+text-sm {
+    font-size: 0.5em;
+}
+.border-around {
+    border: 1px solid rgba(2, 2, 2, 0.1);
+    border-radius: 6px;
+    vertical-align: text-bottom;
+}
+.light {
+    padding: 1em;
+}
+.lighter {
+    padding: 0.5em;
+}
+.shadWhite {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.shadBlack {
+    text-shadow: 0 1px 0 rgba(2, 2, 2, 0.7);
+}
+a.text-gray:hover {
+    color: #5f5f5f;
+}

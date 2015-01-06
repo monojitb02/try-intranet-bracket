@@ -1,0 +1,180 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html ng-app="conference">
+
+<head>
+  <title>Conference</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="app-new.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div ng-controller="AgendaList" class="ng-scope contentpanel">
+    <div>
+
+      <div>
+
+        <div class="event-details clearfix mb30">
+          <div class=" all-agenda clearfix">
+            <img class="col-sm-1" src="http://localhost:8000/images/app-pictures/hyfqshyp0jcfdd9330dx3tkv.jpeg">
+            <h2 class="col-sm-6 ng-binding">Tampa Event</h2>
+          </div>
+          <div class="all-agenda clearfix">
+            <div class="ng-isolate-scope">
+              <ul class="nav nav-tabs" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}" ng-transclude="">
+                <li ng-class="{active: active, disabled: disabled}" ng-repeat="event in agendaList.eventArray" heading="AUG 01, 2014" class="ng-isolate-scope active">
+                  <a ng-click="select()" tab-heading-transclude="" class="ng-binding">AUG 01, 2014</a>
+                </li>
+                <li ng-class="{active: active, disabled: disabled}" ng-repeat="event in agendaList.eventArray" heading="AUG 29, 2014" class="ng-isolate-scope">
+                  <a ng-click="select()" tab-heading-transclude="" class="ng-binding">AUG 29, 2014</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <!-- ngRepeat: tab in tabs -->
+                <div class="tab-pane active agenda-container" ng-repeat="tab in tabs" tab-content-transclude="tab">
+
+
+                  <!-- ngRepeat: eachEvent in event.list -->
+                  <div class="agenda-time clearfix">
+                    <!-- {{eachEvent}} -->
+                    <div class="time col-xs-2 col-sm-2 col-md-2">01:52 PM
+                      <br>
+                      <span>to</span>
+                      <br>03:52 PM
+                    </div>
+
+                    <div class="agenda-detail relative col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-9 col-sm-9 col-md-9">
+                      <!-- ngIf: eachEvent.showButtonGroup -->
+                      <div class="col-md-12 ">
+                        <div class="mb20"></div>
+                        <div class="profile-header">
+                          <h2 class="profile-name">A Safe Approach to Social Selling Using Carrots, Sticks and Wisdom to get your team on the same page</h2>
+                          <div class="profile-location"><i class="fa fa-map-marker"></i>Main, San Francisco, California, USA</div>
+                          <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="#">SomeCompany, Inc.</a>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                          <div class="people-item">
+                            <div class="media">
+                              <a href="#" class="col-sm-6 col-md-4">
+                                <img alt="" src="../images/userprofile.png" class="">
+                              </a>
+                              <div class="col-sm-6 col-md-8">
+                                <h4 class="person-name">Venro Leonga</h4>
+                                <div class="text-muted"><i class="fa fa-map-marker"></i> Bangcok, Thailand</div>
+                                <div class="text-muted"><i class="fa fa-briefcase"></i> CEO at <a href="#">SomeCompany, Inc.</a>
+                                </div>
+                                <ul class="social-list">
+                                  <li><a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Email"><i class="fa fa-envelope-o"></i></a>
+                                  </li>
+                                  <li><a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                                  </li>
+                                  <li><a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                                  </li>
+                                  <li><a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+                                  </li>
+                                  <li><a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- agenda-detail END -->
+
+                  </div>
+                  <!-- end ngRepeat: eachEvent in event.list -->
+                  <!-- agenda END -->
+
+                </div>
+                <!-- end ngRepeat: tab in tabs -->
+                <div class="tab-pane ng-scope" ng-repeat="tab in tabs" ng-class="{active: tab.active}" tab-content-transclude="tab">
+
+
+                  <!-- ngRepeat: eachEvent in event.list -->
+                  <div class="agenda ng-scope" ng-repeat="eachEvent in event.list">
+                    <!-- {{eachEvent}} -->
+                    <div class="time col-md-2 ng-binding">03:01 PM
+                      <br>
+                      <span>to</span>
+                      <br>05:00 PM
+                    </div>
+
+                    <div class="agenda-detail relative col-md-10" ng-click="agendaView(eachEvent._id)" ng-mouseover="eachEvent.showButtonGroup=true" ng-mouseleave="eachEvent.showButtonGroup=false">
+                      <!-- ngIf: eachEvent.showButtonGroup -->
+                      <div>
+                        <h4 class="ng-binding">ABC</h4>
+                        <h5 class="ng-binding"> <i>Location:</i> amar bari te</h5>
+
+                        <!-- ngRepeat: eachSpeaker in eachEvent.speakers -->
+                        <div class="speaker ng-scope" ng-repeat="eachSpeaker in eachEvent.speakers">
+                          <img ng-src="./resources/images/download.jpg" onerror="this.onerror=null;this.src='./resources/images/user.png';" src="./resources/images/download.jpg">
+                          <div class="speaker-detail">
+                            <h5 class="ng-binding">nrgewj</h5>
+                            <p class="ng-binding"> <i class="ng-binding"> jsgwmw,</i> foikjewoi</p>
+                          </div>
+                        </div>
+                        <!-- end ngRepeat: eachSpeaker in eachEvent.speakers -->
+                      </div>
+                    </div>
+                    <!-- agenda-detail END -->
+
+                  </div>
+                  <!-- end ngRepeat: eachEvent in event.list -->
+                  <div class="agenda ng-scope" ng-repeat="eachEvent in event.list">
+                    <!-- {{eachEvent}} -->
+                    <div class="time col-md-2 ng-binding">11:06 PM
+                      <br>
+                      <span>to</span>
+                      <br>01:00 PM
+                    </div>
+
+                    <div class="agenda-detail relative col-md-10" ng-click="agendaView(eachEvent._id)" ng-mouseover="eachEvent.showButtonGroup=true" ng-mouseleave="eachEvent.showButtonGroup=false">
+                      <!-- ngIf: eachEvent.showButtonGroup -->
+                      <div>
+                        <h4 class="ng-binding">hfewbh</h4>
+                        <h5 class="ng-binding"> <i>Location:</i> n rgehkjne</h5>
+
+                        <!-- ngRepeat: eachSpeaker in eachEvent.speakers -->
+                        <div class="speaker ng-scope" ng-repeat="eachSpeaker in eachEvent.speakers">
+                          <img ng-src="http://localhost:8000/images/speaker-pictures/hyfok6eu0e8ydd93306gcdd8_s.jpeg" onerror="this.onerror=null;this.src='./resources/images/user.png';" src="http://localhost:8000/images/speaker-pictures/hyfok6eu0e8ydd93306gcdd8_s.jpeg">
+                          <div class="speaker-detail">
+                            <h5 class="ng-binding">Abhisek Kundu</h5>
+                            <p class="ng-binding"> <i class="ng-binding"> Software Engineer,</i> Innofied Solution Pvt. Ltd.</p>
+                          </div>
+                        </div>
+                        <!-- end ngRepeat: eachSpeaker in eachEvent.speakers -->
+                      </div>
+                    </div>
+                    <!-- agenda-detail END -->
+
+                  </div>
+                  <!-- end ngRepeat: eachEvent in event.list -->
+                  <!-- agenda END -->
+
+                </div>
+                <!-- end ngRepeat: tab in tabs -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../libs/jquery.js"></script>
+  <script src="../../libs/bootstrap.min.js"></script>
+  <script>
+  $('.nav a').click(function(e) {
+    e.preventDefault()
+    $(this).tab('show')
+  });
+  </script>
+</body>
+
+</html>

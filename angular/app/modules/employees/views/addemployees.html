@@ -1,0 +1,399 @@
+<div ng-controller="AddEmployee">
+  <div class="pageheader">
+    <h2>
+      <i class="fa fa-user"></i>
+      {{heading}} Employee
+    </h2>
+  </div>
+
+  <div class="contentpanel">
+    <div class="panel">
+      <!-- <div class="panel-heading">
+              <h4 class="panel-title">Lorem ipsum</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat consectetur ipsam obcaecati et dignissimos quam nemo soluta ut iure perferendis laboriosam incidunt, vel, dolore. Culpa optio vel cum recusandae impedit!</p>
+            </div> -->
+
+
+      <div class="panel-body">
+        <form id="addEmployee" class="form-horizontal form-bordered">
+          <div class="form-group" ng-show="profile.editPersonalProfile">
+            <label class="col-sm-3 control-label">Profile Picture</label>
+            <div class="col-sm-6">
+              <div class="col-sm-9 upload-image-group">
+                <div class="change-img profile-picture-container">
+                  <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                </div>
+                <div ng-click="activateChangeEvent()" class="change-btn change-img-btn">
+                  <input class="upload" type="file" id="choose" />
+                  <a class="btn btn-primary">Upload Image</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Name
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6 location">
+              <div class="col-sm-4">
+                <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">
+              </div>
+              <div class="col-sm-4">
+                <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">
+              </div>
+              <div class="col-sm-4">
+                <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Gender
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-3 radio clearfix">
+              <div class="rdio rdio-primary col-sm-3">
+                <input type="radio" value="M" id="male" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">
+                <label for="male">Male</label>
+              </div>
+              <div class="rdio rdio-primary col-sm-3">
+                <input type="radio" value="F" id="female" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">
+                <label for="female">Female</label>
+              </div>
+            </div>
+          </div>
+          <!-- New Changes-->
+          <div class="form-group" ng-show="profile.editPersonalProfile">
+            <label class="col-sm-3 control-label">Permanent Address
+              <span class="asterisk">*</span>
+            </label>
+            <div class="form-div-group col-sm-6">
+              <div>
+                <input name="permanentFullAddress" type="text" ng-model="employee.personalProfile.permanentAddress.fullAddress" placeholder="Address" class="form-control">
+              </div>
+              <div class="clearfix">
+                <div class="no-padding-left col-sm-4">
+                  <input name="permanentCity" type="text" ng-model="employee.personalProfile.permanentAddress.city" placeholder="City" class="form-control">
+                </div>
+
+                <div class="col-sm-4">
+                  <input name="permanentState" type="text" ng-model="employee.personalProfile.permanentAddress.state" placeholder="State" class="form-control">
+                </div>
+
+                <div class="no-padding-right col-sm-4">
+                  <input name="permanentCountry" type="text" ng-model="employee.personalProfile.permanentAddress.country" placeholder="Country" class="form-control">
+                </div>
+
+              </div>
+              <div>
+                <input name="permanentPin" type="text" ng-model="employee.personalProfile.permanentAddress.PIN" placeholder="Pin Code" class="form-control">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group" ng-show="profile.editPersonalProfile">
+            <label class="col-sm-3 control-label">Current Address</label>
+            <div class="form-div-group col-sm-6">
+
+              <div class="checkbox block">
+                <div class="ckbox ckbox-primary block">
+                  <input type="checkbox" id="int_website" ng-model="checked">
+                  <!-- ng-click="manageAddress(checked)" -->
+                  <label for="int_website">Same as "Permanent Address?"</label>
+                </div>
+              </div>
+
+              <div>
+                <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.fullAddress" placeholder="Address" class="form-control">
+              </div>
+              <div class="clearfix">
+                <div class="no-padding-left col-sm-4">
+                  <input name="city" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.city" placeholder="City" class="form-control">
+                </div>
+
+                <div class="col-sm-4">
+                  <input name="state" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.state" placeholder="State" class="form-control">
+                </div>
+
+                <div class="no-padding-right col-sm-4">
+                  <input name="country" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.country" placeholder="Country" class="form-control">
+                </div>
+
+              </div>
+              <div>
+                <input name="pin" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.PIN" placeholder="Pin Code" class="form-control">
+              </div>
+            </div>
+
+          </div>
+          <!-- New Changes-->
+
+          <div class="form-group" ng-show="profile.editPersonalProfile">
+            <label class="col-sm-3 control-label">Contact Numbers
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <ul id="website_list" class="no-style">
+                <li ng-repeat="eachContact in employee.contactNumbers">
+                  <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control col-sm-11" name="phoneNumber">
+                  <!-- <button type="button" class="btn btn-denger cursor-pointer col-sm-1" ng-disabled="eachContact.text.length" ng-click="removeContactNumber($index)">
+                                      <i class="fa fa-times icon"></i>
+                                    </button> -->
+                </li>
+              </ul>
+              <button type="button" ng-click="addContactNumber()" class="btn btn-primary pull-right mt10">
+                Add Phone
+              </button>
+            </div>
+          </div>
+
+
+
+          <!-- <div class="form-group" ng-show="profile.editPersonalProfile">
+                      <label class="col-sm-3 control-label">
+                        Biography
+                      </label>
+                      <div class="col-sm-6">
+                        <textarea name="bio" ng-model="employee.personalProfile.bioData" ckeditor="editorOptions" placeholder="Enter text here..." ng-click="getCkeditor()" class="form-control" rows="5"></textarea>
+                      </div>
+                    </div> -->
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">DOB
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <div class="input-group col-sm-7">
+                <input name="DOB" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOB" is-open="DOBOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="DOBOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">DOJ
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <div class="input-group col-sm-7">
+                <input name="DOJ" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOJ" is-open="DOJOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="DOJOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Email
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="email" type="text" placeholder="email" ng-model="employee.companyProfile.email" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Designation
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+
+              <!-- <select name="designation" class="form-control" ng-model="selectedDesignation.post">
+                              <option ng-repeat="designation in designations" value="{{designation.post}}">{{designation.post}}</option>
+                            </select> -->
+
+              <select name="designation" class="form-control" ng-model="selectedDesignation" ng-options="designation as designation.post for designation in designations">
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">CTC
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="ctc" type="text" placeholder="CTC" ng-model="employee.companyProfile.CTC" class="form-control">
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Employee Id
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="empId" type="text" placeholder="Employee Id" ng-model="employee.companyProfile.empId" class="form-control">
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label" name="machine">Machine Id
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="machineId" type="text" placeholder="Machine Id" ng-model="employee.companyProfile.attendanceId" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">PAN
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="pan" type="text" placeholder="PAN" ng-model="employee.companyProfile.panId" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="checkAdmin()">
+            <label class="col-sm-3 control-label">ROLE
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-3">
+
+
+              <select name="role" class="form-control" ng-model="selectedRole" ng-options="role as role.name for role in roles">
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="checkAdmin()">
+            <label class="col-sm-3 control-label">Manager</label>
+            <div class="col-sm-6">
+
+              <div id="tags_added">
+                <ul ng-hide="!employee.managers.length" class="no-style">
+                  <li ng-repeat="manager in employee.managers" class="clearfix">
+                    <div class="clear-both">
+                      <div class="col-sm-2 clearfix">
+                        <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                      </div>
+                      <div class="col-sm-8 no-padding-left clearfix">
+                        <div>{{manager.companyProfile.name | name}}</div>
+                        <span class="speaker-description">{{manager.companyProfile.designation.post}}</span>
+                        ,
+                        <span class="speaker-description">{{manager.companyProfile.company.name}}</span>
+                      </div>
+                      <div class="col-sm-2">
+                        <span class="close" title="Remove speaker" ng-click="removeManager($index)" data-btn-name="close_speaker_search">×</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <input ng-hide="employee.managers.length" type="text" placeholder="Choose a manager..." ng-model="employee.managerAutoSearch" ng-keyup="getManagerList()" class="form-control">
+
+              <div ng-hide="!employee.managerAutoSearch.trim().length" class="tag-suggestion search-result-margin" ng-show="displayResult">
+                <div class="search-result-close-block">
+                  <span class="search-result-close-text">Managers found :</span>
+                  <span class="close" title="Close search result" ng-click="closeSearchResult()" data-btn-name="close_speaker_search">×</span>
+                </div>
+                <ul ng-hide="!managers.length" id="speaker_dropdown" class="chosen-results no-style" role="menu">
+                  <li ng-repeat="manager in managers">
+                    <div class="clear-both">
+                      <div class="col-sm-2 clearfix">
+                        <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                      </div>
+                      <div class="col-sm-8 no-padding-left clearfix">
+                        <div>{{manager.companyProfile.name | name}}</div>
+                        <div>
+                          <span class="speaker-description">{{manager.companyProfile.designation.post}}</span>
+                          ,
+                          <span class="speaker-description">{{manager.companyProfile.company.name}}</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <button class="btn btn-primary add-button pull-right" ng-click="addManager($index)">Add</button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div id="no_speaker" ng-hide="managers.length" class="text-center">
+                  <span class="fa fa-spin fa-spinner"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Leave account start date
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <div class="input-group col-sm-7">
+                <input name="accountStartDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountStartDate" is-open="accountStartDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="accountStartDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Leave account end date
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <div class="input-group col-sm-7">
+                <input name="accountEndDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountEndDate" is-open="accountEndDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="accountEndDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Max CL
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="maxCL" type="number" placeholder="Max CL" ng-model="employee.companyProfile.maxCL" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group" ng-show="profile.editCompanyProfile">
+            <label class="col-sm-3 control-label">Max EL
+              <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-6">
+              <input name="maxEL" type="number" placeholder="Max EL" ng-model="employee.companyProfile.maxEL" class="form-control">
+            </div>
+          </div>
+
+          <div ng=show="profile.editPersonalProfile || profile.editCompanyProfile" class="form-group">
+            <div class="col-sm-6 col-sm-offset-3">
+              <div ng-hide="!showErrors" id="error_section">
+                <label ng-repeat="error in errors" class="error">{{error}}</label>
+
+              </div>
+            </div>
+            <div class="form-button-group col-sm-6 col-sm-offset-3">
+
+              <button class="btn btn-primary" name="addEmployeeButton" type="button" ng-click="addEmployee()">
+                Submit
+                <span ng-show="loading">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </span>
+              </button>
+              <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

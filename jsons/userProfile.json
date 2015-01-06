@@ -1,0 +1,49 @@
+{
+  "personalDetails": {
+    "permanentAddress": {
+      "fullAddress": "AG-112, AMP Vaisaakhi Mall",
+      "city": "Kolkata",
+      "state": "West Bengal",
+      "country": "India",
+      "pin": "700091"
+    },
+    "currentAddress": {
+      "fullAddress": "4/60, Bijoygarh",
+      "city": "Kolkata",
+      "state": "West Bengal",
+      "country": "India",
+      "pin": "700032"
+    },
+    "contactNumbers": ["+9133-40081324", "+9133-40084527"],
+    "bioData": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat consectetur ipsam obcaecati et dignissimos quam nemo soluta ut iure perferendis laboriosam incidunt, vel, dolore. Culpa optio vel cum recusandae impedit!",
+    "photoUrl": ""
+  },
+  "companyDetails": {
+    "name": {
+      "first": "Kaushick",
+      "middle": "",
+      "last": "Gope"
+    },
+    "DOJ": "",
+    "DOB": "",
+    "designation": "Software Engineer",
+    "company": {
+      "_id": "",
+      "name": "Innofied Solution Pvt. Ltd."
+    },
+    "email": "kaushick.gope@innofied.com",
+    "manager": {
+      "_id": "",
+      "name": {
+        "first": "Payal",
+        "middle": "",
+        "last": "Dey"
+      },
+      "photoUrl": ""
+    },
+    "empId": "",
+    "attendanceId": "22",
+    "panId": "WB-202010307875",
+    "gender": "M"
+  }
+}

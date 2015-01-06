@@ -1,0 +1,35 @@
+@import url("../css/lato.css");
+@import url("../css/bootstrap.min.css");
+@import url("../css/bootstrap-timepicker.min.css");
+@import url("../css/font-awesome.css");
+@import url("../css/style.default.css");
+@import url("../css/chosen.css");
+ .col-md-6 {
+  margin-left: -15px !important;
+}
+.agenda-detail {
+  padding: 10px;
+  border: 1px solid;
+}
+.agenda-detail > div {
+  border: 1px solid #555;
+  margin: 15px 0;
+}
+.agenda-detail > div:first-child {
+  margin-top: 30px;
+}
+.agenda-detail > div:last-child {
+  margin-bottom: 30px;
+}
+.agenda-time .time {
+  border-left: 4px solid #428bca;
+  vertical-align: middle;
+}
+.agenda-container {
+  /*line-height: 20px;*/
+}
+.agenda-detail img {
+  /*  width:100%;
+  height:100%;
+*/
+}

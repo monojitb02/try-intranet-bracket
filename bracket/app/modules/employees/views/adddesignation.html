@@ -1,0 +1,32 @@
+<div ng-controller="AddDesignation">
+  <div class="dialog-header">
+    <button type="button" class="close" ng-click="close()">×</button>
+    <h4>
+      <span class="fa fa-cog"></span>{{actionOnDesignation}} Designation
+    </h4>
+  </div>
+  <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">
+    <label ng-repeat="error in errors" class="error ">{{error}}</label>
+  </div>
+
+  <form id="addDesignation">
+    <div class="dialog-body">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Post Name
+          <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input type="text" name="post" placeholder="Post Name" ng-model="designationObj.post" class="form-control">
+        </div>
+      </div>
+
+    </div>
+  </form>
+  <div class="form-button-group dialog-footer text-right">
+    <span ng-show="loading" class="loading-icon">
+      <i class="fa fa-spinner fa-spin"></i>
+    </span>
+    <button type="button" class="btn btn-primary dialog-form-btn" ng-click="save()">Save</button>
+    <button type="button" class="btn btn-default dialog-form-btn" ng-click="close()">Cancel</button>
+  </div>
+</div>

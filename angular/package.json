@@ -1,0 +1,11 @@
+{
+  "name": "nw-demo",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "fullscreen": true
+  },
+  "dependencies": {
+    "markdown": "^0.5.0"
+  }
+}

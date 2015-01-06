@@ -1,0 +1,90 @@
+<div ng-controller="RequestLeave">
+
+  <div class="pageheader clearfix">
+    <h2 class="pull-left"><i class="fa fa-list"></i> Apply For a Leave</h2>
+  </div>
+
+  <div class="contentpanel">
+    <!-- Leave Apply -->
+    <form action="" method="post" id="leaveRequest" class="form-horizontal" novalidate="novalidate">
+
+      <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">
+        <label ng-repeat="error in errors" class="error ">{{error}}</label>
+      </div>
+
+      <div ng-show="showSuccess" class="alert-success center-align">
+        <label>{{success}}</label>
+      </div>
+
+      <div class="control-group col-md-12">
+        <label class="control-label col-md-2" for="from">From
+          <span class="asterisk">*</span>
+        </label>
+        <div class="controls col-md-offset-1 col-md-9">
+          <div class="input-group col-sm-7 pull-left">
+
+            <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.sdt" is-open="leaveStartOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="leaveStartOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group col-md-12">
+        <label class="control-label col-md-2" for="to">To
+          <span class="asterisk">*</span>
+        </label>
+        <div class="controls col-md-offset-1 col-md-9">
+          <div class="input-group col-sm-7 pull-left">
+
+            <input name="endDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.edt" is-open="leaveEndOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="leaveEndOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group col-md-12">
+        <label class="control-label col-md-2" for="type">Leave Type
+          <span class="asterisk">*</span>
+        </label>
+        <div class="controls col-md-offset-1 col-md-9 clearfix">
+          <div class="col-sm-9">
+            <div class="rdio rdio-primary col-sm-2">
+              <input type="radio" id="cl" value="1" ng-model="leave.leaveType" name="leaveType" required="">
+              <label for="cl">CL</label>
+            </div>
+            <!-- rdio -->
+            <div class="rdio rdio-primary col-sm-2">
+              <input type="radio" value="2" id="pl" ng-model="leave.leaveType" name="leaveType">
+              <label for="pl">EL</label>
+            </div>
+            <!-- rdio -->
+            <div class="rdio rdio-primary col-sm-2">
+              <input type="radio" value="3" id="lwp" ng-model="leave.leaveType" name="leaveType">
+              <label for="lwp">LWP</label>
+            </div>
+            <label class="error" for="leaveType"></label>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label class="col-md-2 control-label">Reason
+          <span class="asterisk">*</span>
+        </label>
+        <div class="col-md-offset-1 col-md-6">
+          <textarea rows="5" class="form-control" ng-model="leave.reason" name="reason" placeholder="Type your reason..." required=""></textarea>
+        </div>
+      </div>
+      <div class="control-group col-md-12">
+        <div class="form-button-group controls col-md-offset-3 col-md-9">
+          <button class="btn btn-success" ng-click="apply()">Apply</button>
+          <button class="btn btn-default" ng-click="goBack()">Cancel</button>
+        </div>
+      </div>
+    </form>
+    <!-- Leave Apply END -->
+  </div>
+</div>

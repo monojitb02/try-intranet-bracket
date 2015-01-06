@@ -1,0 +1,60 @@
+<div ng-controller="leaveAccountModal">
+
+  <div class="dialog-header">
+    <button type="button" class="close" ng-click="closeModal()">×</button>
+    <h4 class="">
+      <span class="fa fa-cog"></span>Leave Account
+    </h4>
+  </div>
+
+  <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">
+    <label ng-repeat="error in errors" class="error ">{{error}}</label>
+  </div>
+
+
+  <div class="dialog-body">
+
+    <form id="manageAccount">
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Date
+        </label>
+        <div class="col-sm-6">
+          <div class="input-group col-sm-12">
+            <input name="date" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="account.date" is-open="DOBOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="DOBOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Leave Type</label>
+        <div class="col-sm-6 radio clearfix">
+          <div class="rdio rdio-primary col-sm-4">
+            <input type="radio" value="1" id="cl" ng-model="account.leaveType" name="leaveType" class="ng-pristine ng-untouched ng-valid">
+            <label for="cl">CL</label>
+          </div>
+          <div class="rdio rdio-primary col-sm-4">
+            <input type="radio" value="3" id="lwp" ng-model="account.leaveType" name="leaveType" class="ng-pristine ng-untouched ng-valid">
+            <label for="lwp">LWP</label>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="form-button-group dialog-footer text-right">
+    <button type="button" class="btn btn-primary dialog-form-btn" ng-click="update()">Update</button>
+    <button type="button" class="btn btn-default dialog-form-btn" ng-click="closeModal()">cancel</button>
+  </div>
+
+
+
+</div>

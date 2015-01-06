@@ -1,0 +1,52 @@
+/* 
+    Document   : indra
+    Created on : 23 Jul, 2014, 5:21:42 PM
+    Author     : innofied
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+  top: 0;
+  /*bottom: 0;*/
+  left: 0;
+  right: 0;
+  overflow-y: visible;
+}
+.leftpanelinner {
+  background: #1d2939;
+  bottom: 0;
+  top: 50px;
+  width: 240px;
+}
+.leftpanelinner li {
+  cursor: pointer;
+}
+.dialog-header {
+  background-color: #1caf9a;
+  color: white;
+  position: relative;
+  /* top: -10px; */
+  padding: 5px 10px;
+}
+.dialog-header span {
+  margin-right: 5px;
+}
+.dialog-header .close {
+  /*margin: 10px 5px 0px 0px;*/
+}
+.dialog-form-row {
+  float: left;
+  width: 100%;
+}
+.dialog-form-btn {
+  /*margin: 0px 15px 10px 0px;*/
+}
+.btn-success {
+  background-color: #1CAF9A !important;
+  border-color: #17a08c !important;
+}
+.dialog-footer {
+  height: 45px;
+  margin-right: 45px;
+}

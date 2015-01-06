@@ -1,0 +1,73 @@
+<div ng-controller="LeaveDetail">
+
+  <div class="dialog-header">
+    <button type="button" class="close" ng-click="close()">×</button>
+    <h4 class="">
+      <span class="fa fa-cog"></span>Leave Details
+    </h4>
+  </div>
+
+  <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">
+    <label ng-repeat="error in errors" class="error ">{{error}}</label>
+  </div>
+
+  <div>
+
+    <div class="contentpanel">
+      <div class="clearfix mb5">
+        <div class="col-sm-3">
+          <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+        </div>
+        <div class="col-sm-offset-1 col-sm-8 no-padding-left">
+          <h4>
+            <strong>{{leaveDetails.applicant.companyProfile.name | name}}</strong>
+          </h4>
+          <div class="text-muted">{{leaveDetails.applicant.companyProfile.email}}</div>
+          <div class="mt5">
+            <h4>
+              <strong>Leave Requested</strong>
+            </h4>
+            <div>{{leaveDetails.durationOfLeave.from | date:'d, MMMM y'}} to {{leaveDetails.durationOfLeave.to | date:'d, MMMM y'}} ({{leaveDetails.typeOfLeave | typeOfLeave}})</div>
+            <div class="text-muted">
+              <strong>Reason:</strong>
+              <span>{{leaveDetails.content}}</span>
+            </div>
+            <div class="text-muted clearfix">
+              <div class="col-sm-6 no-padding-left">
+                <strong>Available CL:</strong>
+                <span>{{leaveDetails.available.CL}}</span>
+              </div>
+              <div class="col-sm-6 no-padding-left">
+                <strong>Available EL:</strong>
+                <span>{{leaveDetails.available.EL}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="dialog-body">
+
+      <form id="leaveAction">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Comment</label>
+          <div class="col-sm-8">
+            <textarea type="text" name="comment" placeholder="Comment" ng-model="comment" rows="4" class="form-control">
+            </textarea>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+
+    <div class="dialog-footer text-right">
+      <button type="button" class="btn btn-primary dialog-form-btn" ng-click="acceptApplicationFromModal()">Accept</button>
+      <button type="button" class="btn btn-default dialog-form-btn" ng-click="rejectApplicationFromModal()">Reject</button>
+    </div>
+  </div>
+
+
+</div>

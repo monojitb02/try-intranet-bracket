@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="intranet">
+
+<head>
+  <title>intranet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="resources/css/app.css" rel="stylesheet" type="text/css" />
+
+  <!--for node-webkit only
+  <script type="text/javascript">
+  window.gui = require('nw.gui');
+
+  window.requireNode = window.require;
+  delete window.require;
+
+  window.requireNode.version = process.versions.node;
+  delete process.versions.node;
+  </script>-->
+
+</head>
+
+<body class="main-body">
+  <script data-main="app/settings.js" src="libs/require.js"></script>
+  <div>
+    <div ng-view></div>
+  </div>
+</body>
+
+</html>

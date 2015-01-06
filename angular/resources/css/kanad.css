@@ -1,0 +1,228 @@
+div, h1, h2, h3, h4, h5, h6, p, ul, li {
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+a {
+  padding: 0;
+  margin: 0;
+}
+/*body{background:#e4e7ea; padding:0; margin:0; font-family:Arial;}
+.container{width:1000px; height:800px; border:#CCC 0px solid; margin:0 auto;}*/
+
+.agenda-day {
+  padding: 0px 0 10px 0;
+}
+.agenda {
+  /*width:100%;*/
+  
+  padding: 15px 0px;
+  clear: both;
+}
+.time {
+  /*width:150px;*/
+  
+  padding: 10px 0px 15px 0;
+  color: #444;
+  font-size: 14px;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  border-left: 4px solid #428bca;
+  margin-top: 15px;
+  line-height: 22px;
+}
+.time span {
+  color: #555;
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+.agenda-detail {
+  /*width: calc(100% - 190px);*/
+  
+  min-height: 100px;
+  background: #E9E9E9;
+  border-radius: 4px;
+  float: right;
+  padding: 15px;
+  /*border:1px #CCC solid; box-shadow: 2px 3px 3px #DDD;*/
+}
+.agenda-detail h4 {
+  color: #444;
+  padding-bottom: 6px;
+  line-height: 26px;
+  font-weight: bold;
+}
+.agenda-detail h4 span:hover {
+  color: #428bca;
+  ;
+  cursor: pointer;
+}
+.agenda-detail h5 {
+  color: #444;
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+.agenda-detail h5 span {
+  padding: 0 6px;
+}
+.speaker {
+  /*width:48.5%;*/
+  
+  float: left;
+  margin-top: 16px;
+}
+/*.speaker:nth-child(even){margin-left:3%;}*/
+
+.speaker img {
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  float: left;
+}
+.speaker-detail {
+  width: calc(100% - 70px);
+  /*border-top:1px solid #BBB;padding:8px 0 0 0;*/
+  
+  float: right;
+}
+.speaker-detail h5 {
+  color: #428BCA;
+  ;
+  font-size: 14px;
+  text-transform: capitalize;
+  padding-bottom: 8px;
+  font-weight: bold;
+}
+.speaker-detail p {
+  color: #444;
+  font-size: 13px;
+  font-weight: normal;
+}
+.speaker-detail p i {
+  color: #444;
+}
+/*ul.agenda-list-tab{width:100% !important; border-bottom: 0}*/
+
+ul.agenda-list-tab li a {
+  word-wrap: break-word;
+}
+.tab-content {
+  display: table;
+}
+.agenda-panel {
+  padding: 10px;
+}
+.leftpanelinner {
+  padding: 15px;
+}
+.contentpanel {
+  padding: 30px 30px 8px;
+}
+.margin-top-bot-15 {
+  margin: 15px 0;
+}
+.spk-agenda-detail {
+  background: white;
+  display: table;
+}
+.spk-agenda-detail h4 {
+  padding-bottom: 8px;
+  color: #444;
+  /*text-align: justify;*/
+}
+.profile-location .glyphicon {
+  margin-right: 10px;
+  padding-left: 2px;
+}
+.media {
+  margin-top: 0px;
+  padding-top: 10px;
+}
+.profile-social-list a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+img.thumbnail.img-responsive.spk-pfl-pic {
+  max-width: 240px;
+}
+.location {
+  padding-left: 0;
+  padding-right: 0;
+}
+.file-upld {
+  padding-bottom: 10px;
+}
+.headermenu .dropdown-menu li i {
+  margin-right: 10px;
+}
+.logo-picture {
+  height: 50px;
+  width: 50px;
+}
+.person-name span, .company-name {
+  cursor: pointer;
+}
+.media-body div {
+  margin: 5px 0;
+}
+.add-sponsor {
+  margin: 0 !important;
+}
+.add-sponsor i {
+  font-style: normal !important;
+  margin: 0px !important;
+  padding: 0px 2px !important;
+}
+.add-sponsor i.fa {
+  bottom: -1px;
+  position: relative;
+}
+.no-border {
+  border: none !important;
+  font-size: 16px !important;
+}
+.sponsor-category1 {
+  border-left: 5px solid #fc6220;
+}
+.sponsor-category2 {
+  border-left: 5px solid #63b864;
+}
+.sponsor-category3 {
+  border-left: 5px solid #efad57;
+}
+.sponsor-category4 {
+  border-left: 5px solid #468cc8;
+}
+.sponsor-category5 {
+  border-left: 5px solid #d65452;
+}
+.form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 10px !important;
+}
+@media (max-width: 768px) {
+  .time {
+    border-left: 0px;
+    padding: 0px 0px 15px 0;
+  }
+  .agenda {
+    padding: 0 0;
+  }
+  ul.agenda-list-tab li {
+    width: 100% !important;
+    text-align: center;
+  }
+  .spk-agenda-detail {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEE;
+  }
+  .spk-agenda-detail:last-child {
+    border-bottom: 0;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+}

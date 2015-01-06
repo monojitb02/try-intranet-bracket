@@ -1,0 +1,175 @@
+<div ng-controller="ViewAttendance">
+
+  <div class="pageheader clearfix">
+
+    <h2 class="pull-left"><i class="fa fa-list"></i>Attendance List</h2>
+
+    <div class="select-option-dropdown pull-right">
+      <span>
+        <select ng-model="selectedOption" ng-options="selectedOption as selectedOption for selectedOption in allOptions">
+        </select>
+      </span>
+
+      <span ng-show="hasPowerOnOthersAttedance()">
+        <select ng-model="selectedViewOption" ng-options="selectedViewOption as selectedViewOption for selectedViewOption in allViewOptions">
+        </select>
+      </span>
+    </div>
+
+  </div>
+
+  <!-- Pageheader end -->
+
+  <div class="contentpanel">
+
+    <div ng-show="selectedOption === 'Date View'" class="attendance-top-panel panel panel-default">
+      <form id="select_date" class="form-horizontal">
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">
+            Choose Date
+          </label>
+
+          <div class="col-sm-5">
+
+            <div class="input-group col-sm-12 pull-left">
+              <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />
+
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+    <div ng-show="selectedOption === 'Month View'" class="attendance-top-panel panel panel-default">
+      <div class="fc-header clearfix">
+
+
+        <div class="month-date-dropdown">
+          <span class="text-muted">Select Month and Year:</span>
+
+          <span>
+            <select ng-model="selectedMonth" ng-options="selectedMonth as selectedMonth for selectedMonth in allMonths">
+            </select>
+          </span>
+
+          <span>
+            <select ng-model="selectedYear" ng-options="selectedYear as selectedYear for selectedYear in allYears">
+            </select>
+          </span>
+
+        </div>
+
+        <div ng-show="hasPowerOnOthersAttedance()" class="month-date-dropdown pull-right">
+          <input class="form-control" ng-keyup="filterData($event)" ng-model="searchStringForAttendance" type="text" placeholder="Search">
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+
+      <div ng-show="showErrors">
+        <label ng-repeat="error in errors" class="error">{{error}}</label>
+      </div>
+
+      <div ng-show="loading">
+        <i class="fa fa-spinner fa-spin attendance-loading"></i>
+      </div>
+
+      <div ng-show="selectedViewOption === 'Own Attendance'" class="table-responsive">
+        <table class="table table-hidaction table-striped mb30">
+          <thead>
+            <tr>
+              <!-- <th ng-show="selectedViewOption === 'Employee Attendance'">Sl No.</th>
+              <th ng-show="selectedViewOption === 'Employee Attendance'">E. Code</th>
+              <th ng-show="selectedViewOption === 'Employee Attendance'" class="name-field">Name</th> -->
+              <th>Date</th>
+              <th>Shift</th>
+              <th>In Time</th>
+              <th>Out Time</th>
+              <th>Work Duration</th>
+              <th>Over Time</th>
+              <th>Total Duration</th>
+              <th>Status</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="eachEmpolyee in allEmployee">
+              <!-- <td ng-show="selectedViewOption === 'Employee Attendance'">{{$index+1}}</td>
+              <td ng-show="selectedViewOption === 'Employee Attendance'">{{eachEmpolyee.user.companyProfile.attendanceId}}</td>
+              <td ng-show="selectedViewOption === 'Employee Attendance'">{{eachEmpolyee.user.companyProfile.name | name}}</td> -->
+              <td>{{eachEmpolyee.date | date:'MMM d, y'}}</td>
+              <td>{{eachEmpolyee.shift}}</td>
+              <td>{{eachEmpolyee.inTime}}</td>
+              <td>{{eachEmpolyee.outTime}}</td>
+              <td>{{eachEmpolyee.workDuration | stringToTime}}</td>
+              <td>{{eachEmpolyee.overTime | stringToTime}}</td>
+              <td>{{eachEmpolyee.totalDuration | stringToTime}}</td>
+              <td>{{eachEmpolyee.status}}</td>
+              <td>{{eachEmpolyee.remarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FOR Employee Attendance -->
+
+      <div ng-show="selectedViewOption === 'Employee Attendance'">
+
+        <div ng-repeat="attendanceForEachDay in fullDay">
+
+          <strong class="mb10">Date: {{attendanceForEachDay.date | date:'d MMMM, y'}}</strong>
+
+          <div class="table-responsive">
+            <table class="table table-hidaction table-striped mb30">
+              <thead>
+                <tr>
+                  <th>Sl No.</th>
+                  <th>E. Code</th>
+                  <th class="name-field">Name</th>
+                  <!-- <th>Date</th> -->
+                  <th>Shift</th>
+                  <th>In Time</th>
+                  <th>Out Time</th>
+                  <th>Work Duration</th>
+                  <th>Over Time</th>
+                  <th>Total Duration</th>
+                  <th>Status</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="eachEmpolyee in attendanceForEachDay.attendance | filter:searchStringForAttendance" class="cursor-pointer" ng-click="loadEditAttendanceView(eachEmpolyee)">
+                  <td>{{$index+1}}</td>
+                  <td>{{eachEmpolyee.user.companyProfile.attendanceId}}</td>
+                  <td>{{eachEmpolyee.user.companyProfile.name | name}}</td>
+                  <!-- <td>{{eachEmpolyee.date | date:'MMM d, y'}}</td> -->
+                  <td>{{eachEmpolyee.shift}}</td>
+                  <td>{{eachEmpolyee.inTime}}</td>
+                  <td>{{eachEmpolyee.outTime}}</td>
+                  <td>{{eachEmpolyee.workDuration | stringToTime}}</td>
+                  <td>{{eachEmpolyee.overTime | stringToTime}}</td>
+                  <td>{{eachEmpolyee.totalDuration | stringToTime}}</td>
+                  <td>{{eachEmpolyee.status}}</td>
+                  <td>{{eachEmpolyee.remarks}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

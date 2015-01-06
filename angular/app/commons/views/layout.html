@@ -1,0 +1,119 @@
+<section ng-controller="LayoutController">
+
+  <div class="leftpanel">
+
+    <div class="logopanel">
+      <h1>
+        <span>[</span>intranet
+        <span>]</span>
+      </h1>
+    </div>
+    <!-- logopanel -->
+
+    <div class="leftpanelinner">
+      <h5 class="sidebartitle">Navigation</h5>
+
+      <ul class="nav nav-pills nav-stacked nav-bracket">
+
+        <!-- Employee Module -->
+        <li data-name="employees" ng-click="showSubmenu($event)" ng-class="(active ==='employees')? 'active' : ''" class="nav-parent" ng-if="checkForEmployeeModule()">
+          <a><i class="fa fa-users"></i> <span>Employees</span></a>
+          <ul class="children">
+            <li ng-click="showEmpList()" nf-if="$scope.employee.view" ng-class="(activeSubmenu ==='employees/list')? 'active' : ''">
+              <a><i class="fa fa-caret-right"></i>Employees List</a>
+            </li>
+            <li ng-click="addEmployees()" nf-if="$scope.employee.add" ng-class="(activeSubmenu ==='employees/add')? 'active' : ''">
+              <a><i class="fa fa-caret-right"></i>Add Employee</a>
+            </li>
+          </ul>
+        </li>
+        <!-- Employee Module ENDS -->
+
+
+        <!-- Attendance Module -->
+        <li data-name="attendance" ng-click="showSubmenu($event)" ng-class="(active ==='attendance')? 'active' : ''" class="nav-parent" ng-if="checkForAttendanceModule()">
+          <a>
+            <i class="fa fa-clock-o"></i>
+            <span>Attendance</span>
+          </a>
+          <ul class="children">
+            <li ng-click="viewAttendance()" ng-if="attendance.view" ng-class="(activeSubmenu ==='attendance/list')? 'active' : ''"><a><i class="fa fa-caret-right"></i>Show Attendance</a>
+            </li>
+            <li ng-click="showAddAttendance()" ng-if="attendance.add" ng-class="(activeSubmenu ==='attendance/add')? 'active' : ''"><a><i class="fa fa-caret-right"></i>Add Attendance</a>
+            </li>
+          </ul>
+        </li>
+        <!-- Attendance Module ENDS -->
+
+        <!-- Leave Module -->
+        <li data-name="leave" ng-click="showSubmenu($event)" ng-class="(active ==='leave')? 'active' : ''" class="nav-parent" ng-if="checkForLeaveModule()">
+          <a>
+            <i class="fa fa-users"></i>
+            <span>Leave</span>
+          </a>
+          <ul class="children">
+            <li ng-click="showRequests()" ng-if="leave.manage" ng-class="(activeSubmenu ==='leave/list')? 'active' : ''" ng-if="leave">
+              <a><i class="fa fa-caret-right"></i>Show Requests</a>
+            </li>
+            <li ng-click="requestLeave()" ng-if="leave.apply" ng-class="(activeSubmenu ==='leave/apply')? 'active' : ''">
+              <a><i class="fa fa-caret-right"></i>Apply For Leave</a>
+            </li>
+            <li ng-click="showLeaveAccount()" ng-if="leave.view" ng-class="(activeSubmenu ==='leave/account')? 'active' : ''">
+              <a><i class="fa fa-caret-right"></i>Leave Account</a>
+            </li>
+          </ul>
+        </li>
+        <!-- Leave Module ENDS -->
+
+        <!-- Holiday Module -->
+        <li data-name="holiday" ng-click="loadHolidayList($event)" ng-class="(activeSubmenu ==='holiday')? 'active' : ''" class="nav">
+          <a>
+            <i class="fa fa-list"></i>
+            <span>Holiday List</span>
+          </a>
+        </li>
+        <!-- Holiday Module ENDS -->
+
+
+        <!-- Settings Module -->
+        <li data-name="settings" ng-click="showSubmenu($event)" ng-class="(active ==='settings')? 'active' : ''" class="nav-parent" ng-if="showSettingsModule()">
+          <a>
+            <i class="fa fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <ul class="children">
+            <!-- <li ng-click="showAttendanceSettings()" ng-class="(activeSubmenu ==='settings/attendance')? 'active' : ''"><a><i class="fa fa-caret-right"></i>Attendance Settings</a>
+                        </li> -->
+            <!-- <li ng-click="showHolidaySettings()" ng-class="(activeSubmenu ==='settings/holiday')? 'active' : ''" ng-if="settingsModule.holiday">
+              <a><i class="fa fa-caret-right"></i>Holiday Settings</a>
+            </li> -->
+            <li ng-click="showDesignations()" ng-class="(activeSubmenu ==='settings/designation')? 'active' : ''" ng-if="settingsModule.designation">
+              <a><i class="fa fa-caret-right"></i>Designation</a>
+            </li>
+            <!-- <li ng-click="showLeaveSettings()" ng-class="(activeSubmenu ==='settings/leave')? 'active' : ''"><a><i class="fa fa-caret-right"></i>Leave Settings</a>
+                        </li> -->
+          </ul>
+        </li>
+        <!-- Settings Module ENDS -->
+
+
+
+      </ul>
+    </div>
+    <!-- leftpanelinner -->
+  </div>
+  <!-- leftpanel -->
+
+  <div class="mainpanel">
+
+    <div class="headerbar">
+      <ng-include src="'app/modules/user/views/profileheader.html'" class="stickyheader"></ng-include>
+    </div>
+    <!-- headerbar -->
+    <div class="set-margin-top">
+      <ng-include src="viewFile()"></ng-include>
+    </div>
+  </div>
+
+  </div>
+</section>

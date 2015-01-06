@@ -1,0 +1,115 @@
+<div ng-controller="HolidayListController">
+
+  <div class="pageheader clearfix">
+    <h2 class="pull-left"><i class="fa fa-list"></i>Holiday List</h2>
+  </div>
+
+
+
+  <div class="contentpanel">
+
+    <div id="form_fillup" class="panel panel-default">
+
+      <!-- <div class="panel-heading">
+      
+      
+        <h4 class="panel-title">Method 2: Fillup the form</h4>
+      
+      </div> -->
+
+      <div ng-show="isAdmin" class="panel-body">
+
+        <div ng-show="showErrors">
+          <div ng-repeat="error in errors" class="text-center error">{{error}}</div>
+        </div>
+
+        <div ng-show="success">
+          <div class="text-center text-success">{{success}}</div>
+        </div>
+
+        <form id="HolidayDetails" class="form-inline">
+
+          <div class="form-group col-sm-5">
+            <label class="col-sm-3 control-label">Date
+              <span class="asterisk">*</span>
+            </label>
+
+            <div class="col-sm-8">
+
+              <div class="input-group col-sm-12 pull-left">
+                <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />
+
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label class="col-sm-3 control-label">Name
+              <span class="asterisk">*</span>
+            </label>
+
+            <div class="col-sm-8">
+
+              <input name="name" type="text" ng-model="holidayDetails.purpose" placeholder="Name" class="form-control full-width" />
+            </div>
+          </div>
+
+        </form>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="form-button-group col-sm-6 col-sm-offset-4">
+              <button class="btn btn-primary" ng-click="addAttendance()">
+                Submit
+                <span ng-show="loading">
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+              </button>
+              <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="blank-div"></div>
+
+      <div class="table-responsive">
+        <table class="table table-hidaction table-striped mb30">
+          <thead>
+            <tr>
+              <th>Sl. No.</th>
+              <th>Date</th>
+              <th>Week day</th>
+              <th>Name</th>
+              <th ng-if="isAdmin">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="eachHoliday in allHolidays">
+              <td>{{$index+1}}</td>
+              <td>{{eachHoliday.date | date:'MMM d, y'}}</td>
+              <td>{{eachHoliday.date | date:'EEEE'}}</td>
+              <td>{{eachHoliday.purpose}}</td>
+              <td ng-if="isAdmin" class="action-td">
+
+                <a class="btn btn-primary cursor-pointer" ng-click="loadHolidayEditView(eachHoliday)">
+                  <i class="fa fa-edit icon"></i>Edit
+                </a>
+                <a class="btn btn-danger cursor-pointer" ng-click="deleteHoliday(eachHoliday._id, $index)">
+                  <i class="fa fa-warning icon"></i>Delete
+                </a>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>

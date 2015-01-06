@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+  <title>intranet</title>
+
+  <!-- <link href="resources/css/app.css" rel="stylesheet" type="text/css" /> -->
+  <link href="css/style.default.css" rel="stylesheet" type="text/css" />
+
+  <!--for node-webkit only
+  <script type="text/javascript">
+  window.gui = require('nw.gui');
+
+  window.requireNode = window.require;
+  delete window.require;
+
+  window.requireNode.version = process.versions.node;
+  delete process.versions.node;
+  </script>-->
+
+</head>
+
+<body ng-class="{'signin':currentPath === '#/login'}" class="stickyheader">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i>
+    </div>
+  </div>
+
+  <div ui-view></div>
+
+  <script src="bundle.js"></script>
+</body>
+
+</html>

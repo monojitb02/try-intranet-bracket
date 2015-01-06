@@ -1,0 +1,29 @@
+<div class="headerbar">
+  <!-- <a class="menutoggle"><i class="fa fa-bars"></i></a> -->
+
+  <div class="header-right" ng-controller="HeaderController">
+    <ul class="headermenu">
+
+      <li>
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+
+            <img ng-src="{{loggedInUser.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';" />{{loggedInUser.companyProfile.name | name}}
+            <span class="caret"></span>
+
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-usermenu pull-right" role="menu">
+            <li ng-if="checkRole()" ng-click="showProfile()"><a><i class="fa fa-user"></i>My Profile</a>
+            </li>
+            <li ng-if="checkRole()" ng-click="showModal()"><a><i class="fa fa-cog"></i>Change Password</a>
+            </li>
+            <li ng-click="doSignOut()"><a><i class="fa fa-sign-out"></i> Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>

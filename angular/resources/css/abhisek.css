@@ -1,0 +1,130 @@
+.btn-white {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #666;
+  outline: none !important;
+}
+.btn {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 21px;
+  -moz-transition: all 0.2s ease-out 0s;
+  -webkit-transition: all 0.2s ease-out 0s;
+  transition: all 0.2s ease-out 0s;
+  padding: 6px 15px;
+}
+.media {
+  padding-bottom: 11px;
+}
+.nav li.active span.badge {
+  background: #2077bb;
+}
+.nav li span.badge {
+  background: #999;
+}
+.badge-success {
+  background-color: #1CAF9A;
+}
+.blog-details {
+  border-width: 0px 3px;
+  border-style: solid;
+  border-color: rgba(12, 12, 12, 0.03);
+  word-spacing: 3px;
+  /*background: #000 !important;*/
+  /*color: #fff !important;*/
+}
+.tab-content {
+  background: #fcfcfc;
+  padding: 15px;
+  -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+  -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+  box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+  -moz-border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+}
+.agendas .blog-details .blog-meta li {
+  /*padding: 0 13px;*/
+  
+  border: none;
+  word-break: break-word;
+  line-height: 13px;
+  text-align: none;
+}
+.agendas .blog-details .blog-meta li .fa {
+  /*padding: 0 2px;*/
+}
+.agendas ul.pagination {
+  margin-right: 15px;
+}
+.clear-all {
+  clear: both;
+}
+.margn-zero {
+  margin: 0 auto !important;
+}
+.attenders-image {
+  width: 100%;
+}
+.people-item-border {
+  margin: 18px 0;
+  border: 3px solid rgba(12, 12, 12, 0.03) !important;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.follower-list {
+  /*padding-top: 23px;*/
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+  success
+}
+.agendas .blog-details i {
+  margin: 0px 2px;
+}
+.agenda-list {
+  padding: 20px;
+}
+.success {
+  color: #555;
+}
+#success_section {
+  height: 30px;
+  line-height: 30px;
+}
+.small-profile-picture {
+  width: 25px;
+  margin-right: 5px;
+}
+.manager-details {
+  line-height: 25px;
+}
+.icon {
+  margin-right: 5px;
+}
+.filter-group .fa {
+  font-size: 14px;
+  margin-right: 5px;
+  padding: 0 !important;
+  border: none !important;
+  -moz-border-radius: none !important;
+  -webkit-border-radius: none !important;
+  border-radius: none !important;
+}
+.col-md-12 {
+  margin: 10px 0;
+}
+.profile {
+  width: 20px;
+}
+.block {
+  margin-top: 3px !important;
+}
+.adjust-width {
+  width: 100%;
+}

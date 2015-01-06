@@ -1,0 +1,69 @@
+<div class="signin" ng-controller="SubscribeController">
+
+  <section>
+
+    <div class="signinpanel">
+
+      <div class="row">
+
+        <div class="col-md-7">
+
+          <div class="signin-info">
+            <div class="logopanel">
+              <h1>
+                <span>[</span>Conference
+                <span>]</span>
+              </h1>
+            </div>
+            <!-- logopanel -->
+
+            <div class="mb20"></div>
+
+            <h5>
+              <strong>Welcome to Conference Admin Panel!</strong>
+            </h5>
+            <ul>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i>Event Management</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i>Aggenda Management</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i>Manage Speakers</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i>Chat</li>
+              <li><i class="fa fa-arrow-circle-o-right mr5"></i> and much more...</li>
+            </ul>
+            <div class="mb20"></div>
+            Go back to <a class="cursor-pointer" ng-click="showSignIn()">Sign In</a>
+          </div>
+          <!-- signin0-info -->
+
+        </div>
+        <!-- col-sm-7 -->
+
+        <div class="col-md-5">
+
+          <form>
+            <h4 class="nomargin">Subscribe Email</h4>
+            <p class="mt5 mb20">Please provide your email & you'll get the signup link.</p>
+
+            <input type="text" class="form-control uname" ng-model="email" placeholder="Email" />
+            <button class="btn btn-success btn-block" ng-click="doSubscribe()">Subscribe</button>
+
+          </form>
+        </div>
+        <!-- col-sm-5 -->
+
+      </div>
+      <!-- row -->
+
+      <div class="signup-footer">
+        <div class="pull-left">
+          &copy; 2014. All Rights Reserved. Innofied Solution Pvt. Ltd.
+        </div>
+        <div class="pull-right">
+          Created By: <a href="http://www.innofied.com/" target="_blank">Innofied</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- signin -->
+
+  </section>
+</div>

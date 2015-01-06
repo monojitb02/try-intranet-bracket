@@ -1,0 +1,67 @@
+<div ng-controller="LeaveAccount">
+
+  <div class="pageheader clearfix">
+    <h2 class="pull-left"><i class="fa fa-list"></i> Leave Account</h2>
+    <div class="pull-right filter-group">
+      <form class="form-inline">
+        <input class="form-control" ng-keyup="filterData($event)" ng-model="searchString" type="text" placeholder="Search">
+      </form>
+    </div>
+  </div>
+
+  <div class="contentpanel">
+    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">
+
+      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+
+    </div>
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hidaction table-hover mb30">
+          <thead>
+            <tr>
+              <th>m/c-Id</th>
+              <th class="table-name-width">Employee</th>
+              <th class="leave-width">CL</th>
+              <th class="leave-width">EL</th>
+              <th class="leave-width">LWP</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="account in Accounts">
+              <td>{{account.emp.mcId}}</td>
+              <td>
+                <img ng-src="{{account.emp.profilePicture | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';" class="profile">
+                <span>{{account.emp.name | name}}</span>
+              </td>
+              <td class="leave-width">
+                <span ng-if="!account.isEditing">{{account.CL}}</span>
+                <input class="leave-width-input" type="number" ng-model="account.CL" ng-if="account.isEditing"></input>
+              </td>
+              <td class="leave-width">
+                <span ng-if="!account.isEditing">{{account.EL}}</span>
+                <input class="leave-width-input" type="number" ng-model="account.EL" ng-if="account.isEditing"></input>
+              </td>
+              <td class="leave-width">
+                <span ng-if="!account.isEditing">{{account.LWP}}</span>
+                <input class="leave-width-input" type="number" ng-model="account.LWP" ng-if="account.isEditing"></input>
+              </td>
+              <td>
+                <a class="btn btn-primary cursor-pointer" ng-click="loadLeaveAccountView(account, $index)">
+                  <i class="fa fa-refresh icon"></i>Update
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">
+
+      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+{
+    "name": "Hikick-India",
+    "version": "0.0.1",
+    "description": "Hikick-India",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/monojitb02/hikick-india"
+    },
+    "scripts": {
+        "start": "watchify -t partialify index.js -o build/bundle.js -v",
+        "bundle": "browserify -t partialify index.js -o build/bundle.js"
+    },
+    "dependencies": {
+        "partialify": "",
+        "browserify-shim": "3.8.0",
+        "angular": "1.3.4",
+        "angular-bootstrap": "0.11.0",
+        "angular-ui-router": "0.2.11",
+        "ng-tags-input": "2.1.1"
+    },
+    "devDependencies": {
+        "browserify": "^5.11.2",
+        "watchify": "^1.0.2"
+    },
+    "browser": {
+        "jquery": "./build/resources/lib/bracket/jquery-1.11.1.min.js",
+        "jqueryValidate": "./build/resources/lib/bracket/jquery.validate.min.js",
+        "jqueryUi": "./build/resources/lib/bracket/jquery-ui-1.10.3.min.js",
+        "jqueryMigrate": "./build/resources/lib/bracket/jquery-migrate-1.2.1.min.js",
+        "bootstrap": "./build/resources/lib/bracket/bootstrap.min.js",
+        "toggles": "./build/resources/lib/bracket/toggles.min.js",
+        "custom": "./build/resources/lib/bracket/custom.js"
+    },
+    "browserify-shim": {
+        "jquery": {
+            "exports": "jquery"
+        },
+        "jqueryValidate": {
+            "exports": "jqueryValidate",
+            "depends": ["jquery"]
+        },
+        "jqueryUi": {
+            "exports": "jqueryUi",
+            "depends": ["jquery"]
+        },
+        "jqueryMigrate": {
+            "exports": "jqueryMigrate",
+            "depends": ["jquery"]
+        },
+        "bootstrap": {
+            "exports": "bootstrap",
+            "depends": ["jquery"]
+        },
+        "toggles": {
+            "exports": "toggles",
+            "depends": ["jquery"]
+        },
+        "jqueryCookies": {
+            "exports": "jqueryCookies",
+            "depends": ["jquery"]
+        },
+        "custom": {
+            "exports": "custom",
+            "depends": ["jquery", "jqueryUi", "jqueryMigrate", "bootstrap", "toggles"]
+        }
+    },
+    "browserify": {
+        "transform": [
+            "browserify-shim"
+        ]
+    },
+    "author": "Monojit"
+}
