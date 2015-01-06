@@ -1,9 +1,9 @@
 'use strict';
 
-var utility = require('../../../util');
+var util = require('../../../util');
 var api = require('../../../util/api')
 
-module.exports = function($scope, $rootScope, $state, $http, $timeout) {
+/*module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
     //checking login status
     var user = utility.getCookie('user');
@@ -73,3 +73,109 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
         });
     });
 };
+*/
+
+
+//*******************************************************************************
+
+module.exports = function($scope, $rootScope, $http, $state, $modal) {
+
+    $scope.forgotPassword = function() {
+        $location.path("/forgotpassword");
+    };
+
+    /**
+     * Form Validator cofig start
+     */
+    $scope.$on('$viewContentLoaded', function() {
+        $rootScope.currentPath = '#/login';
+        jQuery('#signin').validate({
+            rules: {
+                password: "required",
+                username: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                password: lang.validationMessages.password,
+                username: {
+                    required: lang.validationMessages.email.required,
+                    email: lang.validationMessages.email.email,
+                }
+            },
+            highlight: function(element) {
+                jQuery(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+            },
+            success: function(element) {
+                jQuery(element).closest('.form-control').removeClass('has-error');
+                jQuery(element).closest('label').remove();
+            }
+        });
+    });
+
+
+    $scope.loginCredentials = {
+        username: 'sandip.saha@innofied.com',
+        password: 'sandip'
+    };
+    $scope.errors = [];
+
+    $scope.doSignIn = function() {
+        $scope.loading = true;
+        if (jQuery('#signin').valid()) {
+            $http({
+                url: api.login,
+                method: 'POST',
+                data: {
+                    username: $scope.loginCredentials.username,
+                    password: $scope.loginCredentials.password,
+                    secure: false
+                }
+            }).success(function(response) {
+                if (response.success) {
+                    $scope.loading = false;
+                    util.loggedInUser = response.data;
+                    if (util.loggedInUser.firstTime) {
+                        util.instances.modal = $modal.open({
+                            templateUrl: 'app/modules/user/views/changepassword.html',
+                            size: ''
+                        });
+                    } else {
+                        $state.go('app.home');
+                        //$location.path("/employees/list");
+                    }
+                } else {
+                    $scope.loading = false;
+                    if (response.errors && response.errors.length > 0) {
+                        $scope.errors = [lang.networkError];
+                        $scope.showErrors = true;
+                        util.errorMessageTimeout({
+                            success: function() {
+                                console.log('here');
+                                $scope.errors = [];
+                                $scope.showErrors = false;
+                                $scope.$apply();
+                            }
+                        });
+                    } else {
+                        $scope.errors = _.values(response.errfor);
+                        $scope.showErrors = true;
+                        util.errorMessageTimeout({
+                            success: function() {
+                                console.log('here');
+                                $scope.errors = [];
+                                $scope.showErrors = false;
+                                $scope.$apply();
+                            }
+                        });
+                    }
+                }
+            }).error(function() {});
+        }
+    };
+
+    $scope.showSubscribe = function() {
+        $location.path("/subscribe");
+    }
+}

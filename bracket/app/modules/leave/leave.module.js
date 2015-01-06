@@ -1,4 +1,4 @@
-define([
+/*define([
     'angular',
     'bootstrapUi',
     "Util"
@@ -83,3 +83,11 @@ define([
     return util.modules.leave;
 
 });
+*/
+
+module.exports = angular.module('app.leave', ['ui.router', 'ui.bootstrap'])
+    .controller('leaveAccountCtrl', require('./controllers/leaveAccountCtrl'))
+    .controller('leaveDetailCtrl', require('./controllers/leaveDetailCtrl'))
+    .controller('leaveRequestsCtrl', require('./controllers/leaveRequestsCtrl'))
+    .controller('requestLeaveCtrl', require('./controllers/requestLeaveCtrl'))
+    .config(require('./router/router'));

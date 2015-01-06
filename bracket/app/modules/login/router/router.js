@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+module.exports = function($stateProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
