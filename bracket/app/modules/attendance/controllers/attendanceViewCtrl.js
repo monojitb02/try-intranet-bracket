@@ -1,6 +1,6 @@
 'use strict';
 var util = require('../../../util');
-var api = require('../../../util/api');
+var api = require('../../../util/api')
 module.exports = function($scope, $rootScope, $state, $http) {
 
     var clearSuccess = function() {
@@ -8,7 +8,6 @@ module.exports = function($scope, $rootScope, $state, $http) {
         $scope.errors = [];
         $scope.$apply();
     };
-
     $scope.allOptions = ['Month View', 'Date View'];
     $scope.allViewOptions = ['Own Attendance', 'Employee Attendance'];
 

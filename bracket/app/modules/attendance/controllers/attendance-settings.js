@@ -1,7 +1,7 @@
 'use strict';
 
-define([], function() {
+/*define([], function() {
     return ['$scope', '$http',
         function() {}
     ];
-});
+});*/
