@@ -10,5 +10,14 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
                     controller: 'attendanceViewCtrl'
                 }
             }
+        })
+        .state('app.attendanceAdd', {
+            url: '/attendance/add',
+            views: {
+                'pages': {
+                    template: require('../templates/add-attendance.html'),
+                    controller: 'attendanceAddCtrl'
+                }
+            }
         });
 };
