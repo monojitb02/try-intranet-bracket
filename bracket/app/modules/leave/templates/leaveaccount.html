@@ -1,4 +1,4 @@
-<div ng-controller="LeaveAccount">
+<section>
 
   <div class="pageheader clearfix">
     <h2 class="pull-left"><i class="fa fa-list"></i> Leave Account</h2>
@@ -13,7 +13,6 @@
     <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">
 
       <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-
     </div>
     <div class="col-md-12">
       <div class="table-responsive">
@@ -37,15 +36,15 @@
               </td>
               <td class="leave-width">
                 <span ng-if="!account.isEditing">{{account.CL}}</span>
-                <input class="leave-width-input" type="number" ng-model="account.CL" ng-if="account.isEditing"></input>
+                <input class="leave-width-input" type="number" ng-model="account.CL" ng-if="account.isEditing">
               </td>
               <td class="leave-width">
                 <span ng-if="!account.isEditing">{{account.EL}}</span>
-                <input class="leave-width-input" type="number" ng-model="account.EL" ng-if="account.isEditing"></input>
+                <input class="leave-width-input" type="number" ng-model="account.EL" ng-if="account.isEditing">
               </td>
               <td class="leave-width">
                 <span ng-if="!account.isEditing">{{account.LWP}}</span>
-                <input class="leave-width-input" type="number" ng-model="account.LWP" ng-if="account.isEditing"></input>
+                <input class="leave-width-input" type="number" ng-model="account.LWP" ng-if="account.isEditing">
               </td>
               <td>
                 <a class="btn btn-primary cursor-pointer" ng-click="loadLeaveAccountView(account, $index)">
@@ -64,4 +63,5 @@
     </div>
   </div>
 
-</div>
+
+</section>

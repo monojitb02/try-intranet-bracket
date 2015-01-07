@@ -47,8 +47,10 @@ define(['app'], function(app) {
                 })
                 .when('/settings/attendance', {
                     templateUrl: 'app/commons/views/layout.html'
-                }) /************************* attendance route ENDS ************/
-                .when('/leave/list', { /** Leave route **/
+                })
+
+            /** Leave route **/
+            .when('/leave/list', {
                     templateUrl: 'app/commons/views/layout.html'
                 })
                 .when('/leave/apply', {
@@ -60,7 +62,8 @@ define(['app'], function(app) {
                 .when('/settings/leave', {
                     templateUrl: 'app/commons/views/layout.html'
                 })
-                .when('/settings/holiday', {
+
+            .when('/settings/holiday', {
                     templateUrl: 'app/commons/views/layout.html'
                 })
                 .when('/settings/holiday/:id', {

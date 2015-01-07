@@ -19,7 +19,10 @@ module.exports = {
         }
         return '';
     },
+<<<<<<< HEAD
     modules: {},
+=======
+>>>>>>> 5e6dd258cf95b72cbaa55edda09948b22e548f62
     successMessageTimeout: function(options) {
         setTimeout(function() {
             options.success(true);
@@ -50,6 +53,10 @@ module.exports = {
     editingHoliday: {},
     editingAttendance: {},
     editingLeaveRequest: {},
+<<<<<<< HEAD
     editingLeaveAccount: {}
+=======
+    editingLeaveAccount: {},
+>>>>>>> 5e6dd258cf95b72cbaa55edda09948b22e548f62
 
 };

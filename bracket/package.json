@@ -24,12 +24,11 @@
         "watchify": "^1.0.2"
     },
     "browser": {
-        "jquery": "./build/resources/lib/bracket/jquery-1.11.1.min.js",
-        "jqueryValidate": "./build/resources/lib/bracket/jquery.validate.min.js",
-        "jqueryUi": "./build/resources/lib/bracket/jquery-ui-1.10.3.min.js",
-        "jqueryMigrate": "./build/resources/lib/bracket/jquery-migrate-1.2.1.min.js",
-        "bootstrap": "./build/resources/lib/bracket/bootstrap.min.js",
-        "toggles": "./build/resources/lib/bracket/toggles.min.js",
+        "jquery": "./bower_components/jquery/dist/jquery.js",
+        "jqueryValidate": "./bower_components/jquery-validate/dist/jquery.validate.js",
+        "jqueryUi": "./bower_components/jquery-ui/jquery-ui.js",
+        "bootstrap": "./bower_components/bootstrap/dist/js/bootstrap.js",
+        "toggles": "./bower_components/jquery-toggles/toggles.js",
         "custom": "./build/resources/lib/bracket/custom.js"
     },
     "browserify-shim": {
@@ -42,10 +41,6 @@
         },
         "jqueryUi": {
             "exports": "jqueryUi",
-            "depends": ["jquery"]
-        },
-        "jqueryMigrate": {
-            "exports": "jqueryMigrate",
             "depends": ["jquery"]
         },
         "bootstrap": {
@@ -62,7 +57,7 @@
         },
         "custom": {
             "exports": "custom",
-            "depends": ["jquery", "jqueryUi", "jqueryMigrate", "bootstrap", "toggles"]
+            "depends": ["jquery", "jqueryUi", "bootstrap", "toggles"]
         }
     },
     "browserify": {
