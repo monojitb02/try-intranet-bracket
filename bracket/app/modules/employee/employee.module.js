@@ -277,6 +277,6 @@ module.exports = angular.module('app.employee', ['ui.router', 'ui.bootstrap'])
     .controller('addEmployeeCtrl', require('./controllers/addEmployee'))
     .controller('employeeListCtrl', require('./controllers/employeeList'))
     // .controller('singleEmpCtrl', require('./controllers/singleEmployee'))
-    // .controller('designationListCtrl', require('./controllers/designationList'))
+    .controller('designationListCtrl', require('./controllers/designationList'))
     // .controller('addDesignationCtrl', require('./controllers/addDesignation'))
     .config(require('./router/router'));

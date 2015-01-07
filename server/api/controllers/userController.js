@@ -19,6 +19,14 @@ var lib = require('../../lib'),
 
 module.exports = {
     /**
+     * identifies the User if logged in and send user details`
+     */
+    identifyUser: function(req, res) {
+        var workflow = lib.workflow(req, res);
+        workflow.outcome.data = req.user;
+        workflow.emit('response');
+    },
+    /**
      * UserController.login()`
      */
     login: function(req, res) {

@@ -41,10 +41,11 @@ module.exports = function(app, passport) {
     //app  Routes  
     app.get('/api/app_details', appController.getDetails);
 
-    //User Routes    
+    //User Routes       
     app.post('/api/login', userPolicy.loginValidationCheck, userController.login);
     app.post('/api/logout', userController.logout);
     app.put('/api/reset_password', userController.resetPassword);
+    app.get('/api/user/identify', userController.identifyUser);
     app.get('/api/user/view', userController.view);
     app.get('/api/user/view_all', userController.viewAll);
     app.get('/api/user/view_one', userController.viewOne);

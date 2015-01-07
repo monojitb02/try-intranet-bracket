@@ -1,0 +1,56 @@
+<div class="pageheader clearfix">
+  <h2 class="pull-left"><i class="fa fa-list"></i> Designation List</h2>
+
+  <div class="pull-right filter-group">
+    <form class="form-inline">
+      <div>
+        <button class="btn btn-success" ng-if="addDesignation" ng-click="loadAddDesignationView()"><i class="fa fa-plus"></i>Add Designation</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="contentpanel">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="table-responsive">
+        <table class="table table-striped mb30">
+          <thead class="attender-list-padding">
+            <tr>
+              <th>#</th>
+              <th>Post</th>
+              <th>Count</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="attender-list-padding">
+            <tr ng-repeat="eachDesignation in designationList">
+              <td>{{$index + 1}}</td>
+              <td>{{eachDesignation.post}}</td>
+              <td>{{eachDesignation.count}}</td>
+              <td ng-if="addDesignation">
+                <!-- <a class="btn btn-info" ng-if="addUser" ng-click="loadEmployeeView(eachAttender._id)">
+                        <i class="fa fa-eye icon"></i>View
+                      </a> -->
+                <a class="btn btn-primary cursor-pointer" ng-click="loadAddDesignationView(eachDesignation)">
+                  <i class="fa fa-edit icon"></i>Edit
+                </a>
+                <!-- <a class="btn btn-danger" ng-if="blockUser" ng-click="userBlock(eachAttender._id)">
+                        <i class="fa fa-warning icon"></i>Block
+                      </a> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-bottom clearfix">
+    <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+  </div>
+</div>

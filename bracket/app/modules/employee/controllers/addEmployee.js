@@ -1,9 +1,3 @@
-/*'use strict';
-
-define(['Util', 'jquery', 'underscore', 'lang'], function(util, $, _, lang) {
-    return ['$scope', '$http', '$location', 'UserService', '$element',
-    ];
-});*/
 'use strict';
 
 /*
