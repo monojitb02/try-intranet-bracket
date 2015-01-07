@@ -1,35 +1,33 @@
 'use strict';
+
 var utility = require('../../../util');
 var api = require('../../../util/api');
 module.exports = function($scope, $rootScope, $state, $http, $timeout) {
+
     //checking login status
-    /*    var user = utility.getCookie('user');
-        if (user) {
-            $scope.name = JSON.parse(user).name;
-            $scope.role = JSON.parse(user).role;
-            if ($scope.role.dojoMat1 || $scope.role.dojoMat2 || $scope.role.dojoMat3 || $scope.role.dojoMat4) {
-                $scope.showDojo = true;
-            }
-        } else {
-            $state.go('login');
-        }*/
+    if (!utility.loggedInUser) {
+        $state.go('login');
+    }
+
     //logout user
     $scope.logout = function() {
-        $http({ //get image urls from remote server
+        $http({
             url: api.logout,
             method: 'POST'
         }).success(function(result) {
             if (result.success) {
-                utility.deleteCookie('user');
+                utility.loggedInUser = null;
                 $state.go('login');
             }
         }).error(function() {
             //TODO: show error message
         });
     };
+
     $scope.$on('$stateChangeSuccess', function(event) {
         // console.log('stateChangeSuccess');
     });
+
     //TO_DO: try watching on window.location 
     $scope.$on('$viewContentLoaded', function(event) {
         //console.log('viewContentLoaded');

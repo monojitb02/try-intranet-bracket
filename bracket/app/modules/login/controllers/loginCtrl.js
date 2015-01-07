@@ -84,18 +84,22 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
         $location.path("/forgotpassword");
     };
 
-    $http({
-        url: api.identifyUser,
-        method: 'GET'
-    }).success(function(response) {
-        if (response.success) {
-            util.loggedInUser = response.data;
-            $state.go('app.home');
-        }
-    }).error(function(error) {
+    //checking login status
+    if (!util.loggedInUser) {
+        $http({
+            url: api.identifyUser,
+            method: 'GET'
+        }).success(function(response) {
+            if (response.success) {
+                util.loggedInUser = response.data;
+                $state.go('app.home');
+            }
+        }).error(function(error) {
 
-    });
-
+        });
+    } else {
+        $state.go('app.home');
+    }
 
     /**
      * Form Validator cofig start
