@@ -46,11 +46,11 @@
           <ul class="children">
             <li ng-click="showEmpList()">
               <!-- ng-if="permissions.employee.view" -->
-              <a href="#/employees/list"><i class="fa fa-caret-right"></i>Employees List</a>
+              <a href="#/employee/list"><i class="fa fa-caret-right"></i>Employees List</a>
             </li>
             <li ng-click="addEmployees()">
               <!-- ng-if="permissions.employee.add"  -->
-              <a href="#/employees/add"><i class="fa fa-caret-right"></i>Add Employee</a>
+              <a href="#/employee/add"><i class="fa fa-caret-right"></i>Add Employee</a>
             </li>
           </ul>
         </li>
@@ -163,7 +163,7 @@
     </div>
     <!-- headerbar -->
 
-    <div ui-view="pages">
+    <div ui-view="pages" class="page-content">
 
     </div>
 

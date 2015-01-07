@@ -43,10 +43,7 @@
 });*/
 'use strict';
 
-var App = angular.module('app.attendance', ['ui.router', 'ui.bootstrap'])
+module.exports = angular.module('app.attendance', ['ui.router', 'ui.bootstrap'])
     .controller('attendanceViewCtrl', require('./controllers/attendanceViewCtrl'))
     .controller('attendanceAddCtrl', require('./controllers/add-attendance'))
-    .controller('attendanceSettingsCtrl', require('./controllers/attendance-settings'))
     .config(require('./router/router'));
-
-module.exports = App;

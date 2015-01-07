@@ -52,6 +52,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
                 activeListElement.parents('.nav-parent').addClass('active nav-active');
                 activeListElement.parents('ul').slideDown(200);
             }
+            return adjustmainpanelheight();
         }, 0);
 
     });
@@ -69,9 +70,8 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
     function adjustmainpanelheight() {
         // Adjust mainpanel height
-        var docHeight = jQuery(document).height();
-        if (docHeight > jQuery('.mainpanel').height())
-            jQuery('.mainpanel').height(docHeight);
+        /* var pageContentHeight = jQuery('.page-content').height();
+         jQuery('.mainpanel').height(jQuery('.mainpanel').height());*/
     }
 
     jQuery('.nav-bracket > li').hover(function() {
@@ -94,17 +94,14 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
                     jQuery('.mainpanel').css({
                         height: ''
                     });
-                    adjustmainpanelheight();
                 });
             } else {
                 closeVisibleSubMenu();
                 navParent.addClass('nav-active');
-                sub.slideDown(200, function() {
-                    adjustmainpanelheight();
-                });
+                sub.slideDown(200, function() {});
             }
         }
-        return false;
+        return adjustmainpanelheight();
     };
 
     // Menu Toggle

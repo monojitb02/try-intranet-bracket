@@ -153,7 +153,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
                         var xhr = new XMLHttpRequest();
 
                         // Open the connection.
-                        xhr.open('POST', util.api.uploadAttendanceCSV + '?senderId=' + util.loggedInUser._id, true);
+                        xhr.open('POST', api.uploadAttendanceCSV + '?senderId=' + util.loggedInUser._id, true);
 
                         // Set up a handler for when the request finishes.
                         xhr.onload = function(response) {
@@ -213,7 +213,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
         $http({
             method: 'GET',
-            url: util.api.getManagers,
+            url: api.getManagers,
             params: {
                 name: $scope.attendanceDetails.searchString,
                 senderId: util.loggedInUser._id,
@@ -266,7 +266,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
             if ($scope.action === 'Add') {
 
-                $http.post(util.api.addAttendance, jsonObj).success(function(response) {
+                $http.post(api.addAttendance, jsonObj).success(function(response) {
                     if (response.success) {
                         $scope.loadingForm = false;
                         $scope.successForm = true;
@@ -297,7 +297,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
             } else {
 
-                $http.put(util.api.editAttendance, jsonObj).success(function(response) {
+                $http.put(api.editAttendance, jsonObj).success(function(response) {
                     if (response.success) {
                         $scope.loadingForm = false;
                         $scope.successForm = true;

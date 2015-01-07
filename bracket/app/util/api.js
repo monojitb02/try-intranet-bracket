@@ -1,32 +1,61 @@
 'use strict';
 
-var baseUrl = '/api';
+// var baseUrl = 'http://localhost:8000/';
+var baseUrl = 'api/';
+//    var baseUrl = 'http://192.168.2.6:8000/';
 module.exports = {
-    login: baseUrl + '/login',
-    logout: baseUrl + '/logout',
-
-    //temp participant
-    searchTempParticipant: baseUrl + '/temp_participant/search',
-    findTempParticipant: baseUrl + '/temp_participant/find',
-
-    //participant
-    add: baseUrl + '/participant/add',
-    clubs: baseUrl + '/participant/clubs',
-    participantList: baseUrl + '/participant/list',
-    findParticipant: baseUrl + '/participant/find',
-    deleteParticipant: baseUrl + '/participant/delete',
-    editParticipant: baseUrl + '/participant/update',
-
-    //shedules
-    sheduleSatus: baseUrl + '/shedule/status',
-    sheduleEvent: baseUrl + '/shedule/sheduleEvent',
-    getAllShedule: baseUrl + '/shedule/get_all_shedules',
-    getEventList: baseUrl + '/shedule/get_event_list',
-    getEventShedule: baseUrl + '/shedule/get_event_shedules',
-
-
-    //matches
-    addMatch: baseUrl + '/match/add',
-    getMatchList: baseUrl + '/match/list',
-    getMatch: baseUrl + '/match/find'
+    getBaseUrl: function() {
+        return baseUrl;
+    },
+    addAttender: baseUrl + 'attender/add-attender',
+    getDetails: baseUrl + 'app_details?companyId=5428eff3ed96f7b31ed9ed59',
+    addSpeaker: baseUrl + 'speaker/add-speaker',
+    getFullSpeakerList: baseUrl + 'speakers',
+    getAutoSearchSpeakerList: baseUrl + 'speaker-search',
+    addAgenda: baseUrl + 'agenda/add-agenda',
+    agendaList: baseUrl + 'agendas',
+    getSingleSpeaker: baseUrl + 'speaker/',
+    getSingleAgenda: baseUrl + 'agenda/',
+    updateSingleAgenda: baseUrl + 'agenda/',
+    allAttenders: baseUrl + 'user/view_all',
+    getManagers: baseUrl + 'user/search',
+    getUser: '../jsons/userProfile.json',
+    getLeaveAccounts: baseUrl + 'leave/view_all_account',
+    singleAttender: baseUrl + 'attender/',
+    eventApi: baseUrl + 'event/',
+    updateFloorPlan: baseUrl + 'upload/floor-plan/event/',
+    updateOther: baseUrl + 'user/update_others',
+    // login: '../jsons/login-response.json',
+    login: baseUrl + 'login',
+    addEmployee: baseUrl + 'user/add',
+    updateMyProfile: baseUrl + 'user/update_own',
+    forgotPassword: baseUrl + 'attender/forgot-password',
+    resetPassword: baseUrl + 'attender/reset-password',
+    changePassword: baseUrl + 'user/change_password',
+    addSponsorCategory: baseUrl + 'sponser-category/add',
+    getSingleSponsorCategory: baseUrl + 'sponser-category/',
+    getAllSponsorCategories: baseUrl + 'sponser-categories',
+    getAllSponsors: baseUrl + 'sponsers',
+    addSponsor: baseUrl + 'sponser/add-sponser',
+    getSingleSponsor: baseUrl + 'sponser/',
+    applyForLeave: baseUrl + 'leave/apply',
+    leaveRequestsForOwn: baseUrl + 'leave/details',
+    leaveRequestsForOthers: baseUrl + 'leave/view_all',
+    getSingleEmployee: baseUrl + 'user/view_one',
+    getOwnProfile: baseUrl + 'user/view',
+    designationAddEdit: baseUrl + 'designation/add',
+    uploadAttendanceCSV: baseUrl + 'attendance/upload_csv',
+    addHoliday: baseUrl + 'holiday/add',
+    viewHolidays: baseUrl + 'holiday/view',
+    editHoliday: baseUrl + 'holiday/edit',
+    removeHoliday: baseUrl + 'holiday/remove',
+    getSingleApplicationDetails: baseUrl + 'leave/specific_details',
+    approveOrRejectApplication: baseUrl + 'leave/manage',
+    viewAllAttendance: baseUrl + 'attendance/view_all',
+    viewOwnAttendance: baseUrl + 'attendance/view',
+    addAttendance: baseUrl + 'attendance/add',
+    editAttendance: baseUrl + 'attendance/edit',
+    editLeaveAccount: baseUrl + 'leave/edit',
+    blockUser: baseUrl + 'user/block',
+    logout: baseUrl + 'logout',
 };

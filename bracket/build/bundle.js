@@ -9,21 +9,17 @@ require('./modules/panel/panel.module');
 require('./modules/dashBoard/dashBoard.module');
 require('./modules/profile/profile.module');
 require('./modules/attendance/attendance.module');
+require('./modules/employee/employee.module');
 
 var appDependencies = [
     'ui.router', 'ui.bootstrap', 'app.directive',
     'app.service', 'app.login', 'app.dashBoard',
-    'app.panel', 'app.profile', 'app.attendance'
+    'app.panel', 'app.profile', 'app.attendance',
+    'app.employee'
 ];
 
 module.exports = angular
     .module('app', appDependencies)
-    .filter('stringToTime', function() {
-        return function(string) {
-            var b = string.split(':');
-            return b[0] + ' hour ' + b[1] + ' minute ';
-        };
-    })
     .filter('name', function() {
         return function(empName) {
             if (empName) {
@@ -36,9 +32,88 @@ module.exports = angular
                 return '';
             }
         };
+    })
+    .filter('address', function() {
+        return function(addressObj) {
+            if (addressObj) {
+                return addressObj.city + ', ' + addressObj.state + '- ' + addressObj.country;
+            } else {
+                return '';
+            }
+        };
+    })
+    .filter('fullAddress', function() {
+        return function(addressObj) {
+            if (addressObj) {
+                return addressObj.fullAddress + ',' + addressObj.city + ', ' + addressObj.state + '- ' + addressObj.country + ' PIN - ' + addressObj.PIN;
+            } else {
+                return '';
+            }
+        };
+    })
+    .filter('gender', function() {
+        return function(gender) {
+            if (gender) {
+                if (/m/i.test(gender)) {
+                    return 'Male';
+                } else if (/f/i.test(gender)) {
+                    return 'Female';
+                } else {
+                    return '';
+                }
+            } else {
+                return '';
+            }
+        };
+    })
+    .filter('url', function() {
+        return function(imageUrl) {
+            if (imageUrl) {
+                return util.api.getBaseUrl() + imageUrl;
+            } else {
+                return './resources/images/user.png';
+            }
+        };
+    })
+    .filter('typeOfLeave', function() {
+        return function(leaveType) {
+            if (leaveType === 1) {
+                return 'CL';
+            } else if (leaveType === 2) {
+                return 'PL';
+            }
+        };
+    })
+    .filter('statusCode', function() {
+        return function(statusCode) {
+            if (statusCode === 1) {
+                return 'pending';
+            } else if (statusCode === 2) {
+                return 'approved';
+            } else if (statusCode === 3) {
+                return 'rejected';
+            } else if (statusCode === 4) {
+                return 'cancelled';
+            }
+        };
+    })
+    .filter('totalCount', function() {
+        return function(totalCount) {
+            if (totalCount.from && totalCount.to) {
+                return Math.ceil((new Date(totalCount.to) - new Date(totalCount.from)) / 86400000) + 1;
+            } else {
+                return 'ERROR';
+            }
+        };
+    })
+    .filter('stringToTime', function() {
+        return function(string) {
+            var b = string.split(':');
+            return b[0] + ' hour ' + b[1] + ' minute ';
+        };
     });
 
-},{"./modules/attendance/attendance.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/login/login.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/try-intranet-bracket/bracket/app/modules/services/index.js"}],"/var/www/html/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
+},{"./modules/attendance/attendance.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/employee/employee.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/employee.module.js","./modules/login/login.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/try-intranet-bracket/bracket/app/modules/services/index.js"}],"/var/www/html/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
 'use strict';
 var lang = {
     deletedSuccessfully: "Successfully deleted.",
@@ -94,15 +169,12 @@ module.exports = lang;
 });*/
 'use strict';
 
-var App = angular.module('app.attendance', ['ui.router', 'ui.bootstrap'])
+module.exports = angular.module('app.attendance', ['ui.router', 'ui.bootstrap'])
     .controller('attendanceViewCtrl', require('./controllers/attendanceViewCtrl'))
     .controller('attendanceAddCtrl', require('./controllers/add-attendance'))
-    .controller('attendanceSettingsCtrl', require('./controllers/attendance-settings'))
     .config(require('./router/router'));
 
-module.exports = App;
-
-},{"./controllers/add-attendance":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js","./controllers/attendance-settings":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendance-settings.js","./controllers/attendanceViewCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js":[function(require,module,exports){
+},{"./controllers/add-attendance":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js","./controllers/attendanceViewCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js":[function(require,module,exports){
 'use strict';
 var util = require('../../../util');
 var api = require('../../../util/api');
@@ -258,7 +330,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
                         var xhr = new XMLHttpRequest();
 
                         // Open the connection.
-                        xhr.open('POST', util.api.uploadAttendanceCSV + '?senderId=' + util.loggedInUser._id, true);
+                        xhr.open('POST', api.uploadAttendanceCSV + '?senderId=' + util.loggedInUser._id, true);
 
                         // Set up a handler for when the request finishes.
                         xhr.onload = function(response) {
@@ -318,7 +390,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
         $http({
             method: 'GET',
-            url: util.api.getManagers,
+            url: api.getManagers,
             params: {
                 name: $scope.attendanceDetails.searchString,
                 senderId: util.loggedInUser._id,
@@ -371,7 +443,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
             if ($scope.action === 'Add') {
 
-                $http.post(util.api.addAttendance, jsonObj).success(function(response) {
+                $http.post(api.addAttendance, jsonObj).success(function(response) {
                     if (response.success) {
                         $scope.loadingForm = false;
                         $scope.successForm = true;
@@ -402,7 +474,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
             } else {
 
-                $http.put(util.api.editAttendance, jsonObj).success(function(response) {
+                $http.put(api.editAttendance, jsonObj).success(function(response) {
                     if (response.success) {
                         $scope.loadingForm = false;
                         $scope.successForm = true;
@@ -461,16 +533,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
 };
 
-},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendance-settings.js":[function(require,module,exports){
-'use strict';
-
-/*define([], function() {
-    return ['$scope', '$http',
-        function() {}
-    ];
-});*/
-
-},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js":[function(require,module,exports){
 'use strict';
 var util = require('../../../util');
 var api = require('../../../util/api')
@@ -864,6 +927,1057 @@ var Directive = angular.module('app.directive', [])
 
 module.exports = Directive;
 
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js":[function(require,module,exports){
+/*'use strict';
+
+define(['Util', 'jquery', 'underscore', 'lang'], function(util, $, _, lang) {
+    return ['$scope', '$http', '$location', 'UserService', '$element',
+    ];
+});*/
+'use strict';
+
+/*
+define(['Util', 'jquery', 'underscore', 'lang'], function(util, $, _, lang) {
+    return ['$scope', '$http', '$location', 'UserService', '$element',
+    ];
+});*/
+
+var util = require('../../../util');
+var api = require('../../../util/api');
+module.exports = function($scope, $rootScope, $state, $http, $location, $modal) {
+
+    $scope.employee = {};
+    $scope.profile = {};
+    var userRole = util.loggedInUser.companyProfile.role,
+        init = function() {
+
+            /**
+             * start of datePicker function
+             */
+            $scope.clear = function() {
+                $scope.employee.DOJ = null;
+                $scope.employee.DOB = null;
+            };
+
+            // Disable weekend selection
+            $scope.DOBDisabled = function(date, mode) {
+                return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+            };
+
+            $scope.DOJDisabled = function(date, mode) {
+                return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+            };
+
+            $scope.toggleMin = function() {
+                $scope.minDate = $scope.minDate ? null : new Date();
+            };
+            // $scope.toggleMin();
+
+            $scope.DOBOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.DOBOpened = !$scope.DOBOpened;
+            };
+
+            $scope.DOJOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.DOJOpened = !$scope.DOJOpened;
+            };
+
+            $scope.accountStartDateOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.accountStartDateOpened = !$scope.accountStartDateOpened;
+            };
+
+            $scope.accountEndDateOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.accountEndDateOpened = !$scope.accountEndDateOpened;
+            };
+
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+
+            $scope.initDate = new Date('2016-15-20');
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[2];
+
+            /**
+             * end of datePicker function
+             */
+
+            $scope.designations = util.appDetails.designations;
+            if ($scope.employee && $scope.employee.companyProfile.designation) {
+                $scope.selectedDesignation = _.find($scope.designations, function(eachDesignation) {
+                    if (eachDesignation._id === $scope.employee.companyProfile.designation._id) {
+                        return eachDesignation;
+                    }
+                });
+            } else {
+                $scope.selectedDesignation = $scope.designations[0];
+            }
+
+            $scope.roles = _.filter(util.appDetails.roles, function(eachRole) {
+                if (!util.loggedInUser.companyProfile.manager) {
+                    return eachRole;
+                } else if (eachRole.name !== 'admin') {
+                    return eachRole;
+                }
+            });
+
+            if ($scope.employee && $scope.employee.companyProfile.role) {
+                $scope.selectedRole = _.find($scope.roles, function(eachRole) {
+                    if (eachRole._id === $scope.employee.companyProfile.role._id) {
+                        return eachRole;
+                    }
+                });
+            } else {
+                $scope.selectedRole = util.appDetails.roles[0];
+            }
+
+            if ($scope.employee.personalProfile.contactNumbers.length !== 0) {
+                $scope.employee.contactNumbers = [];
+                _.each($scope.employee.personalProfile.contactNumbers, function(number) {
+
+                    $scope.employee.contactNumbers.push({
+                        text: number,
+                        isEditing: false
+                    });
+                });
+            } else {
+                $scope.employee.contactNumbers = [];
+                $scope.employee.contactNumbers.push({
+                    text: '',
+                    isEditing: true
+                });
+            }
+
+
+            if ($scope.mode === 1) {
+                if ($scope.employee.personalProfile &&
+                    $scope.employee.personalProfile.currentAddress &&
+                    Object.keys($scope.employee.personalProfile.currentAddress).keys !== 0) {
+                    $scope.checked = true;
+                } else {
+                    $scope.checked = false;
+                    // $scope.employee.personalProfile.currentAddress = $scope.employee.personalProfile.permanentAddress;
+                    // console.log($scope.employee.personalProfile.currentAddress);
+                }
+
+                if ($scope.employee.companyProfile && $scope.employee.companyProfile.manager) {
+                    $scope.employee.managers = [$scope.employee.companyProfile.manager];
+                } else {
+                    $scope.employee.managers = [];
+                }
+                if (userRole.user.others.personalProfile.edit) {
+                    $scope.profile.editPersonalProfile = true;
+                }
+                if (userRole.user.others.companyProfile.edit) {
+                    $scope.profile.editCompanyProfile = true;
+                }
+                if (Object.keys($scope.profile).length === 0) {
+                    $location.path('/employees/list');
+                }
+            } else {
+                if (userRole.user.others.add) {
+                    $scope.profile.editPersonalProfile = true;
+                    $scope.profile.editCompanyProfile = true;
+                } else {
+                    $location.path('/employees/list');
+                }
+            }
+
+            $scope.$apply();
+        },
+        location = $location.$$path.split('/'),
+        readImage = function(file) {
+            var reader = new FileReader();
+            var image = new Image();
+            reader.readAsDataURL(file);
+            reader.onload = function(_file) {
+                image.src = _file.target.result;
+                image.onload = function() {
+                    $('img.speaker-picture-small').attr('src', image.src);
+                };
+                image.onerror = function() {
+                    window.alert('Invalid file type: ' + file.type);
+                };
+            };
+        };
+
+    location.shift();
+
+    if (location.length === 3 && location[2] !== '') {
+        $scope.heading = 'Update';
+        $scope.mode = 1;
+        $http.get(util.api.getSingleEmployee + '?senderId=' + util.loggedInUser._id + '&userId=' + location[2])
+            .success(function(response) {
+                if (response.success) {
+                    $scope.employee = response.data;
+                    $scope.employee.companyProfile.DOJ = $scope.employee.companyProfile.DOJ ? new Date($scope.employee.companyProfile.DOJ) : new Date();
+                    $scope.employee.companyProfile.DOB = $scope.employee.companyProfile.DOB ? new Date($scope.employee.companyProfile.DOB) : new Date();
+                    $scope.employee.companyProfile.accountStartDate = $scope.employee.leaveDetails.duration.from ? new Date($scope.employee.leaveDetails.duration.from) : new Date();
+                    $scope.employee.companyProfile.accountEndDate = $scope.employee.leaveDetails.duration.to ? new Date($scope.employee.leaveDetails.duration.to) : new Date();
+                    $scope.employee.companyProfile.maxCL = $scope.employee.leaveDetails.maxCL;
+                    $scope.employee.companyProfile.maxEL = $scope.employee.leaveDetails.maxEL;
+                    if ($scope.employee.companyProfile.manager) {
+                        $scope.employee.managers = [$scope.employee.companyProfile.manager];
+                    } else {
+                        $scope.employee.managers = [];
+                    }
+                    init();
+                } else {
+                    $location.path('/employees/list');
+                }
+            })
+    } else {
+        $scope.heading = 'Add';
+        $scope.employee = {
+            managers: [],
+            personalProfile: {
+                currentAddress: {},
+                permanentAddress: {},
+                contactNumbers: []
+            },
+            companyProfile: {
+                managers: [],
+                name: {},
+                DOJ: new Date(),
+                DOB: new Date(),
+                accountStartDate: new Date(),
+                accountEndDate: new Date(),
+                maxCL: 0,
+                maxEL: 0,
+            },
+        };
+        $scope.mode = 99;
+        init();
+    }
+
+    $('#addEmployee').validate({
+        rules: {
+            machineId: 'required',
+            empId: 'required',
+            ctc: {
+                required: true,
+                number: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            DOB: {
+                required: true,
+                date: true
+            },
+            DOJ: {
+                required: true,
+                date: true
+            },
+            /*fullAddress: 'required',
+            city: 'required',
+            state: 'required',
+            country: 'required',*/
+            pin: {
+                // required: true,
+                number: true
+            },
+            permanentFullAddress: 'required',
+            permanentCity: 'required',
+            permanentState: 'required',
+            permanentCountry: 'required',
+            permanentPin: {
+                required: true,
+                number: true
+            },
+            firstName: 'required',
+            lastName: 'required',
+            gender: 'required',
+            phoneNumber: 'required',
+            designation: 'required',
+            pan: 'required',
+            role: 'required'
+        },
+        messages: {
+            machineId: lang.validationMessages.machineCodeRequired,
+            empId: lang.validationMessages.empIdRequired,
+            ctc: {
+                required: lang.validationMessages.empIdRequired,
+                number: lang.validationMessages.empIdInvalid
+            },
+            email: {
+                required: lang.validationMessages.email.required,
+                email: lang.validationMessages.email.email,
+            },
+            DOB: {
+                required: lang.validationMessages.DOBRequired,
+                date: lang.validationMessages.DOBDateRequired
+            },
+            DOJ: {
+                required: lang.validationMessages.DOJRequired,
+                date: lang.validationMessages.DOJDateRequired
+            },
+            phoneNumber: lang.validationMessages.phoneNumberRequired,
+            designation: lang.validationMessages.designationRequired,
+            /*fullAddress: lang.validationMessages.fullAddressRequired,
+            city: lang.validationMessages.cityRequired,
+            state: lang.validationMessages.stateRequired,
+            country: lang.validationMessages.countryRequired,*/
+            pin: {
+                // required: lang.validationMessages.pinRequired,
+                number: lang.validationMessages.invalidPin
+            },
+            permanenntFullAddress: lang.validationMessages.permanentFullAddressRequired,
+            permanenntCity: lang.validationMessages.permanentCityRequired,
+            permanenntState: lang.validationMessages.permanentStateRequired,
+            permanenntCountry: lang.validationMessages.permanentCountryRequired,
+            permanenntPin: {
+                required: lang.validationMessages.permanentPinRequired,
+                number: lang.validationMessages.permanentInvalidPin
+            },
+            firstName: lang.validationMessages.firstNameRequired,
+            lastName: lang.validationMessages.lastNameRequired,
+            gender: lang.validationMessages.genderRequired,
+            pan: lang.validationMessages.pan,
+            role: lang.validationMessages.role
+        },
+        highlight: function(element) {
+            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'gender') {
+                error.css({
+                    position: 'relative',
+                    right: '100px',
+                    top: '6px'
+                });
+                error.insertAfter($(element).parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        success: function(element) {
+            $(element).closest('.form-control').removeClass('has-error');
+            $(element).closest('label').remove();
+        }
+    });
+
+
+
+    $scope.addContactNumber = function() {
+        if ($scope.employee.contactNumbers[$scope.employee.contactNumbers.length - 1].text.trim() !== '') {
+            $scope.employee.contactNumbers.push({
+                text: '',
+                isEditing: true
+            });
+        }
+    };
+
+
+    $scope.activateChangeEvent = function() {
+        $('#choose').change(function(e) {
+            if (this.disabled) {
+                return window.alert('File upload not supported!');
+            } else {
+                if (this.files && this.files[0]) {
+                    $scope.profilePicture = e.target.files[0];
+                    readImage(this.files[0]);
+                }
+            }
+        });
+    };
+
+    /*$scope.$watch('checked', function(newValue) {
+      if (!newValue) {
+        $scope.employee.personalProfile.currentAddress = {};
+      } else {
+        $scope.employee.personalProfile.currentAddress = $scope.employee.personalProfile.permanentAddress;
+      }
+    });*/
+
+    $scope.manageAddress = function(newValue) {
+        if (newValue) {
+            $scope.employee.personalProfile.currentAddress = {};
+        } else {
+            $scope.employee.personalProfile.currentAddress = $scope.employee.personalProfile.permanentAddress;
+        }
+    };
+
+    $scope.cancel = function() {
+        $location.path('/employees/list');
+    };
+
+    /** 
+     * Searching managers
+     */
+    $scope.getManagerList = function() {
+        $scope.managers = [];
+        $scope.displayResult = true;
+
+        UserService.getManagers({
+            name: $scope.employee.managerAutoSearch,
+            senderId: util.loggedInUser._id,
+            searchFor: ['manager', 'admin']
+        }).success(function(emp) {
+            if (emp.success) {
+                if (emp.data.length > 0) {
+                    $scope.managers = _.filter(emp.data, function(eachEmp) {
+                        if ($scope.employee._id !== eachEmp._id) {
+                            return eachEmp;
+                        }
+                    });
+                } else {
+                    $('#no_speaker').empty();
+                    $($element).find('#no_speaker').append('<span>No speaker found!</span>');
+                }
+            }
+        }).error(function() {});
+    };
+
+    $scope.closeSearchResult = function() {
+        $scope.managers = [];
+        $scope.displayResult = false;
+    };
+
+    $scope.addManager = function(index) {
+        console.log('adding Manager');
+        if ($scope.employee.managers.length > 0) {
+            $scope.removeManager(0);
+        }
+        // $scope.employee.managers.push($scope.managers[index]);
+        $scope.employee.managers = [$scope.managers[index]];
+        $scope.managers.splice(index, 1);
+        $scope.managers = _.difference($scope.managers, $scope.employee.managers);
+        if (!$scope.managers.length) {
+            $('#no_speaker').empty();
+            $($element).find('#no_speaker').append('<span>No speaker found!</span>');
+        }
+        $scope.employee.managerAutoSearch = '';
+    };
+
+    $scope.removeManager = function(index) {
+        // $scope.managers.push($scope.employee.managers[index]);
+        // $scope.employee.managers.splice(index, 1);
+        $scope.employee.managers = [];
+    };
+    /** 
+     * Searching managers ENDS
+     */
+
+    $scope.checkAdmin = function() {
+        return !util.loggedInUser.companyProfile.manager;
+    };
+
+    $scope.$watch('checked', function(value) {
+        if ($scope.employee.personalProfile) {
+            if (!value) {
+                $scope.employee.personalProfile.currentAddress = {};
+            } else {
+                $scope.employee.personalProfile.currentAddress = $scope.employee.personalProfile.permanentAddress;
+            }
+        }
+    });
+
+    $scope.addEmployee = function() {
+        if ($('#addEmployee').valid()) {
+            // if (true) {
+
+            $('[name="addEmployeeButton"]').attr('disabled', 'disabled');
+
+            $scope.loading = true;
+            console.log($scope.employee.companyProfile.DOJ,
+                $scope.employee.companyProfile.DOB);
+            // $scope.employee.companyProfile.DOJ = $scope.employee.DOJ;
+            // $scope.employee.companyProfile.DOB = $scope.employee.DOB;
+            if ($scope.employee.managers && $scope.employee.managers.length > 0) {
+                // console.log($scope.employee.managers);
+                $scope.employee.companyProfile.manager = $scope.employee.managers[0]._id;
+            } else {
+                $scope.employee.companyProfile.manager = null;
+            }
+            $scope.employee.personalProfile.contactNumbers = _.pluck(_.filter($scope.employee.contactNumbers, function(number) {
+                if (number.text && number.text.trim().length !== 0) {
+                    return number;
+                }
+            }), 'text');
+            var jsonObj = _.extend({}, $scope.employee);
+
+            jsonObj.leaveConfig = {
+                startDate: jsonObj.companyProfile.accountStartDate,
+                endDate: jsonObj.companyProfile.accountEndDate,
+                maxCL: jsonObj.companyProfile.maxCL,
+                maxEL: jsonObj.companyProfile.maxEL
+            };
+
+            delete jsonObj.companyProfile.accountStartDate;
+            delete jsonObj.companyProfile.accountEndDate;
+            delete jsonObj.companyProfile.maxCL;
+            delete jsonObj.companyProfile.maxEL;
+            delete jsonObj.$$hashKey;
+            delete jsonObj.contactNumbers;
+            delete jsonObj.managerAutoSearch;
+            delete jsonObj.managers;
+            if ($scope.checked) {
+                delete jsonObj.personalProfile.currentAddress;
+            }
+            if ($scope.selectedRole) {
+                $scope.employee.companyProfile.role = $scope.selectedRole._id;
+            }
+            if (jsonObj.companyProfile.company) {
+                delete jsonObj.companyProfile.company;
+            }
+            if ($scope.selectedDesignation) {
+                $scope.employee.companyProfile.designation = $scope.selectedDesignation._id;
+            }
+
+            jsonObj.senderId = util.loggedInUser._id;
+
+
+
+            if ($scope.mode === 1) {
+                UserService.updateEmp(jsonObj, $scope.profilePicture, $location, $scope);
+            } else {
+                UserService.addEmp(jsonObj, $scope.profilePicture, $location, $scope);
+            }
+        }
+    };
+
+    $scope.$apply();
+};
+
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js":[function(require,module,exports){
+'use strict';
+
+/*define(['Util', 'jquery', 'underscore'], function(util, $, _) {
+    return ['$scope', '$http', '$location', 'UserService', 'employee',
+    ];
+});*/
+
+var util = require('../../../util');
+var api = require('../../../util/api');
+module.exports = function($scope, $http, $location) {
+    var userRole = util.loggedInUser.companyProfile.role;
+
+    $scope.searchString = '';
+
+    var setTableData = function(page) {
+
+            if ($scope.filteredData && $scope.filteredData.length) {
+                var attendiesList = angular.copy($scope.filteredData);
+                $scope.attendiesList = attendiesList.splice((page - 1) * $scope.pagination.itemsPerPage, $scope.pagination.itemsPerPage);
+            } else {
+                $scope.attendiesList = [];
+            }
+
+        },
+
+        createPagination = function() {
+
+            $scope.pagination = {
+                totalItems: $scope.filteredData.length,
+                maxSize: 5,
+                itemsPerPage: util.config.limit.attenderList,
+            };
+            $scope.currentPage = 1;
+
+            $scope.watchPagination();
+
+            $scope.$apply();
+        };
+
+    $scope.watchPagination = function(page) {
+
+        if (page) {
+            setTableData(page);
+        } else {
+            setTableData(1);
+        }
+    };
+
+    $scope.listView = function() {
+        if (userRole.user) {
+            if (userRole.user.others.companyProfile.view ||
+                userRole.user.others.personalProfile.view) {
+                $scope.viewUser = true;
+                if (userRole.user.others.add) {
+                    $scope.addUser = true;
+                }
+                if (userRole.user.others.block) {
+                    $scope.blockUser = true;
+                }
+                if (userRole.user.others.companyProfile.edit ||
+                    userRole.user.others.personalProfile.edit) {
+                    $scope.editUser = true;
+                }
+                return true;
+            } else {
+                history.goBack(-1);
+            }
+        } else {
+            history.goBack(-1);
+        }
+    };
+
+    $scope.filterOptions = [{
+        text: 'All',
+        use: 'all'
+    }, {
+        text: 'Name',
+        use: 'name'
+    }, {
+        text: 'Email',
+        use: 'email'
+    }, {
+        text: 'Designation',
+        use: 'designation'
+    }];
+
+    $scope.loadEmployeeView = function(id) {
+        if (id) {
+            employee.profile = _.find($scope.AllAttendies, function(eachEmp) {
+                if (eachEmp._id === id) {
+                    return eachEmp;
+                }
+            });
+            employee.mode = 'view';
+            $location.path('/employees/view/' + id);
+        }
+    };
+    $scope.loadEmployeeEditView = function(id) {
+        if (id) {
+            employee.profile = _.find($scope.AllAttendies, function(eachEmp) {
+                if (eachEmp._id === id) {
+                    return eachEmp;
+                }
+            });
+            employee.mode = 'edit';
+            $location.path('/employees/edit/' + id);
+        }
+    };
+    $scope.userBlock = function(id, index) {
+        $http.put(util.api.blockUser, {
+            senderId: util.loggedInUser._id,
+            _id: id,
+            blocked: true
+        }).success(function(response) {
+            if (response.success) {
+                $scope.attendiesList[index].companyProfile.isActive = false;
+            }
+        })
+    };
+
+    $scope.userUnblock = function(id, index) {
+        $http.put(util.api.blockUser, {
+            senderId: util.loggedInUser._id,
+            _id: id,
+            blocked: false
+        }).success(function(response) {
+            if (response.success) {
+                $scope.attendiesList[index].companyProfile.isActive = true;
+            }
+        })
+    };
+
+    $scope.addEmployee = function() {
+        employee.profile = {
+            companyProfile: {},
+            personalProfile: {}
+        };
+        $location.path('/employees/add/');
+    };
+
+    $scope.selectedOption = $scope.filterOptions[0];
+
+    $scope.chooseAnOption = function(index) {
+        $scope.selectedOption = $scope.filterOptions[index];
+        $('#filter_dropdown').removeClass('open');
+        $('[name=dropdownButton]').attr('aria-expanded', 'false');
+    };
+
+    $scope.filterData = function(string) {
+        var reg;
+        if (string) {
+            $scope.filteredData = [];
+            reg = new RegExp(string, 'ig');
+            if ($scope.selectedOption.use === 'all') {
+                console.log('In All', reg);
+                $scope.AllAttendies.forEach(function(eachAttender) {
+
+                    if ((eachAttender.name &&
+                            ((eachAttender.name.first && eachAttender.name.first.match(reg)) ||
+                                (eachAttender.name.middle && eachAttender.name.middle.match(reg)) ||
+                                (eachAttender.name.last && eachAttender.name.last.match(reg)))) ||
+                        (eachAttender.companyProfile.email && eachAttender.companyProfile.email.match(reg)) ||
+                        (eachAttender.companyProfile.designation && eachAttender.companyProfile.designation.post &&
+                            eachAttender.companyProfile.designation.post.match(reg))) {
+                        $scope.filteredData.push(eachAttender);
+                        console.log('filter data: ', $scope.filteredData);
+                    }
+                });
+            } else if ($scope.selectedOption.use === 'name') {
+                console.log('In Name', reg);
+                $scope.AllAttendies.forEach(function(eachAttender) {
+                    if ((eachAttender.name &&
+                            ((eachAttender.name.first && eachAttender.name.first.match(reg)) ||
+                                (eachAttender.name.middle && eachAttender.name.middle.match(reg)) ||
+                                (eachAttender.name.last && eachAttender.name.last.match(reg))))) {
+                        $scope.filteredData.push(eachAttender);
+                        console.log('filter data: ', $scope.filteredData);
+                    }
+                });
+            } else if ($scope.selectedOption.use === 'email') {
+                console.log('In Email', reg);
+                $scope.AllAttendies.forEach(function(eachAttender) {
+                    if (eachAttender.companyProfile.email && eachAttender.companyProfile.email.match(reg)) {
+                        $scope.filteredData.push(eachAttender);
+                        console.log('filter data: ', $scope.filteredData);
+                    }
+                });
+            } else if ($scope.selectedOption.use === 'designation') {
+                console.log('In Designation', reg);
+                $scope.AllAttendies.forEach(function(eachAttender) {
+                    if (eachAttender.companyProfile.email && eachAttender.companyProfile.email.match(reg)) {
+                        $scope.filteredData.push(eachAttender);
+                        console.log('filter data: ', $scope.filteredData);
+                    }
+                });
+            }
+        } else {
+            console.log('in filter data else')
+            $scope.filteredData = $scope.AllAttendies;
+        }
+        createPagination();
+    };
+
+    UserService.getAllUsers({
+        senderId: util.loggedInUser._id
+    }).success(function(response) {
+        if (response.success) {
+            $scope.AllAttendies = response.data;
+            $scope.filteredData = response.data;
+            createPagination();
+        }
+    }).error(function() {});
+
+};
+
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/employee.module.js":[function(require,module,exports){
+// define([
+//         'angular',
+//         'Util',
+//         'lang',
+//         'underscore'
+//     ],
+//     function(angular, util, lang, _) {
+//         'use strict';
+
+//         if (!util.modules.employees) {
+//             var app = angular.module('EmployeeModule', []);
+//             app
+//                 .controller('AddEmployee', [
+//                     '$scope',
+//                     '$injector',
+//                     '$element',
+//                     '$compile',
+//                     'Users',
+//                     'employee',
+//                     function($scope, $injector, $element, $compile, UserService, employee) {
+//                         require(['employeeModulePath/controllers/addEmployee'], function(addEmnployee) {
+//                             $injector.invoke(addEmnployee, this, {
+//                                 '$scope': $scope,
+//                                 '$element': $element,
+//                                 '$compile': $compile,
+//                                 'UserService': UserService,
+//                                 'employee': employee
+//                             });
+//                         });
+//                     }
+//                 ])
+//                 .controller('SingleEmp', [
+//                     '$scope',
+//                     '$injector',
+//                     '$element',
+//                     '$compile',
+//                     'Users',
+//                     'employee',
+//                     function($scope, $injector, $element, $compile, UserService, employee) {
+//                         require(['employeeModulePath/controllers/singleEmp'], function(addEmnployee) {
+//                             $injector.invoke(addEmnployee, this, {
+//                                 '$scope': $scope,
+//                                 '$element': $element,
+//                                 '$compile': $compile,
+//                                 'UserService': UserService,
+//                                 'employee': employee
+//                             });
+//                         });
+//                     }
+//                 ])
+//                 .controller('EmployeeList', ['$scope', '$injector', 'Users', 'employee',
+//                     function($scope, $injector, UserService, employee) {
+//                         require(['employeeModulePath/controllers/employeeList'], function(employeeList) {
+//                             $injector.invoke(employeeList, this, {
+//                                 '$scope': $scope,
+//                                 'UserService': UserService,
+//                                 'employee': employee
+//                             });
+//                         });
+//                     }
+//                 ])
+//                 .controller('DesignationList', ['$scope', '$injector', '$element', '$modal',
+//                     function($scope, $injector, $element, $modal) {
+//                         require(['employeeModulePath/controllers/designationlist'], function(designationlist) {
+//                             $injector.invoke(designationlist, this, {
+//                                 '$scope': $scope,
+//                                 '$element': $element,
+//                                 '$modal': $modal
+//                             });
+//                         });
+//                     }
+//                 ])
+//                 .controller('AddDesignation', ['$scope', '$injector', '$element', '$modal',
+//                     function($scope, $injector, $element, $modal) {
+//                         require(['employeeModulePath/controllers/adddesignation'], function(adddesignation) {
+//                             $injector.invoke(adddesignation, this, {
+//                                 '$scope': $scope,
+//                                 '$modal': $modal
+//                             });
+//                         });
+//                     }
+//                 ])
+//                 .factory('employee', function() {
+//                     var emp = {};
+//                     return emp;
+//                 })
+//                 .service('Users', ['$http', function($http) {
+//                     return {
+//                         getManagers: function(query) {
+//                             return $http({
+//                                 method: 'GET',
+//                                 url: util.api.getManagers,
+//                                 params: query
+//                             });
+//                         },
+//                         getAllUsers: function(query) {
+//                             return $http({
+//                                 method: 'GET',
+//                                 url: util.api.allAttenders,
+//                                 params: query
+//                             });
+//                         },
+//                         addEmp: function(query, profilePicture, $location, addEmployeeScope) {
+
+//                             var fd = new FormData();
+
+//                             if (profilePicture) {
+//                                 fd.append('profilePicture', profilePicture, profilePicture.name);
+//                             }
+//                             _.each(query, function(value, key) {
+//                                 if (typeof(value) === 'string') {
+//                                     fd.append(key, value);
+//                                 } else if (typeof(value) === 'object') {
+//                                     fd.append(key, JSON.stringify(value));
+//                                 }
+//                             });
+
+//                             // Set up the request.
+//                             var xhr = new XMLHttpRequest();
+
+//                             // Open the connection.
+//                             xhr.open('POST', util.api.addEmployee + '?senderId=' + query.senderId, true);
+
+//                             // Set up a handler for when the request finishes.
+//                             xhr.onload = function(response) {
+//                                 if (xhr.status === 200) {
+//                                     if (JSON.parse(xhr.response).success) {
+//                                         location.hash = '/employees/list';
+//                                     } else {
+//                                         $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                         addEmployeeScope.loading = false;
+//                                         addEmployeeScope.errors = _.values(JSON.parse(xhr.response).errfor);
+//                                         addEmployeeScope.showErrors = true;
+//                                         addEmployeeScope.$apply();
+
+//                                         util.errorMessageTimeout({
+//                                             success: function() {
+//                                                 addEmployeeScope.errors = [];
+//                                                 addEmployeeScope.showErrors = false;
+//                                                 addEmployeeScope.$apply();
+//                                             }
+//                                         });
+//                                     }
+//                                 } else {
+//                                     $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                     addEmployeeScope.loading = false;
+//                                     addEmployeeScope.errors = [lang.networkError];
+//                                     addEmployeeScope.showErrors = true;
+//                                     addEmployeeScope.$apply();
+
+//                                     util.errorMessageTimeout({
+//                                         success: function() {
+//                                             addEmployeeScope.errors = [];
+//                                             addEmployeeScope.showErrors = false;
+//                                             addEmployeeScope.$apply();
+//                                         }
+//                                     });
+//                                 }
+//                             };
+
+//                             xhr.onerror = function() {
+
+//                                 $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                 addEmployeeScope.loading = false;
+//                                 addEmployeeScope.errors = [lang.networkError];
+//                                 addEmployeeScope.showErrors = true;
+//                                 addEmployeeScope.$apply();
+
+//                                 util.errorMessageTimeout({
+//                                     success: function() {
+//                                         addEmployeeScope.errors = [];
+//                                         addEmployeeScope.showErrors = false;
+//                                         addEmployeeScope.$apply();
+//                                     }
+//                                 });
+
+//                             };
+
+//                             // Send the Data.
+//                             return xhr.send(fd);
+
+//                             /*return $http({
+//                                 method: 'POST',
+//                                 url: util.api.addEmployee,
+//                                 data: query
+//                             });*/
+//                         },
+//                         updateEmp: function(query, profilePicture, $location, addEmployeeScope) {
+//                             var fd = new FormData();
+
+//                             if (profilePicture) {
+//                                 fd.append('profilePicture', profilePicture, profilePicture.name);
+//                             }
+//                             _.each(query, function(value, key) {
+//                                 if (typeof(value) === 'string') {
+//                                     fd.append(key, value);
+//                                 } else if (typeof(value) === 'object') {
+//                                     fd.append(key, JSON.stringify(value));
+//                                 }
+//                             });
+
+//                             // Set up the request.
+//                             var xhr = new XMLHttpRequest();
+
+//                             // Open the connection.
+//                             xhr.open('PUT', util.api.updateOther + '?senderId=' + query.senderId, true);
+
+//                             // Set up a handler for when the request finishes.
+//                             xhr.onload = function(response) {
+//                                 if (xhr.status === 200) {
+//                                     console.log('from service: ', JSON.parse(xhr.response));
+//                                     if (JSON.parse(xhr.response).success) {
+//                                         location.hash = '/employees/list';
+//                                     } else {
+//                                         $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                         addEmployeeScope.loading = false;
+//                                         addEmployeeScope.errors = _.values(JSON.parse(xhr.response).errfor);
+//                                         addEmployeeScope.showErrors = true;
+//                                         addEmployeeScope.$apply();
+
+//                                         util.errorMessageTimeout({
+//                                             success: function() {
+//                                                 addEmployeeScope.errors = [];
+//                                                 addEmployeeScope.showErrors = false;
+//                                                 addEmployeeScope.$apply();
+//                                             }
+//                                         });
+//                                     }
+//                                 } else {
+//                                     $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                     addEmployeeScope.loading = false;
+//                                     addEmployeeScope.errors = [lang.networkError];
+//                                     addEmployeeScope.showErrors = true;
+//                                     addEmployeeScope.$apply();
+
+//                                     util.errorMessageTimeout({
+//                                         success: function() {
+//                                             addEmployeeScope.errors = [];
+//                                             addEmployeeScope.showErrors = false;
+//                                             addEmployeeScope.$apply();
+//                                         }
+//                                     });
+//                                 }
+//                             };
+
+//                             xhr.onerror = function() {
+
+//                                 $('[name="addEmployeeButton"]').removeAttr('disabled');
+//                                 addEmployeeScope.loading = false;
+//                                 addEmployeeScope.errors = [lang.networkError];
+//                                 addEmployeeScope.showErrors = true;
+//                                 addEmployeeScope.$apply();
+
+//                                 util.errorMessageTimeout({
+//                                     success: function() {
+//                                         addEmployeeScope.errors = [];
+//                                         addEmployeeScope.showErrors = false;
+//                                         addEmployeeScope.$apply();
+//                                     }
+//                                 });
+
+//                             };
+
+//                             // Send the Data.
+//                             return xhr.send(fd);
+//                         }
+//                     };
+//                 }]);
+//             util.modules.employees = app;
+//         }
+//         return util.modules.employees;
+
+//     });
+'use strict';
+
+module.exports = angular.module('app.employee', ['ui.router', 'ui.bootstrap'])
+    .controller('addEmployeeCtrl', require('./controllers/addEmployee'))
+    .controller('employeeListCtrl', require('./controllers/employeeList'))
+    // .controller('singleEmpCtrl', require('./controllers/singleEmployee'))
+    // .controller('designationListCtrl', require('./controllers/designationList'))
+    // .controller('addDesignationCtrl', require('./controllers/addDesignation'))
+    .config(require('./router/router'));
+
+},{"./controllers/addEmployee":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js","./controllers/employeeList":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/router/router.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+    $stateProvider
+        .state('app.employeeList', {
+            url: '/employee/list',
+            views: {
+                'pages': {
+                    template: require('../templates/employeeList.html'),
+                    controller: 'employeeListCtrl'
+                }
+            }
+        })
+        .state('app.employeeAdd', {
+            url: '/employee/add',
+            views: {
+                'pages': {
+                    template: require('../templates/addEmployee.html'),
+                    controller: 'addEmployeeCtrl'
+                }
+            }
+        });
+};
+
+},{"../templates/addEmployee.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html","../templates/employeeList.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html":[function(require,module,exports){
+module.exports = '<div class="pageheader">\n  <h2>\n      <i class="fa fa-user"></i>\n      {{heading}} Employee\n    </h2>\n</div>\n\n<div class="contentpanel">\n  <div class="panel">\n    <!-- <div class="panel-heading">\n              <h4 class="panel-title">Lorem ipsum</h4>\n              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat consectetur ipsam obcaecati et dignissimos quam nemo soluta ut iure perferendis laboriosam incidunt, vel, dolore. Culpa optio vel cum recusandae impedit!</p>\n            </div> -->\n\n\n    <div class="panel-body">\n      <form id="addEmployee" class="form-horizontal form-bordered">\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Profile Picture</label>\n          <div class="col-sm-6">\n            <div class="col-sm-9 upload-image-group">\n              <div class="change-img profile-picture-container">\n                <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n              </div>\n              <div ng-click="activateChangeEvent()" class="change-btn change-img-btn">\n                <input class="upload" type="file" id="choose" />\n                <a class="btn btn-primary">Upload Image</a>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Name\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6 location">\n            <div class="col-sm-4">\n              <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">\n            </div>\n            <div class="col-sm-4">\n              <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">\n            </div>\n            <div class="col-sm-4">\n              <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Gender\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3 radio clearfix">\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="M" id="male" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="male">Male</label>\n            </div>\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="F" id="female" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="female">Female</label>\n            </div>\n          </div>\n        </div>\n        <!-- New Changes-->\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Permanent Address\n            <span class="asterisk">*</span>\n          </label>\n          <div class="form-div-group col-sm-6">\n            <div>\n              <input name="permanentFullAddress" type="text" ng-model="employee.personalProfile.permanentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="clearfix">\n              <div class="no-padding-left col-sm-4">\n                <input name="permanentCity" type="text" ng-model="employee.personalProfile.permanentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="permanentState" type="text" ng-model="employee.personalProfile.permanentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="no-padding-right col-sm-4">\n                <input name="permanentCountry" type="text" ng-model="employee.personalProfile.permanentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="permanentPin" type="text" ng-model="employee.personalProfile.permanentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Current Address</label>\n          <div class="form-div-group col-sm-6">\n\n            <div class="checkbox block">\n              <div class="ckbox ckbox-primary block">\n                <input type="checkbox" id="int_website" ng-model="checked">\n                <!-- ng-click="manageAddress(checked)" -->\n                <label for="int_website">Same as "Permanent Address?"</label>\n              </div>\n            </div>\n\n            <div>\n              <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="clearfix">\n              <div class="no-padding-left col-sm-4">\n                <input name="city" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="state" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="no-padding-right col-sm-4">\n                <input name="country" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="pin" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n        <!-- New Changes-->\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Contact Numbers\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <ul id="website_list" class="no-style">\n              <li ng-repeat="eachContact in employee.contactNumbers">\n                <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control col-sm-11" name="phoneNumber">\n                <!-- <button type="button" class="btn btn-denger cursor-pointer col-sm-1" ng-disabled="eachContact.text.length" ng-click="removeContactNumber($index)">\n                                      <i class="fa fa-times icon"></i>\n                                    </button> -->\n              </li>\n            </ul>\n            <button type="button" ng-click="addContactNumber()" class="btn btn-primary pull-right mt10">\n              Add Phone\n            </button>\n          </div>\n        </div>\n\n\n\n        <!-- <div class="form-group" ng-show="profile.editPersonalProfile">\n                      <label class="col-sm-3 control-label">\n                        Biography\n                      </label>\n                      <div class="col-sm-6">\n                        <textarea name="bio" ng-model="employee.personalProfile.bioData" ckeditor="editorOptions" placeholder="Enter text here..." ng-click="getCkeditor()" class="form-control" rows="5"></textarea>\n                      </div>\n                    </div> -->\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOB\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOB" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOB" is-open="DOBOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOBOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOJ\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOJ" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOJ" is-open="DOJOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOJOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Email\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="email" type="text" placeholder="email" ng-model="employee.companyProfile.email" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Designation\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n\n            <!-- <select name="designation" class="form-control" ng-model="selectedDesignation.post">\n                              <option ng-repeat="designation in designations" value="{{designation.post}}">{{designation.post}}</option>\n                            </select> -->\n\n            <select name="designation" class="form-control" ng-model="selectedDesignation" ng-options="designation as designation.post for designation in designations">\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">CTC\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="ctc" type="text" placeholder="CTC" ng-model="employee.companyProfile.CTC" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Employee Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="empId" type="text" placeholder="Employee Id" ng-model="employee.companyProfile.empId" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label" name="machine">Machine Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="machineId" type="text" placeholder="Machine Id" ng-model="employee.companyProfile.attendanceId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">PAN\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="pan" type="text" placeholder="PAN" ng-model="employee.companyProfile.panId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">ROLE\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3">\n\n\n            <select name="role" class="form-control" ng-model="selectedRole" ng-options="role as role.name for role in roles">\n\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">Manager</label>\n          <div class="col-sm-6">\n\n            <div id="tags_added">\n              <ul ng-hide="!employee.managers.length" class="no-style">\n                <li ng-repeat="manager in employee.managers" class="clearfix">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                      <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                    </div>\n                    <div class="col-sm-2">\n                      <span class="close" title="Remove speaker" ng-click="removeManager($index)" data-btn-name="close_speaker_search">×</span>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n            </div>\n\n            <input ng-hide="employee.managers.length" type="text" placeholder="Choose a manager..." ng-model="employee.managerAutoSearch" ng-keyup="getManagerList()" class="form-control">\n\n            <div ng-hide="!employee.managerAutoSearch.trim().length" class="tag-suggestion search-result-margin" ng-show="displayResult">\n              <div class="search-result-close-block">\n                <span class="search-result-close-text">Managers found :</span>\n                <span class="close" title="Close search result" ng-click="closeSearchResult()" data-btn-name="close_speaker_search">×</span>\n              </div>\n              <ul ng-hide="!managers.length" id="speaker_dropdown" class="chosen-results no-style" role="menu">\n                <li ng-repeat="manager in managers">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <div>\n                        <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                        <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                      </div>\n                    </div>\n                    <div class="col-sm-2">\n                      <button class="btn btn-primary add-button pull-right" ng-click="addManager($index)">Add</button>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n              <div id="no_speaker" ng-hide="managers.length" class="text-center">\n                <span class="fa fa-spin fa-spinner"></span>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account start date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountStartDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountStartDate" is-open="accountStartDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountStartDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account end date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountEndDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountEndDate" is-open="accountEndDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountEndDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max CL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxCL" type="number" placeholder="Max CL" ng-model="employee.companyProfile.maxCL" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max EL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxEL" type="number" placeholder="Max EL" ng-model="employee.companyProfile.maxEL" class="form-control">\n          </div>\n        </div>\n\n        <div ng=show="profile.editPersonalProfile || profile.editCompanyProfile" class="form-group">\n          <div class="col-sm-6 col-sm-offset-3">\n            <div ng-hide="!showErrors" id="error_section">\n              <label ng-repeat="error in errors" class="error">{{error}}</label>\n\n            </div>\n          </div>\n          <div class="form-button-group col-sm-6 col-sm-offset-3">\n\n            <button class="btn btn-primary" name="addEmployeeButton" type="button" ng-click="addEmployee()">\n              Submit\n              <span ng-show="loading">\n                  <i class="fa fa-spinner fa-spin"></i>\n                </span>\n            </button>\n            <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n          </div>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n';
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html":[function(require,module,exports){
+module.exports = '<div class="pageheader clearfix">\n  <h2 class="pull-left"><i class="fa fa-list"></i> Employee List</h2>\n\n  <div class="pull-right filter-group">\n    <form class="form-inline">\n      <div class="form-button-group-spcl">\n        <button class="btn btn-success" ng-show="addUser" ng-click="addEmployee()"><i class="fa fa-plus"></i>Add Employee</button>\n        <input class="form-control" ng-show="viewUser" ng-keyup="filterData(searchString)" ng-model="searchString" type="text" placeholder="Search">\n      </div>\n\n      <div id="filter_dropdown" ng-show="viewUser" class="dropdown">\n        <button name="dropdownButton" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">{{selectedOption.text}}\n          <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu right-align" role="menu">\n          <li ng-repeat="option in filterOptions | orderBy:\'option\'">\n            <a ng-click="chooseAnOption($index)">{{option.text}} </a>\n          </li>\n        </ul>\n      </div>\n    </form>\n  </div>\n</div>\n\n<div class="contentpanel">\n  <!-- Old Pagination-->\n  <div ng-click="watchPagination(currentPage)" ng-if="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n    <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n\n  </div>\n\n  <div class="row">\n\n    <div class="col-sm-12">\n\n      <div class="table-responsive">\n        <table class="table table-striped mb30">\n          <thead class="attender-list-padding">\n            <tr>\n              <th>#</th>\n              <!-- <th>id</th> -->\n              <th>Name</th>\n              <th>Email</th>\n              <th>Designation</th>\n              <th>Gender</th>\n              <th>Manager</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody class="attender-list-padding">\n            <tr ng-repeat="eachAttender in attendiesList">\n              <td>{{$index + 1}}</td>\n              <!-- <td>{{eachAttender._id}}</td> -->\n              <td>{{eachAttender.companyProfile.name | name }}</td>\n              <td>{{eachAttender.companyProfile.email}}</td>\n              <td>{{eachAttender.companyProfile.designation.post}}</td>\n              <td>{{eachAttender.companyProfile.gender | gender}}</td>\n              <td>\n                <div ng-show="eachAttender.companyProfile.manager._id" class="cursor-pointer" ng-click="loadAttendiesView(eachAttender.companyProfile.manager._id)">\n                  <img ng-src="{{eachAttender.companyProfile.manager.personalProfile.photoUrl | url}}" alt="" ng-show="eachAttender.companyProfile.manager.photoUrl" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="small-profile-picture">\n                  <span class="manager-details">{{eachAttender.companyProfile.manager.companyProfile.name | name}}</span>\n                </div>\n              </td>\n              <td class="action-td">\n                <a class="btn btn-info cursor-pointer" ng-if="addUser" ng-click="loadEmployeeView(eachAttender._id)">\n                  <i class="fa fa-eye icon"></i>View\n                </a>\n                <a class="btn btn-primary cursor-pointer" ng-if="editUser" ng-click="loadEmployeeEditView(eachAttender._id)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-success cursor-pointer block-unblock-button" ng-show="blockUser && eachAttender.companyProfile.isActive" ng-click="userBlock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Block\n                </a>\n                <a class="btn btn-danger cursor-pointer block-unblock-button" ng-show="blockUser && !eachAttender.companyProfile.isActive" ng-click="userUnblock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Unblock\n                </a>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <!-- Old Pagination-->\n  <!-- <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-bottom clearfix">\n        \n          <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n        \n        </div> -->\n\n</div>\n';
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js":[function(require,module,exports){
 'use strict';
 
@@ -1019,6 +2133,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
                 activeListElement.parents('.nav-parent').addClass('active nav-active');
                 activeListElement.parents('ul').slideDown(200);
             }
+            return adjustmainpanelheight();
         }, 0);
 
     });
@@ -1036,9 +2151,8 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
     function adjustmainpanelheight() {
         // Adjust mainpanel height
-        var docHeight = jQuery(document).height();
-        if (docHeight > jQuery('.mainpanel').height())
-            jQuery('.mainpanel').height(docHeight);
+        /* var pageContentHeight = jQuery('.page-content').height();
+         jQuery('.mainpanel').height(jQuery('.mainpanel').height());*/
     }
 
     jQuery('.nav-bracket > li').hover(function() {
@@ -1061,17 +2175,14 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
                     jQuery('.mainpanel').css({
                         height: ''
                     });
-                    adjustmainpanelheight();
                 });
             } else {
                 closeVisibleSubMenu();
                 navParent.addClass('nav-active');
-                sub.slideDown(200, function() {
-                    adjustmainpanelheight();
-                });
+                sub.slideDown(200, function() {});
             }
         }
-        return false;
+        return adjustmainpanelheight();
     };
 
     // Menu Toggle
@@ -1162,7 +2273,7 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
 };
 
 },{"../templates/panel.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
-module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li><a href="#/logout"><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employees/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employees/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday/list">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/settings/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
+module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li><a href="#/logout"><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employee/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employee/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday/list">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/settings/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages" class="page-content">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js":[function(require,module,exports){
 'use strict';
 
@@ -1224,61 +2335,123 @@ module.exports = Service;
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/util/api.js":[function(require,module,exports){
 'use strict';
 
-var baseUrl = '/api';
+// var baseUrl = 'http://localhost:8000/';
+var baseUrl = 'api/';
+//    var baseUrl = 'http://192.168.2.6:8000/';
 module.exports = {
-    login: baseUrl + '/login',
-    logout: baseUrl + '/logout',
-
-    //temp participant
-    searchTempParticipant: baseUrl + '/temp_participant/search',
-    findTempParticipant: baseUrl + '/temp_participant/find',
-
-    //participant
-    add: baseUrl + '/participant/add',
-    clubs: baseUrl + '/participant/clubs',
-    participantList: baseUrl + '/participant/list',
-    findParticipant: baseUrl + '/participant/find',
-    deleteParticipant: baseUrl + '/participant/delete',
-    editParticipant: baseUrl + '/participant/update',
-
-    //shedules
-    sheduleSatus: baseUrl + '/shedule/status',
-    sheduleEvent: baseUrl + '/shedule/sheduleEvent',
-    getAllShedule: baseUrl + '/shedule/get_all_shedules',
-    getEventList: baseUrl + '/shedule/get_event_list',
-    getEventShedule: baseUrl + '/shedule/get_event_shedules',
-
-
-    //matches
-    addMatch: baseUrl + '/match/add',
-    getMatchList: baseUrl + '/match/list',
-    getMatch: baseUrl + '/match/find'
+    getBaseUrl: function() {
+        return baseUrl;
+    },
+    addAttender: baseUrl + 'attender/add-attender',
+    getDetails: baseUrl + 'app_details?companyId=5428eff3ed96f7b31ed9ed59',
+    addSpeaker: baseUrl + 'speaker/add-speaker',
+    getFullSpeakerList: baseUrl + 'speakers',
+    getAutoSearchSpeakerList: baseUrl + 'speaker-search',
+    addAgenda: baseUrl + 'agenda/add-agenda',
+    agendaList: baseUrl + 'agendas',
+    getSingleSpeaker: baseUrl + 'speaker/',
+    getSingleAgenda: baseUrl + 'agenda/',
+    updateSingleAgenda: baseUrl + 'agenda/',
+    allAttenders: baseUrl + 'user/view_all',
+    getManagers: baseUrl + 'user/search',
+    getUser: '../jsons/userProfile.json',
+    getLeaveAccounts: baseUrl + 'leave/view_all_account',
+    singleAttender: baseUrl + 'attender/',
+    eventApi: baseUrl + 'event/',
+    updateFloorPlan: baseUrl + 'upload/floor-plan/event/',
+    updateOther: baseUrl + 'user/update_others',
+    // login: '../jsons/login-response.json',
+    login: baseUrl + 'login',
+    addEmployee: baseUrl + 'user/add',
+    updateMyProfile: baseUrl + 'user/update_own',
+    forgotPassword: baseUrl + 'attender/forgot-password',
+    resetPassword: baseUrl + 'attender/reset-password',
+    changePassword: baseUrl + 'user/change_password',
+    addSponsorCategory: baseUrl + 'sponser-category/add',
+    getSingleSponsorCategory: baseUrl + 'sponser-category/',
+    getAllSponsorCategories: baseUrl + 'sponser-categories',
+    getAllSponsors: baseUrl + 'sponsers',
+    addSponsor: baseUrl + 'sponser/add-sponser',
+    getSingleSponsor: baseUrl + 'sponser/',
+    applyForLeave: baseUrl + 'leave/apply',
+    leaveRequestsForOwn: baseUrl + 'leave/details',
+    leaveRequestsForOthers: baseUrl + 'leave/view_all',
+    getSingleEmployee: baseUrl + 'user/view_one',
+    getOwnProfile: baseUrl + 'user/view',
+    designationAddEdit: baseUrl + 'designation/add',
+    uploadAttendanceCSV: baseUrl + 'attendance/upload_csv',
+    addHoliday: baseUrl + 'holiday/add',
+    viewHolidays: baseUrl + 'holiday/view',
+    editHoliday: baseUrl + 'holiday/edit',
+    removeHoliday: baseUrl + 'holiday/remove',
+    getSingleApplicationDetails: baseUrl + 'leave/specific_details',
+    approveOrRejectApplication: baseUrl + 'leave/manage',
+    viewAllAttendance: baseUrl + 'attendance/view_all',
+    viewOwnAttendance: baseUrl + 'attendance/view',
+    addAttendance: baseUrl + 'attendance/add',
+    editAttendance: baseUrl + 'attendance/edit',
+    editLeaveAccount: baseUrl + 'leave/edit',
+    blockUser: baseUrl + 'user/block',
+    logout: baseUrl + 'logout',
 };
 
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/util/index.js":[function(require,module,exports){
 'use strict';
 
-module.exports={
-	deleteCookie:function (name) {
-		document.cookie=name+'=;expires=Thu, 01Jan 1970 00:00:01 GMT; ';
-	},
-	setCookie:function (cname,cvalue) {
-		document.cookie=cname+'='+cvalue+';';
-	},
-	getCookie:function (cname) {
-		var name=cname+'=',
-			ca=document.cookie.split(';');
-		for (var i=0;i < ca.length; i++) {
-			var c=ca[i];
-			while(c.charAt(0)==' ') c=c.substring(1);
-			if(c.indexOf(name)!= -1){
-				return c.substring(name.length,c.length);
-			}
-		}
-		return '';
-	}
-			
+module.exports = {
+    deleteCookie: function(name) {
+        document.cookie = name + '=;expires=Thu, 01Jan 1970 00:00:01 GMT; ';
+    },
+    setCookie: function(cname, cvalue) {
+        document.cookie = cname + '=' + cvalue + ';';
+    },
+    getCookie: function(cname) {
+        var name = cname + '=',
+            ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return '';
+    },
+    modules: {},
+    successMessageTimeout: function(options) {
+        setTimeout(function() {
+            options.success(true);
+        }, 2000);
+    },
+    errorMessageTimeout: function(options) {
+        setTimeout(function() {
+            options.success(true);
+        }, 2000);
+    },
+    config: {
+        limit: {
+            attenderList: 5,
+        }
+    },
+    statusCode: {
+        1: "pending",
+        2: "approved",
+        3: "rejected",
+        4: "cancelled"
+    },
+    coompanyId: '5428eff3ed96f7b31ed9ed59',
+    monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    instances: {},
+    loggedInUser: {},
+    appDetails: {},
+    editingDesignation: {},
+    editingHoliday: {},
+    editingAttendance: {},
+    editingLeaveRequest: {},
+    editingLeaveAccount: {}
+
 };
+
 },{}],"/var/www/html/try-intranet-bracket/bracket/build/resources/lib/bracket/bootstrap.min.js":[function(require,module,exports){
 (function (global){
 
