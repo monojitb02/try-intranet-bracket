@@ -941,7 +941,7 @@ module.exports = App;
 },{"./controllers/dashBoardCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/controllers/dashBoardCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js":[function(require,module,exports){
 'use strict';
 
-module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+module.exports = function($stateProvider) {
     $stateProvider
         .state('app.home', {
             url: '/home',
@@ -952,10 +952,6 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
                 }
             }
         });
-    $urlRouterProvider.otherwise(function($injector) {
-        var $state = $injector.get('$state');
-        $state.go('app.home')
-    });
 };
 
 },{"../templates/dashBoard.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html":[function(require,module,exports){
@@ -3229,6 +3225,19 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
         $location.path("/forgotpassword");
     };
 
+    $http({
+        url: api.identifyUser,
+        method: 'GET'
+    }).success(function(response) {
+        if (response.success) {
+            util.loggedInUser = response.data;
+            $state.go('app.home');
+        }
+    }).error(function(error) {
+
+    });
+
+
     /**
      * Form Validator cofig start
      */
@@ -3281,15 +3290,8 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 if (response.success) {
                     $scope.loading = false;
                     util.loggedInUser = response.data;
-                    if (util.loggedInUser.firstTime) {
-                        util.instances.modal = $modal.open({
-                            templateUrl: 'app/modules/user/views/changepassword.html',
-                            size: ''
-                        });
-                    } else {
-                        $state.go('app.home');
-                        //$location.path("/employees/list");
-                    }
+
+                    $state.go('app.home');
                 } else {
                     $scope.loading = false;
                     if (response.errors && response.errors.length > 0) {
@@ -3532,12 +3534,17 @@ module.exports = App;
 },{"./controllers/panelCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/controllers/panelCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/router/router.js":[function(require,module,exports){
 'use strict';
 
-module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+module.exports = function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {
             template: require('../templates/panel.html'),
             controller: 'panelCtrl'
         });
+
+    $urlRouterProvider.otherwise(function($injector) {
+        var $state = $injector.get('$state');
+        $state.go('login');
+    });
 };
 
 },{"../templates/panel.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
