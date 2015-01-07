@@ -25,7 +25,6 @@ module.exports = {
     eventApi: baseUrl + 'event/',
     updateFloorPlan: baseUrl + 'upload/floor-plan/event/',
     updateOther: baseUrl + 'user/update_others',
-    // login: '../jsons/login-response.json',
     login: baseUrl + 'login',
     addEmployee: baseUrl + 'user/add',
     updateMyProfile: baseUrl + 'user/update_own',

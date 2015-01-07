@@ -1,0 +1,30 @@
+.pending {
+    color: #0f0;
+}
+.complete {
+    color: #00f;
+}
+.fail {
+    color: #f00;
+}
+.err {
+    color: #FF0505;
+}
+.loading {
+    height: 30px;
+    vertical-align: middle;
+}
+.item {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    word-break: break-all;
+}
+tbody tr td:nth-child(1) {
+    max-width: 100px;
+}
+tbody tr td:nth-child(2) {
+    max-width: 250px;
+}
+tbody tr td:nth-child(3) {
+    max-width: 250px;
+}
