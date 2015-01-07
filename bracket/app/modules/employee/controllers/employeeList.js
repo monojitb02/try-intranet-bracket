@@ -7,7 +7,7 @@
 
 var util = require('../../../util');
 var api = require('../../../util/api');
-module.exports = function($scope, $http, $location) {
+module.exports = function($scope, $http, $location, UserService) {
     var userRole = util.loggedInUser.companyProfile.role;
 
     $scope.searchString = '';
@@ -34,7 +34,7 @@ module.exports = function($scope, $http, $location) {
 
             $scope.watchPagination();
 
-            $scope.$apply();
+            // $scope.$apply();
         };
 
     $scope.watchPagination = function(page) {
@@ -201,8 +201,13 @@ module.exports = function($scope, $http, $location) {
         createPagination();
     };
 
-    UserService.getAllUsers({
-        senderId: util.loggedInUser._id
+    console.log(util.loggedInUser._id);
+    $http({
+        method: 'GET',
+        url: api.allAttenders,
+        params: {
+            senderId: util.loggedInUser._id
+        }
     }).success(function(response) {
         if (response.success) {
             $scope.AllAttendies = response.data;
@@ -210,5 +215,15 @@ module.exports = function($scope, $http, $location) {
             createPagination();
         }
     }).error(function() {});
+
+    // UserService.getAllUsers({
+    //     senderId: util.loggedInUser._id
+    // }).success(function(response) {
+    //     if (response.success) {
+    //         $scope.AllAttendies = response.data;
+    //         $scope.filteredData = response.data;
+    //         createPagination();
+    //     }
+    // }).error(function() {});
 
 };
