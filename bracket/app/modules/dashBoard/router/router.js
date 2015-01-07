@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+module.exports = function($stateProvider) {
     $stateProvider
         .state('app.home', {
             url: '/home',
@@ -11,8 +11,4 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
                 }
             }
         });
-    $urlRouterProvider.otherwise(function($injector) {
-        var $state = $injector.get('$state');
-        $state.go('app.home')
-    });
 };

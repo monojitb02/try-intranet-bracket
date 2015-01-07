@@ -84,6 +84,19 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
         $location.path("/forgotpassword");
     };
 
+    $http({
+        url: api.identifyUser,
+        method: 'GET'
+    }).success(function(response) {
+        if (response.success) {
+            util.loggedInUser = response.data;
+            $state.go('app.home');
+        }
+    }).error(function(error) {
+
+    });
+
+
     /**
      * Form Validator cofig start
      */
@@ -136,15 +149,8 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 if (response.success) {
                     $scope.loading = false;
                     util.loggedInUser = response.data;
-                    if (util.loggedInUser.firstTime) {
-                        util.instances.modal = $modal.open({
-                            templateUrl: 'app/modules/user/views/changepassword.html',
-                            size: ''
-                        });
-                    } else {
-                        $state.go('app.home');
-                        //$location.path("/employees/list");
-                    }
+
+                    $state.go('app.home');
                 } else {
                     $scope.loading = false;
                     if (response.errors && response.errors.length > 0) {
