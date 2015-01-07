@@ -155,7 +155,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                                 console.log('here');
                                 $scope.errors = [];
                                 $scope.showErrors = false;
-                                $scope.$apply();
                             }
                         });
                     } else {
@@ -166,7 +165,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                                 console.log('here');
                                 $scope.errors = [];
                                 $scope.showErrors = false;
-                                $scope.$apply();
                             }
                         });
                     }

@@ -84,15 +84,15 @@
           <ul class="children">
             <li ng-click="showRequests()">
               <!-- ng-if="permissions.leave.manage" -->
-              <a><i class="fa fa-caret-right"></i>Show Requests</a>
+              <a href="#/leave/requests"><i class="fa fa-caret-right"></i>Show Requests</a>
             </li>
             <li ng-click="requestLeave()">
               <!-- ng-if="permissions.leave.apply" -->
-              <a><i class="fa fa-caret-right"></i>Apply For Leave</a>
+              <a href="#/leave/apply"><i class="fa fa-caret-right"></i>Apply For Leave</a>
             </li>
             <li ng-click="showLeaveAccount()">
               <!-- ng-if="permissions.leave.view" -->
-              <a><i class="fa fa-caret-right"></i>Leave Account</a>
+              <a href="#/leave/account"><i class="fa fa-caret-right"></i>Leave Account</a>
             </li>
           </ul>
         </li>
@@ -100,7 +100,7 @@
 
         <!-- Holiday Module -->
         <li class="nav">
-          <a href="#/holiday/list">
+          <a href="#/holiday">
             <i class="fa fa-list"></i>
             <span>Holiday List</span>
           </a>

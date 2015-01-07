@@ -9,11 +9,14 @@ require('./modules/panel/panel.module');
 require('./modules/dashBoard/dashBoard.module');
 require('./modules/profile/profile.module');
 require('./modules/attendance/attendance.module');
+require('./modules/leave/leave.module');
+require('./modules/holiday/holiday.module');
 
 var appDependencies = [
     'ui.router', 'ui.bootstrap', 'app.directive',
     'app.service', 'app.login', 'app.dashBoard',
-    'app.panel', 'app.profile', 'app.attendance'
+    'app.panel', 'app.profile', 'app.attendance',
+    'app.leave', 'app.holiday'
 ];
 
 module.exports = angular
@@ -38,7 +41,7 @@ module.exports = angular
         };
     });
 
-},{"./modules/attendance/attendance.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/login/login.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/services/index.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
+},{"./modules/attendance/attendance.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/holiday/holiday.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js","./modules/leave/leave.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/leave.module.js","./modules/login/login.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/services/index.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -921,6 +924,1055 @@ var Directive = angular.module('app.directive', [])
 
 module.exports = Directive;
 
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $location) {
+
+    var clearSuccess = function() {
+        $scope.success = '';
+        $scope.errors = [];
+        $scope.$apply();
+    };
+
+    $('#HolidayDetails').validate({
+        rules: {
+            name: 'required',
+            startDate: 'required',
+        },
+        messages: {
+            name: lang.validationMessages.name,
+            startDate: lang.validationMessages.date,
+        },
+        highlight: function(element) {
+            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'gender') {
+                error.insertAfter($(element).parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        success: function(element) {
+            $(element).closest('.form-control').removeClass('has-error');
+            $(element).closest('label').remove();
+        }
+    });
+
+    var init = function() {
+
+            $scope.isAdmin = (util.loggedInUser.companyProfile.role.trueName === 'admin') ? true : false;
+
+            $scope.loadHolidayEditView = function(holidayObj) {
+                $scope.actionOnHoliday = 'Edit';
+                $scope.editingHoliday = holidayObj;
+                holidaySettings({
+                    name: holidayObj.purpose,
+                    date: new Date(holidayObj.date)
+                });
+            };
+
+            $scope.deleteHoliday = function(id, index) {
+
+                /*  Delete Operation write Here
+                 *  AND
+                 *  Pull the data from allHolidays in SUCCESS */
+
+                var deletedHoliday = [];
+                $http.put(util.api.removeHoliday, {
+                    senderId: util.loggedInUser._id,
+                    holidayId: id
+                }).success(function(response) {
+                    if (response.success) {
+                        deletedHoliday = $scope.allHolidays.splice(index, 1);
+                        $scope.$apply();
+                    } else {
+                        $scope.allHolidays.push(deletedHoliday[0]);
+                        $scope.errors = [lang.networkError];
+                        $scope.showErrors = true;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        $scope.$apply();
+                    }
+                })
+            }
+
+            $scope.actionOnHoliday = 'Add';
+            holidaySettings({
+                name: '',
+                date: new Date()
+            });
+
+        },
+        holidaySettings = function(holidayObj) {
+
+            $scope.holidayDetails = {
+                purpose: holidayObj.name ? holidayObj.name : ''
+            };
+            /**
+             * start of datePicker function
+             */
+            $scope.today = function() {
+                $scope.startdt = holidayObj.date ? new Date(holidayObj.date) : new Date();
+            };
+            $scope.today();
+            $scope.clear = function() {
+                // $scope.dt = null;
+                // $scope.enddt = null;
+                $scope.startdt = null;
+            };
+
+            // Disable weekend selection
+            $scope.startDisabled = function(date, mode) {
+                return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+            };
+            $scope.startOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.startOpened = !$scope.startOpened;
+            };
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+
+            $scope.initDate = new Date('2016-15-20');
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[2];
+
+            /**
+             * end of datePicker function
+             */
+            $scope.$apply();
+        };
+
+    $scope.addAttendance = function() {
+
+
+        if ($('#HolidayDetails').valid()) {
+            $scope.loading = true;
+            var jsonObj = {
+                senderId: util.loggedInUser._id,
+                date: new Date($scope.startdt),
+                purpose: $scope.holidayDetails.purpose,
+            };
+
+            if ($scope.actionOnHoliday === 'Add') {
+
+                $http.post(util.api.addHoliday, jsonObj).success(function(response) {
+                    if (response.success) {
+                        $scope.success = 'Added Successfully';
+                        $scope.allHolidays = response.data;
+                        $scope.startdt = new Date();
+                        $scope.holidayDetails.purpose = '';
+                        $scope.loading = false;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        // $location.path('/holiday/list');
+                        $scope.$apply();
+                    } else {
+                        if (_.values(response.errfor).length > 0) {
+                            $scope.errors = _.values(response.errfor);
+                        } else {
+                            $scope.errors = [];
+                            $scope.errors.push(lang.networkError);
+                        }
+                        $scope.loading = false;
+                        $scope.showErrors = true;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        $scope.$apply();
+                    }
+                })
+            } else {
+                jsonObj.holidayId = $scope.editingHoliday._id;
+                $http.put(util.api.editHoliday, jsonObj).success(function(response) {
+                    if (response.success) {
+                        $scope.success = 'Edited Successfully';
+                        $scope.allHolidays = response.data;
+                        $scope.startdt = new Date();
+                        $scope.holidayDetails.purpose = '';
+                        $scope.loading = false;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        // $location.path('/holiday/list');
+                        $scope.$apply();
+                    } else {
+                        if (_.values(response.errfor).length > 0) {
+                            $scope.errors = _.values(response.errfor);
+                        } else {
+                            $scope.errors = [];
+                            $scope.errors.push(lang.networkError);
+                        }
+                        $scope.loading = false;
+                        $scope.showErrors = true;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        $scope.$apply();
+                    }
+                })
+            }
+        }
+
+    };
+
+    $http.get(util.api.viewHolidays + '?senderId=' + util.loggedInUser._id).success(function(response) {
+        $scope.allHolidays = response.data;
+
+        init();
+    })
+
+};
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js":[function(require,module,exports){
+'use strict';
+
+module.exports = angular.module('app.holiday', ['ui.router', 'ui.bootstrap'])
+    .controller('holidayCtrl', require('./controllers/holidayCtrl'))
+    .config(require('./router/router'));
+
+},{"./controllers/holidayCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/router/router.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
+    $stateProvider
+        .state('app.holiday', {
+            url: '/holiday',
+            views: {
+                'pages': {
+                    template: require('../templates/holiday.html'),
+                    controller: 'holidayCtrl'
+                }
+            }
+        });
+};
+
+},{"../templates/holiday.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html":[function(require,module,exports){
+module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i>Holiday List</h2>\n  </div>\n\n\n\n  <div class="contentpanel">\n\n    <div id="form_fillup" class="panel panel-default">\n\n      <!-- <div class="panel-heading">\n      \n      \n        <h4 class="panel-title">Method 2: Fillup the form</h4>\n      \n      </div> -->\n\n      <div ng-show="isAdmin" class="panel-body">\n\n        <div ng-show="showErrors">\n          <div ng-repeat="error in errors" class="text-center error">{{error}}</div>\n        </div>\n\n        <div ng-show="success">\n          <div class="text-center text-success">{{success}}</div>\n        </div>\n\n        <form id="HolidayDetails" class="form-inline">\n\n          <div class="form-group col-sm-5">\n            <label class="col-sm-3 control-label">Date\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <div class="input-group col-sm-12 pull-left">\n                <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n                <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n              </div>\n            </div>\n\n          </div>\n\n          <div class="form-group col-sm-6">\n            <label class="col-sm-3 control-label">Name\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <input name="name" type="text" ng-model="holidayDetails.purpose" placeholder="Name" class="form-control full-width" />\n            </div>\n          </div>\n\n        </form>\n\n        <div class="form-group">\n          <div class="row">\n            <div class="form-button-group col-sm-6 col-sm-offset-4">\n              <button class="btn btn-primary" ng-click="addAttendance()">\n                Submit\n                <span ng-show="loading">\n                  <i class="fa fa-spin fa-spinner"></i>\n                </span>\n              </button>\n              <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class="blank-div"></div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-striped mb30">\n          <thead>\n            <tr>\n              <th>Sl. No.</th>\n              <th>Date</th>\n              <th>Week day</th>\n              <th>Name</th>\n              <th ng-if="isAdmin">Actions</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="eachHoliday in allHolidays">\n              <td>{{$index+1}}</td>\n              <td>{{eachHoliday.date | date:\'MMM d, y\'}}</td>\n              <td>{{eachHoliday.date | date:\'EEEE\'}}</td>\n              <td>{{eachHoliday.purpose}}</td>\n              <td ng-if="isAdmin" class="action-td">\n\n                <a class="btn btn-primary cursor-pointer" ng-click="loadHolidayEditView(eachHoliday)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="deleteHoliday(eachHoliday._id, $index)">\n                  <i class="fa fa-warning icon"></i>Delete\n                </a>\n              </td>\n\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n    </div>\n</section>\n';
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $modal) {
+    var userRole = util.loggedInUser.companyProfile.role,
+        allData = [],
+        reg;
+
+    $scope.hasPowerOnOthersLeave = function() {
+        return userRole.leave.others.view;
+    };
+
+    $scope.loadLeaveAccountView = function(account, index) {
+        util.editingLeaveAccount = account;
+        util.accountIndex = index;
+        util.instances.modal = $modal.open({
+            templateUrl: 'app/modules/leave/views/leaveaccountmodal.html',
+            size: '',
+            controller: 'leaveAccountModalCtrl',
+        });
+        util.instances.modal.result.then(function() {
+            //console.log('here i am', index);
+            $scope.filteredData[index] = util.editingLeaveAccount;
+            //console.log($scope.filteredData[index]);
+            createPagination();
+            // $scope.$apply();
+        }, function() {
+
+        });
+
+        // $scope.Accounts[index].isEditing = !$scope.Accounts[index].isEditing;
+
+    }
+
+    $http.get(util.api.getLeaveAccounts + '?senderId=' + util.loggedInUser._id).success(function(attendance) {
+        if (userRole.leave.others.view) {
+            $scope.filteredData = [];
+
+            attendance.data.forEach(function(eachData) {
+                eachData.isEditing = false;
+                allData.push(eachData);
+            });
+            $scope.filteredData = angular.copy(allData);
+            createPagination();
+        } else {
+            $scope.filteredData = [];
+            $scope.filteredData.push(attendance.data[0]);
+            createPagination();
+        }
+    }).error(function() {});
+
+    $scope.filterData = function() {
+        if ($scope.searchString.trim().length) {
+            $scope.filteredData = [];
+            reg = new RegExp($scope.searchString.trim(), 'ig');
+
+            allData.forEach(function(eachAttender) {
+                if ((eachAttender.emp.name &&
+                        (eachAttender.emp.name.first && eachAttender.emp.name.first.match(reg)) ||
+                        (eachAttender.emp.name.middle && eachAttender.emp.name.middle.match(reg)) ||
+                        (eachAttender.emp.name.last && eachAttender.emp.name.last.match(reg)))) {
+                    $scope.filteredData.push(eachAttender);
+                }
+            });
+
+            createPagination();
+
+        } else {
+            $scope.filteredData = angular.copy(allData);
+            createPagination();
+        }
+    }
+
+    var setTableData = function(page) {
+            var Accounts = _.extend([], $scope.filteredData);
+            $scope.Accounts = Accounts.splice((page - 1) * $scope.pagination.itemsPerPage, $scope.pagination.itemsPerPage);
+        },
+
+        createPagination = function() {
+            $scope.pagination = {
+                totalItems: $scope.filteredData.length,
+                maxSize: 5,
+                itemsPerPage: 5,
+            };
+            $scope.currentPage = 1;
+
+            $scope.$watch('currentPage', function(value) {
+                setTableData(value);
+            });
+
+            //$scope.$apply();
+        };
+}
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $location) {
+    $scope.allRequests = [];
+    $scope.account = {};
+
+    var init = function() {
+            /**
+             * start of datePicker function
+             */
+
+            $scope.today = function() {
+                $scope.account.date = new Date();
+            };
+
+            $scope.today();
+
+            $scope.clear = function() {
+                $scope.account.date = null;
+                // $scope.employee.DOB = null;
+            };
+            // Disable weekend selection
+            $scope.DOBDisabled = function(date, mode) {
+                return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+            };
+            $scope.DOBOpen = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.DOBOpened = !$scope.DOBOpened;
+            };
+
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+
+            $scope.initDate = new Date('2016-15-20');
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[2];
+
+            /**
+             * end of datePicker function
+             */
+
+            $scope.$apply();
+        },
+        clearSuccess = function() {
+            $scope.success = '';
+            $scope.errors = [];
+            $scope.$apply();
+        };
+    $scope.showErrors = true;
+    $('#manageAccount').validate({
+        rules: {
+            date: {
+                required: true,
+                date: true
+            },
+
+            leaveType: 'required'
+        },
+        messages: {
+            date: {
+                required: lang.validationMessages.DOBRequired,
+                date: lang.validationMessages.DOBDateRequired
+            },
+            leaveType: lang.validationMessages.genderRequired
+        },
+        highlight: function(element) {
+            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'leaveType') {
+                error.css({
+                    position: 'relative',
+                    right: '100px',
+                    top: '6px'
+                });
+                error.insertAfter($(element).parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        success: function(element) {
+            $(element).closest('.form-control').removeClass('has-error');
+            $(element).closest('label').remove();
+        }
+    });
+
+    $scope.closeModal = function() {
+        util.instances.modal.dismiss();
+    };
+
+    $scope.update = function() {
+        if ($('#manageAccount').valid()) {
+            $http.put(util.api.editLeaveAccount, {
+                senderId: util.loggedInUser._id,
+                user: util.editingLeaveAccount.emp._id,
+                date: $scope.account.date,
+                leaveType: $scope.account.leaveType
+            }).success(function(response) {
+                if (response.success) {
+                    util.editingLeaveAccount = response.data;
+                    util.instances.modal.close();
+                } else {
+                    if (_.values(response.errfor).length) {
+                        $scope.errors = _.values(response.errfor)
+                    } else {
+                        $scope.errors = [lang.networkError]
+                    }
+                    $scope.$apply();
+                }
+            }).error(function() {});
+        }
+    }
+
+    init();
+};
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $location) {
+
+    var clearSuccess = function() {
+        $scope.success = '';
+        $scope.errors = [];
+        $scope.$apply();
+    };
+    //util.editingLeaveRequest
+
+    // $scope.leaveDetails = ;
+
+    $http({
+        url: util.api.getSingleApplicationDetails,
+        method: 'GET',
+        params: {
+            senderId: util.loggedInUser._id,
+            leaveId: util.editingLeaveRequest._id
+        }
+    }).success(function(response) {
+        if (response.success) {
+            $scope.leaveDetails = angular.copy(util.editingLeaveRequest);
+            $scope.leaveDetails.available = {
+                CL: response.data.availableCL,
+                EL: response.data.availableEL,
+            };
+            console.log('work on this: ', $scope.leaveDetails);
+            $scope.$apply();
+        } else {
+            if (_.values(response.errfor).length > 0) {
+                $scope.errors = _.values(response.errfor);
+            } else {
+                $scope.errors = [lang.networkError];
+            }
+            $scope.showErrors = true;
+            util.successMessageTimeout({
+                success: function() {
+                    clearSuccess();
+                }
+            });
+        }
+    })
+
+    $scope.close = function() {
+        util.instances.modal.dismiss();
+    };
+
+    $scope.acceptApplicationFromModal = function() {
+        $http.put(util.api.approveOrRejectApplication, {
+            senderId: util.loggedInUser._id,
+            leaveId: $scope.leaveDetails._id,
+            approved: 1,
+            comment: $scope.comment
+        }).success(function(response) {
+            if (response.success) {
+                // console.log('acceptApplication:', $scope.allRequests[index], response);
+                // $scope.leaveDetails = response.data.leaveApplication.statusCode;
+                util.editingLeaveRequest.statusCode = response.data.leaveApplication.statusCode;
+                // console.log(util.editingLeaveRequest, response.data.leaveApplication.statusCode;);
+                util.instances.modal.close();
+                $scope.$apply();
+            } else {
+                if (_.values(response.errfor).length > 0) {
+                    $scope.errors = _.values(response.errfor);
+                } else {
+                    $scope.errors = [lang.networkError];
+                }
+                $scope.showErrors = true;
+                util.successMessageTimeout({
+                    success: function() {
+                        clearSuccess();
+                    }
+                });
+                $scope.$apply();
+            }
+        })
+    };
+
+    $scope.rejectApplicationFromModal = function(id, index) {
+        $http.put(util.api.approveOrRejectApplication, {
+            senderId: util.loggedInUser._id,
+            leaveId: $scope.leaveDetails._id,
+            approved: 0,
+            comment: $scope.comment
+        }).success(function(response) {
+            if (response.success) {
+                // console.log('rejectApplication:', $scope.allRequests[index], response);
+                // $scope.leaveDetails = response.data.leaveApplication.statusCode;
+                // console.log(util.editingLeaveRequest);
+                util.editingLeaveRequest.statusCode = response.data.leaveApplication.statusCode;
+                util.instances.modal.close();
+                $scope.$apply();
+            } else {
+                if (_.values(response.errfor).length > 0) {
+                    $scope.errors = _.values(response.errfor);
+                } else {
+                    $scope.errors = [lang.networkError];
+                }
+                $scope.showErrors = true;
+                util.successMessageTimeout({
+                    success: function() {
+                        clearSuccess();
+                    }
+                });
+                $scope.$apply();
+            }
+        })
+    };
+
+
+    $scope.$apply();
+};
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $location, $modal) {
+    $scope.allRequests = [];
+
+    var clearSuccess = function() {
+            $scope.success = '';
+            $scope.errors = [];
+            $scope.$apply();
+        },
+        init = function() {
+            console.log('loggedInUser: ', util.loggedInUser._id);
+
+            $scope.acceptApplication = function(id, index) {
+                $http.put(util.api.approveOrRejectApplication, {
+                    senderId: util.loggedInUser._id,
+                    leaveId: id,
+                    approved: 1,
+                    // comment: "Dummy Text. Don't make this mandatory"
+                }).success(function(response) {
+                    if (response.success) {
+                        // console.log('acceptApplication:', $scope.allRequests[index], response);
+                        $scope.allRequests[index].statusCode = response.data.leaveApplication.statusCode;
+
+                        // $scope.$apply();
+                    } else {
+                        if (_.values(response.errfor).length > 0) {
+                            $scope.errors = _.values(response.errfor);
+                        } else {
+                            $scope.errors = [lang.networkError];
+                            // $scope.errors.push(lang.networkError);
+                        }
+                        $scope.showErrors = true;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        $scope.$apply();
+                    }
+                })
+            };
+
+            $scope.rejectApplication = function(id, index) {
+                $http.put(util.api.approveOrRejectApplication, {
+                    senderId: util.loggedInUser._id,
+                    leaveId: id,
+                    approved: 0,
+                    // comment: "Dummy Text. Don't make this mandatory"
+                }).success(function(response) {
+                    if (response.success) {
+                        // console.log('rejectApplication:', $scope.allRequests[index], response);
+                        $scope.allRequests[index].statusCode = response.data.leaveApplication.statusCode;
+                        // $scope.$apply();
+                    } else {
+                        if (_.values(response.errfor).length > 0) {
+                            $scope.errors = _.values(response.errfor);
+                        } else {
+                            $scope.errors = [];
+                            $scope.errors.push(lang.networkError);
+                        }
+                        $scope.showErrors = true;
+                        util.successMessageTimeout({
+                            success: function() {
+                                clearSuccess();
+                            }
+                        });
+                        $scope.$apply();
+                    }
+                })
+            };
+
+            $scope.loadApplicationView = function(request, index) {
+                util.editingLeaveRequest = request;
+                util.instances.modal = $modal.open({
+                    templateUrl: 'app/modules/leave/views/leavedetail.html',
+                    size: ''
+                });
+                util.instances.modal.result.then(function() {
+                    $scope.allRequests[index] = angular.copy(util.editingLeaveRequest);
+                }, function() {
+
+                });
+            };
+
+            $scope.$apply();
+        };
+
+    $scope.manageOthersLeave = function() {
+        return util.loggedInUser.companyProfile.role.leave.others.manage;
+    }
+
+    if ($scope.manageOthersLeave()) { //leaveRequestsForOthers
+        $http.get(util.api.leaveRequestsForOthers + '?senderId=' + util.loggedInUser._id).success(function(response) {
+
+            if (response.success) {
+                $scope.allRequests = response.data.appliedLeave;
+                init();
+            } else {
+                if (response.errors.length > 0) {
+                    $scope.errors = [lang.networkError];
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                            $scope.$apply();
+                        }
+                    });
+                } else {
+                    $scope.errors = _.values(response.errfor);
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                            $scope.$apply();
+                        }
+                    });
+                }
+            }
+        }).error(function() {})
+    } else {
+        $http.get(util.api.leaveRequestsForOwn + '?senderId=' + util.loggedInUser._id).success(function(response) {
+            console.log(response, $scope);
+            if (response.success) {
+                $scope.allRequests = response.data.appliedLeave;
+                init();
+            } else {
+                if (response.errors.length > 0) {
+                    $scope.errors = [lang.networkError];
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                            $scope.$apply();
+                        }
+                    });
+                } else {
+                    $scope.errors = _.values(response.errfor);
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                            $scope.$apply();
+                        }
+                    });
+                }
+            }
+        }).error(function() {})
+    }
+
+};
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($scope, $http, $location) {
+    console.log(util.loggedInUser);
+    $scope.leave = {
+        leaveType: '2',
+        reason: ''
+    };
+    var clearSuccess = function() {
+        $scope.success = '';
+        $scope.$apply();
+    };
+
+    var init = function(config) {
+
+        $scope.today = function() {
+            /*$scope.leaveStartDate = new Date(config.startdt.setHours(0, 0));
+            $scope.leaveEndDate = new Date(config.enddt.setHours(0, 0));*/
+            $scope.dateObj = {
+                sdt: new Date(config.startdt.setHours(0, 0)),
+                edt: new Date(config.enddt.setHours(0, 0))
+            }
+        };
+        $scope.today();
+
+        $scope.clear = function() {
+            $scope.dt = null;
+            $scope.leaveEndDate = null;
+            $scope.leaveStartDate = null;
+        };
+
+        // Disable weekend selection
+        $scope.leaveStartDisabled = function(date, mode) {
+            return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+        };
+
+        $scope.leaveEndDisabled = function(date, mode) {
+            return (mode === 'day' && (date.getDay() === -1 || date.getDay() === 7));
+        };
+
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        // $scope.toggleMin();
+
+        $scope.leaveStartOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.leaveStartOpened = !$scope.leaveStartOpened;
+        };
+
+        $scope.leaveEndOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.leaveEndOpened = !$scope.leaveEndOpened;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.initDate = new Date('2016-15-20');
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[2];
+
+        /**
+         * end of datePicker function
+         */
+
+    };
+
+    init({
+        startdt: new Date(),
+        enddt: new Date()
+    });
+
+
+    $('leaveRequest').validate({
+        rules: {
+            startDate: 'required',
+            endDate: 'required',
+            leaveType: 'required',
+            reason: 'required',
+        },
+        messages: {
+            startDate: lang.validationMessages.startDate,
+            endDate: lang.validationMessages.endDate,
+            leaveType: lang.validationMessages.leaveType,
+            reason: lang.validationMessages.reason,
+        },
+        highlight: function(element) {
+            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr('name') == 'leaveType') {
+                error.insertAfter($(element).parent().parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        success: function(element) {
+            $(element).closest('.form-control').removeClass('has-error');
+            $(element).closest('label').remove();
+        }
+    });
+
+    /*$scope.$watch('sdt', function(sdt) {
+      console.log('sdt', sdt);
+    });
+
+    $scope.$watch('edt', function(edt) {
+      console.log('edt', edt);
+    });*/
+
+    $scope.apply = function() {
+        if ($('#leaveRequest').valid()) {
+            var jsonObj = {};
+            /*jsonObj.startDate = $scope.leaveStartDate;
+            jsonObj.endDate = $scope.leaveEndDate;*/
+            jsonObj.startDate = $scope.dateObj.sdt;
+            jsonObj.endDate = $scope.dateObj.edt;
+            jsonObj.leaveType = $scope.leave.leaveType;
+            jsonObj.reason = $scope.leave.reason;
+            jsonObj.senderId = util.loggedInUser._id;
+
+            // console.log(jsonObj);
+
+            $http.post(util.api.applyForLeave, jsonObj)
+                .success(function(response) {
+                    console.log(response);
+                    if (response.success) {
+                        if (response.message) {
+                            $scope.success = response.message;
+                            $scope.showSuccess = true;
+                            util.successMessageTimeout({
+                                success: function() {
+                                    clearSuccess();
+                                }
+                            });
+                        }
+                    } else {
+                        if (response.errors.length > 0) {
+                            $scope.errors = [lang.networkError];
+                            $scope.showErrors = true;
+                            util.errorMessageTimeout({
+                                success: function() {
+                                    $scope.errors = [];
+                                    $scope.showErrors = false;
+                                    $scope.$apply();
+                                }
+                            });
+                        } else {
+                            $scope.errors = _.values(response.errfor);
+                            $scope.showErrors = true;
+                            util.errorMessageTimeout({
+                                success: function() {
+                                    $scope.errors = [];
+                                    $scope.showErrors = false;
+                                    $scope.$apply();
+                                }
+                            });
+                        }
+                    }
+                }).error(function() {})
+                // return $location.path('/employees/list');
+        }
+    };
+    $scope.goBack = function() {
+        return $location.path('/dashboard');
+    };
+    $scope.$apply();
+};
+
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/leave.module.js":[function(require,module,exports){
+/*define([
+    'angular',
+    'bootstrapUi',
+    "Util"
+], function(angular, bootstrapUi, util) {
+    'use strict';
+    if (!util.modules.leave) {
+        var app = angular.module("LeaveModule", ['ui.bootstrap'])
+            .controller('LeaveAccount', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/leaveaccount'], function(leaveAccount) {
+                        $injector.invoke(leaveAccount, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('LeaveDetail', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/leavedetail'], function(leaveDetail) {
+                        $injector.invoke(leaveDetail, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('LeaveRequests', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/leaverequests'], function(leaveRequests) {
+                        $injector.invoke(leaveRequests, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('RequestLeave', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/request-leave'], function(requestLeave) {
+                        $injector.invoke(requestLeave, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('HolidayController', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/holiday-settings'], function(holidaySettings) {
+                        $injector.invoke(holidaySettings, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('HolidayListController', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/holidaylist'], function(holidayList) {
+                        $injector.invoke(holidayList, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('LeaveSettingsController', ['$scope', '$injector', '$modal',
+                function($scope, $injector, $modal) {
+                    require(['leaveModulePath/controllers/leave-settings'], function(leaveSettings) {
+                        $injector.invoke(leaveSettings, this, {
+                            '$scope': $scope,
+                            '$modal': $modal
+                        });
+                    });
+                }
+            ]).controller('leaveAccountModal', ['$scope', '$injector',
+                function($scope, $injector) {
+                    require(['leaveModulePath/controllers/leaveaccountmodal'], function(leaveAccountModalController) {
+                        $injector.invoke(leaveAccountModalController, this, {
+                            '$scope': $scope,
+                        });
+                    });
+                }
+            ]);
+        util.modules.leave = app;
+    }
+    return util.modules.leave;
+
+});
+*/
+
+module.exports = angular.module('app.leave', ['ui.router', 'ui.bootstrap'])
+    .controller('leaveAccountCtrl', require('./controllers/leaveAccountCtrl'))
+    .controller('leaveAccountModalCtrl', require('./controllers/leaveAccountModalCtrl'))
+    .controller('leaveDetailCtrl', require('./controllers/leaveDetailCtrl'))
+    .controller('leaveRequestsCtrl', require('./controllers/leaveRequestsCtrl'))
+    .controller('requestLeaveCtrl', require('./controllers/requestLeaveCtrl'))
+    .config(require('./router/router'));
+
+},{"./controllers/leaveAccountCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js","./controllers/leaveAccountModalCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js","./controllers/leaveDetailCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js","./controllers/leaveRequestsCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js","./controllers/requestLeaveCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/router/router.js":[function(require,module,exports){
+'use strict';
+
+module.exports = function($stateProvider) {
+    $stateProvider
+        .state('app.applyLeave', {
+            url: '/leave/apply',
+            views: {
+                'pages': {
+                    template: require('../templates/request.html'),
+                    controller: 'requestLeaveCtrl'
+                }
+            }
+        })
+        .state('app.leaveAccount', {
+            url: '/leave/account',
+            views: {
+                'pages': {
+                    template: require('../templates/leaveaccount.html'),
+                    controller: 'leaveAccountCtrl'
+                }
+            }
+        })
+        .state('app.leaveDetail', {
+            url: '/leave/detail',
+            views: {
+                'pages': {
+                    template: require('../templates/leavedetail.html'),
+                    controller: 'leaveDetailCtrl'
+                }
+            }
+        })
+        .state('app.leaveRequests', {
+            url: '/leave/requests',
+            views: {
+                'pages': {
+                    template: require('../templates/leaverequestview.html'),
+                    controller: 'leaveRequestsCtrl'
+                }
+            }
+        });
+};
+
+},{"../templates/leaveaccount.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html","../templates/leavedetail.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html","../templates/leaverequestview.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html","../templates/request.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/request.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html":[function(require,module,exports){
+module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Leave Account</h2>\n    <div class="pull-right filter-group">\n      <form class="form-inline">\n        <input class="form-control" ng-keyup="filterData($event)" ng-model="searchString" type="text" placeholder="Search">\n      </form>\n    </div>\n  </div>\n\n  <div class="contentpanel">\n    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n    </div>\n    <div class="col-md-12">\n      <div class="table-responsive">\n        <table class="table table-hidaction table-hover mb30">\n          <thead>\n            <tr>\n              <th>m/c-Id</th>\n              <th class="table-name-width">Employee</th>\n              <th class="leave-width">CL</th>\n              <th class="leave-width">EL</th>\n              <th class="leave-width">LWP</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="account in Accounts">\n              <td>{{account.emp.mcId}}</td>\n              <td>\n                <img ng-src="{{account.emp.profilePicture | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="profile">\n                <span>{{account.emp.name | name}}</span>\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.CL}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.CL" ng-if="account.isEditing">\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.EL}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.EL" ng-if="account.isEditing">\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.LWP}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.LWP" ng-if="account.isEditing">\n              </td>\n              <td>\n                <a class="btn btn-primary cursor-pointer" ng-click="loadLeaveAccountView(account, $index)">\n                  <i class="fa fa-refresh icon"></i>Update\n                </a>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n\n    </div>\n  </div>\n\n\n</section>\n';
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html":[function(require,module,exports){
+module.exports = '<section>\n\n  <div class="dialog-header">\n    <button type="button" class="close" ng-click="close()">×</button>\n    <h4 class="">\n      <span class="fa fa-cog"></span>Leave Details\n    </h4>\n  </div>\n\n  <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">\n    <label ng-repeat="error in errors" class="error ">{{error}}</label>\n  </div>\n\n  <div>\n\n    <div class="contentpanel">\n      <div class="clearfix mb5">\n        <div class="col-sm-3">\n          <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n        </div>\n        <div class="col-sm-offset-1 col-sm-8 no-padding-left">\n          <h4>\n            <strong>{{leaveDetails.applicant.companyProfile.name | name}}</strong>\n          </h4>\n          <div class="text-muted">{{leaveDetails.applicant.companyProfile.email}}</div>\n          <div class="mt5">\n            <h4>\n              <strong>Leave Requested</strong>\n            </h4>\n            <div>{{leaveDetails.durationOfLeave.from | date:\'d, MMMM y\'}} to {{leaveDetails.durationOfLeave.to | date:\'d, MMMM y\'}} ({{leaveDetails.typeOfLeave | typeOfLeave}})</div>\n            <div class="text-muted">\n              <strong>Reason:</strong>\n              <span>{{leaveDetails.content}}</span>\n            </div>\n            <div class="text-muted clearfix">\n              <div class="col-sm-6 no-padding-left">\n                <strong>Available CL:</strong>\n                <span>{{leaveDetails.available.CL}}</span>\n              </div>\n              <div class="col-sm-6 no-padding-left">\n                <strong>Available EL:</strong>\n                <span>{{leaveDetails.available.EL}}</span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <div class="dialog-body">\n\n      <form id="leaveAction">\n        <div class="form-group">\n          <label class="col-sm-3 control-label">Comment</label>\n          <div class="col-sm-8">\n            <textarea type="text" name="comment" placeholder="Comment" ng-model="comment" rows="4" class="form-control">\n            </textarea>\n          </div>\n        </div>\n\n      </form>\n    </div>\n\n\n    <div class="dialog-footer text-right">\n      <button type="button" class="btn btn-primary dialog-form-btn" ng-click="acceptApplicationFromModal()">Accept</button>\n      <button type="button" class="btn btn-default dialog-form-btn" ng-click="rejectApplicationFromModal()">Reject</button>\n    </div>\n  </div>\n\n\n</section>\n';
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html":[function(require,module,exports){
+module.exports = '<section>\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Leave Requests</h2>\n  </div>\n\n  <div class="contentpanel">\n    <div class="col-md-12">\n\n      <div ng-show="showErrors">\n        <label ng-repeat="error in errors" class="error">{{error}}</label>\n      </div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-stripped mb30">\n          <thead>\n            <tr>\n              <th>#</th>\n              <th>Employee</th>\n              <th>From</th>\n              <th>To</th>\n              <th>Total</th>\n              <th>Type</th>\n              <th>Status</th>\n              <th ng-if="manageOthersLeave()">Action</th>\n              <!-- ng-if="manageOthersLeave()" -->\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="request in allRequests">\n              <td>{{$index+1}}</td>\n              <td>\n                <img ng-src="{{request.applicant.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="profile">\n                <span>{{request.applicant.companyProfile.name | name}}</span>\n              </td>\n              <td>{{request.durationOfLeave.from | date:\'MMMM d, y\'}}</td>\n              <td>{{request.durationOfLeave.to | date:\'MMMM d, y\'}}</td>\n              <td>{{request.durationOfLeave | totalCount}}</td>\n              <td>{{request.typeOfLeave | typeOfLeave}}</td>\n              <td>{{request.statusCode | statusCode}}</td>\n              <td ng-if="manageOthersLeave()">\n                <!-- ng-if="manageOthersLeave()" -->\n\n                <a class="btn btn-primary cursor-pointer" ng-click="acceptApplication(request._id,  $index)">\n                  <i class="fa fa-check icon"></i>Accept\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="rejectApplication(request._id,  $index)">\n                  <i class="fa fa-times icon"></i>Reject\n                </a>\n                <a class="btn btn-default cursor-pointer" ng-click="loadApplicationView(request, $index)">\n                  <i class="fa fa-eye icon"></i>View\n                </a>\n\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</section>\n';
+},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/request.html":[function(require,module,exports){
+module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Apply For a Leave</h2>\n  </div>\n\n  <div class="contentpanel">\n    <!-- Leave Apply -->\n    <form action="" method="post" id="leaveRequest" class="form-horizontal" novalidate="novalidate">\n\n      <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">\n        <label ng-repeat="error in errors" class="error ">{{error}}</label>\n      </div>\n\n      <div ng-show="showSuccess" class="alert-success center-align">\n        <label>{{success}}</label>\n      </div>\n\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="from">From\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9">\n          <div class="input-group col-sm-7 pull-left">\n\n            <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.sdt" is-open="leaveStartOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n            <span class="input-group-btn">\n              <button type="button" class="btn btn-default" ng-click="leaveStartOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n              </button>\n            </span>\n          </div>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="to">To\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9">\n          <div class="input-group col-sm-7 pull-left">\n\n            <input name="endDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.edt" is-open="leaveEndOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n            <span class="input-group-btn">\n              <button type="button" class="btn btn-default" ng-click="leaveEndOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n              </button>\n            </span>\n          </div>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="type">Leave Type\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9 clearfix">\n          <div class="col-sm-9">\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" id="cl" value="1" ng-model="leave.leaveType" name="leaveType" required="">\n              <label for="cl">CL</label>\n            </div>\n            <!-- rdio -->\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" value="2" id="pl" ng-model="leave.leaveType" name="leaveType">\n              <label for="pl">EL</label>\n            </div>\n            <!-- rdio -->\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" value="3" id="lwp" ng-model="leave.leaveType" name="leaveType">\n              <label for="lwp">LWP</label>\n            </div>\n            <label class="error" for="leaveType"></label>\n          </div>\n        </div>\n      </div>\n      <div class="col-md-12">\n        <label class="col-md-2 control-label">Reason\n          <span class="asterisk">*</span>\n        </label>\n        <div class="col-md-offset-1 col-md-6">\n          <textarea rows="5" class="form-control" ng-model="leave.reason" name="reason" placeholder="Type your reason..." required=""></textarea>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <div class="form-button-group controls col-md-offset-3 col-md-9">\n          <button class="btn btn-success" ng-click="apply()">Apply</button>\n          <button class="btn btn-default" ng-click="goBack()">Cancel</button>\n        </div>\n      </div>\n    </form>\n    <!-- Leave Apply END -->\n  </div>\n</section>\n';
 },{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js":[function(require,module,exports){
 'use strict';
 
@@ -1079,7 +2131,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                                 console.log('here');
                                 $scope.errors = [];
                                 $scope.showErrors = false;
-                                $scope.$apply();
                             }
                         });
                     } else {
@@ -1090,7 +2141,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                                 console.log('here');
                                 $scope.errors = [];
                                 $scope.showErrors = false;
-                                $scope.$apply();
                             }
                         });
                     }
@@ -1325,7 +2375,7 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
 };
 
 },{"../templates/panel.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
-module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li><a href="#/logout"><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employees/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employees/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday/list">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/settings/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
+module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li><a href="#/logout"><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employees/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employees/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a href="#/leave/requests"><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a href="#/leave/apply"><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a href="#/leave/account"><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/settings/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li><a href="#/logout"><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
 },{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js":[function(require,module,exports){
 'use strict';
 

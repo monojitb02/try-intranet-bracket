@@ -8,11 +8,14 @@ require('./modules/panel/panel.module');
 require('./modules/dashBoard/dashBoard.module');
 require('./modules/profile/profile.module');
 require('./modules/attendance/attendance.module');
+require('./modules/leave/leave.module');
+require('./modules/holiday/holiday.module');
 
 var appDependencies = [
     'ui.router', 'ui.bootstrap', 'app.directive',
     'app.service', 'app.login', 'app.dashBoard',
-    'app.panel', 'app.profile', 'app.attendance'
+    'app.panel', 'app.profile', 'app.attendance',
+    'app.leave', 'app.holiday'
 ];
 
 module.exports = angular
