@@ -40,6 +40,7 @@ exports = module.exports = function(app, passport) {
                 _id: user._id
             }, '-personalProfile.password')
             .populate('companyProfile.role')
+            .populate('companyProfile.company')
             .exec(function(err, user) {
                 if (err) {
                     done(err);

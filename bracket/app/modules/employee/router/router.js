@@ -19,5 +19,14 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
                     controller: 'addEmployeeCtrl'
                 }
             }
+        })
+        .state('app.designationList', {
+            url: '/employee/designation',
+            views: {
+                'pages': {
+                    template: require('../templates/designationList.html'),
+                    controller: 'designationListCtrl'
+                }
+            }
         });
 };
