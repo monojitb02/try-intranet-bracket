@@ -50,6 +50,7 @@ module.exports = {
                 /*!req.body.senderId &&
                                 !req.query.senderId*/
             ) {
+                res.status(401);
                 workflow.outcome.errfor.message = lib.message.NOT_LOGGED_IN;
                 workflow.emit('response');
             } else {
