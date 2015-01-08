@@ -44,7 +44,6 @@ module.exports = {
     coompanyId: '5428eff3ed96f7b31ed9ed59',
     monthList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     instances: {},
-    loggedInUser: {},
     appDetails: {},
     editingDesignation: {},
     editingHoliday: {},
