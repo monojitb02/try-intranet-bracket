@@ -33,15 +33,17 @@
           <label class="col-sm-3 control-label">Name
             <span class="asterisk">*</span>
           </label>
-          <div class="col-sm-6 location">
-            <div class="col-sm-4">
-              <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">
-            </div>
-            <div class="col-sm-4">
-              <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">
-            </div>
-            <div class="col-sm-4">
-              <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-4">
+                <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">
+              </div>
+              <div class="col-sm-4">
+                <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">
+              </div>
+              <div class="col-sm-4">
+                <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">
+              </div>
             </div>
           </div>
         </div>
@@ -69,8 +71,8 @@
             <div>
               <input name="permanentFullAddress" type="text" ng-model="employee.personalProfile.permanentAddress.fullAddress" placeholder="Address" class="form-control">
             </div>
-            <div class="clearfix">
-              <div class="no-padding-left col-sm-4">
+            <div class="row">
+              <div class="col-sm-4">
                 <input name="permanentCity" type="text" ng-model="employee.personalProfile.permanentAddress.city" placeholder="City" class="form-control">
               </div>
 
@@ -78,7 +80,7 @@
                 <input name="permanentState" type="text" ng-model="employee.personalProfile.permanentAddress.state" placeholder="State" class="form-control">
               </div>
 
-              <div class="no-padding-right col-sm-4">
+              <div class="col-sm-4">
                 <input name="permanentCountry" type="text" ng-model="employee.personalProfile.permanentAddress.country" placeholder="Country" class="form-control">
               </div>
 
@@ -91,22 +93,18 @@
         </div>
 
         <div class="form-group" ng-show="profile.editPersonalProfile">
+
+          <div class="ckbox ckbox-success">
+            <input type="checkbox" id="same_address" ng-model="checked">
+            <label for="same_address">Same as "Permanent Address?"</label>
+          </div>
           <label class="col-sm-3 control-label">Current Address</label>
           <div class="form-div-group col-sm-6">
-
-            <div class="checkbox block">
-              <div class="ckbox ckbox-primary block">
-                <input type="checkbox" id="int_website" ng-model="checked">
-                <!-- ng-click="manageAddress(checked)" -->
-                <label for="int_website">Same as "Permanent Address?"</label>
-              </div>
-            </div>
-
             <div>
               <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.fullAddress" placeholder="Address" class="form-control">
             </div>
-            <div class="clearfix">
-              <div class="no-padding-left col-sm-4">
+            <div class="row">
+              <div class="col-sm-4">
                 <input name="city" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.city" placeholder="City" class="form-control">
               </div>
 
@@ -114,7 +112,7 @@
                 <input name="state" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.state" placeholder="State" class="form-control">
               </div>
 
-              <div class="no-padding-right col-sm-4">
+              <div class="col-sm-4">
                 <input name="country" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.country" placeholder="Country" class="form-control">
               </div>
 
@@ -132,7 +130,7 @@
             <span class="asterisk">*</span>
           </label>
           <div class="col-sm-6">
-            <ul id="website_list" class="no-style">
+            <ul class="no-style">
               <li ng-repeat="eachContact in employee.contactNumbers">
                 <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control col-sm-11" name="phoneNumber">
                 <!-- <button type="button" class="btn btn-denger cursor-pointer col-sm-1" ng-disabled="eachContact.text.length" ng-click="removeContactNumber($index)">
