@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('../../../util');
-var api = require('../../../util/api')
+var api = require('../../../util/api');
 
 /*module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
@@ -79,11 +79,27 @@ var api = require('../../../util/api')
 //*******************************************************************************
 
 module.exports = function($scope, $rootScope, $http, $state, $modal) {
+    var loadHome = function() {
+        $http({
+            method: 'GET',
+            url: api.getDetails,
+            params: {
+                companyId: util.loggedInUser.companyProfile.company._id
+            }
+        }).success(function(data) {
+            util.appDetails = data.data;
+            $scope.loading = false;
+            $state.go('app.home');
+        }).error(function() {
+            // console.log(arguments);
+        });
+    };
+
+    $rootScope.stopMainLoading = false;
 
     $scope.forgotPassword = function() {
         $location.path("/forgotpassword");
     };
-
     //checking login status
     if (!util.loggedInUser) {
         $http({
@@ -91,11 +107,15 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
             method: 'GET'
         }).success(function(response) {
             if (response.success) {
+                //console.log(response.data);
                 util.loggedInUser = response.data;
-                $state.go('app.home');
+                loadHome();
+            } else {
+                $rootScope.stopMainLoading = true;
             }
-        }).error(function(error) {
 
+        }).error(function(error) {
+            $rootScope.stopMainLoading = true;
         });
     } else {
         $state.go('app.home');
@@ -129,6 +149,7 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 jQuery(element).closest('label').remove();
             }
         });
+
     });
 
 
@@ -151,33 +172,21 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 }
             }).success(function(response) {
                 if (response.success) {
-                    $scope.loading = false;
                     util.loggedInUser = response.data;
-
-                    $state.go('app.home');
+                    loadHome();
                 } else {
-                    $scope.loading = false;
                     if (response.errors && response.errors.length > 0) {
                         $scope.errors = [lang.networkError];
-                        $scope.showErrors = true;
-                        util.errorMessageTimeout({
-                            success: function() {
-                                console.log('here');
-                                $scope.errors = [];
-                                $scope.showErrors = false;
-                            }
-                        });
                     } else {
                         $scope.errors = _.values(response.errfor);
-                        $scope.showErrors = true;
-                        util.errorMessageTimeout({
-                            success: function() {
-                                console.log('here');
-                                $scope.errors = [];
-                                $scope.showErrors = false;
-                            }
-                        });
                     }
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                        }
+                    });
                 }
             }).error(function() {});
         }

@@ -1,5 +1,5 @@
 'use strict';
-
+var api = require('./util/api')
 require('./modules/directives');
 require('./modules/services');
 require('./modules/login/login.module');
@@ -69,9 +69,9 @@ module.exports = angular
     .filter('url', function() {
         return function(imageUrl) {
             if (imageUrl) {
-                return util.api.getBaseUrl() + imageUrl;
+                return api.getBaseUrl() + imageUrl;
             } else {
-                return './resources/images/user.png';
+                return './images/user.png';
             }
         };
     })

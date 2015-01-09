@@ -5,10 +5,10 @@ var baseUrl = 'api/';
 //    var baseUrl = 'http://192.168.2.6:8000/';
 module.exports = {
     getBaseUrl: function() {
-        return baseUrl;
+        return '';
     },
 
-    getDetails: baseUrl + 'app_details?companyId=5428eff3ed96f7b31ed9ed59',
+    getDetails: baseUrl + 'app_details',
 
     //user route
     login: baseUrl + 'login',

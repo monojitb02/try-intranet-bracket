@@ -1,12 +1,46 @@
 'use strict';
 
-var utility = require('../../../util');
+var util = require('../../../util');
 var api = require('../../../util/api');
 module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
+    var loadHome = function() {
+        $http({
+            method: 'GET',
+            url: api.getDetails,
+            params: {
+                companyId: util.loggedInUser.companyProfile.company._id
+            }
+        }).success(function(data) {
+            util.appDetails = data.data;
+            $scope.loading = false;
+        }).error(function() {
+            // console.log(arguments);
+        });
+    };
+
     //checking login status
-    if (!utility.loggedInUser) {
+    /*if (!util.loggedInUser) {
         $state.go('login');
+        return;
+    }*/
+
+    if (!util.loggedInUser) {
+        $http({
+            url: api.identifyUser,
+            method: 'GET'
+        }).success(function(response) {
+            if (response.success) {
+                console.log(response.data);
+                util.loggedInUser = response.data;
+                loadHome();
+            } else {
+                $rootScope.stopMainLoading = true;
+            }
+
+        }).error(function(error) {
+            $rootScope.stopMainLoading = true;
+        });
     }
 
     //logout user
@@ -16,7 +50,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
             method: 'POST'
         }).success(function(result) {
             if (result.success) {
-                utility.loggedInUser = null;
+                util.loggedInUser = null;
                 $state.go('login');
             }
         }).error(function() {
@@ -30,7 +64,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
     //TO_DO: try watching on window.location 
     $scope.$on('$viewContentLoaded', function(event) {
-        //console.log('viewContentLoaded');
+        $rootScope.stopMainLoading = true;
         $timeout(function() {
             //console.log('test window location', window.location, window.location.hash);
             var originalHash = window.location.hash /*.replace(/\?.*$/, '')*/ ,

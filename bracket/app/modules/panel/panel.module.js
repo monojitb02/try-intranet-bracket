@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('app.panel', ['ui.router', 'ui.bootstrap'])
+var App = angular.module('app.panel', ['ui.router', 'ui.bootstrap', 'app.service'])
     .controller('panelCtrl', require('./controllers/panelCtrl'))
     .config(require('./router/router'));
 

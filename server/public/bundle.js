@@ -1,6 +1,6 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/var/www/html/angular/try-intranet-bracket/bracket/app/app.module.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/var/www/html/try-intranet-bracket/bracket/app/app.module.js":[function(require,module,exports){
 'use strict';
-
+var api = require('./util/api')
 require('./modules/directives');
 require('./modules/services');
 require('./modules/login/login.module');
@@ -70,9 +70,9 @@ module.exports = angular
     .filter('url', function() {
         return function(imageUrl) {
             if (imageUrl) {
-                return util.api.getBaseUrl() + imageUrl;
+                return api.getBaseUrl() + imageUrl;
             } else {
-                return './resources/images/user.png';
+                return './images/user.png';
             }
         };
     })
@@ -114,7 +114,7 @@ module.exports = angular
         };
     });
 
-},{"./modules/attendance/attendance.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/employee/employee.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/employee.module.js","./modules/holiday/holiday.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js","./modules/leave/leave.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/leave.module.js","./modules/login/login.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/services/index.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
+},{"./modules/attendance/attendance.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js","./modules/dashBoard/dashBoard.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js","./modules/directives":"/var/www/html/try-intranet-bracket/bracket/app/modules/directives/index.js","./modules/employee/employee.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/employee.module.js","./modules/holiday/holiday.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js","./modules/leave/leave.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/leave.module.js","./modules/login/login.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/login.module.js","./modules/panel/panel.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/panel.module.js","./modules/profile/profile.module":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/profile.module.js","./modules/services":"/var/www/html/try-intranet-bracket/bracket/app/modules/services/index.js","./util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/lang/index.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -181,7 +181,7 @@ module.exports = {
 
 }
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/attendance.module.js":[function(require,module,exports){
 /*define([
     'angular',
     'bootstrapUi',
@@ -232,7 +232,7 @@ module.exports = angular.module('app.attendance', ['ui.router', 'ui.bootstrap'])
     .controller('attendanceAddCtrl', require('./controllers/add-attendance'))
     .config(require('./router/router'));
 
-},{"./controllers/add-attendance":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js","./controllers/attendanceViewCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js":[function(require,module,exports){
+},{"./controllers/add-attendance":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js","./controllers/attendanceViewCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/add-attendance.js":[function(require,module,exports){
 'use strict';
 var util = require('../../../util');
 var api = require('../../../util/api');
@@ -591,7 +591,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
 
 };
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/controllers/attendanceViewCtrl.js":[function(require,module,exports){
 'use strict';
 var util = require('../../../util');
 var api = require('../../../util/api')
@@ -892,7 +892,7 @@ module.exports = function($scope, $rootScope, $state, $http) {
     ];
 });*/
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/router/router.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -917,11 +917,11 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
         });
 };
 
-},{"../templates/add-attendance.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/templates/add-attendance.html","../templates/view.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/templates/view.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/templates/add-attendance.html":[function(require,module,exports){
+},{"../templates/add-attendance.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/templates/add-attendance.html","../templates/view.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/templates/view.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/templates/add-attendance.html":[function(require,module,exports){
 module.exports = '<div class="pageheader">\n  <h2><i class="fa fa-calendar"></i> {{action}} Attendance</h2>\n</div>\n<!-- Pageheader end -->\n\n<div class="contentpanel">\n\n\n\n  <div ng-show="addAction" id="upload_csv" class="panel panel-default">\n\n    <div class="panel-heading">\n      <h4 class="panel-title">Method 1: Upload CSV</h4>\n    </div>\n\n    <div class="panel-body">\n      <form id="csv" class="form-horizontal normal-form">\n\n        <div ng-click="activateChangeEvent(\'csv\')" class="change-btn upload-csv-btn">\n          <input class="upload" type="file" id="choose" />\n          <a class="btn btn-primary">\n              Upload csv file\n            </a>\n\n          <span ng-show="loading" class="loading-icon">\n              <i class="fa fa-spinner fa-spin"></i>\n            </span>\n\n          <div ng-show="success" id="success_section" class="success">\n            <label ng-show="success" class="">{{success}}</label>\n          </div>\n\n          <div ng-show="showErrors">\n            <label ng-repeat="error in errors" class="error">{{error}}</label>\n          </div>\n\n        </div>\n\n      </form>\n    </div>\n\n  </div>\n\n\n  <div id="form_fillup" class="panel panel-default">\n\n    <div ng-show="addAction" class="panel-heading">\n\n\n      <h4 class="panel-title">Method 2: Fillup the form</h4>\n\n    </div>\n\n    <div class="panel-body">\n\n      <div ng-show="successForm" id="success_section" class="success">\n        <label ng-show="success" class="">{{success}}</label>\n      </div>\n\n      <div ng-show="showErrorsForm">\n        <label ng-repeat="error in errors" class="error">{{error}}</label>\n      </div>\n\n      <form id="AttendanceDetails" class="form-horizontal">\n\n        <div class="form-group">\n          <label class="col-sm-3 control-label">\n            User\n          </label>\n\n          <div class="col-sm-5">\n\n            <div ng-show="attendanceDetails.user._id">\n              <div class="clear-both">\n                <div class="col-sm-2 clearfix">\n                  <img style="width: 100%" ng-src="{{attendanceDetails.user.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                </div>\n                <div class="col-sm-8 no-padding-left clearfix">\n                  <div class="ng-binding">{{attendanceDetails.user.companyProfile.name | name}}</div>\n                  <div class="speaker-description">{{attendanceDetails.user.companyProfile.email}}</div>\n                  <div class="speaker-description">{{attendanceDetails.user.companyProfile.designation.post}} , {{attendanceDetails.user.companyProfile.company.name}}\n                  </div>\n                </div>\n                <div class="col-sm-2">\n                  <span class="close" title="Remove speaker" ng-click="removeUser()" data-btn-name="close_speaker_search">×</span>\n                </div>\n              </div>\n            </div>\n\n            <input name="user" ng-show="!attendanceDetails.user._id" type="text" ng-model="attendanceDetails.searchString" ng-keyup="getUserList()" placeholder="Search for user" class="form-control" />\n\n            <div ng-hide="!attendanceDetails.searchString.trim().length" class="tag-suggestion search-result-margin" ng-show="displayResult">\n              <div class="search-result-close-block">\n                <span class="search-result-close-text">Users found :</span>\n                <span class="close" title="Close search result" ng-click="closeSearchResult()" data-btn-name="close_speaker_search">×</span>\n              </div>\n              <ul ng-hide="!managers.length" id="speaker_dropdown" class="chosen-results no-style" role="menu">\n                <li ng-repeat="manager in managers">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <div class="speaker-description">{{manager.companyProfile.email}}</div>\n                      <div>\n                        <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                        <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                      </div>\n                    </div>\n                    <div class="col-sm-2">\n                      <button class="btn btn-primary add-button pull-right" ng-click="addManager($index)">Add</button>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n              <div id="no_speaker" ng-hide="managers.length" class="text-center">\n                <span class="fa fa-spin fa-spinner"></span>\n              </div>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group">\n          <label class="col-sm-3 control-label">Date\n            <span class="asterisk">*</span>\n          </label>\n\n          <div class="col-sm-6">\n\n            <div class="input-group col-sm-7 pull-left">\n              <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n          </div>\n\n        </div>\n\n        <div class="form-group">\n          <label class="col-sm-3 control-label">Work Duration\n            <span class="asterisk">*</span>\n          </label>\n\n          <div class="col-sm-6">\n\n            <div class="col-sm-4">\n\n              <div ng-model="timepicker.event.startDate" class="form-group dropdown timepicker pull-left">\n                <div class="input-group dropdown-toggle">\n                  <input name="startTime" id="start_time_string" ng-hide="mode===\'View\'" class="form-control disabled-input-with-border" type="text" value="{{timepicker.event.startDate|date:\'hh:mm a\'}}" disabled="disabled" />\n                  <span class="input-group-btn" ng-hide="mode===\'View\'">\n                      <button type="button" class="btn btn-default" data-toggle="timepicker">\n                        <i class="glyphicon glyphicon-time"></i>\n                      </button>\n                    </span>\n                </div>\n\n                <div class="dropdown-menu col-sm-4" ng-click="timepicker.clicked($event)">\n                  <timepicker hour-step="timepicker.config.hourSteps" minute-step="timepicker.config.minuteSteps" show-meridian="timepicker.config.ShowMeridian"></timepicker>\n                </div>\n\n              </div>\n            </div>\n\n            <div class="col-sm-offset-1 col-sm-4">\n\n              <div ng-model="timepicker.event.endDate" class="form-group dropdown timepicker">\n                <div class="input-group dropdown-toggle">\n                  <input name="endTime" id="end_time_string" class="form-control disabled-input-with-border" type="text" value="{{timepicker.event.endDate|date:\'hh:mm a\'}}" disabled="disabled" />\n                  <span class="input-group-btn">\n                      <button type="button" class="btn btn-default" data-toggle="timepicker">\n                        <i class="glyphicon glyphicon-time"></i>\n                      </button>\n                    </span>\n                </div>\n\n                <div class="dropdown-menu col-sm-4" ng-click="timepicker.clicked($event)">\n                  <timepicker ng-model="timepicker.event.endDate" hour-step="timepicker.config.hourSteps" minute-step="timepicker.config.minuteSteps" show-meridian="timepicker.config.ShowMeridian"></timepicker>\n                </div>\n\n              </div>\n            </div>\n          </div>\n\n        </div>\n\n        <div class="form-group">\n          <div class="row">\n            <div class="form-button-group col-sm-6 col-sm-offset-3">\n              <span ng-show="loadingForm" class="loading-icon">\n                  <i class="fa fa-spinner fa-spin"></i>\n                </span>\n              <button class="btn btn-primary" ng-click="addAttendance()">Submit</button>\n              <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n            </div>\n          </div>\n        </div>\n\n      </form>\n\n    </div>\n\n  </div>\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/attendance/templates/view.html":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/attendance/templates/view.html":[function(require,module,exports){
 module.exports = '<div class="pageheader clearfix">\n\n  <h2 class="pull-left"><i class="fa fa-list"></i>Attendance List</h2>\n\n  <div class="select-option-dropdown pull-right">\n    <span>\n      <select ng-model="selectedOption" ng-options="selectedOption as selectedOption for selectedOption in allOptions">\n      </select>\n    </span>\n\n    <span ng-show="hasPowerOnOthersAttedance()">\n        <select ng-model="selectedViewOption" ng-options="selectedViewOption as selectedViewOption for selectedViewOption in allViewOptions">\n        </select>\n      </span>\n  </div>\n\n</div>\n\n<!-- Pageheader end -->\n\n<div class="contentpanel">\n\n  <div ng-show="selectedOption === \'Date View\'" class="attendance-top-panel panel panel-default">\n    <form id="select_date" class="form-horizontal">\n\n      <div class="form-group">\n        <label class="col-sm-2 control-label">\n          Choose Date\n        </label>\n\n        <div class="col-sm-5">\n\n          <div class="input-group col-sm-12 pull-left">\n            <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n            <span class="input-group-btn">\n                <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                </button>\n              </span>\n          </div>\n        </div>\n\n      </div>\n\n    </form>\n  </div>\n\n  <div ng-show="selectedOption === \'Month View\'" class="attendance-top-panel panel panel-default">\n    <div class="fc-header clearfix">\n\n\n      <div class="month-date-dropdown">\n        <span class="text-muted">Select Month and Year:</span>\n\n        <span>\n            <select ng-model="selectedMonth" ng-options="selectedMonth as selectedMonth for selectedMonth in allMonths">\n            </select>\n          </span>\n\n        <span>\n            <select ng-model="selectedYear" ng-options="selectedYear as selectedYear for selectedYear in allYears">\n            </select>\n          </span>\n\n      </div>\n\n      <div ng-show="hasPowerOnOthersAttedance()" class="month-date-dropdown pull-right">\n        <input class="form-control" ng-keyup="filterData($event)" ng-model="searchStringForAttendance" type="text" placeholder="Search">\n      </div>\n\n    </div>\n  </div>\n\n  <div>\n\n    <div ng-show="showErrors">\n      <label ng-repeat="error in errors" class="error">{{error}}</label>\n    </div>\n\n    <div ng-show="loading">\n      <i class="fa fa-spinner fa-spin attendance-loading"></i>\n    </div>\n\n    <div ng-show="selectedViewOption === \'Own Attendance\'" class="table-responsive">\n      <table class="table table-hidaction table-striped mb30">\n        <thead>\n          <tr>\n            <!-- <th ng-show="selectedViewOption === \'Employee Attendance\'">Sl No.</th>\n              <th ng-show="selectedViewOption === \'Employee Attendance\'">E. Code</th>\n              <th ng-show="selectedViewOption === \'Employee Attendance\'" class="name-field">Name</th> -->\n            <th>Date</th>\n            <th>Shift</th>\n            <th>In Time</th>\n            <th>Out Time</th>\n            <th>Work Duration</th>\n            <th>Over Time</th>\n            <th>Total Duration</th>\n            <th>Status</th>\n            <th>Remarks</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr ng-repeat="eachEmpolyee in allEmployee">\n            <!-- <td ng-show="selectedViewOption === \'Employee Attendance\'">{{$index+1}}</td>\n              <td ng-show="selectedViewOption === \'Employee Attendance\'">{{eachEmpolyee.user.companyProfile.attendanceId}}</td>\n              <td ng-show="selectedViewOption === \'Employee Attendance\'">{{eachEmpolyee.user.companyProfile.name | name}}</td> -->\n            <td>{{eachEmpolyee.date | date:\'MMM d, y\'}}</td>\n            <td>{{eachEmpolyee.shift}}</td>\n            <td>{{eachEmpolyee.inTime}}</td>\n            <td>{{eachEmpolyee.outTime}}</td>\n            <td>{{eachEmpolyee.workDuration | stringToTime}}</td>\n            <td>{{eachEmpolyee.overTime | stringToTime}}</td>\n            <td>{{eachEmpolyee.totalDuration | stringToTime}}</td>\n            <td>{{eachEmpolyee.status}}</td>\n            <td>{{eachEmpolyee.remarks}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n\n    <!-- FOR Employee Attendance -->\n\n    <div ng-show="selectedViewOption === \'Employee Attendance\'">\n\n      <div ng-repeat="attendanceForEachDay in fullDay">\n\n        <strong class="mb10">Date: {{attendanceForEachDay.date | date:\'d MMMM, y\'}}</strong>\n\n        <div class="table-responsive">\n          <table class="table table-hidaction table-striped mb30">\n            <thead>\n              <tr>\n                <th>Sl No.</th>\n                <th>E. Code</th>\n                <th class="name-field">Name</th>\n                <!-- <th>Date</th> -->\n                <th>Shift</th>\n                <th>In Time</th>\n                <th>Out Time</th>\n                <th>Work Duration</th>\n                <th>Over Time</th>\n                <th>Total Duration</th>\n                <th>Status</th>\n                <th>Remarks</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr ng-repeat="eachEmpolyee in attendanceForEachDay.attendance | filter:searchStringForAttendance" class="cursor-pointer" ng-click="loadEditAttendanceView(eachEmpolyee)">\n                <td>{{$index+1}}</td>\n                <td>{{eachEmpolyee.user.companyProfile.attendanceId}}</td>\n                <td>{{eachEmpolyee.user.companyProfile.name | name}}</td>\n                <!-- <td>{{eachEmpolyee.date | date:\'MMM d, y\'}}</td> -->\n                <td>{{eachEmpolyee.shift}}</td>\n                <td>{{eachEmpolyee.inTime}}</td>\n                <td>{{eachEmpolyee.outTime}}</td>\n                <td>{{eachEmpolyee.workDuration | stringToTime}}</td>\n                <td>{{eachEmpolyee.overTime | stringToTime}}</td>\n                <td>{{eachEmpolyee.totalDuration | stringToTime}}</td>\n                <td>{{eachEmpolyee.status}}</td>\n                <td>{{eachEmpolyee.remarks}}</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n\n\n      </div>\n\n    </div>\n  </div>\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/controllers/dashBoardCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/controllers/dashBoardCtrl.js":[function(require,module,exports){
 'use strict';
 
 var api = require('../../../util/api');
@@ -929,7 +929,7 @@ module.exports = function($scope, $http, $state) {
 
 };
 
-},{"../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js":[function(require,module,exports){
+},{"../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/dashBoard.module.js":[function(require,module,exports){
 'use strict';
 
 var App = angular.module('app.dashBoard', ['ui.router', 'ui.bootstrap'])
@@ -938,7 +938,7 @@ var App = angular.module('app.dashBoard', ['ui.router', 'ui.bootstrap'])
 
 module.exports = App;
 
-},{"./controllers/dashBoardCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/controllers/dashBoardCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js":[function(require,module,exports){
+},{"./controllers/dashBoardCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/controllers/dashBoardCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider) {
@@ -954,9 +954,9 @@ module.exports = function($stateProvider) {
         });
 };
 
-},{"../templates/dashBoard.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html":[function(require,module,exports){
+},{"../templates/dashBoard.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/dashBoard/templates/dashBoard.html":[function(require,module,exports){
 module.exports = '<div class="pageheader">\n  <h2><i class="fa fa-home"></i> Dashboard <span>Subtitle goes here...</span></h2>\n  <div class="breadcrumb-wrapper">\n    <span class="label">You are here:</span>\n    <ol class="breadcrumb">\n      <li><a href="index.html">Bracket</a>\n      </li>\n      <li class="active">Dashboard</li>\n    </ol>\n  </div>\n</div>\n\n<div class="contentpanel">\n  <div class="row">\n\n    <div class="col-sm-6 col-md-3">\n      <div class="panel panel-success panel-stat">\n        <div class="panel-heading">\n\n          <div class="stat">\n            <div class="row">\n              <div class="col-xs-4">\n                <img src="images/is-user.png" alt="" />\n              </div>\n              <div class="col-xs-8">\n                <small class="stat-label">Visits Today</small>\n                <h1>900k+</h1>\n              </div>\n            </div>\n            <!-- row -->\n\n            <div class="mb15"></div>\n\n            <div class="row">\n              <div class="col-xs-6">\n                <small class="stat-label">Pages / Visit</small>\n                <h4>7.80</h4>\n              </div>\n\n              <div class="col-xs-6">\n                <small class="stat-label">% New Visits</small>\n                <h4>76.43%</h4>\n              </div>\n            </div>\n            <!-- row -->\n          </div>\n          <!-- stat -->\n\n        </div>\n        <!-- panel-heading -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n\n    <div class="col-sm-6 col-md-3">\n      <div class="panel panel-danger panel-stat">\n        <div class="panel-heading">\n\n          <div class="stat">\n            <div class="row">\n              <div class="col-xs-4">\n                <img src="images/is-document.png" alt="" />\n              </div>\n              <div class="col-xs-8">\n                <small class="stat-label">% Unique Visitors</small>\n                <h1>54.40%</h1>\n              </div>\n            </div>\n            <!-- row -->\n\n            <div class="mb15"></div>\n\n            <small class="stat-label">Avg. Visit Duration</small>\n            <h4>01:80:22</h4>\n\n          </div>\n          <!-- stat -->\n\n        </div>\n        <!-- panel-heading -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n\n    <div class="col-sm-6 col-md-3">\n      <div class="panel panel-primary panel-stat">\n        <div class="panel-heading">\n\n          <div class="stat">\n            <div class="row">\n              <div class="col-xs-4">\n                <img src="images/is-document.png" alt="" />\n              </div>\n              <div class="col-xs-8">\n                <small class="stat-label">Page Views</small>\n                <h1>300k+</h1>\n              </div>\n            </div>\n            <!-- row -->\n\n            <div class="mb15"></div>\n\n            <small class="stat-label">% Bounce Rate</small>\n            <h4>34.23%</h4>\n\n          </div>\n          <!-- stat -->\n\n        </div>\n        <!-- panel-heading -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n\n    <div class="col-sm-6 col-md-3">\n      <div class="panel panel-dark panel-stat">\n        <div class="panel-heading">\n\n          <div class="stat">\n            <div class="row">\n              <div class="col-xs-4">\n                <img src="images/is-money.png" alt="" />\n              </div>\n              <div class="col-xs-8">\n                <small class="stat-label">Today\'s Earnings</small>\n                <h1>$655</h1>\n              </div>\n            </div>\n            <!-- row -->\n\n            <div class="mb15"></div>\n\n            <div class="row">\n              <div class="col-xs-6">\n                <small class="stat-label">Last Week</small>\n                <h4>$32,322</h4>\n              </div>\n\n              <div class="col-xs-6">\n                <small class="stat-label">Last Month</small>\n                <h4>$503,000</h4>\n              </div>\n            </div>\n            <!-- row -->\n\n          </div>\n          <!-- stat -->\n\n        </div>\n        <!-- panel-heading -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n  </div>\n  <!-- row -->\n\n  <div class="row">\n    <div class="col-sm-8 col-md-9">\n      <div class="panel panel-default">\n        <div class="panel-body">\n          <div class="row">\n            <div class="col-sm-8">\n              <h5 class="subtitle mb5">Network Performance</h5>\n              <p class="mb15">Duis autem vel eum iriure dolor in hendrerit in vulputate...</p>\n              <div id="basicflot" style="width: 100%; height: 300px; margin-bottom: 20px"></div>\n            </div>\n            <!-- col-sm-8 -->\n            <div class="col-sm-4">\n              <h5 class="subtitle mb5">Server Status</h5>\n              <p class="mb15">Summary of the status of your server.</p>\n\n              <span class="sublabel">CPU Usage (40.05 - 32 cpus)</span>\n              <div class="progress progress-sm">\n                <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-primary"></div>\n              </div>\n              <!-- progress -->\n\n              <span class="sublabel">Memory Usage (32.2%)</span>\n              <div class="progress progress-sm">\n                <div style="width: 32%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success"></div>\n              </div>\n              <!-- progress -->\n\n              <span class="sublabel">Disk Usage (82.2%)</span>\n              <div class="progress progress-sm">\n                <div style="width: 82%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger"></div>\n              </div>\n              <!-- progress -->\n\n              <span class="sublabel">Databases (63/100)</span>\n              <div class="progress progress-sm">\n                <div style="width: 63%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning"></div>\n              </div>\n              <!-- progress -->\n\n              <span class="sublabel">Domains (2/10)</span>\n              <div class="progress progress-sm">\n                <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success"></div>\n              </div>\n              <!-- progress -->\n\n              <span class="sublabel">Email Account (13/50)</span>\n              <div class="progress progress-sm">\n                <div style="width: 26%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success"></div>\n              </div>\n              <!-- progress -->\n\n\n            </div>\n            <!-- col-sm-4 -->\n          </div>\n          <!-- row -->\n        </div>\n        <!-- panel-body -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-9 -->\n\n    <div class="col-sm-4 col-md-3">\n\n      <div class="panel panel-default">\n        <div class="panel-body">\n          <h5 class="subtitle mb5">Most Browser Used</h5>\n          <p class="mb15">Duis autem vel eum iriure dolor in hendrerit in vulputate...</p>\n          <div id="donut-chart2" class="ex-donut-chart"></div>\n        </div>\n        <!-- panel-body -->\n      </div>\n      <!-- panel -->\n\n    </div>\n    <!-- col-sm-3 -->\n\n  </div>\n  <!-- row -->\n\n  <div class="row">\n\n    <div class="col-sm-7">\n\n      <div class="table-responsive">\n        <table class="table table-bordered mb30">\n          <thead>\n            <tr>\n              <th>#</th>\n              <th>First Name</th>\n              <th>Last Name</th>\n              <th>Username</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td>1</td>\n              <td>Mark</td>\n              <td>Otto</td>\n              <td>@mdo</td>\n            </tr>\n            <tr>\n              <td>2</td>\n              <td>Jacob</td>\n              <td>Thornton</td>\n              <td>@fat</td>\n            </tr>\n            <tr>\n              <td>3</td>\n              <td>Larry</td>\n              <td>the Bird</td>\n              <td>@twitter</td>\n            </tr>\n            <tr>\n              <td>4</td>\n              <td>Mark</td>\n              <td>Otto</td>\n              <td>@mdo</td>\n            </tr>\n            <tr>\n              <td>5</td>\n              <td>Jacob</td>\n              <td>Thornton</td>\n              <td>@fat</td>\n            </tr>\n            <tr>\n              <td>6</td>\n              <td>Larry</td>\n              <td>the Bird</td>\n              <td>@twitter</td>\n            </tr>\n            <tr>\n              <td>7</td>\n              <td>Larry</td>\n              <td>the Bird</td>\n              <td>@twitter</td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n      <!-- table-responsive -->\n\n    </div>\n    <!-- col-sm-7 -->\n\n    <div class="col-sm-5">\n\n      <div class="panel panel-success">\n        <div class="panel-heading padding5">\n          <div id="line-chart" class="ex-line-chart"></div>\n        </div>\n        <div class="panel-body">\n          <div class="tinystat pull-left">\n            <div id="sparkline" class="chart mt5"></div>\n            <div class="datainfo">\n              <span class="text-muted">Average Sales</span>\n              <h4>$630,201</h4>\n            </div>\n          </div>\n          <!-- tinystat -->\n          <div class="tinystat pull-right">\n            <div id="sparkline2" class="chart mt5"></div>\n            <div class="datainfo">\n              <span class="text-muted">Total Sales</span>\n              <h4>$139,201</h4>\n            </div>\n          </div>\n          <!-- tinystat -->\n        </div>\n      </div>\n      <!-- panel -->\n\n    </div>\n    <!-- col-sm-6 -->\n  </div>\n  <!-- row -->\n\n  <div class="row">\n    <div class="col-sm-6 col-md-4">\n      <div class="panel panel-default widget-photoday">\n        <div class="panel-body">\n          <a href="" class="photoday"><img src="images/photos/photo1.png" alt="" />\n          </a>\n          <div class="photo-details">\n            <h4 class="photo-title">Strawhat In The Beach</h4>\n            <small class="text-muted"><i class="fa fa-map-marker"></i> San Franciso, California, USA</small>\n            <small>By: <a href="">ThemePixels</a></small>\n          </div>\n          <!-- photo-details -->\n          <ul class="photo-meta">\n            <li><span><i class="fa fa-eye"></i> 32,102</span>\n            </li>\n            <li><a href="#"><i class="fa fa-heart"></i> 1,003</a>\n            </li>\n            <li><a href="#"><i class="fa fa-comments"></i> 52</a>\n            </li>\n          </ul>\n        </div>\n        <!-- panel-body -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n\n    <div class="col-sm-6 col-md-4">\n      <div class="panel panel-default panel-alt widget-messaging">\n        <div class="panel-heading">\n          <div class="panel-btns">\n            <a href="" class="panel-edit"><i class="fa fa-edit"></i></a>\n          </div>\n          <!-- panel-btns -->\n          <h3 class="panel-title">Messaging</h3>\n        </div>\n        <div class="panel-body">\n          <ul>\n            <li>\n              <small class="pull-right">Dec 10</small>\n              <h4 class="sender">Jennier Lawrence</h4>\n              <small>Lorem ipsum dolor sit amet...</small>\n            </li>\n            <li>\n              <small class="pull-right">Dec 9</small>\n              <h4 class="sender">Marsha Mellow</h4>\n              <small>Lorem ipsum dolor sit amet...</small>\n            </li>\n            <li>\n              <small class="pull-right">Dec 9</small>\n              <h4 class="sender">Holly Golightly</h4>\n              <small>Lorem ipsum dolor sit amet...</small>\n            </li>\n            <li>\n              <small class="pull-right">Dec 10</small>\n              <h4 class="sender">Jennier Lawrence</h4>\n              <small>Lorem ipsum dolor sit amet...</small>\n            </li>\n            <li>\n              <small class="pull-right">Dec 9</small>\n              <h4 class="sender">Marsha Mellow</h4>\n              <small>Lorem ipsum dolor sit amet...</small>\n            </li>\n          </ul>\n        </div>\n        <!-- panel-body -->\n      </div>\n      <!-- panel -->\n    </div>\n    <!-- col-sm-6 -->\n\n    <div class="col-sm-6 col-md-4">\n      <div class="panel panel-dark panel-alt widget-quick-status-post">\n        <div class="panel-heading">\n          <div class="panel-btns">\n            <a href="" class="panel-close">&times;</a>\n            <a href="" class="minimize">&minus;</a>\n          </div>\n          <!-- panel-btns -->\n          <h3 class="panel-title">Quick Status Post</h3>\n        </div>\n        <div class="panel-body">\n          <ul class="nav nav-tabs nav-justified">\n            <li class="active"><a href="#post-status" data-toggle="tab"><i class="fa fa-pencil"></i> <strong>Status</strong></a>\n            </li>\n            <li><a href="#post-photo" data-toggle="tab"><i class="fa fa-picture-o"></i> <strong>Photo</strong></a>\n            </li>\n            <li><a href="#post-checkin" data-toggle="tab"><i class="fa fa-map-marker"></i> <strong>Check-In</strong></a>\n            </li>\n          </ul>\n          <div class="tab-content">\n            <div id="post-status" class="tab-pane active">\n              <input type="text" class="form-control" placeholder="What\'s your status?" />\n            </div>\n            <div id="post-photo" class="tab-pane">\n              <input type="text" class="form-control" placeholder="Choose photo" />\n            </div>\n            <div id="post-checkin" class="tab-pane">\n              <input type="text" class="form-control" placeholder="Search location" />\n            </div>\n            <button class="btn btn-primary btn-block mt10">Submit Post</button>\n          </div>\n          <!-- tab-content -->\n\n        </div>\n        <!-- panel-body -->\n      </div>\n      <!-- panel -->\n\n      <div class="mb20"></div>\n\n      <div class="row">\n        <div class="col-xs-6">\n          <div class="panel panel-warning panel-alt widget-today">\n            <div class="panel-heading text-center">\n              <i class="fa fa-calendar-o"></i>\n            </div>\n            <div class="panel-body text-center">\n              <h3 class="today">Fri, Dec 13</h3>\n            </div>\n            <!-- panel-body -->\n          </div>\n          <!-- panel -->\n        </div>\n\n        <div class="col-xs-6">\n          <div class="panel panel-danger panel-alt widget-time">\n            <div class="panel-heading text-center">\n              <i class="glyphicon glyphicon-time"></i>\n            </div>\n            <div class="panel-body text-center">\n              <h3 class="today">4:50AM PST</h3>\n            </div>\n            <!-- panel-body -->\n          </div>\n          <!-- panel -->\n        </div>\n      </div>\n    </div>\n    <!-- col-sm-6 -->\n  </div>\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/directives/index.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/directives/index.js":[function(require,module,exports){
 'use strict';
 
 var Directive = angular.module('app.directive', [])
@@ -981,7 +981,7 @@ var Directive = angular.module('app.directive', [])
 
 module.exports = Directive;
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js":[function(require,module,exports){
 'use strict';
 
 /*
@@ -1497,7 +1497,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
     $scope.$apply();
 };
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/designationList.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/designationList.js":[function(require,module,exports){
 'use strict';
 
 /*
@@ -1549,7 +1549,7 @@ module.exports = function($scope, $http, $location, $modal) {
     $scope.$apply();
 }
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js":[function(require,module,exports){
 'use strict';
 
 /*define(['Util', 'jquery', 'underscore'], function(util, $, _) {
@@ -1660,7 +1660,6 @@ module.exports = function($scope, $http, $location, UserService) {
     };
     $scope.userBlock = function(id, index) {
         $http.put(util.api.blockUser, {
-            senderId: util.loggedInUser._id,
             _id: id,
             blocked: true
         }).success(function(response) {
@@ -1672,7 +1671,6 @@ module.exports = function($scope, $http, $location, UserService) {
 
     $scope.userUnblock = function(id, index) {
         $http.put(util.api.blockUser, {
-            senderId: util.loggedInUser._id,
             _id: id,
             blocked: false
         }).success(function(response) {
@@ -1780,7 +1778,7 @@ module.exports = function($scope, $http, $location, UserService) {
 
 };
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/employee.module.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/employee.module.js":[function(require,module,exports){
 // define([
 //         'angular',
 //         'Util',
@@ -2064,7 +2062,7 @@ module.exports = angular.module('app.employee', ['ui.router', 'ui.bootstrap', 'a
     // .controller('addDesignationCtrl', require('./controllers/addDesignation'))
     .config(require('./router/router'));
 
-},{"./controllers/addEmployee":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js","./controllers/designationList":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/designationList.js","./controllers/employeeList":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/router/router.js":[function(require,module,exports){
+},{"./controllers/addEmployee":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/addEmployee.js","./controllers/designationList":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/designationList.js","./controllers/employeeList":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/controllers/employeeList.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -2098,13 +2096,13 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
         });
 };
 
-},{"../templates/addEmployee.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html","../templates/designationList.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/designationList.html","../templates/employeeList.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html":[function(require,module,exports){
-module.exports = '<div class="pageheader">\n  <h2>\n      <i class="fa fa-user"></i>\n      {{heading}} Employee\n    </h2>\n</div>\n\n<div class="contentpanel">\n  <div class="panel">\n    <!-- <div class="panel-heading">\n              <h4 class="panel-title">Lorem ipsum</h4>\n              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat consectetur ipsam obcaecati et dignissimos quam nemo soluta ut iure perferendis laboriosam incidunt, vel, dolore. Culpa optio vel cum recusandae impedit!</p>\n            </div> -->\n\n\n    <div class="panel-body">\n      <form id="addEmployee" class="form-horizontal form-bordered">\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Profile Picture</label>\n          <div class="col-sm-6">\n            <div class="col-sm-9 upload-image-group">\n              <div class="change-img profile-picture-container">\n                <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n              </div>\n              <div ng-click="activateChangeEvent()" class="change-btn change-img-btn">\n                <input class="upload" type="file" id="choose" />\n                <a class="btn btn-primary">Upload Image</a>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Name\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6 location">\n            <div class="col-sm-4">\n              <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">\n            </div>\n            <div class="col-sm-4">\n              <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">\n            </div>\n            <div class="col-sm-4">\n              <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Gender\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3 radio clearfix">\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="M" id="male" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="male">Male</label>\n            </div>\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="F" id="female" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="female">Female</label>\n            </div>\n          </div>\n        </div>\n        <!-- New Changes-->\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Permanent Address\n            <span class="asterisk">*</span>\n          </label>\n          <div class="form-div-group col-sm-6">\n            <div>\n              <input name="permanentFullAddress" type="text" ng-model="employee.personalProfile.permanentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="clearfix">\n              <div class="no-padding-left col-sm-4">\n                <input name="permanentCity" type="text" ng-model="employee.personalProfile.permanentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="permanentState" type="text" ng-model="employee.personalProfile.permanentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="no-padding-right col-sm-4">\n                <input name="permanentCountry" type="text" ng-model="employee.personalProfile.permanentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="permanentPin" type="text" ng-model="employee.personalProfile.permanentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Current Address</label>\n          <div class="form-div-group col-sm-6">\n\n            <div class="checkbox block">\n              <div class="ckbox ckbox-primary block">\n                <input type="checkbox" id="int_website" ng-model="checked">\n                <!-- ng-click="manageAddress(checked)" -->\n                <label for="int_website">Same as "Permanent Address?"</label>\n              </div>\n            </div>\n\n            <div>\n              <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="clearfix">\n              <div class="no-padding-left col-sm-4">\n                <input name="city" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="state" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="no-padding-right col-sm-4">\n                <input name="country" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="pin" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n        <!-- New Changes-->\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Contact Numbers\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <ul id="website_list" class="no-style">\n              <li ng-repeat="eachContact in employee.contactNumbers">\n                <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control col-sm-11" name="phoneNumber">\n                <!-- <button type="button" class="btn btn-denger cursor-pointer col-sm-1" ng-disabled="eachContact.text.length" ng-click="removeContactNumber($index)">\n                                      <i class="fa fa-times icon"></i>\n                                    </button> -->\n              </li>\n            </ul>\n            <button type="button" ng-click="addContactNumber()" class="btn btn-primary pull-right mt10">\n              Add Phone\n            </button>\n          </div>\n        </div>\n\n\n\n        <!-- <div class="form-group" ng-show="profile.editPersonalProfile">\n                      <label class="col-sm-3 control-label">\n                        Biography\n                      </label>\n                      <div class="col-sm-6">\n                        <textarea name="bio" ng-model="employee.personalProfile.bioData" ckeditor="editorOptions" placeholder="Enter text here..." ng-click="getCkeditor()" class="form-control" rows="5"></textarea>\n                      </div>\n                    </div> -->\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOB\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOB" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOB" is-open="DOBOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOBOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOJ\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOJ" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOJ" is-open="DOJOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOJOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Email\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="email" type="text" placeholder="email" ng-model="employee.companyProfile.email" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Designation\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n\n            <!-- <select name="designation" class="form-control" ng-model="selectedDesignation.post">\n                              <option ng-repeat="designation in designations" value="{{designation.post}}">{{designation.post}}</option>\n                            </select> -->\n\n            <select name="designation" class="form-control" ng-model="selectedDesignation" ng-options="designation as designation.post for designation in designations">\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">CTC\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="ctc" type="text" placeholder="CTC" ng-model="employee.companyProfile.CTC" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Employee Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="empId" type="text" placeholder="Employee Id" ng-model="employee.companyProfile.empId" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label" name="machine">Machine Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="machineId" type="text" placeholder="Machine Id" ng-model="employee.companyProfile.attendanceId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">PAN\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="pan" type="text" placeholder="PAN" ng-model="employee.companyProfile.panId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">ROLE\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3">\n\n\n            <select name="role" class="form-control" ng-model="selectedRole" ng-options="role as role.name for role in roles">\n\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">Manager</label>\n          <div class="col-sm-6">\n\n            <div id="tags_added">\n              <ul ng-hide="!employee.managers.length" class="no-style">\n                <li ng-repeat="manager in employee.managers" class="clearfix">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                      <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                    </div>\n                    <div class="col-sm-2">\n                      <span class="close" title="Remove speaker" ng-click="removeManager($index)" data-btn-name="close_speaker_search">×</span>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n            </div>\n\n            <input ng-hide="employee.managers.length" type="text" placeholder="Choose a manager..." ng-model="employee.managerAutoSearch" ng-keyup="getManagerList()" class="form-control">\n\n            <div ng-hide="!employee.managerAutoSearch.trim().length" class="tag-suggestion search-result-margin" ng-show="displayResult">\n              <div class="search-result-close-block">\n                <span class="search-result-close-text">Managers found :</span>\n                <span class="close" title="Close search result" ng-click="closeSearchResult()" data-btn-name="close_speaker_search">×</span>\n              </div>\n              <ul ng-hide="!managers.length" id="speaker_dropdown" class="chosen-results no-style" role="menu">\n                <li ng-repeat="manager in managers">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <div>\n                        <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                        <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                      </div>\n                    </div>\n                    <div class="col-sm-2">\n                      <button class="btn btn-primary add-button pull-right" ng-click="addManager($index)">Add</button>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n              <div id="no_speaker" ng-hide="managers.length" class="text-center">\n                <span class="fa fa-spin fa-spinner"></span>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account start date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountStartDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountStartDate" is-open="accountStartDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountStartDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account end date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountEndDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountEndDate" is-open="accountEndDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountEndDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max CL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxCL" type="number" placeholder="Max CL" ng-model="employee.companyProfile.maxCL" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max EL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxEL" type="number" placeholder="Max EL" ng-model="employee.companyProfile.maxEL" class="form-control">\n          </div>\n        </div>\n\n        <div ng=show="profile.editPersonalProfile || profile.editCompanyProfile" class="form-group">\n          <div class="col-sm-6 col-sm-offset-3">\n            <div ng-hide="!showErrors" id="error_section">\n              <label ng-repeat="error in errors" class="error">{{error}}</label>\n\n            </div>\n          </div>\n          <div class="form-button-group col-sm-6 col-sm-offset-3">\n\n            <button class="btn btn-primary" name="addEmployeeButton" type="button" ng-click="addEmployee()">\n              Submit\n              <span ng-show="loading">\n                  <i class="fa fa-spinner fa-spin"></i>\n                </span>\n            </button>\n            <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n          </div>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/designationList.html":[function(require,module,exports){
+},{"../templates/addEmployee.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html","../templates/designationList.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/designationList.html","../templates/employeeList.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/addEmployee.html":[function(require,module,exports){
+module.exports = '<div class="pageheader">\n  <h2>\n      <i class="fa fa-user"></i>\n      {{heading}} Employee\n    </h2>\n</div>\n\n<div class="contentpanel">\n  <div class="panel">\n    <!-- <div class="panel-heading">\n              <h4 class="panel-title">Lorem ipsum</h4>\n              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat consectetur ipsam obcaecati et dignissimos quam nemo soluta ut iure perferendis laboriosam incidunt, vel, dolore. Culpa optio vel cum recusandae impedit!</p>\n            </div> -->\n\n\n    <div class="panel-body">\n      <form id="addEmployee" class="form-horizontal form-bordered">\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Profile Picture</label>\n          <div class="col-sm-6">\n            <div class="col-sm-9 upload-image-group">\n              <div class="change-img profile-picture-container">\n                <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./images/user.png\';">\n              </div>\n              <div ng-click="activateChangeEvent()" class="change-btn change-img-btn">\n                <input class="upload" type="file" id="choose" />\n                <a class="btn btn-primary">Upload Image</a>\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Name\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="row">\n              <div class="col-sm-4">\n                <input name="firstName" type="text" ng-model="employee.companyProfile.name.first" placeholder="First Name" class="form-control">\n              </div>\n              <div class="col-sm-4">\n                <input name="middleName" type="text" ng-model="employee.companyProfile.name.middle" placeholder="Middle Name" class="form-control">\n              </div>\n              <div class="col-sm-4">\n                <input name="lastName" type="text" ng-model="employee.companyProfile.name.last" placeholder="Last Name" class="form-control">\n              </div>\n            </div>\n          </div>\n        </div>\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Gender\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3 radio clearfix">\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="M" id="male" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="male">Male</label>\n            </div>\n            <div class="rdio rdio-primary col-sm-3">\n              <input type="radio" value="F" id="female" ng-model="employee.companyProfile.gender" name="gender" class="ng-pristine ng-untouched ng-valid">\n              <label for="female">Female</label>\n            </div>\n          </div>\n        </div>\n        <!-- New Changes-->\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Permanent Address\n            <span class="asterisk">*</span>\n          </label>\n          <div class="form-div-group col-sm-6">\n            <div>\n              <input name="permanentFullAddress" type="text" ng-model="employee.personalProfile.permanentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="row">\n              <div class="col-sm-4">\n                <input name="permanentCity" type="text" ng-model="employee.personalProfile.permanentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="permanentState" type="text" ng-model="employee.personalProfile.permanentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="permanentCountry" type="text" ng-model="employee.personalProfile.permanentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="permanentPin" type="text" ng-model="employee.personalProfile.permanentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n\n          <div class="ckbox ckbox-success">\n            <input type="checkbox" id="same_address" ng-model="checked">\n            <label for="same_address">Same as "Permanent Address?"</label>\n          </div>\n          <label class="col-sm-3 control-label">Current Address</label>\n          <div class="form-div-group col-sm-6">\n            <div>\n              <input name="fullAddress" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.fullAddress" placeholder="Address" class="form-control">\n            </div>\n            <div class="row">\n              <div class="col-sm-4">\n                <input name="city" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.city" placeholder="City" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="state" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.state" placeholder="State" class="form-control">\n              </div>\n\n              <div class="col-sm-4">\n                <input name="country" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.country" placeholder="Country" class="form-control">\n              </div>\n\n            </div>\n            <div>\n              <input name="pin" type="text" ng-disabled="checked" ng-model="employee.personalProfile.currentAddress.PIN" placeholder="Pin Code" class="form-control">\n            </div>\n          </div>\n\n        </div>\n        <!-- New Changes-->\n\n        <div class="form-group" ng-show="profile.editPersonalProfile">\n          <label class="col-sm-3 control-label">Contact Numbers\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <ul class="no-style">\n              <li ng-repeat="eachContact in employee.contactNumbers">\n                <input type="text" ng-model="eachContact.text" placeholder="Contact Number" class="form-control col-sm-11" name="phoneNumber">\n                <!-- <button type="button" class="btn btn-denger cursor-pointer col-sm-1" ng-disabled="eachContact.text.length" ng-click="removeContactNumber($index)">\n                                      <i class="fa fa-times icon"></i>\n                                    </button> -->\n              </li>\n            </ul>\n            <button type="button" ng-click="addContactNumber()" class="btn btn-primary pull-right mt10">\n              Add Phone\n            </button>\n          </div>\n        </div>\n\n\n\n        <!-- <div class="form-group" ng-show="profile.editPersonalProfile">\n                      <label class="col-sm-3 control-label">\n                        Biography\n                      </label>\n                      <div class="col-sm-6">\n                        <textarea name="bio" ng-model="employee.personalProfile.bioData" ckeditor="editorOptions" placeholder="Enter text here..." ng-click="getCkeditor()" class="form-control" rows="5"></textarea>\n                      </div>\n                    </div> -->\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOB\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOB" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOB" is-open="DOBOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOBOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">DOJ\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="DOJ" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.DOJ" is-open="DOJOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="DOJOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Email\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="email" type="text" placeholder="email" ng-model="employee.companyProfile.email" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Designation\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n\n            <!-- <select name="designation" class="form-control" ng-model="selectedDesignation.post">\n                              <option ng-repeat="designation in designations" value="{{designation.post}}">{{designation.post}}</option>\n                            </select> -->\n\n            <select name="designation" class="form-control" ng-model="selectedDesignation" ng-options="designation as designation.post for designation in designations">\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">CTC\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="ctc" type="text" placeholder="CTC" ng-model="employee.companyProfile.CTC" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Employee Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="empId" type="text" placeholder="Employee Id" ng-model="employee.companyProfile.empId" class="form-control">\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label" name="machine">Machine Id\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="machineId" type="text" placeholder="Machine Id" ng-model="employee.companyProfile.attendanceId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">PAN\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="pan" type="text" placeholder="PAN" ng-model="employee.companyProfile.panId" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">ROLE\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-3">\n\n\n            <select name="role" class="form-control" ng-model="selectedRole" ng-options="role as role.name for role in roles">\n\n            </select>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="checkAdmin()">\n          <label class="col-sm-3 control-label">Manager</label>\n          <div class="col-sm-6">\n\n            <div id="tags_added">\n              <ul ng-hide="!employee.managers.length" class="no-style">\n                <li ng-repeat="manager in employee.managers" class="clearfix">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                      <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                    </div>\n                    <div class="col-sm-2">\n                      <span class="close" title="Remove speaker" ng-click="removeManager($index)" data-btn-name="close_speaker_search">×</span>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n            </div>\n\n            <input ng-hide="employee.managers.length" type="text" placeholder="Choose a manager..." ng-model="employee.managerAutoSearch" ng-keyup="getManagerList()" class="form-control">\n\n            <div ng-hide="!employee.managerAutoSearch.trim().length" class="tag-suggestion search-result-margin" ng-show="displayResult">\n              <div class="search-result-close-block">\n                <span class="search-result-close-text">Managers found :</span>\n                <span class="close" title="Close search result" ng-click="closeSearchResult()" data-btn-name="close_speaker_search">×</span>\n              </div>\n              <ul ng-hide="!managers.length" id="speaker_dropdown" class="chosen-results no-style" role="menu">\n                <li ng-repeat="manager in managers">\n                  <div class="clear-both">\n                    <div class="col-sm-2 clearfix">\n                      <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./images/user.png\';">\n                    </div>\n                    <div class="col-sm-8 no-padding-left clearfix">\n                      <div>{{manager.companyProfile.name | name}}</div>\n                      <div>\n                        <span class="speaker-description">{{manager.companyProfile.designation.post}}</span> ,\n                        <span class="speaker-description">{{manager.companyProfile.company.name}}</span>\n                      </div>\n                    </div>\n                    <div class="col-sm-2">\n                      <button class="btn btn-primary add-button pull-right" ng-click="addManager($index)">Add</button>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n              <div id="no_speaker" ng-hide="managers.length" class="text-center">\n                <span class="fa fa-spin fa-spinner"></span>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account start date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountStartDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountStartDate" is-open="accountStartDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountStartDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Leave account end date\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <div class="input-group col-sm-7">\n              <input name="accountEndDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="employee.companyProfile.accountEndDate" is-open="accountEndDateOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n              <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="accountEndDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n            </div>\n\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max CL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxCL" type="number" placeholder="Max CL" ng-model="employee.companyProfile.maxCL" class="form-control">\n          </div>\n        </div>\n\n        <div class="form-group" ng-show="profile.editCompanyProfile">\n          <label class="col-sm-3 control-label">Max EL\n            <span class="asterisk">*</span>\n          </label>\n          <div class="col-sm-6">\n            <input name="maxEL" type="number" placeholder="Max EL" ng-model="employee.companyProfile.maxEL" class="form-control">\n          </div>\n        </div>\n\n        <div ng=show="profile.editPersonalProfile || profile.editCompanyProfile" class="form-group">\n          <div class="col-sm-6 col-sm-offset-3">\n            <div ng-hide="!showErrors" id="error_section">\n              <label ng-repeat="error in errors" class="error">{{error}}</label>\n\n            </div>\n          </div>\n          <div class="form-button-group col-sm-6 col-sm-offset-3">\n\n            <button class="btn btn-primary" name="addEmployeeButton" type="button" ng-click="addEmployee()">\n              Submit\n              <span ng-show="loading">\n                  <i class="fa fa-spinner fa-spin"></i>\n                </span>\n            </button>\n            <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n          </div>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>\n';
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/designationList.html":[function(require,module,exports){
 module.exports = '<div class="pageheader clearfix">\n  <h2 class="pull-left"><i class="fa fa-list"></i> Designation List</h2>\n\n  <div class="pull-right filter-group">\n    <form class="form-inline">\n      <div>\n        <button class="btn btn-success" ng-if="addDesignation" ng-click="loadAddDesignationView()"><i class="fa fa-plus"></i>Add Designation</button>\n\n      </div>\n    </form>\n  </div>\n</div>\n\n<div class="contentpanel">\n\n  <div class="row">\n\n    <div class="col-sm-12">\n\n      <div class="table-responsive">\n        <table class="table table-striped mb30">\n          <thead class="attender-list-padding">\n            <tr>\n              <th>#</th>\n              <th>Post</th>\n              <th>Count</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody class="attender-list-padding">\n            <tr ng-repeat="eachDesignation in designationList">\n              <td>{{$index + 1}}</td>\n              <td>{{eachDesignation.post}}</td>\n              <td>{{eachDesignation.count}}</td>\n              <td ng-if="addDesignation">\n                <!-- <a class="btn btn-info" ng-if="addUser" ng-click="loadEmployeeView(eachAttender._id)">\n                        <i class="fa fa-eye icon"></i>View\n                      </a> -->\n                <a class="btn btn-primary cursor-pointer" ng-click="loadAddDesignationView(eachDesignation)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <!-- <a class="btn btn-danger" ng-if="blockUser" ng-click="userBlock(eachAttender._id)">\n                        <i class="fa fa-warning icon"></i>Block\n                      </a> -->\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-bottom clearfix">\n    <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n  </div>\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html":[function(require,module,exports){
-module.exports = '<div class="pageheader clearfix">\n  <h2 class="pull-left"><i class="fa fa-list"></i> Employee List</h2>\n\n  <div class="pull-right filter-group">\n    <form class="form-inline">\n      <div class="form-button-group-spcl">\n        <button class="btn btn-success" ng-show="addUser" ng-click="addEmployee()"><i class="fa fa-plus"></i>Add Employee</button>\n        <input class="form-control" ng-show="viewUser" ng-keyup="filterData(searchString)" ng-model="searchString" type="text" placeholder="Search">\n      </div>\n\n      <div id="filter_dropdown" ng-show="viewUser" class="dropdown">\n        <button name="dropdownButton" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">{{selectedOption.text}}\n          <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu right-align" role="menu">\n          <li ng-repeat="option in filterOptions | orderBy:\'option\'">\n            <a ng-click="chooseAnOption($index)">{{option.text}} </a>\n          </li>\n        </ul>\n      </div>\n    </form>\n  </div>\n</div>\n\n<div class="contentpanel">\n  <!-- Old Pagination-->\n  <div ng-click="watchPagination(currentPage)" ng-if="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n    <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n\n  </div>\n\n  <div class="row">\n\n    <div class="col-sm-12">\n\n      <div class="table-responsive">\n        <table class="table table-striped mb30">\n          <thead class="attender-list-padding">\n            <tr>\n              <th>#</th>\n              <!-- <th>id</th> -->\n              <th>Name</th>\n              <th>Email</th>\n              <th>Designation</th>\n              <th>Gender</th>\n              <th>Manager</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody class="attender-list-padding">\n            <tr ng-repeat="eachAttender in attendiesList">\n              <td>{{$index + 1}}</td>\n              <!-- <td>{{eachAttender._id}}</td> -->\n              <td>{{eachAttender.companyProfile.name | name }}</td>\n              <td>{{eachAttender.companyProfile.email}}</td>\n              <td>{{eachAttender.companyProfile.designation.post}}</td>\n              <td>{{eachAttender.companyProfile.gender | gender}}</td>\n              <td>\n                <div ng-show="eachAttender.companyProfile.manager._id" class="cursor-pointer" ng-click="loadAttendiesView(eachAttender.companyProfile.manager._id)">\n                  <img ng-src="{{eachAttender.companyProfile.manager.personalProfile.photoUrl | url}}" alt="" ng-show="eachAttender.companyProfile.manager.photoUrl" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="small-profile-picture">\n                  <span class="manager-details">{{eachAttender.companyProfile.manager.companyProfile.name | name}}</span>\n                </div>\n              </td>\n              <td class="action-td">\n                <a class="btn btn-info cursor-pointer" ng-if="addUser" ng-click="loadEmployeeView(eachAttender._id)">\n                  <i class="fa fa-eye icon"></i>View\n                </a>\n                <a class="btn btn-primary cursor-pointer" ng-if="editUser" ng-click="loadEmployeeEditView(eachAttender._id)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-success cursor-pointer block-unblock-button" ng-show="blockUser && eachAttender.companyProfile.isActive" ng-click="userBlock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Block\n                </a>\n                <a class="btn btn-danger cursor-pointer block-unblock-button" ng-show="blockUser && !eachAttender.companyProfile.isActive" ng-click="userUnblock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Unblock\n                </a>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <!-- Old Pagination-->\n  <!-- <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-bottom clearfix">\n        \n          <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n        \n        </div> -->\n\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/employee/templates/employeeList.html":[function(require,module,exports){
+module.exports = '<div class="pageheader clearfix">\n  <h2 class="pull-left"><i class="fa fa-list"></i> Employee List</h2>\n\n  <div class="pull-right filter-group">\n    <form class="form-inline">\n      <div class="form-button-group-spcl">\n        <button class="btn btn-success" ng-show="addUser" ng-click="addEmployee()"><i class="fa fa-plus"></i>Add Employee</button>\n        <input class="form-control" ng-show="viewUser" ng-keyup="filterData(searchString)" ng-model="searchString" type="text" placeholder="Search">\n      </div>\n\n      <div id="filter_dropdown" ng-show="viewUser" class="dropdown">\n        <button name="dropdownButton" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">{{selectedOption.text}}\n          <span class="caret"></span>\n        </button>\n        <ul class="dropdown-menu right-align" role="menu">\n          <li ng-repeat="option in filterOptions | orderBy:\'option\'">\n            <a ng-click="chooseAnOption($index)">{{option.text}} </a>\n          </li>\n        </ul>\n      </div>\n    </form>\n  </div>\n</div>\n\n<div class="contentpanel">\n  <!-- Old Pagination-->\n  <div ng-click="watchPagination(currentPage)" ng-if="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n    <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n\n  </div>\n\n  <div class="row">\n\n    <div class="col-sm-12">\n\n      <div class="table-responsive">\n        <table class="table table-hover mb30">\n          <thead class="attender-list-padding">\n            <tr>\n              <th>#</th>\n              <!-- <th>id</th> -->\n              <th>Name</th>\n              <th>Email</th>\n              <th>Designation</th>\n              <th>Gender</th>\n              <th>Manager</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody class="attender-list-padding">\n            <tr ng-repeat="eachAttender in attendiesList">\n              <td>{{$index + 1}}</td>\n              <!-- <td>{{eachAttender._id}}</td> -->\n              <td>{{eachAttender.companyProfile.name | name }}</td>\n              <td>{{eachAttender.companyProfile.email}}</td>\n              <td>{{eachAttender.companyProfile.designation.post}}</td>\n              <td>{{eachAttender.companyProfile.gender | gender}}</td>\n              <td>\n                <div ng-show="eachAttender.companyProfile.manager._id" class="cursor-pointer" ng-click="loadAttendiesView(eachAttender.companyProfile.manager._id)">\n                  <img ng-src="{{eachAttender.companyProfile.manager.personalProfile.photoUrl | url}}" alt="" ng-show="eachAttender.companyProfile.manager.photoUrl" onerror="this.onerror=null;this.src=\'./images/user.png\';" class="small-profile-picture">\n                  <span class="manager-details">{{eachAttender.companyProfile.manager.companyProfile.name | name}}</span>\n                </div>\n              </td>\n              <td class="action-td">\n                <a class="btn btn-info cursor-pointer" ng-if="addUser" ng-click="loadEmployeeView(eachAttender._id)">\n                  <i class="fa fa-eye icon"></i>View\n                </a>\n                <a class="btn btn-primary cursor-pointer" ng-if="editUser" ng-click="loadEmployeeEditView(eachAttender._id)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-success cursor-pointer block-unblock-button" ng-show="blockUser && eachAttender.companyProfile.isActive" ng-click="userBlock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Block\n                </a>\n                <a class="btn btn-danger cursor-pointer block-unblock-button" ng-show="blockUser && !eachAttender.companyProfile.isActive" ng-click="userUnblock(eachAttender._id, $index)">\n                  <i class="fa fa-warning icon"></i>Unblock\n                </a>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n\n  <!-- Old Pagination-->\n  <!-- <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-bottom clearfix">\n        \n          <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n        \n        </div> -->\n\n</div>\n';
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $location) {
@@ -2320,14 +2318,14 @@ module.exports = function($scope, $http, $location) {
 
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/holiday.module.js":[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('app.holiday', ['ui.router', 'ui.bootstrap'])
     .controller('holidayCtrl', require('./controllers/holidayCtrl'))
     .config(require('./router/router'));
 
-},{"./controllers/holidayCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/router/router.js":[function(require,module,exports){
+},{"./controllers/holidayCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/controllers/holidayCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -2343,9 +2341,9 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
         });
 };
 
-},{"../templates/holiday.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html":[function(require,module,exports){
+},{"../templates/holiday.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html":[function(require,module,exports){
 module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i>Holiday List</h2>\n  </div>\n\n\n\n  <div class="contentpanel">\n\n    <div id="form_fillup" class="panel panel-default">\n\n      <!-- <div class="panel-heading">\n      \n      \n        <h4 class="panel-title">Method 2: Fillup the form</h4>\n      \n      </div> -->\n\n      <div ng-show="isAdmin" class="panel-body">\n\n        <div ng-show="showErrors">\n          <div ng-repeat="error in errors" class="text-center error">{{error}}</div>\n        </div>\n\n        <div ng-show="success">\n          <div class="text-center text-success">{{success}}</div>\n        </div>\n\n        <form id="HolidayDetails" class="form-inline">\n\n          <div class="form-group col-sm-5">\n            <label class="col-sm-3 control-label">Date\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <div class="input-group col-sm-12 pull-left">\n                <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n                <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n              </div>\n            </div>\n\n          </div>\n\n          <div class="form-group col-sm-6">\n            <label class="col-sm-3 control-label">Name\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <input name="name" type="text" ng-model="holidayDetails.purpose" placeholder="Name" class="form-control full-width" />\n            </div>\n          </div>\n\n        </form>\n\n        <div class="form-group">\n          <div class="row">\n            <div class="form-button-group col-sm-6 col-sm-offset-4">\n              <button class="btn btn-primary" ng-click="addAttendance()">\n                Submit\n                <span ng-show="loading">\n                  <i class="fa fa-spin fa-spinner"></i>\n                </span>\n              </button>\n              <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class="blank-div"></div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-striped mb30">\n          <thead>\n            <tr>\n              <th>Sl. No.</th>\n              <th>Date</th>\n              <th>Week day</th>\n              <th>Name</th>\n              <th ng-if="isAdmin">Actions</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="eachHoliday in allHolidays">\n              <td>{{$index+1}}</td>\n              <td>{{eachHoliday.date | date:\'MMM d, y\'}}</td>\n              <td>{{eachHoliday.date | date:\'EEEE\'}}</td>\n              <td>{{eachHoliday.purpose}}</td>\n              <td ng-if="isAdmin" class="action-td">\n\n                <a class="btn btn-primary cursor-pointer" ng-click="loadHolidayEditView(eachHoliday)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="deleteHoliday(eachHoliday._id, $index)">\n                  <i class="fa fa-warning icon"></i>Delete\n                </a>\n              </td>\n\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n    </div>\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $modal) {
@@ -2439,7 +2437,7 @@ module.exports = function($scope, $http, $modal) {
         };
 }
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $location) {
@@ -2559,7 +2557,7 @@ module.exports = function($scope, $http, $location) {
     init();
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $location) {
@@ -2674,7 +2672,7 @@ module.exports = function($scope, $http, $location) {
     $scope.$apply();
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $location, $modal) {
@@ -2831,7 +2829,7 @@ module.exports = function($scope, $http, $location, $modal) {
 
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($scope, $http, $location) {
@@ -3006,7 +3004,7 @@ module.exports = function($scope, $http, $location) {
     $scope.$apply();
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/leave.module.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/leave.module.js":[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('app.leave', ['ui.router', 'ui.bootstrap'])
@@ -3017,7 +3015,7 @@ module.exports = angular.module('app.leave', ['ui.router', 'ui.bootstrap'])
     .controller('requestLeaveCtrl', require('./controllers/requestLeaveCtrl'))
     .config(require('./router/router'));
 
-},{"./controllers/leaveAccountCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js","./controllers/leaveAccountModalCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js","./controllers/leaveDetailCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js","./controllers/leaveRequestsCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js","./controllers/requestLeaveCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/router/router.js":[function(require,module,exports){
+},{"./controllers/leaveAccountCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js","./controllers/leaveAccountModalCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountModalCtrl.js","./controllers/leaveDetailCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveDetailCtrl.js","./controllers/leaveRequestsCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveRequestsCtrl.js","./controllers/requestLeaveCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/requestLeaveCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider) {
@@ -3060,19 +3058,19 @@ module.exports = function($stateProvider) {
         });
 };
 
-},{"../templates/leaveaccount.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html","../templates/leavedetail.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html","../templates/leaverequestview.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html","../templates/request.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/request.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html":[function(require,module,exports){
+},{"../templates/leaveaccount.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html","../templates/leavedetail.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html","../templates/leaverequestview.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html","../templates/request.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/request.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leaveaccount.html":[function(require,module,exports){
 module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Leave Account</h2>\n    <div class="pull-right filter-group">\n      <form class="form-inline">\n        <input class="form-control" ng-keyup="filterData($event)" ng-model="searchString" type="text" placeholder="Search">\n      </form>\n    </div>\n  </div>\n\n  <div class="contentpanel">\n    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n    </div>\n    <div class="col-md-12">\n      <div class="table-responsive">\n        <table class="table table-hidaction table-hover mb30">\n          <thead>\n            <tr>\n              <th>m/c-Id</th>\n              <th class="table-name-width">Employee</th>\n              <th class="leave-width">CL</th>\n              <th class="leave-width">EL</th>\n              <th class="leave-width">LWP</th>\n              <th>Action</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="account in Accounts">\n              <td>{{account.emp.mcId}}</td>\n              <td>\n                <img ng-src="{{account.emp.profilePicture | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="profile">\n                <span>{{account.emp.name | name}}</span>\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.CL}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.CL" ng-if="account.isEditing">\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.EL}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.EL" ng-if="account.isEditing">\n              </td>\n              <td class="leave-width">\n                <span ng-if="!account.isEditing">{{account.LWP}}</span>\n                <input class="leave-width-input" type="number" ng-model="account.LWP" ng-if="account.isEditing">\n              </td>\n              <td>\n                <a class="btn btn-primary cursor-pointer" ng-click="loadLeaveAccountView(account, $index)">\n                  <i class="fa fa-refresh icon"></i>Update\n                </a>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n    <div ng-show="pagination.totalItems > pagination.itemsPerPage" class="pagination-group-top clearfix">\n\n      <pagination total-items="pagination.totalItems" ng-model="currentPage" max-size="pagination.maxSize" class="pagination-sm pull-right" items-per-page="pagination.itemsPerPage" boundary-links="true" rotate="false" num-pages="numPages"></pagination>\n\n    </div>\n  </div>\n\n\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leavedetail.html":[function(require,module,exports){
 module.exports = '<section>\n\n  <div class="dialog-header">\n    <button type="button" class="close" ng-click="close()">×</button>\n    <h4 class="">\n      <span class="fa fa-cog"></span>Leave Details\n    </h4>\n  </div>\n\n  <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">\n    <label ng-repeat="error in errors" class="error ">{{error}}</label>\n  </div>\n\n  <div>\n\n    <div class="contentpanel">\n      <div class="clearfix mb5">\n        <div class="col-sm-3">\n          <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';">\n        </div>\n        <div class="col-sm-offset-1 col-sm-8 no-padding-left">\n          <h4>\n            <strong>{{leaveDetails.applicant.companyProfile.name | name}}</strong>\n          </h4>\n          <div class="text-muted">{{leaveDetails.applicant.companyProfile.email}}</div>\n          <div class="mt5">\n            <h4>\n              <strong>Leave Requested</strong>\n            </h4>\n            <div>{{leaveDetails.durationOfLeave.from | date:\'d, MMMM y\'}} to {{leaveDetails.durationOfLeave.to | date:\'d, MMMM y\'}} ({{leaveDetails.typeOfLeave | typeOfLeave}})</div>\n            <div class="text-muted">\n              <strong>Reason:</strong>\n              <span>{{leaveDetails.content}}</span>\n            </div>\n            <div class="text-muted clearfix">\n              <div class="col-sm-6 no-padding-left">\n                <strong>Available CL:</strong>\n                <span>{{leaveDetails.available.CL}}</span>\n              </div>\n              <div class="col-sm-6 no-padding-left">\n                <strong>Available EL:</strong>\n                <span>{{leaveDetails.available.EL}}</span>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <div class="dialog-body">\n\n      <form id="leaveAction">\n        <div class="form-group">\n          <label class="col-sm-3 control-label">Comment</label>\n          <div class="col-sm-8">\n            <textarea type="text" name="comment" placeholder="Comment" ng-model="comment" rows="4" class="form-control">\n            </textarea>\n          </div>\n        </div>\n\n      </form>\n    </div>\n\n\n    <div class="dialog-footer text-right">\n      <button type="button" class="btn btn-primary dialog-form-btn" ng-click="acceptApplicationFromModal()">Accept</button>\n      <button type="button" class="btn btn-default dialog-form-btn" ng-click="rejectApplicationFromModal()">Reject</button>\n    </div>\n  </div>\n\n\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/leaverequestview.html":[function(require,module,exports){
 module.exports = '<section>\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Leave Requests</h2>\n  </div>\n\n  <div class="contentpanel">\n    <div class="col-md-12">\n\n      <div ng-show="showErrors">\n        <label ng-repeat="error in errors" class="error">{{error}}</label>\n      </div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-stripped mb30">\n          <thead>\n            <tr>\n              <th>#</th>\n              <th>Employee</th>\n              <th>From</th>\n              <th>To</th>\n              <th>Total</th>\n              <th>Type</th>\n              <th>Status</th>\n              <th ng-if="manageOthersLeave()">Action</th>\n              <!-- ng-if="manageOthersLeave()" -->\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="request in allRequests">\n              <td>{{$index+1}}</td>\n              <td>\n                <img ng-src="{{request.applicant.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src=\'./resources/images/user.png\';" class="profile">\n                <span>{{request.applicant.companyProfile.name | name}}</span>\n              </td>\n              <td>{{request.durationOfLeave.from | date:\'MMMM d, y\'}}</td>\n              <td>{{request.durationOfLeave.to | date:\'MMMM d, y\'}}</td>\n              <td>{{request.durationOfLeave | totalCount}}</td>\n              <td>{{request.typeOfLeave | typeOfLeave}}</td>\n              <td>{{request.statusCode | statusCode}}</td>\n              <td ng-if="manageOthersLeave()">\n                <!-- ng-if="manageOthersLeave()" -->\n\n                <a class="btn btn-primary cursor-pointer" ng-click="acceptApplication(request._id,  $index)">\n                  <i class="fa fa-check icon"></i>Accept\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="rejectApplication(request._id,  $index)">\n                  <i class="fa fa-times icon"></i>Reject\n                </a>\n                <a class="btn btn-default cursor-pointer" ng-click="loadApplicationView(request, $index)">\n                  <i class="fa fa-eye icon"></i>View\n                </a>\n\n              </td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n    </div>\n  </div>\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/leave/templates/request.html":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/templates/request.html":[function(require,module,exports){
 module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i> Apply For a Leave</h2>\n  </div>\n\n  <div class="contentpanel">\n    <!-- Leave Apply -->\n    <form action="" method="post" id="leaveRequest" class="form-horizontal" novalidate="novalidate">\n\n      <div ng-hide="!showErrors" id="error_section" class="alert-error center-align">\n        <label ng-repeat="error in errors" class="error ">{{error}}</label>\n      </div>\n\n      <div ng-show="showSuccess" class="alert-success center-align">\n        <label>{{success}}</label>\n      </div>\n\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="from">From\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9">\n          <div class="input-group col-sm-7 pull-left">\n\n            <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.sdt" is-open="leaveStartOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n            <span class="input-group-btn">\n              <button type="button" class="btn btn-default" ng-click="leaveStartOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n              </button>\n            </span>\n          </div>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="to">To\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9">\n          <div class="input-group col-sm-7 pull-left">\n\n            <input name="endDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="dateObj.edt" is-open="leaveEndOpened" datepicker-options="dateOptions" ng-required="true" close-text="Close" disabled="disabled" />\n            <span class="input-group-btn">\n              <button type="button" class="btn btn-default" ng-click="leaveEndOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n              </button>\n            </span>\n          </div>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <label class="control-label col-md-2" for="type">Leave Type\n          <span class="asterisk">*</span>\n        </label>\n        <div class="controls col-md-offset-1 col-md-9 clearfix">\n          <div class="col-sm-9">\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" id="cl" value="1" ng-model="leave.leaveType" name="leaveType" required="">\n              <label for="cl">CL</label>\n            </div>\n            <!-- rdio -->\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" value="2" id="pl" ng-model="leave.leaveType" name="leaveType">\n              <label for="pl">EL</label>\n            </div>\n            <!-- rdio -->\n            <div class="rdio rdio-primary col-sm-2">\n              <input type="radio" value="3" id="lwp" ng-model="leave.leaveType" name="leaveType">\n              <label for="lwp">LWP</label>\n            </div>\n            <label class="error" for="leaveType"></label>\n          </div>\n        </div>\n      </div>\n      <div class="col-md-12">\n        <label class="col-md-2 control-label">Reason\n          <span class="asterisk">*</span>\n        </label>\n        <div class="col-md-offset-1 col-md-6">\n          <textarea rows="5" class="form-control" ng-model="leave.reason" name="reason" placeholder="Type your reason..." required=""></textarea>\n        </div>\n      </div>\n      <div class="control-group col-md-12">\n        <div class="form-button-group controls col-md-offset-3 col-md-9">\n          <button class="btn btn-success" ng-click="apply()">Apply</button>\n          <button class="btn btn-default" ng-click="goBack()">Cancel</button>\n        </div>\n      </div>\n    </form>\n    <!-- Leave Apply END -->\n  </div>\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js":[function(require,module,exports){
 'use strict';
 
 var util = require('../../../util');
-var api = require('../../../util/api')
+var api = require('../../../util/api');
 
 /*module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
@@ -3150,11 +3148,27 @@ var api = require('../../../util/api')
 //*******************************************************************************
 
 module.exports = function($scope, $rootScope, $http, $state, $modal) {
+    var loadHome = function() {
+        $http({
+            method: 'GET',
+            url: api.getDetails,
+            params: {
+                companyId: util.loggedInUser.companyProfile.company._id
+            }
+        }).success(function(data) {
+            util.appDetails = data.data;
+            $scope.loading = false;
+            $state.go('app.home');
+        }).error(function() {
+            // console.log(arguments);
+        });
+    };
+
+    $rootScope.stopMainLoading = false;
 
     $scope.forgotPassword = function() {
         $location.path("/forgotpassword");
     };
-
     //checking login status
     if (!util.loggedInUser) {
         $http({
@@ -3162,11 +3176,15 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
             method: 'GET'
         }).success(function(response) {
             if (response.success) {
+                //console.log(response.data);
                 util.loggedInUser = response.data;
-                $state.go('app.home');
+                loadHome();
+            } else {
+                $rootScope.stopMainLoading = true;
             }
-        }).error(function(error) {
 
+        }).error(function(error) {
+            $rootScope.stopMainLoading = true;
         });
     } else {
         $state.go('app.home');
@@ -3200,6 +3218,7 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 jQuery(element).closest('label').remove();
             }
         });
+
     });
 
 
@@ -3222,33 +3241,21 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                 }
             }).success(function(response) {
                 if (response.success) {
-                    $scope.loading = false;
                     util.loggedInUser = response.data;
-
-                    $state.go('app.home');
+                    loadHome();
                 } else {
-                    $scope.loading = false;
                     if (response.errors && response.errors.length > 0) {
                         $scope.errors = [lang.networkError];
-                        $scope.showErrors = true;
-                        util.errorMessageTimeout({
-                            success: function() {
-                                console.log('here');
-                                $scope.errors = [];
-                                $scope.showErrors = false;
-                            }
-                        });
                     } else {
                         $scope.errors = _.values(response.errfor);
-                        $scope.showErrors = true;
-                        util.errorMessageTimeout({
-                            success: function() {
-                                console.log('here');
-                                $scope.errors = [];
-                                $scope.showErrors = false;
-                            }
-                        });
                     }
+                    $scope.showErrors = true;
+                    util.errorMessageTimeout({
+                        success: function() {
+                            $scope.errors = [];
+                            $scope.showErrors = false;
+                        }
+                    });
                 }
             }).error(function() {});
         }
@@ -3259,7 +3266,7 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
     }
 }
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/login.module.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/login.module.js":[function(require,module,exports){
 'use strict';
 
 var App = angular.module('app.login', ['ui.router', 'ui.bootstrap'])
@@ -3268,7 +3275,7 @@ var App = angular.module('app.login', ['ui.router', 'ui.bootstrap'])
 
 module.exports = App;
 
-},{"./controllers/loginCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/router/router.js":[function(require,module,exports){
+},{"./controllers/loginCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/controllers/loginCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider) {
@@ -3280,18 +3287,52 @@ module.exports = function($stateProvider) {
         });
 };
 
-},{"../templates/login.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/templates/login.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/login/templates/login.html":[function(require,module,exports){
+},{"../templates/login.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/login/templates/login.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/templates/login.html":[function(require,module,exports){
 module.exports = '<section>\n\n  <div class="signinpanel">\n\n    <div class="row">\n\n      <div class="col-md-7">\n\n        <div class="signin-info">\n          <div class="logopanel">\n            <h1>\n              <span>[</span>\n              intranet\n              <span>]</span>\n            </h1>\n          </div>\n          <!-- logopanel -->\n\n          <div class="mb20"></div>\n\n          <h5>\n            <strong>Welcome to Intranet!</strong>\n          </h5>\n          <ul>\n            <li>\n              <i class="fa fa-arrow-circle-o-right mr5"></i>Canteen Management</li>\n            <li><i class="fa fa-arrow-circle-o-right mr5"></i>Payroll Management</li>\n            <li><i class="fa fa-arrow-circle-o-right mr5"></i>Attendance Management</li>\n            <li><i class="fa fa-arrow-circle-o-right mr5"></i>Leave Management</li>\n            <li><i class="fa fa-arrow-circle-o-right mr5"></i> and more...</li>\n          </ul>\n          <div class="mb20"></div>\n          <!--<strong>Not a member? <a class="cursor-pointer" ng-click="showSubscribe()">Subscribe</a>\n                    </strong>-->\n        </div>\n        <!-- signin0-info -->\n\n      </div>\n      <!-- col-sm-7 -->\n\n      <div class="col-md-5">\n\n        <form id="signin">\n          <h4 class="nomargin">Sign In</h4>\n          <p class="mt5 mb20">Login to access your account.</p>\n\n          <div ng-hide="!showErrors" id="error_section">\n            <label ng-repeat="error in errors" class="error">{{error}}</label>\n\n          </div>\n\n          <input type="text" name="username" class="form-control uname" ng-model="loginCredentials.username" placeholder="Email" />\n          <input type="password" name="password" class="form-control pword" ng-model="loginCredentials.password" placeholder="Password" />\n          <a class="cursor-pointer" ng-click="forgotPassword()">\n            <br />\n            <small>Forgot Your Password?</small>\n          </a>\n          <button class="btn btn-success btn-block" ng-click="doSignIn()">\n            <!-- <span ng-show="!loading"> -->\n            Sign In\n            <!-- </span> -->\n            <span ng-show="loading">\n              <i class="fa fa-spinner fa-spin"></i>\n            </span>\n          </button>\n\n        </form>\n      </div>\n      <!-- col-sm-5 -->\n\n    </div>\n    <!-- row -->\n\n    <div class="signup-footer">\n      <div class="pull-left">\n        &copy; 2014. All Rights Reserved. Innofied Solution Pvt. Ltd.\n      </div>\n      <div class="pull-right">\n        Created By: <a href="http://www.innofied.com/" target="_blank">Innofied</a>\n      </div>\n    </div>\n\n  </div>\n\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/controllers/panelCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/controllers/panelCtrl.js":[function(require,module,exports){
 'use strict';
 
-var utility = require('../../../util');
+var util = require('../../../util');
 var api = require('../../../util/api');
 module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
+    var loadHome = function() {
+        $http({
+            method: 'GET',
+            url: api.getDetails,
+            params: {
+                companyId: util.loggedInUser.companyProfile.company._id
+            }
+        }).success(function(data) {
+            util.appDetails = data.data;
+            $scope.loading = false;
+        }).error(function() {
+            // console.log(arguments);
+        });
+    };
+
     //checking login status
-    if (!utility.loggedInUser) {
+    /*if (!util.loggedInUser) {
         $state.go('login');
+        return;
+    }*/
+
+    if (!util.loggedInUser) {
+        $http({
+            url: api.identifyUser,
+            method: 'GET'
+        }).success(function(response) {
+            if (response.success) {
+                console.log(response.data);
+                util.loggedInUser = response.data;
+                loadHome();
+            } else {
+                $rootScope.stopMainLoading = true;
+            }
+
+        }).error(function(error) {
+            $rootScope.stopMainLoading = true;
+        });
     }
 
     //logout user
@@ -3301,7 +3342,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
             method: 'POST'
         }).success(function(result) {
             if (result.success) {
-                utility.loggedInUser = null;
+                util.loggedInUser = null;
                 $state.go('login');
             }
         }).error(function() {
@@ -3315,7 +3356,7 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
     //TO_DO: try watching on window.location 
     $scope.$on('$viewContentLoaded', function(event) {
-        //console.log('viewContentLoaded');
+        $rootScope.stopMainLoading = true;
         $timeout(function() {
             //console.log('test window location', window.location, window.location.hash);
             var originalHash = window.location.hash /*.replace(/\?.*$/, '')*/ ,
@@ -3454,23 +3495,84 @@ module.exports = function($scope, $rootScope, $state, $http, $timeout) {
 
 };
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/panel.module.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/panel.module.js":[function(require,module,exports){
 'use strict';
 
-var App = angular.module('app.panel', ['ui.router', 'ui.bootstrap'])
+var App = angular.module('app.panel', ['ui.router', 'ui.bootstrap', 'app.service'])
     .controller('panelCtrl', require('./controllers/panelCtrl'))
     .config(require('./router/router'));
 
 module.exports = App;
 
-},{"./controllers/panelCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/controllers/panelCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/router/router.js":[function(require,module,exports){
+},{"./controllers/panelCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/controllers/panelCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/router/router.js":[function(require,module,exports){
 'use strict';
 
-module.exports = function($stateProvider, $urlRouterProvider) {
+
+module.exports = function($stateProvider, $urlRouterProvider, $http, $rootScope, $q, $state) {
     $stateProvider
         .state('app', {
             template: require('../templates/panel.html'),
-            controller: 'panelCtrl'
+            controller: 'panelCtrl',
+            resolve: {
+                app: function() {
+                    var defer = $q.defer(),
+                        getAppDetail = function() {
+                            var defer = $q.defer();
+                            $http({
+                                method: 'GET',
+                                url: api.getDetails,
+                                params: {
+                                    companyId: util.loggedInUser.companyProfile.company._id
+                                }
+                            }).success(function(data) {
+                                util.appDetails = data.data;
+                                //$scope.loading = false;
+                                defer.resolve();
+                            }).error(function() {
+                                defer.reject();
+                                // console.log(arguments);
+                            });
+                            return defer.promise;
+                        },
+                        identifyUser = function() {
+                            var defer = $q.defer();
+                            $http({
+                                url: api.identifyUser,
+                                method: 'GET'
+                            }).success(function(response) {
+                                if (response.success) {
+                                    //console.log(response.data);
+                                    util.loggedInUser = response.data;
+                                    defer.resolve();
+                                    //loadHome();
+                                } else {
+                                    defer.reject();
+                                }
+
+                            }).error(function(error) {
+                                defer.reject();
+                            });
+                            return defer.promise;
+                        };
+
+
+                    //checking login status
+                    if (!util.loggedInUser) {
+                        $q.all([
+                            getAppDetail(),
+                            identifyUser()
+                        ]).then(function() {
+                                $rootScope.stopMainLoading = true;
+                                defer.resolve();
+                            },
+                            function() {
+                                $state.go('login');
+                                defer.reject();
+                            })
+                    }
+                    return defer.promise;
+                }
+            }
         });
 
     $urlRouterProvider.otherwise(function($injector) {
@@ -3479,9 +3581,9 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     });
 };
 
-},{"../templates/panel.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
+},{"../templates/panel.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
 module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li ng-click="logout()"><a href=""><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employee/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employee/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a href="#/leave/requests"><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a href="#/leave/apply"><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a href="#/leave/account"><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/employee/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li ng-click="logout()"><a href=""><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages" class="page-content">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js":[function(require,module,exports){
 'use strict';
 
 var utility = require('../../../util');
@@ -3491,7 +3593,7 @@ module.exports = function($scope) {
 
 };
 
-},{"../../../util":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/profile.module.js":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/profile.module.js":[function(require,module,exports){
 'use strict';
 
 var App = angular.module('app.profile', ['ui.router', 'ui.bootstrap'])
@@ -3500,7 +3602,7 @@ var App = angular.module('app.profile', ['ui.router', 'ui.bootstrap'])
 
 module.exports = App;
 
-},{"./controllers/profileCtrl":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js","./router/router":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/router/router.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/router/router.js":[function(require,module,exports){
+},{"./controllers/profileCtrl":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js","./router/router":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/router/router.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/router/router.js":[function(require,module,exports){
 'use strict';
 
 module.exports = function($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -3516,10 +3618,13 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
         });
 };
 
-},{"../templates/profile.html":"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/templates/profile.html"}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/profile/templates/profile.html":[function(require,module,exports){
+},{"../templates/profile.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/templates/profile.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/templates/profile.html":[function(require,module,exports){
 module.exports = '<div class="pageheader">\n  <h2><i class="fa fa-user"></i> Profile <span>Subtitle goes here...</span></h2>\n  <div class="breadcrumb-wrapper">\n    <span class="label">You are here:</span>\n    <ol class="breadcrumb">\n      <li><a href="index.html">Bracket</a>\n      </li>\n      <li><a href="index.html">Pages</a>\n      </li>\n      <li class="active">Profile</li>\n    </ol>\n  </div>\n</div>\n\n<div class="contentpanel">\n\n  <div class="row">\n    <div class="col-sm-3">\n      <img src="images/photos/profile-1.png" class="thumbnail img-responsive" alt="" />\n\n      <div class="mb30"></div>\n\n      <h5 class="subtitle">About</h5>\n      <p class="mb30">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat... <a href="">Show More</a>\n      </p>\n\n      <h5 class="subtitle">Connect</h5>\n      <ul class="profile-social-list">\n        <li><i class="fa fa-twitter"></i> <a href="">twitter.com/eileensideways</a>\n        </li>\n        <li><i class="fa fa-facebook"></i> <a href="">facebook.com/eileen</a>\n        </li>\n        <li><i class="fa fa-youtube"></i> <a href="">youtube.com/eileen22</a>\n        </li>\n        <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/4ever-eileen</a>\n        </li>\n        <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/eileen</a>\n        </li>\n        <li><i class="fa fa-instagram"></i> <a href="">instagram.com/eiside</a>\n        </li>\n      </ul>\n\n      <div class="mb30"></div>\n\n      <h5 class="subtitle">Address</h5>\n      <address>\n        795 Folsom Ave, Suite 600\n        <br> San Francisco, CA 94107\n        <br>\n        <abbr title="Phone">P:</abbr> (123) 456-7890\n      </address>\n\n    </div>\n    <!-- col-sm-3 -->\n    <div class="col-sm-9">\n\n      <div class="profile-header">\n        <h2 class="profile-name">Eileen Sideways</h2>\n        <div class="profile-location"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>\n        <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a>\n        </div>\n\n        <div class="mb20"></div>\n\n        <button class="btn btn-success mr5"><i class="fa fa-user"></i> Follow</button>\n        <button class="btn btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n      </div>\n      <!-- profile-header -->\n\n      <!-- Nav tabs -->\n      <ul class="nav nav-tabs nav-justified nav-profile">\n        <li class="active"><a href="#activities" data-toggle="tab"><strong>Activities</strong></a>\n        </li>\n        <li><a href="#followers" data-toggle="tab"><strong>Followers</strong></a>\n        </li>\n        <li><a href="#following" data-toggle="tab"><strong>Following</strong></a>\n        </li>\n        <li><a href="#events" data-toggle="tab"><strong>My Events</strong></a>\n        </li>\n      </ul>\n\n      <!-- Tab panes -->\n      <div class="tab-content">\n        <div class="tab-pane active" id="activities">\n          <div class="activity-list">\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user1.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Ray Sin</strong> started following <strong>Eileen Sideways</strong>.\n                <br />\n                <small class="text-muted">Yesterday at 3:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> posted a new blog.\n                <br />\n                <small class="text-muted">Today at 3:18pm</small>\n\n                <div class="media blog-media">\n                  <a class="pull-left" href="#">\n                    <img class="media-object" src="images/photos/media5.png" alt="" />\n                  </a>\n                  <div class="media-body">\n                    <h4 class="media-title"><a href="">Ut Enim Ad Minim Veniam</a></h4>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... <a href="">Read more</a>\n                    </p>\n                  </div>\n                </div>\n                <!-- media -->\n\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user2.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Chris Anthemum</strong> started following <strong>Eileen Sideways</strong>.\n                <br />\n                <small class="text-muted">2 days ago at 8:30am</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> uploaded <a href="">5 photos</a>.\n                <br />\n                <small class="text-muted">5 days ago at 12:30pm</small>\n\n                <ul class="uploadphoto-list">\n                  <li>\n                    <a href="images/photos/media1.jpg" data-rel="prettyPhoto"><img src="images/photos/media1.jpg" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                  <li>\n                    <a href="images/photos/media2.png" data-rel="prettyPhoto"><img src="images/photos/media2.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                  <li>\n                    <a href="images/photos/media3.png" data-rel="prettyPhoto"><img src="images/photos/media3.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                </ul>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user4.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Frank Furter</strong> started following <strong>Eileen Sideways</strong>.\n                <br />\n                <small class="text-muted">6 days ago at 8:15am</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> posted a new note.\n                <br />\n                <small class="text-muted">6 days ago at 6:18am</small>\n                <h4 class="media-title"><a href="">Consectetur Adipisicing Elit</a></h4>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... <a href="">Read more</a>\n                </p>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> posted a new blog.\n                <br />\n                <small class="text-muted">December 25 at 3:18pm</small>\n\n                <div class="media blog-media">\n                  <a class="pull-left" href="#">\n                    <img class="media-object" src="images/photos/media4.png" alt="" />\n                  </a>\n                  <div class="media-body">\n                    <h4 class="media-title"><a href="">Ut Enim Ad Minim Veniam</a></h4>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... <a href="">Read more</a>\n                    </p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> added new photo.\n                <br />\n                <small class="text-muted">December 24 at 1:30pm</small>\n                <div class="mb20"></div>\n                <a href="images/photos/media6.png" data-rel="prettyPhoto" class="img-single"><img src="images/photos/media6.png" class="img-responsive" alt="" />\n                </a>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user5.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Weno Carasbong</strong> started following <strong>Eileen Sideways</strong>.\n                <br />\n                <small class="text-muted">December 15 at 3:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/userprofile.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Eileen Sideways</strong> posted a new blog.\n                <br />\n                <small class="text-muted">December 15 at 3:18pm</small>\n\n                <div class="media blog-media">\n                  <a class="pull-left" href="#">\n                    <img class="media-object" src="images/photos/media7.png" alt="" />\n                  </a>\n                  <div class="media-body">\n                    <h4 class="media-title"><a href="">Ut Enim Ad Minim Veniam</a></h4>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... <a href="">Read more</a>\n                    </p>\n                  </div>\n                </div>\n                <!-- media -->\n\n              </div>\n            </div>\n            <!-- media -->\n\n          </div>\n          <!-- activity-list -->\n\n          <button class="btn btn-white btn-block">Show More</button>\n\n        </div>\n        <div class="tab-pane" id="followers">\n\n          <div class="follower-list">\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Ray Sin</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> Follow</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Weno Carasbong</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> Cebu City, Philippines</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">ITCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-primary mr5"><i class="fa fa-check"></i> Following</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Nusja Nawancali</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> Madrid, Spain</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> CEO at <a href="">SomeCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> Follow</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Zaham Sindilmaca</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> Bangkok, Thailand</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> Java Developer at <a href="">ITCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-primary mr5"><i class="fa fa-check"></i> Following</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Christopher Atam</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> Tokyo, Japan</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> QA Engineer at <a href="">SomeCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> Follow</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media">\n              <a class="pull-left" href="#">\n                <!-- <img class="media-object" src="holder.js/100x125" alt="" /> -->\n              </a>\n              <div class="media-body">\n                <h3 class="follower-name">Venro Leonga</h3>\n                <div class="profile-location"><i class="fa fa-map-marker"></i> Paris, France</div>\n                <div class="profile-position"><i class="fa fa-briefcase"></i> UX Designer at <a href="">ITCompany, Inc.</a>\n                </div>\n\n                <div class="mb20"></div>\n\n                <button class="btn btn-sm btn-success mr5"><i class="fa fa-user"></i> Follow</button>\n                <button class="btn btn-sm btn-white"><i class="fa fa-envelope-o"></i> Message</button>\n              </div>\n            </div>\n            <!-- media -->\n\n          </div>\n          <!--follower-list -->\n\n        </div>\n        <div class="tab-pane" id="following">\n\n          <div class="activity-list">\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user2.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Chris Anthemum</strong> liked a photos\n                <br />\n                <small class="text-muted">Today at 12:30pm</small>\n\n                <ul class="uploadphoto-list">\n                  <li>\n                    <a href="images/photos/media5.png" data-rel="prettyPhoto"><img src="images/photos/media5.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                  <li>\n                    <a href="images/photos/media4.png" data-rel="prettyPhoto"><img src="images/photos/media4.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                </ul>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user1.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Ray Sin</strong> is now following to <strong>Chris Anthemum</strong>.\n                <br />\n                <small class="text-muted">Yesterday at 1:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user4.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Frank Furter</strong> is now following to <strong>Ray Sin</strong>.\n                <br />\n                <small class="text-muted">3 days ago at 1:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user2.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Chris Anthemum</strong> liked a photos\n                <br />\n                <small class="text-muted">5 days ago at 12:30pm</small>\n\n                <ul class="uploadphoto-list">\n                  <li>\n                    <a href="images/photos/media6.png" data-rel="prettyPhoto"><img src="images/photos/media6.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                  <li>\n                    <a href="images/photos/media7.png" data-rel="prettyPhoto"><img src="images/photos/media7.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                  <li>\n                    <a href="images/photos/media2.png" data-rel="prettyPhoto"><img src="images/photos/media2.png" class="img-responsive" alt="" />\n                    </a>\n                  </li>\n                </ul>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user1.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Nusja Nawancali</strong> is now following to <strong>Zaham Sindilmaca</strong>.\n                <br />\n                <small class="text-muted">December 25 at 1:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user4.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Frank Furter</strong> is now following to <strong>Zaham Sindilmaca</strong>.\n                <br />\n                <small class="text-muted">December 24 at 1:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user3.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Nusja NawanCali</strong> posted a new blog.\n                <br />\n                <small class="text-muted">December 23 at 3:18pm</small>\n\n                <div class="media blog-media">\n                  <a class="pull-left" href="#">\n                    <img class="media-object" src="images/photos/media3.png" alt="" />\n                  </a>\n                  <div class="media-body">\n                    <h4 class="media-title"><a href="">Ut Enim Ad Minim Veniam</a></h4>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... <a href="">Read more</a>\n                    </p>\n                  </div>\n                </div>\n                <!-- media -->\n\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user4.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Mark Zonsion</strong> is now following to <strong>Weno Carasbong</strong>.\n                <br />\n                <small class="text-muted">December 23 at 1:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n            <div class="media act-media">\n              <a class="pull-left" href="#">\n                <img class="media-object act-thumb" src="images/photos/user4.png" alt="" />\n              </a>\n              <div class="media-body act-media-body">\n                <strong>Frank Furter</strong> is now following to <strong>Weno Carasbong</strong>.\n                <br />\n                <small class="text-muted">December 20 at 4:30pm</small>\n              </div>\n            </div>\n            <!-- media -->\n\n          </div>\n          <!-- activity-list -->\n\n          <button class="btn btn-white btn-block">Show More</button>\n\n        </div>\n        <div class="tab-pane" id="events">\n          <div class="events">\n            <h5 class="subtitle">Upcoming Events</h5>\n            <div class="row">\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Free Living Trust Seminar</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Silicon Valley, San Francisco, CA</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Sunday, January 15, 2014 at 11:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Serious Games Seminar</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> New York City</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Monday, January 14, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Travel &amp; Adventure Show</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Los Angeles, CA</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Friday, January 12, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Mobile Games Summit</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Bay Area, San Francisco</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Saturday, January 10, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n            </div>\n\n            <br />\n\n            <h5 class="subtitle">Past Events</h5>\n            <div class="row">\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Free Living Trust Seminar</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Silicon Valley, San Francisco, CA</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Sunday, January 15, 2014 at 11:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Serious Games Seminar</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> New York City</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Monday, January 14, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Travel &amp; Adventure Show</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Los Angeles, CA</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Friday, January 12, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n\n              <div class="col-sm-6">\n                <div class="media">\n                  <a class="pull-left" href="#">\n                    <!-- <img class="media-object" src="holder.js/100x120" alt="" /> -->\n                  </a>\n                  <div class="media-body event-body">\n                    <h4 class="event-title"><a href="">Mobile Games Summit</a></h4>\n                    <small class="text-muted"><i class="fa fa-map-marker"></i> Bay Area, San Francisco</small>\n                    <small class="text-muted"><i class="fa fa-calendar"></i> Saturday, January 10, 2014 at 8:00am</small>\n                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>\n                  </div>\n                </div>\n                <!-- media -->\n              </div>\n              <!-- col-sm-6 -->\n            </div>\n\n          </div>\n          <!-- events -->\n        </div>\n      </div>\n      <!-- tab-content -->\n\n    </div>\n    <!-- col-sm-9 -->\n  </div>\n  <!-- row -->\n\n</div>\n';
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/modules/services/index.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/services/index.js":[function(require,module,exports){
 'use strict';
+
+var util = require('../../util');
+var api = require('../../util/api');
 
 var Service = angular.module('app.service', [])
     .service('UserService', ['$http', function($http) {
@@ -3703,11 +3808,69 @@ var Service = angular.module('app.service', [])
                 return xhr.send(fd);
             }
         };
+    }])
+    .service('UserIdentification', ['$http', '$state', '$q', '$rootScope', function($http, $state, $q, $rootScope) {
+        var defer = $q.defer(),
+            getAppDetail = function() {
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: api.getDetails,
+                    params: {
+                        companyId: util.loggedInUser.companyProfile.company._id
+                    }
+                }).success(function(data) {
+                    util.appDetails = data.data;
+                    //$scope.loading = false;
+                    defer.resolve();
+                }).error(function() {
+                    defer.reject();
+                    // console.log(arguments);
+                });
+                return defer.promise;
+            },
+            identifyUser = function() {
+                var defer = $q.defer();
+                $http({
+                    url: api.identifyUser,
+                    method: 'GET'
+                }).success(function(response) {
+                    if (response.success) {
+                        //console.log(response.data);
+                        util.loggedInUser = response.data;
+                        defer.resolve();
+                        //loadHome();
+                    } else {
+                        defer.reject();
+                    }
+
+                }).error(function(error) {
+                    defer.reject();
+                });
+                return defer.promise;
+            };
+
+
+        //checking login status
+        if (!util.loggedInUser) {
+            $q.all([
+                getAppDetail(),
+                identifyUser()
+            ]).then(function() {
+                    $rootScope.stopMainLoading = true;
+                    defer.resolve();
+                },
+                function() {
+                    $state.go('login');
+                    defer.reject();
+                })
+        }
+        return defer.promise;
     }]);
 
 module.exports = Service;
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/util/api.js":[function(require,module,exports){
+},{"../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/util/api.js":[function(require,module,exports){
 'use strict';
 
 // var baseUrl = 'http://localhost:8000/';
@@ -3715,10 +3878,10 @@ var baseUrl = 'api/';
 //    var baseUrl = 'http://192.168.2.6:8000/';
 module.exports = {
     getBaseUrl: function() {
-        return baseUrl;
+        return '';
     },
 
-    getDetails: baseUrl + 'app_details?companyId=5428eff3ed96f7b31ed9ed59',
+    getDetails: baseUrl + 'app_details',
 
     //user route
     login: baseUrl + 'login',
@@ -3759,7 +3922,7 @@ module.exports = {
     uploadAttendanceCSV: baseUrl + 'attendance/upload_csv',
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/app/util/index.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/app/util/index.js":[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -3815,10 +3978,10 @@ module.exports = {
 
 };
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js":[function(require,module,exports){
 (function (global){
 
-; require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
+; require("/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
  * Bootstrap v3.3.1 (http://getbootstrap.com)
@@ -6146,10 +6309,10 @@ if (typeof jQuery === 'undefined') {
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js":[function(require,module,exports){
+},{"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js":[function(require,module,exports){
 (function (global){
 
-; require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
+; require("/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /**
 @license jQuery Toggles v3.1.4
@@ -6449,10 +6612,10 @@ Toggles.prototype.toggle = function(state) {
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js":[function(require,module,exports){
+},{"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js":[function(require,module,exports){
 (function (global){
 
-; require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
+; require("/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*! jQuery UI - v1.11.2 - 2014-10-16
 * http://jqueryui.com
@@ -23041,10 +23204,10 @@ var tooltip = $.widget( "ui.tooltip", {
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-validate/dist/jquery.validate.js":[function(require,module,exports){
+},{"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-validate/dist/jquery.validate.js":[function(require,module,exports){
 (function (global){
 
-; require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
+; require("/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
  * jQuery Validation Plugin v1.13.1
@@ -24416,11 +24579,11 @@ $.extend($.fn, {
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":[function(require,module,exports){
+},{"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":[function(require,module,exports){
 (function (global){
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
- * jQuery JavaScript Library v2.1.3
+ * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -24430,19 +24593,19 @@ $.extend($.fn, {
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-12-18T15:11Z
+ * Date: 2014-05-01T17:11Z
  */
 
 (function( global, factory ) {
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {
-		// For CommonJS and CommonJS-like environments where a proper `window`
-		// is present, execute the factory and get jQuery.
-		// For environments that do not have a `window` with a `document`
-		// (such as Node.js), expose a factory as module.exports.
-		// This accentuates the need for the creation of a real `window`.
+		// For CommonJS and CommonJS-like environments where a proper window is present,
+		// execute the factory and get jQuery
+		// For environments that do not inherently posses a window with a document
+		// (such as Node.js), expose a jQuery-making factory as module.exports
+		// This accentuates the need for the creation of a real window
 		// e.g. var jQuery = require("jquery")(window);
-		// See ticket #14549 for more info.
+		// See ticket #14549 for more info
 		module.exports = global.document ?
 			factory( global, true ) :
 			function( w ) {
@@ -24458,10 +24621,10 @@ $.extend($.fn, {
 // Pass this if window is not defined yet
 }(typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
 
-// Support: Firefox 18+
-// Can't be in strict mode, several libs including ASP.NET trace
+// Can't do this because several apps including ASP.NET trace
 // the stack via arguments.caller.callee and Firefox dies if
 // you try to trace through "use strict" call chains. (#13335)
+// Support: Firefox 18+
 //
 
 var arr = [];
@@ -24488,7 +24651,7 @@ var
 	// Use the correct document accordingly with window argument (sandbox)
 	document = window.document,
 
-	version = "2.1.3",
+	version = "2.1.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -24606,7 +24769,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 	if ( typeof target === "boolean" ) {
 		deep = target;
 
-		// Skip the boolean and the target
+		// skip the boolean and the target
 		target = arguments[ i ] || {};
 		i++;
 	}
@@ -24616,7 +24779,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 		target = {};
 	}
 
-	// Extend jQuery itself if only one argument is passed
+	// extend jQuery itself if only one argument is passed
 	if ( i === length ) {
 		target = this;
 		i--;
@@ -24673,6 +24836,9 @@ jQuery.extend({
 
 	noop: function() {},
 
+	// See test/unit/core.js for details concerning isFunction.
+	// Since version 1.3, DOM methods and functions like alert
+	// aren't supported. They return false on IE (#2968).
 	isFunction: function( obj ) {
 		return jQuery.type(obj) === "function";
 	},
@@ -24687,8 +24853,7 @@ jQuery.extend({
 		// parseFloat NaNs numeric-cast false positives (null|true|false|"")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
 		// subtraction forces infinities to NaN
-		// adding 1 corrects loss of precision from parseFloat (#15100)
-		return !jQuery.isArray( obj ) && (obj - parseFloat( obj ) + 1) >= 0;
+		return !jQuery.isArray( obj ) && obj - parseFloat( obj ) >= 0;
 	},
 
 	isPlainObject: function( obj ) {
@@ -24722,7 +24887,7 @@ jQuery.extend({
 		if ( obj == null ) {
 			return obj + "";
 		}
-		// Support: Android<4.0, iOS<6 (functionish RegExp)
+		// Support: Android < 4.0, iOS < 6 (functionish RegExp)
 		return typeof obj === "object" || typeof obj === "function" ?
 			class2type[ toString.call(obj) ] || "object" :
 			typeof obj;
@@ -24752,7 +24917,6 @@ jQuery.extend({
 	},
 
 	// Convert dashed to camelCase; used by the css and data modules
-	// Support: IE9-11+
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
@@ -24968,14 +25132,14 @@ function isArraylike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.2.0-pre
+ * Sizzle CSS Selector Engine v1.10.19
  * http://sizzlejs.com/
  *
- * Copyright 2008, 2014 jQuery Foundation, Inc. and other contributors
+ * Copyright 2013 jQuery Foundation, Inc. and other contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-12-16
+ * Date: 2014-04-18
  */
 (function( window ) {
 
@@ -25002,7 +25166,7 @@ var i,
 	contains,
 
 	// Instance-specific data
-	expando = "sizzle" + 1 * new Date(),
+	expando = "sizzle" + -(new Date()),
 	preferredDoc = window.document,
 	dirruns = 0,
 	done = 0,
@@ -25017,6 +25181,7 @@ var i,
 	},
 
 	// General-purpose constants
+	strundefined = typeof undefined,
 	MAX_NEGATIVE = 1 << 31,
 
 	// Instance methods
@@ -25026,13 +25191,12 @@ var i,
 	push_native = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-	// Use a stripped-down indexOf as it's faster than native
-	// http://jsperf.com/thor-indexof-vs-for/5
-	indexOf = function( list, elem ) {
+	// Use a stripped-down indexOf if we can't use a native one
+	indexOf = arr.indexOf || function( elem ) {
 		var i = 0,
-			len = list.length;
+			len = this.length;
 		for ( ; i < len; i++ ) {
-			if ( list[i] === elem ) {
+			if ( this[i] === elem ) {
 				return i;
 			}
 		}
@@ -25072,7 +25236,6 @@ var i,
 		")\\)|)",
 
 	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
-	rwhitespace = new RegExp( whitespace + "+", "g" ),
 	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g" ),
 
 	rcomma = new RegExp( "^" + whitespace + "*," + whitespace + "*" ),
@@ -25124,14 +25287,6 @@ var i,
 				String.fromCharCode( high + 0x10000 ) :
 				// Supplemental Plane codepoint (surrogate pair)
 				String.fromCharCode( high >> 10 | 0xD800, high & 0x3FF | 0xDC00 );
-	},
-
-	// Used for iframes
-	// See setDocument()
-	// Removing the function wrapper causes a "Permission Denied"
-	// error in IE
-	unloadHandler = function() {
-		setDocument();
 	};
 
 // Optimize for push.apply( _, NodeList )
@@ -25174,18 +25329,19 @@ function Sizzle( selector, context, results, seed ) {
 
 	context = context || document;
 	results = results || [];
-	nodeType = context.nodeType;
 
-	if ( typeof selector !== "string" || !selector ||
-		nodeType !== 1 && nodeType !== 9 && nodeType !== 11 ) {
-
+	if ( !selector || typeof selector !== "string" ) {
 		return results;
 	}
 
-	if ( !seed && documentIsHTML ) {
+	if ( (nodeType = context.nodeType) !== 1 && nodeType !== 9 ) {
+		return [];
+	}
 
-		// Try to shortcut find operations when possible (e.g., not under DocumentFragment)
-		if ( nodeType !== 11 && (match = rquickExpr.exec( selector )) ) {
+	if ( documentIsHTML && !seed ) {
+
+		// Shortcuts
+		if ( (match = rquickExpr.exec( selector )) ) {
 			// Speed-up: Sizzle("#ID")
 			if ( (m = match[1]) ) {
 				if ( nodeType === 9 ) {
@@ -25217,7 +25373,7 @@ function Sizzle( selector, context, results, seed ) {
 				return results;
 
 			// Speed-up: Sizzle(".CLASS")
-			} else if ( (m = match[3]) && support.getElementsByClassName ) {
+			} else if ( (m = match[3]) && support.getElementsByClassName && context.getElementsByClassName ) {
 				push.apply( results, context.getElementsByClassName( m ) );
 				return results;
 			}
@@ -25227,7 +25383,7 @@ function Sizzle( selector, context, results, seed ) {
 		if ( support.qsa && (!rbuggyQSA || !rbuggyQSA.test( selector )) ) {
 			nid = old = expando;
 			newContext = context;
-			newSelector = nodeType !== 1 && selector;
+			newSelector = nodeType === 9 && selector;
 
 			// qSA works strangely on Element-rooted queries
 			// We can work around this by specifying an extra ID on the root
@@ -25414,7 +25570,7 @@ function createPositionalPseudo( fn ) {
  * @returns {Element|Object|Boolean} The input node if acceptable, otherwise a falsy value
  */
 function testContext( context ) {
-	return context && typeof context.getElementsByTagName !== "undefined" && context;
+	return context && typeof context.getElementsByTagName !== strundefined && context;
 }
 
 // Expose support vars for convenience
@@ -25438,8 +25594,9 @@ isXML = Sizzle.isXML = function( elem ) {
  * @returns {Object} Returns the current document
  */
 setDocument = Sizzle.setDocument = function( node ) {
-	var hasCompare, parent,
-		doc = node ? node.ownerDocument || node : preferredDoc;
+	var hasCompare,
+		doc = node ? node.ownerDocument || node : preferredDoc,
+		parent = doc.defaultView;
 
 	// If no document and documentElement is available, return
 	if ( doc === document || doc.nodeType !== 9 || !doc.documentElement ) {
@@ -25449,7 +25606,9 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// Set our document
 	document = doc;
 	docElem = doc.documentElement;
-	parent = doc.defaultView;
+
+	// Support tests
+	documentIsHTML = !isXML( doc );
 
 	// Support: IE>8
 	// If iframe document is assigned to "document" variable and if iframe has been reloaded,
@@ -25458,22 +25617,21 @@ setDocument = Sizzle.setDocument = function( node ) {
 	if ( parent && parent !== parent.top ) {
 		// IE11 does not have attachEvent, so all must suffer
 		if ( parent.addEventListener ) {
-			parent.addEventListener( "unload", unloadHandler, false );
+			parent.addEventListener( "unload", function() {
+				setDocument();
+			}, false );
 		} else if ( parent.attachEvent ) {
-			parent.attachEvent( "onunload", unloadHandler );
+			parent.attachEvent( "onunload", function() {
+				setDocument();
+			});
 		}
 	}
-
-	/* Support tests
-	---------------------------------------------------------------------- */
-	documentIsHTML = !isXML( doc );
 
 	/* Attributes
 	---------------------------------------------------------------------- */
 
 	// Support: IE<8
-	// Verify that getAttribute really returns attributes and not properties
-	// (excepting IE8 booleans)
+	// Verify that getAttribute really returns attributes and not properties (excepting IE8 booleans)
 	support.attributes = assert(function( div ) {
 		div.className = "i";
 		return !div.getAttribute("className");
@@ -25488,8 +25646,17 @@ setDocument = Sizzle.setDocument = function( node ) {
 		return !div.getElementsByTagName("*").length;
 	});
 
-	// Support: IE<9
-	support.getElementsByClassName = rnative.test( doc.getElementsByClassName );
+	// Check if getElementsByClassName can be trusted
+	support.getElementsByClassName = rnative.test( doc.getElementsByClassName ) && assert(function( div ) {
+		div.innerHTML = "<div class='a'></div><div class='a i'></div>";
+
+		// Support: Safari<4
+		// Catch class over-caching
+		div.firstChild.className = "i";
+		// Support: Opera<10
+		// Catch gEBCN failure to find non-leading classes
+		return div.getElementsByClassName("i").length === 2;
+	});
 
 	// Support: IE<10
 	// Check if getElementById returns elements by name
@@ -25503,7 +25670,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// ID find and filter
 	if ( support.getById ) {
 		Expr.find["ID"] = function( id, context ) {
-			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
+			if ( typeof context.getElementById !== strundefined && documentIsHTML ) {
 				var m = context.getElementById( id );
 				// Check parentNode to catch when Blackberry 4.6 returns
 				// nodes that are no longer in the document #6963
@@ -25524,7 +25691,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		Expr.filter["ID"] =  function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
-				var node = typeof elem.getAttributeNode !== "undefined" && elem.getAttributeNode("id");
+				var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("id");
 				return node && node.value === attrId;
 			};
 		};
@@ -25533,20 +25700,14 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// Tag
 	Expr.find["TAG"] = support.getElementsByTagName ?
 		function( tag, context ) {
-			if ( typeof context.getElementsByTagName !== "undefined" ) {
+			if ( typeof context.getElementsByTagName !== strundefined ) {
 				return context.getElementsByTagName( tag );
-
-			// DocumentFragment nodes don't have gEBTN
-			} else if ( support.qsa ) {
-				return context.querySelectorAll( tag );
 			}
 		} :
-
 		function( tag, context ) {
 			var elem,
 				tmp = [],
 				i = 0,
-				// By happy coincidence, a (broken) gEBTN appears on DocumentFragment nodes too
 				results = context.getElementsByTagName( tag );
 
 			// Filter out possible comments
@@ -25564,7 +25725,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 	// Class
 	Expr.find["CLASS"] = support.getElementsByClassName && function( className, context ) {
-		if ( documentIsHTML ) {
+		if ( typeof context.getElementsByClassName !== strundefined && documentIsHTML ) {
 			return context.getElementsByClassName( className );
 		}
 	};
@@ -25593,15 +25754,13 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// setting a boolean content attribute,
 			// since its presence should be enough
 			// http://bugs.jquery.com/ticket/12359
-			docElem.appendChild( div ).innerHTML = "<a id='" + expando + "'></a>" +
-				"<select id='" + expando + "-\f]' msallowcapture=''>" +
-				"<option selected=''></option></select>";
+			div.innerHTML = "<select msallowclip=''><option selected=''></option></select>";
 
 			// Support: IE8, Opera 11-12.16
 			// Nothing should be selected when empty strings follow ^= or $= or *=
 			// The test attribute must be unknown in Opera but "safe" for WinRT
 			// http://msdn.microsoft.com/en-us/library/ie/hh465388.aspx#attribute_section
-			if ( div.querySelectorAll("[msallowcapture^='']").length ) {
+			if ( div.querySelectorAll("[msallowclip^='']").length ) {
 				rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:''|\"\")" );
 			}
 
@@ -25611,23 +25770,11 @@ setDocument = Sizzle.setDocument = function( node ) {
 				rbuggyQSA.push( "\\[" + whitespace + "*(?:value|" + booleans + ")" );
 			}
 
-			// Support: Chrome<29, Android<4.2+, Safari<7.0+, iOS<7.0+, PhantomJS<1.9.7+
-			if ( !div.querySelectorAll( "[id~=" + expando + "-]" ).length ) {
-				rbuggyQSA.push("~=");
-			}
-
 			// Webkit/Opera - :checked should return selected option elements
 			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
 			// IE8 throws error here and will not see later tests
 			if ( !div.querySelectorAll(":checked").length ) {
 				rbuggyQSA.push(":checked");
-			}
-
-			// Support: Safari 8+, iOS 8+
-			// https://bugs.webkit.org/show_bug.cgi?id=136851
-			// In-page `selector#id sibing-combinator selector` fails
-			if ( !div.querySelectorAll( "a#" + expando + "+*" ).length ) {
-				rbuggyQSA.push(".#.+[+~]");
 			}
 		});
 
@@ -25745,7 +25892,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 			// Maintain original order
 			return sortInput ?
-				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
+				( indexOf.call( sortInput, a ) - indexOf.call( sortInput, b ) ) :
 				0;
 		}
 
@@ -25772,7 +25919,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				aup ? -1 :
 				bup ? 1 :
 				sortInput ?
-				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
+				( indexOf.call( sortInput, a ) - indexOf.call( sortInput, b ) ) :
 				0;
 
 		// If the nodes are siblings, we can do a quick check
@@ -25835,7 +25982,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
 			}
-		} catch (e) {}
+		} catch(e) {}
 	}
 
 	return Sizzle( expr, document, null, [ elem ] ).length > 0;
@@ -26054,7 +26201,7 @@ Expr = Sizzle.selectors = {
 			return pattern ||
 				(pattern = new RegExp( "(^|" + whitespace + ")" + className + "(" + whitespace + "|$)" )) &&
 				classCache( className, function( elem ) {
-					return pattern.test( typeof elem.className === "string" && elem.className || typeof elem.getAttribute !== "undefined" && elem.getAttribute("class") || "" );
+					return pattern.test( typeof elem.className === "string" && elem.className || typeof elem.getAttribute !== strundefined && elem.getAttribute("class") || "" );
 				});
 		},
 
@@ -26076,7 +26223,7 @@ Expr = Sizzle.selectors = {
 					operator === "^=" ? check && result.indexOf( check ) === 0 :
 					operator === "*=" ? check && result.indexOf( check ) > -1 :
 					operator === "$=" ? check && result.slice( -check.length ) === check :
-					operator === "~=" ? ( " " + result.replace( rwhitespace, " " ) + " " ).indexOf( check ) > -1 :
+					operator === "~=" ? ( " " + result + " " ).indexOf( check ) > -1 :
 					operator === "|=" ? result === check || result.slice( 0, check.length + 1 ) === check + "-" :
 					false;
 			};
@@ -26196,7 +26343,7 @@ Expr = Sizzle.selectors = {
 							matched = fn( seed, argument ),
 							i = matched.length;
 						while ( i-- ) {
-							idx = indexOf( seed, matched[i] );
+							idx = indexOf.call( seed, matched[i] );
 							seed[ idx ] = !( matches[ idx ] = matched[i] );
 						}
 					}) :
@@ -26235,8 +26382,6 @@ Expr = Sizzle.selectors = {
 				function( elem, context, xml ) {
 					input[0] = elem;
 					matcher( input, null, xml, results );
-					// Don't keep the element (issue #299)
-					input[0] = null;
 					return !results.pop();
 				};
 		}),
@@ -26248,7 +26393,6 @@ Expr = Sizzle.selectors = {
 		}),
 
 		"contains": markFunction(function( text ) {
-			text = text.replace( runescape, funescape );
 			return function( elem ) {
 				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
 			};
@@ -26670,7 +26814,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 				i = matcherOut.length;
 				while ( i-- ) {
 					if ( (elem = matcherOut[i]) &&
-						(temp = postFinder ? indexOf( seed, elem ) : preMap[i]) > -1 ) {
+						(temp = postFinder ? indexOf.call( seed, elem ) : preMap[i]) > -1 ) {
 
 						seed[temp] = !(results[temp] = elem);
 					}
@@ -26705,16 +26849,13 @@ function matcherFromTokens( tokens ) {
 			return elem === checkContext;
 		}, implicitRelative, true ),
 		matchAnyContext = addCombinator( function( elem ) {
-			return indexOf( checkContext, elem ) > -1;
+			return indexOf.call( checkContext, elem ) > -1;
 		}, implicitRelative, true ),
 		matchers = [ function( elem, context, xml ) {
-			var ret = ( !leadingRelative && ( xml || context !== outermostContext ) ) || (
+			return ( !leadingRelative && ( xml || context !== outermostContext ) ) || (
 				(checkContext = context).nodeType ?
 					matchContext( elem, context, xml ) :
 					matchAnyContext( elem, context, xml ) );
-			// Avoid hanging onto element (issue #299)
-			checkContext = null;
-			return ret;
 		} ];
 
 	for ( ; i < len; i++ ) {
@@ -26964,7 +27105,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 // Sort stability
 support.sortStable = expando.split("").sort( sortOrder ).join("") === expando;
 
-// Support: Chrome 14-35+
+// Support: Chrome<14
 // Always assume duplicates if they aren't passed to the comparison function
 support.detectDuplicates = !!hasDuplicate;
 
@@ -27173,7 +27314,7 @@ var rootjQuery,
 				if ( match[1] ) {
 					context = context instanceof jQuery ? context[0] : context;
 
-					// Option to run scripts is true for back-compat
+					// scripts is true for back-compat
 					// Intentionally let the error be thrown if parseHTML is not present
 					jQuery.merge( this, jQuery.parseHTML(
 						match[1],
@@ -27201,8 +27342,8 @@ var rootjQuery,
 				} else {
 					elem = document.getElementById( match[2] );
 
-					// Support: Blackberry 4.6
-					// gEBID returns nodes no longer in the document (#6963)
+					// Check parentNode to catch when Blackberry 4.6 returns
+					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Inject the element directly into the jQuery object
 						this.length = 1;
@@ -27255,7 +27396,7 @@ rootjQuery = jQuery( document );
 
 
 var rparentsprev = /^(?:parents|prev(?:Until|All))/,
-	// Methods guaranteed to produce a unique set when starting from a unique set
+	// methods guaranteed to produce a unique set when starting from a unique set
 	guaranteedUnique = {
 		children: true,
 		contents: true,
@@ -27335,7 +27476,8 @@ jQuery.fn.extend({
 		return this.pushStack( matched.length > 1 ? jQuery.unique( matched ) : matched );
 	},
 
-	// Determine the position of an element within the set
+	// Determine the position of an element within
+	// the matched set of elements
 	index: function( elem ) {
 
 		// No argument, return index in parent
@@ -27343,7 +27485,7 @@ jQuery.fn.extend({
 			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
-		// Index in selector
+		// index in selector
 		if ( typeof elem === "string" ) {
 			return indexOf.call( jQuery( elem ), this[ 0 ] );
 		}
@@ -27759,7 +27901,7 @@ jQuery.extend({
 
 			progressValues, progressContexts, resolveContexts;
 
-		// Add listeners to Deferred subordinates; treat others as resolved
+		// add listeners to Deferred subordinates; treat others as resolved
 		if ( length > 1 ) {
 			progressValues = new Array( length );
 			progressContexts = new Array( length );
@@ -27776,7 +27918,7 @@ jQuery.extend({
 			}
 		}
 
-		// If we're not waiting on anything, resolve the master
+		// if we're not waiting on anything, resolve the master
 		if ( !remaining ) {
 			deferred.resolveWith( resolveContexts, resolveValues );
 		}
@@ -27855,7 +27997,7 @@ jQuery.ready.promise = function( obj ) {
 		readyList = jQuery.Deferred();
 
 		// Catch cases where $(document).ready() is called after the browser event has already occurred.
-		// We once tried to use readyState "interactive" here, but it caused issues like the one
+		// we once tried to use readyState "interactive" here, but it caused issues like the one
 		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
 		if ( document.readyState === "complete" ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
@@ -27949,7 +28091,7 @@ jQuery.acceptData = function( owner ) {
 
 
 function Data() {
-	// Support: Android<4,
+	// Support: Android < 4,
 	// Old WebKit does not have Object.preventExtensions/freeze method,
 	// return new empty object instead with no [[set]] accessor
 	Object.defineProperty( this.cache = {}, 0, {
@@ -27958,7 +28100,7 @@ function Data() {
 		}
 	});
 
-	this.expando = jQuery.expando + Data.uid++;
+	this.expando = jQuery.expando + Math.random();
 }
 
 Data.uid = 1;
@@ -27986,7 +28128,7 @@ Data.prototype = {
 				descriptor[ this.expando ] = { value: unlock };
 				Object.defineProperties( owner, descriptor );
 
-			// Support: Android<4
+			// Support: Android < 4
 			// Fallback to a less secure definition
 			} catch ( e ) {
 				descriptor[ this.expando ] = unlock;
@@ -28126,16 +28268,17 @@ var data_user = new Data();
 
 
 
-//	Implementation Summary
-//
-//	1. Enforce API surface and semantic compatibility with 1.9.x branch
-//	2. Improve the module's maintainability by reducing the storage
-//		paths to a single mechanism.
-//	3. Use the same single mechanism to support "private" and "user" data.
-//	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
-//	5. Avoid exposing implementation details on user objects (eg. expando properties)
-//	6. Provide a clear path for implementation upgrade to WeakMap in 2014
+/*
+	Implementation Summary
 
+	1. Enforce API surface and semantic compatibility with 1.9.x branch
+	2. Improve the module's maintainability by reducing the storage
+		paths to a single mechanism.
+	3. Use the same single mechanism to support "private" and "user" data.
+	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
+	5. Avoid exposing implementation details on user objects (eg. expando properties)
+	6. Provide a clear path for implementation upgrade to WeakMap in 2014
+*/
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /([A-Z])/g;
 
@@ -28340,7 +28483,7 @@ jQuery.extend({
 				queue.unshift( "inprogress" );
 			}
 
-			// Clear up the last queue stop function
+			// clear up the last queue stop function
 			delete hooks.stop;
 			fn.call( elem, next, hooks );
 		}
@@ -28350,7 +28493,7 @@ jQuery.extend({
 		}
 	},
 
-	// Not public - generate a queueHooks object, or return the current one
+	// not intended for public consumption - generates a queueHooks object, or returns the current one
 	_queueHooks: function( elem, type ) {
 		var key = type + "queueHooks";
 		return data_priv.get( elem, key ) || data_priv.access( elem, key, {
@@ -28380,7 +28523,7 @@ jQuery.fn.extend({
 			this.each(function() {
 				var queue = jQuery.queue( this, type, data );
 
-				// Ensure a hooks for this queue
+				// ensure a hooks for this queue
 				jQuery._queueHooks( this, type );
 
 				if ( type === "fx" && queue[0] !== "inprogress" ) {
@@ -28447,22 +28590,21 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 		div = fragment.appendChild( document.createElement( "div" ) ),
 		input = document.createElement( "input" );
 
-	// Support: Safari<=5.1
-	// Check state lost if the name is set (#11217)
+	// #11217 - WebKit loses check when the name is after the checked attribute
 	// Support: Windows Web Apps (WWA)
-	// `name` and `type` must use .setAttribute for WWA (#14901)
+	// `name` and `type` need .setAttribute for WWA
 	input.setAttribute( "type", "radio" );
 	input.setAttribute( "checked", "checked" );
 	input.setAttribute( "name", "t" );
 
 	div.appendChild( input );
 
-	// Support: Safari<=5.1, Android<4.2
-	// Older WebKit doesn't clone checked state correctly in fragments
+	// Support: Safari 5.1, iOS 5.1, Android 4.x, Android 2.3
+	// old WebKit doesn't clone checked state correctly in fragments
 	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
-	// Support: IE<=11+
 	// Make sure textarea (and checkbox) defaultValue is properly cloned
+	// Support: IE9-IE11+
 	div.innerHTML = "<textarea>x</textarea>";
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 })();
@@ -28840,8 +28982,8 @@ jQuery.event = {
 			j = 0;
 			while ( (handleObj = matched.handlers[ j++ ]) && !event.isImmediatePropagationStopped() ) {
 
-				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
-				// a subset or equal to those in the bound event (both can have no namespace).
+				// Triggered event must either 1) have no namespace, or
+				// 2) have namespace(s) a subset or equal to those in the bound event (both can have no namespace).
 				if ( !event.namespace_re || event.namespace_re.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
@@ -28991,7 +29133,7 @@ jQuery.event = {
 			event.target = document;
 		}
 
-		// Support: Safari 6.0+, Chrome<28
+		// Support: Safari 6.0+, Chrome < 28
 		// Target should not be a text node (#504, #13143)
 		if ( event.target.nodeType === 3 ) {
 			event.target = event.target.parentNode;
@@ -29096,7 +29238,7 @@ jQuery.Event = function( src, props ) {
 		// by a handler lower down the tree; reflect the correct value.
 		this.isDefaultPrevented = src.defaultPrevented ||
 				src.defaultPrevented === undefined &&
-				// Support: Android<4.0
+				// Support: Android < 4.0
 				src.returnValue === false ?
 			returnTrue :
 			returnFalse;
@@ -29186,8 +29328,8 @@ jQuery.each({
 	};
 });
 
-// Support: Firefox, Chrome, Safari
 // Create "bubbling" focus and blur events
+// Support: Firefox, Chrome, Safari
 if ( !support.focusinBubbles ) {
 	jQuery.each({ focus: "focusin", blur: "focusout" }, function( orig, fix ) {
 
@@ -29340,7 +29482,7 @@ var
 	// We have to close these tags to support XHTML (#13200)
 	wrapMap = {
 
-		// Support: IE9
+		// Support: IE 9
 		option: [ 1, "<select multiple='multiple'>", "</select>" ],
 
 		thead: [ 1, "<table>", "</table>" ],
@@ -29351,7 +29493,7 @@ var
 		_default: [ 0, "", "" ]
 	};
 
-// Support: IE9
+// Support: IE 9
 wrapMap.optgroup = wrapMap.option;
 
 wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead;
@@ -29441,7 +29583,7 @@ function getAll( context, tag ) {
 		ret;
 }
 
-// Fix IE bugs, see support tests
+// Support: IE >= 9
 function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
@@ -29461,7 +29603,8 @@ jQuery.extend({
 			clone = elem.cloneNode( true ),
 			inPage = jQuery.contains( elem.ownerDocument, elem );
 
-		// Fix IE cloning issues
+		// Support: IE >= 9
+		// Fix Cloning issues
 		if ( !support.noCloneChecked && ( elem.nodeType === 1 || elem.nodeType === 11 ) &&
 				!jQuery.isXMLDoc( elem ) ) {
 
@@ -29512,8 +29655,8 @@ jQuery.extend({
 
 				// Add nodes directly
 				if ( jQuery.type( elem ) === "object" ) {
-					// Support: QtWebKit, PhantomJS
-					// push.apply(_, arraylike) throws on ancient WebKit
+					// Support: QtWebKit
+					// jQuery.merge because push.apply(_, arraylike) throws
 					jQuery.merge( nodes, elem.nodeType ? [ elem ] : elem );
 
 				// Convert non-html into a text node
@@ -29535,14 +29678,15 @@ jQuery.extend({
 						tmp = tmp.lastChild;
 					}
 
-					// Support: QtWebKit, PhantomJS
-					// push.apply(_, arraylike) throws on ancient WebKit
+					// Support: QtWebKit
+					// jQuery.merge because push.apply(_, arraylike) throws
 					jQuery.merge( nodes, tmp.childNodes );
 
 					// Remember the top-level container
 					tmp = fragment.firstChild;
 
-					// Ensure the created nodes are orphaned (#12392)
+					// Fixes #12346
+					// Support: Webkit, IE
 					tmp.textContent = "";
 				}
 			}
@@ -29904,7 +30048,7 @@ function actualDisplay( name, doc ) {
 		// getDefaultComputedStyle might be reliably used only on attached element
 		display = window.getDefaultComputedStyle && ( style = window.getDefaultComputedStyle( elem[ 0 ] ) ) ?
 
-			// Use of this method is a temporary fix (more like optimization) until something better comes along,
+			// Use of this method is a temporary fix (more like optmization) until something better comes along,
 			// since it was removed from specification and supported only in FF
 			style.display : jQuery.css( elem[ 0 ], "display" );
 
@@ -29954,14 +30098,7 @@ var rmargin = (/^margin/);
 var rnumnonpx = new RegExp( "^(" + pnum + ")(?!px)[a-z%]+$", "i" );
 
 var getStyles = function( elem ) {
-		// Support: IE<=11+, Firefox<=30+ (#15098, #14150)
-		// IE throws on elements created in popups
-		// FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-		if ( elem.ownerDocument.defaultView.opener ) {
-			return elem.ownerDocument.defaultView.getComputedStyle( elem, null );
-		}
-
-		return window.getComputedStyle( elem, null );
+		return elem.ownerDocument.defaultView.getComputedStyle( elem, null );
 	};
 
 
@@ -29973,7 +30110,7 @@ function curCSS( elem, name, computed ) {
 	computed = computed || getStyles( elem );
 
 	// Support: IE9
-	// getPropertyValue is only needed for .css('filter') (#12537)
+	// getPropertyValue is only needed for .css('filter') in IE9, see #12537
 	if ( computed ) {
 		ret = computed.getPropertyValue( name ) || computed[ name ];
 	}
@@ -30019,13 +30156,15 @@ function addGetHookIf( conditionFn, hookFn ) {
 	return {
 		get: function() {
 			if ( conditionFn() ) {
-				// Hook not needed (or it's not possible to use it due
-				// to missing dependency), remove it.
+				// Hook not needed (or it's not possible to use it due to missing dependency),
+				// remove it.
+				// Since there are no other hooks for marginRight, remove the whole object.
 				delete this.get;
 				return;
 			}
 
 			// Hook needed; redefine it so that the support test is not executed again.
+
 			return (this.get = hookFn).apply( this, arguments );
 		}
 	};
@@ -30042,8 +30181,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 		return;
 	}
 
-	// Support: IE9-11+
-	// Style of cloned element affects source element cloned (#8908)
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
 	support.clearCloneStyle = div.style.backgroundClip === "content-box";
@@ -30076,7 +30213,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 	if ( window.getComputedStyle ) {
 		jQuery.extend( support, {
 			pixelPosition: function() {
-
 				// This test is executed only once but we still do memoizing
 				// since we can use the boxSizingReliable pre-computing.
 				// No need to check if the test was already performed, though.
@@ -30090,7 +30226,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 				return boxSizingReliableVal;
 			},
 			reliableMarginRight: function() {
-
 				// Support: Android 2.3
 				// Check if div with explicit width and no margin-right incorrectly
 				// gets computed margin-right based on width of container. (#3333)
@@ -30112,7 +30247,6 @@ function addGetHookIf( conditionFn, hookFn ) {
 				ret = !parseFloat( window.getComputedStyle( marginDiv, null ).marginRight );
 
 				docElem.removeChild( container );
-				div.removeChild( marginDiv );
 
 				return ret;
 			}
@@ -30144,8 +30278,8 @@ jQuery.swap = function( elem, options, callback, args ) {
 
 
 var
-	// Swappable if display is none or starts with table except "table", "table-cell", or "table-caption"
-	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+	// swappable if display is none or starts with table except "table", "table-cell", or "table-caption"
+	// see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
 	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
 	rnumsplit = new RegExp( "^(" + pnum + ")(.*)$", "i" ),
 	rrelNum = new RegExp( "^([+-])=(" + pnum + ")", "i" ),
@@ -30158,15 +30292,15 @@ var
 
 	cssPrefixes = [ "Webkit", "O", "Moz", "ms" ];
 
-// Return a css property mapped to a potentially vendor prefixed property
+// return a css property mapped to a potentially vendor prefixed property
 function vendorPropName( style, name ) {
 
-	// Shortcut for names that are not vendor prefixed
+	// shortcut for names that are not vendor prefixed
 	if ( name in style ) {
 		return name;
 	}
 
-	// Check for vendor prefixed names
+	// check for vendor prefixed names
 	var capName = name[0].toUpperCase() + name.slice(1),
 		origName = name,
 		i = cssPrefixes.length;
@@ -30199,7 +30333,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 		val = 0;
 
 	for ( ; i < 4; i += 2 ) {
-		// Both box models exclude margin, so add it if we want it
+		// both box models exclude margin, so add it if we want it
 		if ( extra === "margin" ) {
 			val += jQuery.css( elem, extra + cssExpand[ i ], true, styles );
 		}
@@ -30210,15 +30344,15 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 				val -= jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
 			}
 
-			// At this point, extra isn't border nor margin, so remove border
+			// at this point, extra isn't border nor margin, so remove border
 			if ( extra !== "margin" ) {
 				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
 			}
 		} else {
-			// At this point, extra isn't content, so add padding
+			// at this point, extra isn't content, so add padding
 			val += jQuery.css( elem, "padding" + cssExpand[ i ], true, styles );
 
-			// At this point, extra isn't content nor padding, so add border
+			// at this point, extra isn't content nor padding, so add border
 			if ( extra !== "padding" ) {
 				val += jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
 			}
@@ -30236,7 +30370,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-	// Some non-html elements return undefined for offsetWidth, so check for null/undefined
+	// some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
 	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?id=491668
 	if ( val <= 0 || val == null ) {
@@ -30251,7 +30385,7 @@ function getWidthOrHeight( elem, name, extra ) {
 			return val;
 		}
 
-		// Check for style in case a browser which returns unreliable values
+		// we need the check for style in case a browser which returns unreliable values
 		// for getComputedStyle silently falls back to the reliable elem.style
 		valueIsBorderBox = isBorderBox &&
 			( support.boxSizingReliable() || val === elem.style[ name ] );
@@ -30260,7 +30394,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = parseFloat( val ) || 0;
 	}
 
-	// Use the active box-sizing model to add/subtract irrelevant styles
+	// use the active box-sizing model to add/subtract irrelevant styles
 	return ( val +
 		augmentWidthOrHeight(
 			elem,
@@ -30324,14 +30458,12 @@ function showHide( elements, show ) {
 }
 
 jQuery.extend({
-
 	// Add in style property hooks for overriding the default
 	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
 				if ( computed ) {
-
 					// We should always get a number back from opacity
 					var ret = curCSS( elem, "opacity" );
 					return ret === "" ? "1" : ret;
@@ -30359,12 +30491,12 @@ jQuery.extend({
 	// Add in properties whose names you wish to fix before
 	// setting or getting the value
 	cssProps: {
+		// normalize float css property
 		"float": "cssFloat"
 	},
 
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
-
 		// Don't set styles on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
@@ -30377,32 +30509,33 @@ jQuery.extend({
 
 		name = jQuery.cssProps[ origName ] || ( jQuery.cssProps[ origName ] = vendorPropName( style, origName ) );
 
-		// Gets hook for the prefixed version, then unprefixed version
+		// gets hook for the prefixed version
+		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
 		// Check if we're setting a value
 		if ( value !== undefined ) {
 			type = typeof value;
 
-			// Convert "+=" or "-=" to relative numbers (#7345)
+			// convert relative number strings (+= or -=) to relative numbers. #7345
 			if ( type === "string" && (ret = rrelNum.exec( value )) ) {
 				value = ( ret[1] + 1 ) * ret[2] + parseFloat( jQuery.css( elem, name ) );
 				// Fixes bug #9237
 				type = "number";
 			}
 
-			// Make sure that null and NaN values aren't set (#7116)
+			// Make sure that null and NaN values aren't set. See: #7116
 			if ( value == null || value !== value ) {
 				return;
 			}
 
-			// If a number, add 'px' to the (except for certain CSS properties)
+			// If a number was passed in, add 'px' to the (except for certain CSS properties)
 			if ( type === "number" && !jQuery.cssNumber[ origName ] ) {
 				value += "px";
 			}
 
-			// Support: IE9-11+
-			// background-* props affect original clone's values
+			// Fixes #8908, it can be done more correctly by specifying setters in cssHooks,
+			// but it would mean to define eight (for every problematic property) identical functions
 			if ( !support.clearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
 				style[ name ] = "inherit";
 			}
@@ -30430,7 +30563,8 @@ jQuery.extend({
 		// Make sure that we're working with the right name
 		name = jQuery.cssProps[ origName ] || ( jQuery.cssProps[ origName ] = vendorPropName( elem.style, origName ) );
 
-		// Try prefixed name followed by the unprefixed name
+		// gets hook for the prefixed version
+		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
 		// If a hook was provided get the computed value from there
@@ -30443,12 +30577,12 @@ jQuery.extend({
 			val = curCSS( elem, name, styles );
 		}
 
-		// Convert "normal" to computed value
+		//convert "normal" to computed value
 		if ( val === "normal" && name in cssNormalTransform ) {
 			val = cssNormalTransform[ name ];
 		}
 
-		// Make numeric if forced or a qualifier was provided and val looks numeric
+		// Return, converting to number if forced or a qualifier was provided and val looks numeric
 		if ( extra === "" || extra ) {
 			num = parseFloat( val );
 			return extra === true || jQuery.isNumeric( num ) ? num || 0 : val;
@@ -30461,9 +30595,8 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 	jQuery.cssHooks[ name ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
-
-				// Certain elements can have dimension info if we invisibly show them
-				// but it must have a current display style that would benefit
+				// certain elements can have dimension info if we invisibly show them
+				// however, it must have a current display style that would benefit from this
 				return rdisplayswap.test( jQuery.css( elem, "display" ) ) && elem.offsetWidth === 0 ?
 					jQuery.swap( elem, cssShow, function() {
 						return getWidthOrHeight( elem, name, extra );
@@ -30491,6 +30624,8 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 	function( elem, computed ) {
 		if ( computed ) {
+			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
+			// Work around by temporarily setting element display to inline-block
 			return jQuery.swap( elem, { "display": "inline-block" },
 				curCSS, [ elem, "marginRight" ] );
 		}
@@ -30508,7 +30643,7 @@ jQuery.each({
 			var i = 0,
 				expanded = {},
 
-				// Assumes a single number if not a string
+				// assumes a single number if not a string
 				parts = typeof value === "string" ? value.split(" ") : [ value ];
 
 			for ( ; i < 4; i++ ) {
@@ -30631,18 +30766,17 @@ Tween.propHooks = {
 				return tween.elem[ tween.prop ];
 			}
 
-			// Passing an empty string as a 3rd parameter to .css will automatically
-			// attempt a parseFloat and fallback to a string if the parse fails.
-			// Simple values such as "10px" are parsed to Float;
-			// complex values such as "rotate(1rad)" are returned as-is.
+			// passing an empty string as a 3rd parameter to .css will automatically
+			// attempt a parseFloat and fallback to a string if the parse fails
+			// so, simple values such as "10px" are parsed to Float.
+			// complex values such as "rotate(1rad)" are returned as is.
 			result = jQuery.css( tween.elem, tween.prop, "" );
 			// Empty strings, null, undefined and "auto" are converted to 0.
 			return !result || result === "auto" ? 0 : result;
 		},
 		set: function( tween ) {
-			// Use step hook for back compat.
-			// Use cssHook if its there.
-			// Use .style if available and use plain properties where available.
+			// use step hook for back compat - use cssHook if its there - use .style if its
+			// available and use plain properties where available
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
 			} else if ( tween.elem.style && ( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null || jQuery.cssHooks[ tween.prop ] ) ) {
@@ -30656,6 +30790,7 @@ Tween.propHooks = {
 
 // Support: IE9
 // Panic based approach to setting things on disconnected nodes
+
 Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
 	set: function( tween ) {
 		if ( tween.elem.nodeType && tween.elem.parentNode ) {
@@ -30711,16 +30846,16 @@ var
 				start = +target || 1;
 
 				do {
-					// If previous iteration zeroed out, double until we get *something*.
-					// Use string for doubling so we don't accidentally see scale as unchanged below
+					// If previous iteration zeroed out, double until we get *something*
+					// Use a string for doubling factor so we don't accidentally see scale as unchanged below
 					scale = scale || ".5";
 
 					// Adjust and apply
 					start = start / scale;
 					jQuery.style( tween.elem, prop, start + unit );
 
-				// Update scale, tolerating zero or NaN from tween.cur(),
-				// break the loop if scale is unchanged or perfect, or if we've just had enough
+				// Update scale, tolerating zero or NaN from tween.cur()
+				// And breaking the loop if scale is unchanged or perfect, or if we've just had enough
 				} while ( scale !== (scale = tween.cur() / target) && scale !== 1 && --maxIterations );
 			}
 
@@ -30752,8 +30887,8 @@ function genFx( type, includeWidth ) {
 		i = 0,
 		attrs = { height: type };
 
-	// If we include width, step value is 1 to do all cssExpand values,
-	// otherwise step value is 2 to skip over Left and Right
+	// if we include width, step value is 1 to do all cssExpand values,
+	// if we don't include width, step value is 2 to skip over Left and Right
 	includeWidth = includeWidth ? 1 : 0;
 	for ( ; i < 4 ; i += 2 - includeWidth ) {
 		which = cssExpand[ i ];
@@ -30775,7 +30910,7 @@ function createTween( value, prop, animation ) {
 	for ( ; index < length; index++ ) {
 		if ( (tween = collection[ index ].call( animation, prop, value )) ) {
 
-			// We're done with this property
+			// we're done with this property
 			return tween;
 		}
 	}
@@ -30790,7 +30925,7 @@ function defaultPrefilter( elem, props, opts ) {
 		hidden = elem.nodeType && isHidden( elem ),
 		dataShow = data_priv.get( elem, "fxshow" );
 
-	// Handle queue: false promises
+	// handle queue: false promises
 	if ( !opts.queue ) {
 		hooks = jQuery._queueHooks( elem, "fx" );
 		if ( hooks.unqueued == null ) {
@@ -30805,7 +30940,8 @@ function defaultPrefilter( elem, props, opts ) {
 		hooks.unqueued++;
 
 		anim.always(function() {
-			// Ensure the complete handler is called before this completes
+			// doing this makes sure that the complete handler will be called
+			// before this completes
 			anim.always(function() {
 				hooks.unqueued--;
 				if ( !jQuery.queue( elem, "fx" ).length ) {
@@ -30815,7 +30951,7 @@ function defaultPrefilter( elem, props, opts ) {
 		});
 	}
 
-	// Height/width overflow pass
+	// height/width overflow pass
 	if ( elem.nodeType === 1 && ( "height" in props || "width" in props ) ) {
 		// Make sure that nothing sneaks out
 		// Record all 3 overflow attributes because IE9-10 do not
@@ -30877,7 +31013,7 @@ function defaultPrefilter( elem, props, opts ) {
 			dataShow = data_priv.access( elem, "fxshow", {} );
 		}
 
-		// Store state if its toggle - enables .stop().toggle() to "reverse"
+		// store state if its toggle - enables .stop().toggle() to "reverse"
 		if ( toggle ) {
 			dataShow.hidden = !hidden;
 		}
@@ -30937,8 +31073,8 @@ function propFilter( props, specialEasing ) {
 			value = hooks.expand( value );
 			delete props[ name ];
 
-			// Not quite $.extend, this won't overwrite existing keys.
-			// Reusing 'index' because we have the correct "name"
+			// not quite $.extend, this wont overwrite keys already present.
+			// also - reusing 'index' from above because we have the correct "name"
 			for ( index in value ) {
 				if ( !( index in props ) ) {
 					props[ index ] = value[ index ];
@@ -30957,7 +31093,7 @@ function Animation( elem, properties, options ) {
 		index = 0,
 		length = animationPrefilters.length,
 		deferred = jQuery.Deferred().always( function() {
-			// Don't match elem in the :animated selector
+			// don't match elem in the :animated selector
 			delete tick.elem;
 		}),
 		tick = function() {
@@ -30966,8 +31102,7 @@ function Animation( elem, properties, options ) {
 			}
 			var currentTime = fxNow || createFxNow(),
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
-				// Support: Android 2.3
-				// Archaic crash bug won't allow us to use `1 - ( 0.5 || 0 )` (#12497)
+				// archaic crash bug won't allow us to use 1 - ( 0.5 || 0 ) (#12497)
 				temp = remaining / animation.duration || 0,
 				percent = 1 - temp,
 				index = 0,
@@ -31003,7 +31138,7 @@ function Animation( elem, properties, options ) {
 			},
 			stop: function( gotoEnd ) {
 				var index = 0,
-					// If we are going to the end, we want to run all the tweens
+					// if we are going to the end, we want to run all the tweens
 					// otherwise we skip this part
 					length = gotoEnd ? animation.tweens.length : 0;
 				if ( stopped ) {
@@ -31014,7 +31149,8 @@ function Animation( elem, properties, options ) {
 					animation.tweens[ index ].run( 1 );
 				}
 
-				// Resolve when we played the last frame; otherwise, reject
+				// resolve when we played the last frame
+				// otherwise, reject
 				if ( gotoEnd ) {
 					deferred.resolveWith( elem, [ animation, gotoEnd ] );
 				} else {
@@ -31096,7 +31232,7 @@ jQuery.speed = function( speed, easing, fn ) {
 	opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === "number" ? opt.duration :
 		opt.duration in jQuery.fx.speeds ? jQuery.fx.speeds[ opt.duration ] : jQuery.fx.speeds._default;
 
-	// Normalize opt.queue - true/undefined/null -> "fx"
+	// normalize opt.queue - true/undefined/null -> "fx"
 	if ( opt.queue == null || opt.queue === true ) {
 		opt.queue = "fx";
 	}
@@ -31120,10 +31256,10 @@ jQuery.speed = function( speed, easing, fn ) {
 jQuery.fn.extend({
 	fadeTo: function( speed, to, easing, callback ) {
 
-		// Show any hidden elements after setting opacity to 0
+		// show any hidden elements after setting opacity to 0
 		return this.filter( isHidden ).css( "opacity", 0 ).show()
 
-			// Animate to the value specified
+			// animate to the value specified
 			.end().animate({ opacity: to }, speed, easing, callback );
 	},
 	animate: function( prop, speed, easing, callback ) {
@@ -31186,9 +31322,9 @@ jQuery.fn.extend({
 				}
 			}
 
-			// Start the next in the queue if the last step wasn't forced.
-			// Timers currently will call their complete callbacks, which
-			// will dequeue but only if they were gotoEnd.
+			// start the next in the queue if the last step wasn't forced
+			// timers currently will call their complete callbacks, which will dequeue
+			// but only if they were gotoEnd
 			if ( dequeue || !gotoEnd ) {
 				jQuery.dequeue( this, type );
 			}
@@ -31206,17 +31342,17 @@ jQuery.fn.extend({
 				timers = jQuery.timers,
 				length = queue ? queue.length : 0;
 
-			// Enable finishing flag on private data
+			// enable finishing flag on private data
 			data.finish = true;
 
-			// Empty the queue first
+			// empty the queue first
 			jQuery.queue( this, type, [] );
 
 			if ( hooks && hooks.stop ) {
 				hooks.stop.call( this, true );
 			}
 
-			// Look for any active animations, and finish them
+			// look for any active animations, and finish them
 			for ( index = timers.length; index--; ) {
 				if ( timers[ index ].elem === this && timers[ index ].queue === type ) {
 					timers[ index ].anim.stop( true );
@@ -31224,14 +31360,14 @@ jQuery.fn.extend({
 				}
 			}
 
-			// Look for any animations in the old queue and finish them
+			// look for any animations in the old queue and finish them
 			for ( index = 0; index < length; index++ ) {
 				if ( queue[ index ] && queue[ index ].finish ) {
 					queue[ index ].finish.call( this );
 				}
 			}
 
-			// Turn off finishing flag
+			// turn off finishing flag
 			delete data.finish;
 		});
 	}
@@ -31334,21 +31470,21 @@ jQuery.fn.delay = function( time, type ) {
 
 	input.type = "checkbox";
 
-	// Support: iOS<=5.1, Android<=4.2+
-	// Default value for a checkbox should be "on"
+	// Support: iOS 5.1, Android 4.x, Android 2.3
+	// Check the default checkbox/radio value ("" on old WebKit; "on" elsewhere)
 	support.checkOn = input.value !== "";
 
-	// Support: IE<=11+
-	// Must access selectedIndex to make default options select
+	// Must access the parent to make an option select properly
+	// Support: IE9, IE10
 	support.optSelected = opt.selected;
 
-	// Support: Android<=2.3
-	// Options inside disabled selects are incorrectly marked as disabled
+	// Make sure that the options inside disabled selects aren't marked as disabled
+	// (WebKit marks them as disabled)
 	select.disabled = true;
 	support.optDisabled = !opt.disabled;
 
-	// Support: IE<=11+
-	// An input loses its value after becoming a radio
+	// Check if an input maintains its value after becoming a radio
+	// Support: IE9, IE10
 	input = document.createElement( "input" );
 	input.value = "t";
 	input.type = "radio";
@@ -31445,6 +31581,8 @@ jQuery.extend({
 			set: function( elem, value ) {
 				if ( !support.radioValue && value === "radio" &&
 					jQuery.nodeName( elem, "input" ) ) {
+					// Setting the type on a radio button after the value resets the value in IE6-9
+					// Reset value to default in case type is set after value during creation
 					var val = elem.value;
 					elem.setAttribute( "type", value );
 					if ( val ) {
@@ -31514,7 +31652,7 @@ jQuery.extend({
 		var ret, hooks, notxml,
 			nType = elem.nodeType;
 
-		// Don't get/set properties on text, comment and attribute nodes
+		// don't get/set properties on text, comment and attribute nodes
 		if ( !elem || nType === 3 || nType === 8 || nType === 2 ) {
 			return;
 		}
@@ -31550,6 +31688,8 @@ jQuery.extend({
 	}
 });
 
+// Support: IE9+
+// Selectedness for an option in an optgroup can be inaccurate
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
@@ -31657,7 +31797,7 @@ jQuery.fn.extend({
 						}
 					}
 
-					// Only assign if different to avoid unneeded rendering.
+					// only assign if different to avoid unneeded rendering.
 					finalValue = value ? jQuery.trim( cur ) : "";
 					if ( elem.className !== finalValue ) {
 						elem.className = finalValue;
@@ -31684,14 +31824,14 @@ jQuery.fn.extend({
 
 		return this.each(function() {
 			if ( type === "string" ) {
-				// Toggle individual class names
+				// toggle individual class names
 				var className,
 					i = 0,
 					self = jQuery( this ),
 					classNames = value.match( rnotwhite ) || [];
 
 				while ( (className = classNames[ i++ ]) ) {
-					// Check each className given, space separated list
+					// check each className given, space separated list
 					if ( self.hasClass( className ) ) {
 						self.removeClass( className );
 					} else {
@@ -31706,7 +31846,7 @@ jQuery.fn.extend({
 					data_priv.set( this, "__className__", this.className );
 				}
 
-				// If the element has a class name or if we're passed `false`,
+				// If the element has a class name or if we're passed "false",
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
 				// falling back to the empty string if nothing was stored.
@@ -31750,9 +31890,9 @@ jQuery.fn.extend({
 				ret = elem.value;
 
 				return typeof ret === "string" ?
-					// Handle most common string cases
+					// handle most common string cases
 					ret.replace(rreturn, "") :
-					// Handle cases where value is null/undef or number
+					// handle cases where value is null/undef or number
 					ret == null ? "" : ret;
 			}
 
@@ -31860,7 +32000,7 @@ jQuery.extend({
 					}
 				}
 
-				// Force browsers to behave consistently when non-matching value is set
+				// force browsers to behave consistently when non-matching value is set
 				if ( !optionSet ) {
 					elem.selectedIndex = -1;
 				}
@@ -31881,6 +32021,8 @@ jQuery.each([ "radio", "checkbox" ], function() {
 	};
 	if ( !support.checkOn ) {
 		jQuery.valHooks[ this ].get = function( elem ) {
+			// Support: Webkit
+			// "" is returned instead of "on" if a value isn't specified
 			return elem.getAttribute("value") === null ? "on" : elem.value;
 		};
 	}
@@ -31962,6 +32104,10 @@ jQuery.parseXML = function( data ) {
 
 
 var
+	// Document location
+	ajaxLocParts,
+	ajaxLocation,
+
 	rhash = /#.*$/,
 	rts = /([?&])_=[^&]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
@@ -31990,13 +32136,22 @@ var
 	transports = {},
 
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
-	allTypes = "*/".concat( "*" ),
+	allTypes = "*/".concat("*");
 
-	// Document location
-	ajaxLocation = window.location.href,
+// #8138, IE may throw an exception when accessing
+// a field from window.location if document.domain has been set
+try {
+	ajaxLocation = location.href;
+} catch( e ) {
+	// Use the href attribute of an A element
+	// since IE will modify it given document.location
+	ajaxLocation = document.createElement( "a" );
+	ajaxLocation.href = "";
+	ajaxLocation = ajaxLocation.href;
+}
 
-	// Segment location into parts
-	ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
+// Segment location into parts
+ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
@@ -32475,8 +32630,7 @@ jQuery.extend({
 		}
 
 		// We can fire global events as of now if asked to
-		// Don't fire events if jQuery.event is undefined in an AMD-usage scenario (#15118)
-		fireGlobals = jQuery.event && s.global;
+		fireGlobals = s.global;
 
 		// Watch for a new set of requests
 		if ( fireGlobals && jQuery.active++ === 0 ) {
@@ -32549,7 +32703,7 @@ jQuery.extend({
 			return jqXHR.abort();
 		}
 
-		// Aborting is no longer a cancellation
+		// aborting is no longer a cancellation
 		strAbort = "abort";
 
 		// Install callbacks on deferreds
@@ -32661,7 +32815,8 @@ jQuery.extend({
 					isSuccess = !error;
 				}
 			} else {
-				// Extract error from statusText and normalize for non-aborts
+				// We extract error from statusText
+				// then normalize statusText and status for non-aborts
 				error = statusText;
 				if ( status || !statusText ) {
 					statusText = "error";
@@ -32717,7 +32872,7 @@ jQuery.extend({
 
 jQuery.each( [ "get", "post" ], function( i, method ) {
 	jQuery[ method ] = function( url, data, callback, type ) {
-		// Shift arguments if data argument was omitted
+		// shift arguments if data argument was omitted
 		if ( jQuery.isFunction( data ) ) {
 			type = type || callback;
 			callback = data;
@@ -32731,6 +32886,13 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 			data: data,
 			success: callback
 		});
+	};
+});
+
+// Attach a bunch of functions for handling common AJAX events
+jQuery.each( [ "ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend" ], function( i, type ) {
+	jQuery.fn[ type ] = function( fn ) {
+		return this.on( type, fn );
 	};
 });
 
@@ -32951,9 +33113,8 @@ var xhrId = 0,
 
 // Support: IE9
 // Open requests must be manually aborted on unload (#5280)
-// See https://support.microsoft.com/kb/2856746 for more info
-if ( window.attachEvent ) {
-	window.attachEvent( "onunload", function() {
+if ( window.ActiveXObject ) {
+	jQuery( window ).on( "unload", function() {
 		for ( var key in xhrCallbacks ) {
 			xhrCallbacks[ key ]();
 		}
@@ -33306,16 +33467,6 @@ jQuery.fn.load = function( url, params, callback ) {
 
 
 
-// Attach a bunch of functions for handling common AJAX events
-jQuery.each( [ "ajaxStart", "ajaxStop", "ajaxComplete", "ajaxError", "ajaxSuccess", "ajaxSend" ], function( i, type ) {
-	jQuery.fn[ type ] = function( fn ) {
-		return this.on( type, fn );
-	};
-});
-
-
-
-
 jQuery.expr.filters.animated = function( elem ) {
 	return jQuery.grep(jQuery.timers, function( fn ) {
 		return elem === fn.elem;
@@ -33352,8 +33503,7 @@ jQuery.offset = {
 		calculatePosition = ( position === "absolute" || position === "fixed" ) &&
 			( curCSSTop + curCSSLeft ).indexOf("auto") > -1;
 
-		// Need to be able to calculate position if either
-		// top or left is auto and position is either absolute or fixed
+		// Need to be able to calculate position if either top or left is auto and position is either absolute or fixed
 		if ( calculatePosition ) {
 			curPosition = curElem.position();
 			curTop = curPosition.top;
@@ -33410,8 +33560,8 @@ jQuery.fn.extend({
 			return box;
 		}
 
-		// Support: BlackBerry 5, iOS 3 (original iPhone)
 		// If we don't have gBCR, just use 0,0 rather than error
+		// BlackBerry 5, iOS 3 (original iPhone)
 		if ( typeof elem.getBoundingClientRect !== strundefined ) {
 			box = elem.getBoundingClientRect();
 		}
@@ -33433,7 +33583,7 @@ jQuery.fn.extend({
 
 		// Fixed elements are offset from window (parentOffset = {top:0, left: 0}, because it is its only offset parent
 		if ( jQuery.css( elem, "position" ) === "fixed" ) {
-			// Assume getBoundingClientRect is there when computed position is fixed
+			// We assume that getBoundingClientRect is available when computed position is fixed
 			offset = elem.getBoundingClientRect();
 
 		} else {
@@ -33496,18 +33646,16 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 	};
 });
 
-// Support: Safari<7+, Chrome<37+
 // Add the top/left cssHooks using jQuery.fn.position
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
-// Blink bug: https://code.google.com/p/chromium/issues/detail?id=229280
-// getComputedStyle returns percent when specified for top/left/bottom/right;
-// rather than make the css module depend on the offset module, just check for it here
+// getComputedStyle returns percent when specified for top/left/bottom/right
+// rather than make the css module depend on the offset module, we just check for it here
 jQuery.each( [ "top", "left" ], function( i, prop ) {
 	jQuery.cssHooks[ prop ] = addGetHookIf( support.pixelPosition,
 		function( elem, computed ) {
 			if ( computed ) {
 				computed = curCSS( elem, prop );
-				// If curCSS returns percentage, fallback to offset
+				// if curCSS returns percentage, fallback to offset
 				return rnumnonpx.test( computed ) ?
 					jQuery( elem ).position()[ prop ] + "px" :
 					computed;
@@ -33520,7 +33668,7 @@ jQuery.each( [ "top", "left" ], function( i, prop ) {
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name }, function( defaultExtra, funcName ) {
-		// Margin is only for outerHeight, outerWidth
+		// margin is only for outerHeight, outerWidth
 		jQuery.fn[ funcName ] = function( margin, value ) {
 			var chainable = arguments.length && ( defaultExtra || typeof margin !== "boolean" ),
 				extra = defaultExtra || ( margin === true || value === true ? "margin" : "border" );
@@ -33611,8 +33759,8 @@ jQuery.noConflict = function( deep ) {
 	return jQuery;
 };
 
-// Expose jQuery and $ identifiers, even in AMD
-// (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
+// Expose jQuery and $ identifiers, even in
+// AMD (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
 // and CommonJS for browser emulators (#13566)
 if ( typeof noGlobal === strundefined ) {
 	window.jQuery = window.$ = jQuery;
@@ -33630,332 +33778,1434 @@ return jQuery;
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/custom.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/bower_components/underscore/underscore.js":[function(require,module,exports){
 (function (global){
-
-; require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js");
-require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js");
-require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js");
-require("/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
-'use strict';
+//     Underscore.js 1.7.0
+//     http://underscorejs.org
+//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
 
-jQuery(window).load(function() {
+(function() {
 
-    // Page Preloader
-    jQuery('#preloader').delay(350).fadeOut(function() {
-        jQuery('body').delay(350).css({
-            'overflow': 'visible'
-        });
+  // Baseline setup
+  // --------------
+
+  // Establish the root object, `window` in the browser, or `exports` on the server.
+  var root = this;
+
+  // Save the previous value of the `_` variable.
+  var previousUnderscore = root._;
+
+  // Save bytes in the minified (but not gzipped) version:
+  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+
+  // Create quick reference variables for speed access to core prototypes.
+  var
+    push             = ArrayProto.push,
+    slice            = ArrayProto.slice,
+    concat           = ArrayProto.concat,
+    toString         = ObjProto.toString,
+    hasOwnProperty   = ObjProto.hasOwnProperty;
+
+  // All **ECMAScript 5** native function implementations that we hope to use
+  // are declared here.
+  var
+    nativeIsArray      = Array.isArray,
+    nativeKeys         = Object.keys,
+    nativeBind         = FuncProto.bind;
+
+  // Create a safe reference to the Underscore object for use below.
+  var _ = function(obj) {
+    if (obj instanceof _) return obj;
+    if (!(this instanceof _)) return new _(obj);
+    this._wrapped = obj;
+  };
+
+  // Export the Underscore object for **Node.js**, with
+  // backwards-compatibility for the old `require()` API. If we're in
+  // the browser, add `_` as a global object.
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = _;
+    }
+    exports._ = _;
+  } else {
+    root._ = _;
+  }
+
+  // Current version.
+  _.VERSION = '1.7.0';
+
+  // Internal function that returns an efficient (for current engines) version
+  // of the passed-in callback, to be repeatedly applied in other Underscore
+  // functions.
+  var createCallback = function(func, context, argCount) {
+    if (context === void 0) return func;
+    switch (argCount == null ? 3 : argCount) {
+      case 1: return function(value) {
+        return func.call(context, value);
+      };
+      case 2: return function(value, other) {
+        return func.call(context, value, other);
+      };
+      case 3: return function(value, index, collection) {
+        return func.call(context, value, index, collection);
+      };
+      case 4: return function(accumulator, value, index, collection) {
+        return func.call(context, accumulator, value, index, collection);
+      };
+    }
+    return function() {
+      return func.apply(context, arguments);
+    };
+  };
+
+  // A mostly-internal function to generate callbacks that can be applied
+  // to each element in a collection, returning the desired result — either
+  // identity, an arbitrary callback, a property matcher, or a property accessor.
+  _.iteratee = function(value, context, argCount) {
+    if (value == null) return _.identity;
+    if (_.isFunction(value)) return createCallback(value, context, argCount);
+    if (_.isObject(value)) return _.matches(value);
+    return _.property(value);
+  };
+
+  // Collection Functions
+  // --------------------
+
+  // The cornerstone, an `each` implementation, aka `forEach`.
+  // Handles raw objects in addition to array-likes. Treats all
+  // sparse array-likes as if they were dense.
+  _.each = _.forEach = function(obj, iteratee, context) {
+    if (obj == null) return obj;
+    iteratee = createCallback(iteratee, context);
+    var i, length = obj.length;
+    if (length === +length) {
+      for (i = 0; i < length; i++) {
+        iteratee(obj[i], i, obj);
+      }
+    } else {
+      var keys = _.keys(obj);
+      for (i = 0, length = keys.length; i < length; i++) {
+        iteratee(obj[keys[i]], keys[i], obj);
+      }
+    }
+    return obj;
+  };
+
+  // Return the results of applying the iteratee to each element.
+  _.map = _.collect = function(obj, iteratee, context) {
+    if (obj == null) return [];
+    iteratee = _.iteratee(iteratee, context);
+    var keys = obj.length !== +obj.length && _.keys(obj),
+        length = (keys || obj).length,
+        results = Array(length),
+        currentKey;
+    for (var index = 0; index < length; index++) {
+      currentKey = keys ? keys[index] : index;
+      results[index] = iteratee(obj[currentKey], currentKey, obj);
+    }
+    return results;
+  };
+
+  var reduceError = 'Reduce of empty array with no initial value';
+
+  // **Reduce** builds up a single result from a list of values, aka `inject`,
+  // or `foldl`.
+  _.reduce = _.foldl = _.inject = function(obj, iteratee, memo, context) {
+    if (obj == null) obj = [];
+    iteratee = createCallback(iteratee, context, 4);
+    var keys = obj.length !== +obj.length && _.keys(obj),
+        length = (keys || obj).length,
+        index = 0, currentKey;
+    if (arguments.length < 3) {
+      if (!length) throw new TypeError(reduceError);
+      memo = obj[keys ? keys[index++] : index++];
+    }
+    for (; index < length; index++) {
+      currentKey = keys ? keys[index] : index;
+      memo = iteratee(memo, obj[currentKey], currentKey, obj);
+    }
+    return memo;
+  };
+
+  // The right-associative version of reduce, also known as `foldr`.
+  _.reduceRight = _.foldr = function(obj, iteratee, memo, context) {
+    if (obj == null) obj = [];
+    iteratee = createCallback(iteratee, context, 4);
+    var keys = obj.length !== + obj.length && _.keys(obj),
+        index = (keys || obj).length,
+        currentKey;
+    if (arguments.length < 3) {
+      if (!index) throw new TypeError(reduceError);
+      memo = obj[keys ? keys[--index] : --index];
+    }
+    while (index--) {
+      currentKey = keys ? keys[index] : index;
+      memo = iteratee(memo, obj[currentKey], currentKey, obj);
+    }
+    return memo;
+  };
+
+  // Return the first value which passes a truth test. Aliased as `detect`.
+  _.find = _.detect = function(obj, predicate, context) {
+    var result;
+    predicate = _.iteratee(predicate, context);
+    _.some(obj, function(value, index, list) {
+      if (predicate(value, index, list)) {
+        result = value;
+        return true;
+      }
     });
-});
-
-// jQuery(document).ready(function() {
-
-//     // Toggle Left Menu
-//     /*jQuery('.leftpanel .nav-parent > a').live('click', function() {
-
-//         var parent = jQuery(this).parent();
-//         var sub = parent.find('> ul');
-
-//         // Dropdown works only when leftpanel is not collapsed
-//         if (!jQuery('body').hasClass('leftpanel-collapsed')) {
-//             if (sub.is(':visible')) {
-//                 sub.slideUp(200, function() {
-//                     parent.removeClass('nav-active');
-//                     jQuery('.mainpanel').css({
-//                         height: ''
-//                     });
-//                     adjustmainpanelheight();
-//                 });
-//             } else {
-//                 closeVisibleSubMenu();
-//                 parent.addClass('nav-active');
-//                 sub.slideDown(200, function() {
-//                     adjustmainpanelheight();
-//                 });
-//             }
-//         }
-//         return false;
-//     });*/
-
-//     function closeVisibleSubMenu() {
-//         jQuery('.leftpanel .nav-parent').each(function() {
-//             var t = jQuery(this);
-//             if (t.hasClass('nav-active')) {
-//                 t.find('> ul').slideUp(200, function() {
-//                     t.removeClass('nav-active');
-//                 });
-//             }
-//         });
-//     }
-
-//     function adjustmainpanelheight() {
-//         // Adjust mainpanel height
-//         var docHeight = jQuery(document).height();
-//         if (docHeight > jQuery('.mainpanel').height())
-//             jQuery('.mainpanel').height(docHeight);
-//     }
-//     adjustmainpanelheight();
-
-
-//     // Tooltip
-//     jQuery('.tooltips').tooltip({
-//         container: 'body'
-//     });
-
-//     // Popover
-//     jQuery('.popovers').popover();
-
-//     // Close Button in Panels
-//     jQuery('.panel .panel-close').click(function() {
-//         jQuery(this).closest('.panel').fadeOut(200);
-//         return false;
-//     });
-
-//     // Form Toggles
-//     jQuery('.toggle').toggles({
-//         on: true
-//     });
-
-//     jQuery('.toggle-chat1').toggles({
-//         on: false
-//     });
-
-
-
-//     // Minimize Button in Panels
-//     jQuery('.minimize').click(function() {
-//         var t = jQuery(this);
-//         var p = t.closest('.panel');
-//         if (!jQuery(this).hasClass('maximize')) {
-//             p.find('.panel-body, .panel-footer').slideUp(200);
-//             t.addClass('maximize');
-//             t.html('&plus;');
-//         } else {
-//             p.find('.panel-body, .panel-footer').slideDown(200);
-//             t.removeClass('maximize');
-//             t.html('&minus;');
-//         }
-//         return false;
-//     });
-
-
-//     // Add class everytime a mouse pointer hover over it
-//     jQuery('.nav-bracket > li').hover(function() {
-//         jQuery(this).addClass('nav-hover');
-//     }, function() {
-//         jQuery(this).removeClass('nav-hover');
-//     });
-
-
-//     // Menu Toggle
-//     jQuery('.menutoggle').click(function() {
-//         console.log('test menutoggle');
-//         var body = jQuery('body');
-//         var bodypos = body.css('position');
-
-//         if (bodypos != 'relative') {
-
-//             if (!body.hasClass('leftpanel-collapsed')) {
-//                 body.addClass('leftpanel-collapsed');
-//                 jQuery('.nav-bracket ul').attr('style', '');
-
-//                 jQuery(this).addClass('menu-collapsed');
-
-//             } else {
-//                 body.removeClass('leftpanel-collapsed chat-view');
-//                 jQuery('.nav-bracket li.active ul').css({
-//                     display: 'block'
-//                 });
-
-//                 jQuery(this).removeClass('menu-collapsed');
-
-//             }
-//         } else {
-
-//             if (body.hasClass('leftpanel-show'))
-//                 body.removeClass('leftpanel-show');
-//             else
-//                 body.addClass('leftpanel-show');
-
-//             adjustmainpanelheight();
-//         }
-
-//     });
-
-//     // Chat View
-//     jQuery('#chatview').click(function() {
-//         console.log('test Chat view');
-
-//         var body = jQuery('body');
-//         var bodypos = body.css('position');
-
-//         if (bodypos != 'relative') {
-
-//             if (!body.hasClass('chat-view')) {
-//                 body.addClass('leftpanel-collapsed chat-view');
-//                 jQuery('.nav-bracket ul').attr('style', '');
-
-//             } else {
-
-//                 body.removeClass('chat-view');
-
-//                 if (!jQuery('.menutoggle').hasClass('menu-collapsed')) {
-//                     jQuery('body').removeClass('leftpanel-collapsed');
-//                     jQuery('.nav-bracket li.active ul').css({
-//                         display: 'block'
-//                     });
-//                 } else {
-
-//                 }
-//             }
-
-//         } else {
-
-//             if (!body.hasClass('chat-relative-view')) {
-
-//                 body.addClass('chat-relative-view');
-//                 body.css({
-//                     left: ''
-//                 });
-
-//             } else {
-//                 body.removeClass('chat-relative-view');
-//             }
-//         }
-
-//     });
-
-//     reposition_topnav();
-//     // reposition_searchform();
-
-//     jQuery(window).resize(function() {
-
-//         if (jQuery('body').css('position') == 'relative') {
-
-//             jQuery('body').removeClass('leftpanel-collapsed chat-view');
-
-//         } else {
-
-//             jQuery('body').removeClass('chat-relative-view');
-//             jQuery('body').css({
-//                 left: '',
-//                 marginRight: ''
-//             });
-//         }
-
-
-//         // reposition_searchform();
-//         reposition_topnav();
-
-//     });
-
-
-
-//     /* This function will reposition search form to the left panel when viewed
-//      * in screens smaller than 767px and will return to top when viewed higher
-//      * than 767px
-//      */
-//     function reposition_searchform() {
-//         /* if (jQuery('.searchform').css('position') == 'relative') {
-//              jQuery('.searchform').insertBefore('.leftpanelinner .userlogged');
-//          } else {
-//              jQuery('.searchform').insertBefore('.header-right');
-//          }*/
-//     }
-
-
-
-//     /* This function allows top navigation menu to move to left navigation menu
-//      * when viewed in screens lower than 1024px and will move it back when viewed
-//      * higher than 1024px
-//      */
-//     function reposition_topnav() {
-//         if (jQuery('.nav-horizontal').length > 0) {
-
-//             // top navigation move to left nav
-//             // .nav-horizontal will set position to relative when viewed in screen below 1024
-//             if (jQuery('.nav-horizontal').css('position') == 'relative') {
-
-//                 if (jQuery('.leftpanel .nav-bracket').length == 2) {
-//                     jQuery('.nav-horizontal').insertAfter('.nav-bracket:eq(1)');
-//                 } else {
-//                     // only add to bottom if .nav-horizontal is not yet in the left panel
-//                     if (jQuery('.leftpanel .nav-horizontal').length === 0)
-//                         jQuery('.nav-horizontal').appendTo('.leftpanelinner');
-//                 }
-
-//                 jQuery('.nav-horizontal').css({
-//                         display: 'block'
-//                     })
-//                     .addClass('nav-pills nav-stacked nav-bracket');
-
-//                 jQuery('.nav-horizontal .children').removeClass('dropdown-menu');
-//                 jQuery('.nav-horizontal > li').each(function() {
-
-//                     jQuery(this).removeClass('open');
-//                     jQuery(this).find('a').removeAttr('class');
-//                     jQuery(this).find('a').removeAttr('data-toggle');
-
-//                 });
-
-//                 if (jQuery('.nav-horizontal li:last-child').has('form')) {
-//                     jQuery('.nav-horizontal li:last-child form').addClass('searchform').appendTo('.topnav');
-//                     jQuery('.nav-horizontal li:last-child').hide();
-//                 }
-
-//             } else {
-//                 // move nav only when .nav-horizontal is currently from leftpanel
-//                 // that is viewed from screen size above 1024
-//                 if (jQuery('.leftpanel .nav-horizontal').length > 0) {
-
-//                     jQuery('.nav-horizontal').removeClass('nav-pills nav-stacked nav-bracket')
-//                         .appendTo('.topnav');
-//                     jQuery('.nav-horizontal .children').addClass('dropdown-menu').removeAttr('style');
-//                     jQuery('.nav-horizontal li:last-child').show();
-//                     jQuery('.searchform').removeClass('searchform').appendTo('.nav-horizontal li:last-child .dropdown-menu');
-//                     jQuery('.nav-horizontal > li > a').each(function() {
-
-//                         jQuery(this).parent().removeClass('nav-active');
-
-//                         if (jQuery(this).parent().find('.dropdown-menu').length > 0) {
-//                             jQuery(this).attr('class', 'dropdown-toggle');
-//                             jQuery(this).attr('data-toggle', 'dropdown');
-//                         }
-
-//                     });
-//                 }
-
-//             }
-
-//         }
-//     }
-
-
-//     // Check if leftpanel is collapsed
-//     if (jQuery('body').hasClass('leftpanel-collapsed')) {
-//         jQuery('.nav-bracket .children').css({
-//             display: ''
-//         });
-//     }
-
-//     // Handles form inside of dropdown
-//     jQuery('.dropdown-menu').find('form').click(function(e) {
-//         e.stopPropagation();
-//     });
-
-// });
-
-; browserify_shim__define__module__export__(typeof custom != "undefined" ? custom : window.custom);
+    return result;
+  };
+
+  // Return all the elements that pass a truth test.
+  // Aliased as `select`.
+  _.filter = _.select = function(obj, predicate, context) {
+    var results = [];
+    if (obj == null) return results;
+    predicate = _.iteratee(predicate, context);
+    _.each(obj, function(value, index, list) {
+      if (predicate(value, index, list)) results.push(value);
+    });
+    return results;
+  };
+
+  // Return all the elements for which a truth test fails.
+  _.reject = function(obj, predicate, context) {
+    return _.filter(obj, _.negate(_.iteratee(predicate)), context);
+  };
+
+  // Determine whether all of the elements match a truth test.
+  // Aliased as `all`.
+  _.every = _.all = function(obj, predicate, context) {
+    if (obj == null) return true;
+    predicate = _.iteratee(predicate, context);
+    var keys = obj.length !== +obj.length && _.keys(obj),
+        length = (keys || obj).length,
+        index, currentKey;
+    for (index = 0; index < length; index++) {
+      currentKey = keys ? keys[index] : index;
+      if (!predicate(obj[currentKey], currentKey, obj)) return false;
+    }
+    return true;
+  };
+
+  // Determine if at least one element in the object matches a truth test.
+  // Aliased as `any`.
+  _.some = _.any = function(obj, predicate, context) {
+    if (obj == null) return false;
+    predicate = _.iteratee(predicate, context);
+    var keys = obj.length !== +obj.length && _.keys(obj),
+        length = (keys || obj).length,
+        index, currentKey;
+    for (index = 0; index < length; index++) {
+      currentKey = keys ? keys[index] : index;
+      if (predicate(obj[currentKey], currentKey, obj)) return true;
+    }
+    return false;
+  };
+
+  // Determine if the array or object contains a given value (using `===`).
+  // Aliased as `include`.
+  _.contains = _.include = function(obj, target) {
+    if (obj == null) return false;
+    if (obj.length !== +obj.length) obj = _.values(obj);
+    return _.indexOf(obj, target) >= 0;
+  };
+
+  // Invoke a method (with arguments) on every item in a collection.
+  _.invoke = function(obj, method) {
+    var args = slice.call(arguments, 2);
+    var isFunc = _.isFunction(method);
+    return _.map(obj, function(value) {
+      return (isFunc ? method : value[method]).apply(value, args);
+    });
+  };
+
+  // Convenience version of a common use case of `map`: fetching a property.
+  _.pluck = function(obj, key) {
+    return _.map(obj, _.property(key));
+  };
+
+  // Convenience version of a common use case of `filter`: selecting only objects
+  // containing specific `key:value` pairs.
+  _.where = function(obj, attrs) {
+    return _.filter(obj, _.matches(attrs));
+  };
+
+  // Convenience version of a common use case of `find`: getting the first object
+  // containing specific `key:value` pairs.
+  _.findWhere = function(obj, attrs) {
+    return _.find(obj, _.matches(attrs));
+  };
+
+  // Return the maximum element (or element-based computation).
+  _.max = function(obj, iteratee, context) {
+    var result = -Infinity, lastComputed = -Infinity,
+        value, computed;
+    if (iteratee == null && obj != null) {
+      obj = obj.length === +obj.length ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value > result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = _.iteratee(iteratee, context);
+      _.each(obj, function(value, index, list) {
+        computed = iteratee(value, index, list);
+        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
+          result = value;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Return the minimum element (or element-based computation).
+  _.min = function(obj, iteratee, context) {
+    var result = Infinity, lastComputed = Infinity,
+        value, computed;
+    if (iteratee == null && obj != null) {
+      obj = obj.length === +obj.length ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value < result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = _.iteratee(iteratee, context);
+      _.each(obj, function(value, index, list) {
+        computed = iteratee(value, index, list);
+        if (computed < lastComputed || computed === Infinity && result === Infinity) {
+          result = value;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Shuffle a collection, using the modern version of the
+  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  _.shuffle = function(obj) {
+    var set = obj && obj.length === +obj.length ? obj : _.values(obj);
+    var length = set.length;
+    var shuffled = Array(length);
+    for (var index = 0, rand; index < length; index++) {
+      rand = _.random(0, index);
+      if (rand !== index) shuffled[index] = shuffled[rand];
+      shuffled[rand] = set[index];
+    }
+    return shuffled;
+  };
+
+  // Sample **n** random values from a collection.
+  // If **n** is not specified, returns a single random element.
+  // The internal `guard` argument allows it to work with `map`.
+  _.sample = function(obj, n, guard) {
+    if (n == null || guard) {
+      if (obj.length !== +obj.length) obj = _.values(obj);
+      return obj[_.random(obj.length - 1)];
+    }
+    return _.shuffle(obj).slice(0, Math.max(0, n));
+  };
+
+  // Sort the object's values by a criterion produced by an iteratee.
+  _.sortBy = function(obj, iteratee, context) {
+    iteratee = _.iteratee(iteratee, context);
+    return _.pluck(_.map(obj, function(value, index, list) {
+      return {
+        value: value,
+        index: index,
+        criteria: iteratee(value, index, list)
+      };
+    }).sort(function(left, right) {
+      var a = left.criteria;
+      var b = right.criteria;
+      if (a !== b) {
+        if (a > b || a === void 0) return 1;
+        if (a < b || b === void 0) return -1;
+      }
+      return left.index - right.index;
+    }), 'value');
+  };
+
+  // An internal function used for aggregate "group by" operations.
+  var group = function(behavior) {
+    return function(obj, iteratee, context) {
+      var result = {};
+      iteratee = _.iteratee(iteratee, context);
+      _.each(obj, function(value, index) {
+        var key = iteratee(value, index, obj);
+        behavior(result, value, key);
+      });
+      return result;
+    };
+  };
+
+  // Groups the object's values by a criterion. Pass either a string attribute
+  // to group by, or a function that returns the criterion.
+  _.groupBy = group(function(result, value, key) {
+    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
+  });
+
+  // Indexes the object's values by a criterion, similar to `groupBy`, but for
+  // when you know that your index values will be unique.
+  _.indexBy = group(function(result, value, key) {
+    result[key] = value;
+  });
+
+  // Counts instances of an object that group by a certain criterion. Pass
+  // either a string attribute to count by, or a function that returns the
+  // criterion.
+  _.countBy = group(function(result, value, key) {
+    if (_.has(result, key)) result[key]++; else result[key] = 1;
+  });
+
+  // Use a comparator function to figure out the smallest index at which
+  // an object should be inserted so as to maintain order. Uses binary search.
+  _.sortedIndex = function(array, obj, iteratee, context) {
+    iteratee = _.iteratee(iteratee, context, 1);
+    var value = iteratee(obj);
+    var low = 0, high = array.length;
+    while (low < high) {
+      var mid = low + high >>> 1;
+      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
+    }
+    return low;
+  };
+
+  // Safely create a real, live array from anything iterable.
+  _.toArray = function(obj) {
+    if (!obj) return [];
+    if (_.isArray(obj)) return slice.call(obj);
+    if (obj.length === +obj.length) return _.map(obj, _.identity);
+    return _.values(obj);
+  };
+
+  // Return the number of elements in an object.
+  _.size = function(obj) {
+    if (obj == null) return 0;
+    return obj.length === +obj.length ? obj.length : _.keys(obj).length;
+  };
+
+  // Split a collection into two arrays: one whose elements all satisfy the given
+  // predicate, and one whose elements all do not satisfy the predicate.
+  _.partition = function(obj, predicate, context) {
+    predicate = _.iteratee(predicate, context);
+    var pass = [], fail = [];
+    _.each(obj, function(value, key, obj) {
+      (predicate(value, key, obj) ? pass : fail).push(value);
+    });
+    return [pass, fail];
+  };
+
+  // Array Functions
+  // ---------------
+
+  // Get the first element of an array. Passing **n** will return the first N
+  // values in the array. Aliased as `head` and `take`. The **guard** check
+  // allows it to work with `_.map`.
+  _.first = _.head = _.take = function(array, n, guard) {
+    if (array == null) return void 0;
+    if (n == null || guard) return array[0];
+    if (n < 0) return [];
+    return slice.call(array, 0, n);
+  };
+
+  // Returns everything but the last entry of the array. Especially useful on
+  // the arguments object. Passing **n** will return all the values in
+  // the array, excluding the last N. The **guard** check allows it to work with
+  // `_.map`.
+  _.initial = function(array, n, guard) {
+    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+  };
+
+  // Get the last element of an array. Passing **n** will return the last N
+  // values in the array. The **guard** check allows it to work with `_.map`.
+  _.last = function(array, n, guard) {
+    if (array == null) return void 0;
+    if (n == null || guard) return array[array.length - 1];
+    return slice.call(array, Math.max(array.length - n, 0));
+  };
+
+  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
+  // Especially useful on the arguments object. Passing an **n** will return
+  // the rest N values in the array. The **guard**
+  // check allows it to work with `_.map`.
+  _.rest = _.tail = _.drop = function(array, n, guard) {
+    return slice.call(array, n == null || guard ? 1 : n);
+  };
+
+  // Trim out all falsy values from an array.
+  _.compact = function(array) {
+    return _.filter(array, _.identity);
+  };
+
+  // Internal implementation of a recursive `flatten` function.
+  var flatten = function(input, shallow, strict, output) {
+    if (shallow && _.every(input, _.isArray)) {
+      return concat.apply(output, input);
+    }
+    for (var i = 0, length = input.length; i < length; i++) {
+      var value = input[i];
+      if (!_.isArray(value) && !_.isArguments(value)) {
+        if (!strict) output.push(value);
+      } else if (shallow) {
+        push.apply(output, value);
+      } else {
+        flatten(value, shallow, strict, output);
+      }
+    }
+    return output;
+  };
+
+  // Flatten out an array, either recursively (by default), or just one level.
+  _.flatten = function(array, shallow) {
+    return flatten(array, shallow, false, []);
+  };
+
+  // Return a version of the array that does not contain the specified value(s).
+  _.without = function(array) {
+    return _.difference(array, slice.call(arguments, 1));
+  };
+
+  // Produce a duplicate-free version of the array. If the array has already
+  // been sorted, you have the option of using a faster algorithm.
+  // Aliased as `unique`.
+  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
+    if (array == null) return [];
+    if (!_.isBoolean(isSorted)) {
+      context = iteratee;
+      iteratee = isSorted;
+      isSorted = false;
+    }
+    if (iteratee != null) iteratee = _.iteratee(iteratee, context);
+    var result = [];
+    var seen = [];
+    for (var i = 0, length = array.length; i < length; i++) {
+      var value = array[i];
+      if (isSorted) {
+        if (!i || seen !== value) result.push(value);
+        seen = value;
+      } else if (iteratee) {
+        var computed = iteratee(value, i, array);
+        if (_.indexOf(seen, computed) < 0) {
+          seen.push(computed);
+          result.push(value);
+        }
+      } else if (_.indexOf(result, value) < 0) {
+        result.push(value);
+      }
+    }
+    return result;
+  };
+
+  // Produce an array that contains the union: each distinct element from all of
+  // the passed-in arrays.
+  _.union = function() {
+    return _.uniq(flatten(arguments, true, true, []));
+  };
+
+  // Produce an array that contains every item shared between all the
+  // passed-in arrays.
+  _.intersection = function(array) {
+    if (array == null) return [];
+    var result = [];
+    var argsLength = arguments.length;
+    for (var i = 0, length = array.length; i < length; i++) {
+      var item = array[i];
+      if (_.contains(result, item)) continue;
+      for (var j = 1; j < argsLength; j++) {
+        if (!_.contains(arguments[j], item)) break;
+      }
+      if (j === argsLength) result.push(item);
+    }
+    return result;
+  };
+
+  // Take the difference between one array and a number of other arrays.
+  // Only the elements present in just the first array will remain.
+  _.difference = function(array) {
+    var rest = flatten(slice.call(arguments, 1), true, true, []);
+    return _.filter(array, function(value){
+      return !_.contains(rest, value);
+    });
+  };
+
+  // Zip together multiple lists into a single array -- elements that share
+  // an index go together.
+  _.zip = function(array) {
+    if (array == null) return [];
+    var length = _.max(arguments, 'length').length;
+    var results = Array(length);
+    for (var i = 0; i < length; i++) {
+      results[i] = _.pluck(arguments, i);
+    }
+    return results;
+  };
+
+  // Converts lists into objects. Pass either a single array of `[key, value]`
+  // pairs, or two parallel arrays of the same length -- one of keys, and one of
+  // the corresponding values.
+  _.object = function(list, values) {
+    if (list == null) return {};
+    var result = {};
+    for (var i = 0, length = list.length; i < length; i++) {
+      if (values) {
+        result[list[i]] = values[i];
+      } else {
+        result[list[i][0]] = list[i][1];
+      }
+    }
+    return result;
+  };
+
+  // Return the position of the first occurrence of an item in an array,
+  // or -1 if the item is not included in the array.
+  // If the array is large and already in sort order, pass `true`
+  // for **isSorted** to use binary search.
+  _.indexOf = function(array, item, isSorted) {
+    if (array == null) return -1;
+    var i = 0, length = array.length;
+    if (isSorted) {
+      if (typeof isSorted == 'number') {
+        i = isSorted < 0 ? Math.max(0, length + isSorted) : isSorted;
+      } else {
+        i = _.sortedIndex(array, item);
+        return array[i] === item ? i : -1;
+      }
+    }
+    for (; i < length; i++) if (array[i] === item) return i;
+    return -1;
+  };
+
+  _.lastIndexOf = function(array, item, from) {
+    if (array == null) return -1;
+    var idx = array.length;
+    if (typeof from == 'number') {
+      idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
+    }
+    while (--idx >= 0) if (array[idx] === item) return idx;
+    return -1;
+  };
+
+  // Generate an integer Array containing an arithmetic progression. A port of
+  // the native Python `range()` function. See
+  // [the Python documentation](http://docs.python.org/library/functions.html#range).
+  _.range = function(start, stop, step) {
+    if (arguments.length <= 1) {
+      stop = start || 0;
+      start = 0;
+    }
+    step = step || 1;
+
+    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var range = Array(length);
+
+    for (var idx = 0; idx < length; idx++, start += step) {
+      range[idx] = start;
+    }
+
+    return range;
+  };
+
+  // Function (ahem) Functions
+  // ------------------
+
+  // Reusable constructor function for prototype setting.
+  var Ctor = function(){};
+
+  // Create a function bound to a given object (assigning `this`, and arguments,
+  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
+  // available.
+  _.bind = function(func, context) {
+    var args, bound;
+    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
+    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
+    args = slice.call(arguments, 2);
+    bound = function() {
+      if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
+      Ctor.prototype = func.prototype;
+      var self = new Ctor;
+      Ctor.prototype = null;
+      var result = func.apply(self, args.concat(slice.call(arguments)));
+      if (_.isObject(result)) return result;
+      return self;
+    };
+    return bound;
+  };
+
+  // Partially apply a function by creating a version that has had some of its
+  // arguments pre-filled, without changing its dynamic `this` context. _ acts
+  // as a placeholder, allowing any combination of arguments to be pre-filled.
+  _.partial = function(func) {
+    var boundArgs = slice.call(arguments, 1);
+    return function() {
+      var position = 0;
+      var args = boundArgs.slice();
+      for (var i = 0, length = args.length; i < length; i++) {
+        if (args[i] === _) args[i] = arguments[position++];
+      }
+      while (position < arguments.length) args.push(arguments[position++]);
+      return func.apply(this, args);
+    };
+  };
+
+  // Bind a number of an object's methods to that object. Remaining arguments
+  // are the method names to be bound. Useful for ensuring that all callbacks
+  // defined on an object belong to it.
+  _.bindAll = function(obj) {
+    var i, length = arguments.length, key;
+    if (length <= 1) throw new Error('bindAll must be passed function names');
+    for (i = 1; i < length; i++) {
+      key = arguments[i];
+      obj[key] = _.bind(obj[key], obj);
+    }
+    return obj;
+  };
+
+  // Memoize an expensive function by storing its results.
+  _.memoize = function(func, hasher) {
+    var memoize = function(key) {
+      var cache = memoize.cache;
+      var address = hasher ? hasher.apply(this, arguments) : key;
+      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
+      return cache[address];
+    };
+    memoize.cache = {};
+    return memoize;
+  };
+
+  // Delays a function for the given number of milliseconds, and then calls
+  // it with the arguments supplied.
+  _.delay = function(func, wait) {
+    var args = slice.call(arguments, 2);
+    return setTimeout(function(){
+      return func.apply(null, args);
+    }, wait);
+  };
+
+  // Defers a function, scheduling it to run after the current call stack has
+  // cleared.
+  _.defer = function(func) {
+    return _.delay.apply(_, [func, 1].concat(slice.call(arguments, 1)));
+  };
+
+  // Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time. Normally, the throttled function will run
+  // as much as it can, without ever going more than once per `wait` duration;
+  // but if you'd like to disable the execution on the leading edge, pass
+  // `{leading: false}`. To disable execution on the trailing edge, ditto.
+  _.throttle = function(func, wait, options) {
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    if (!options) options = {};
+    var later = function() {
+      previous = options.leading === false ? 0 : _.now();
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+    return function() {
+      var now = _.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        clearTimeout(timeout);
+        timeout = null;
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  };
+
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  _.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+
+    var later = function() {
+      var last = _.now() - timestamp;
+
+      if (last < wait && last > 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        }
+      }
+    };
+
+    return function() {
+      context = this;
+      args = arguments;
+      timestamp = _.now();
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+  };
+
+  // Returns the first function passed as an argument to the second,
+  // allowing you to adjust arguments, run code before and after, and
+  // conditionally execute the original function.
+  _.wrap = function(func, wrapper) {
+    return _.partial(wrapper, func);
+  };
+
+  // Returns a negated version of the passed-in predicate.
+  _.negate = function(predicate) {
+    return function() {
+      return !predicate.apply(this, arguments);
+    };
+  };
+
+  // Returns a function that is the composition of a list of functions, each
+  // consuming the return value of the function that follows.
+  _.compose = function() {
+    var args = arguments;
+    var start = args.length - 1;
+    return function() {
+      var i = start;
+      var result = args[start].apply(this, arguments);
+      while (i--) result = args[i].call(this, result);
+      return result;
+    };
+  };
+
+  // Returns a function that will only be executed after being called N times.
+  _.after = function(times, func) {
+    return function() {
+      if (--times < 1) {
+        return func.apply(this, arguments);
+      }
+    };
+  };
+
+  // Returns a function that will only be executed before being called N times.
+  _.before = function(times, func) {
+    var memo;
+    return function() {
+      if (--times > 0) {
+        memo = func.apply(this, arguments);
+      } else {
+        func = null;
+      }
+      return memo;
+    };
+  };
+
+  // Returns a function that will be executed at most one time, no matter how
+  // often you call it. Useful for lazy initialization.
+  _.once = _.partial(_.before, 2);
+
+  // Object Functions
+  // ----------------
+
+  // Retrieve the names of an object's properties.
+  // Delegates to **ECMAScript 5**'s native `Object.keys`
+  _.keys = function(obj) {
+    if (!_.isObject(obj)) return [];
+    if (nativeKeys) return nativeKeys(obj);
+    var keys = [];
+    for (var key in obj) if (_.has(obj, key)) keys.push(key);
+    return keys;
+  };
+
+  // Retrieve the values of an object's properties.
+  _.values = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var values = Array(length);
+    for (var i = 0; i < length; i++) {
+      values[i] = obj[keys[i]];
+    }
+    return values;
+  };
+
+  // Convert an object into a list of `[key, value]` pairs.
+  _.pairs = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var pairs = Array(length);
+    for (var i = 0; i < length; i++) {
+      pairs[i] = [keys[i], obj[keys[i]]];
+    }
+    return pairs;
+  };
+
+  // Invert the keys and values of an object. The values must be serializable.
+  _.invert = function(obj) {
+    var result = {};
+    var keys = _.keys(obj);
+    for (var i = 0, length = keys.length; i < length; i++) {
+      result[obj[keys[i]]] = keys[i];
+    }
+    return result;
+  };
+
+  // Return a sorted list of the function names available on the object.
+  // Aliased as `methods`
+  _.functions = _.methods = function(obj) {
+    var names = [];
+    for (var key in obj) {
+      if (_.isFunction(obj[key])) names.push(key);
+    }
+    return names.sort();
+  };
+
+  // Extend a given object with all the properties in passed-in object(s).
+  _.extend = function(obj) {
+    if (!_.isObject(obj)) return obj;
+    var source, prop;
+    for (var i = 1, length = arguments.length; i < length; i++) {
+      source = arguments[i];
+      for (prop in source) {
+        if (hasOwnProperty.call(source, prop)) {
+            obj[prop] = source[prop];
+        }
+      }
+    }
+    return obj;
+  };
+
+  // Return a copy of the object only containing the whitelisted properties.
+  _.pick = function(obj, iteratee, context) {
+    var result = {}, key;
+    if (obj == null) return result;
+    if (_.isFunction(iteratee)) {
+      iteratee = createCallback(iteratee, context);
+      for (key in obj) {
+        var value = obj[key];
+        if (iteratee(value, key, obj)) result[key] = value;
+      }
+    } else {
+      var keys = concat.apply([], slice.call(arguments, 1));
+      obj = new Object(obj);
+      for (var i = 0, length = keys.length; i < length; i++) {
+        key = keys[i];
+        if (key in obj) result[key] = obj[key];
+      }
+    }
+    return result;
+  };
+
+   // Return a copy of the object without the blacklisted properties.
+  _.omit = function(obj, iteratee, context) {
+    if (_.isFunction(iteratee)) {
+      iteratee = _.negate(iteratee);
+    } else {
+      var keys = _.map(concat.apply([], slice.call(arguments, 1)), String);
+      iteratee = function(value, key) {
+        return !_.contains(keys, key);
+      };
+    }
+    return _.pick(obj, iteratee, context);
+  };
+
+  // Fill in a given object with default properties.
+  _.defaults = function(obj) {
+    if (!_.isObject(obj)) return obj;
+    for (var i = 1, length = arguments.length; i < length; i++) {
+      var source = arguments[i];
+      for (var prop in source) {
+        if (obj[prop] === void 0) obj[prop] = source[prop];
+      }
+    }
+    return obj;
+  };
+
+  // Create a (shallow-cloned) duplicate of an object.
+  _.clone = function(obj) {
+    if (!_.isObject(obj)) return obj;
+    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
+  };
+
+  // Invokes interceptor with the obj, and then returns obj.
+  // The primary purpose of this method is to "tap into" a method chain, in
+  // order to perform operations on intermediate results within the chain.
+  _.tap = function(obj, interceptor) {
+    interceptor(obj);
+    return obj;
+  };
+
+  // Internal recursive comparison function for `isEqual`.
+  var eq = function(a, b, aStack, bStack) {
+    // Identical objects are equal. `0 === -0`, but they aren't identical.
+    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    // A strict comparison is necessary because `null == undefined`.
+    if (a == null || b == null) return a === b;
+    // Unwrap any wrapped objects.
+    if (a instanceof _) a = a._wrapped;
+    if (b instanceof _) b = b._wrapped;
+    // Compare `[[Class]]` names.
+    var className = toString.call(a);
+    if (className !== toString.call(b)) return false;
+    switch (className) {
+      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
+      case '[object RegExp]':
+      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
+      case '[object String]':
+        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+        // equivalent to `new String("5")`.
+        return '' + a === '' + b;
+      case '[object Number]':
+        // `NaN`s are equivalent, but non-reflexive.
+        // Object(NaN) is equivalent to NaN
+        if (+a !== +a) return +b !== +b;
+        // An `egal` comparison is performed for other numeric values.
+        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
+      case '[object Date]':
+      case '[object Boolean]':
+        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
+        // millisecond representations. Note that invalid dates with millisecond representations
+        // of `NaN` are not equivalent.
+        return +a === +b;
+    }
+    if (typeof a != 'object' || typeof b != 'object') return false;
+    // Assume equality for cyclic structures. The algorithm for detecting cyclic
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+    var length = aStack.length;
+    while (length--) {
+      // Linear search. Performance is inversely proportional to the number of
+      // unique nested structures.
+      if (aStack[length] === a) return bStack[length] === b;
+    }
+    // Objects with different constructors are not equivalent, but `Object`s
+    // from different frames are.
+    var aCtor = a.constructor, bCtor = b.constructor;
+    if (
+      aCtor !== bCtor &&
+      // Handle Object.create(x) cases
+      'constructor' in a && 'constructor' in b &&
+      !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
+        _.isFunction(bCtor) && bCtor instanceof bCtor)
+    ) {
+      return false;
+    }
+    // Add the first object to the stack of traversed objects.
+    aStack.push(a);
+    bStack.push(b);
+    var size, result;
+    // Recursively compare objects and arrays.
+    if (className === '[object Array]') {
+      // Compare array lengths to determine if a deep comparison is necessary.
+      size = a.length;
+      result = size === b.length;
+      if (result) {
+        // Deep compare the contents, ignoring non-numeric properties.
+        while (size--) {
+          if (!(result = eq(a[size], b[size], aStack, bStack))) break;
+        }
+      }
+    } else {
+      // Deep compare objects.
+      var keys = _.keys(a), key;
+      size = keys.length;
+      // Ensure that both objects contain the same number of properties before comparing deep equality.
+      result = _.keys(b).length === size;
+      if (result) {
+        while (size--) {
+          // Deep compare each member
+          key = keys[size];
+          if (!(result = _.has(b, key) && eq(a[key], b[key], aStack, bStack))) break;
+        }
+      }
+    }
+    // Remove the first object from the stack of traversed objects.
+    aStack.pop();
+    bStack.pop();
+    return result;
+  };
+
+  // Perform a deep comparison to check if two objects are equal.
+  _.isEqual = function(a, b) {
+    return eq(a, b, [], []);
+  };
+
+  // Is a given array, string, or object empty?
+  // An "empty" object has no enumerable own-properties.
+  _.isEmpty = function(obj) {
+    if (obj == null) return true;
+    if (_.isArray(obj) || _.isString(obj) || _.isArguments(obj)) return obj.length === 0;
+    for (var key in obj) if (_.has(obj, key)) return false;
+    return true;
+  };
+
+  // Is a given value a DOM element?
+  _.isElement = function(obj) {
+    return !!(obj && obj.nodeType === 1);
+  };
+
+  // Is a given value an array?
+  // Delegates to ECMA5's native Array.isArray
+  _.isArray = nativeIsArray || function(obj) {
+    return toString.call(obj) === '[object Array]';
+  };
+
+  // Is a given variable an object?
+  _.isObject = function(obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+  };
+
+  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp.
+  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
+    _['is' + name] = function(obj) {
+      return toString.call(obj) === '[object ' + name + ']';
+    };
+  });
+
+  // Define a fallback version of the method in browsers (ahem, IE), where
+  // there isn't any inspectable "Arguments" type.
+  if (!_.isArguments(arguments)) {
+    _.isArguments = function(obj) {
+      return _.has(obj, 'callee');
+    };
+  }
+
+  // Optimize `isFunction` if appropriate. Work around an IE 11 bug.
+  if (typeof /./ !== 'function') {
+    _.isFunction = function(obj) {
+      return typeof obj == 'function' || false;
+    };
+  }
+
+  // Is a given object a finite number?
+  _.isFinite = function(obj) {
+    return isFinite(obj) && !isNaN(parseFloat(obj));
+  };
+
+  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
+  _.isNaN = function(obj) {
+    return _.isNumber(obj) && obj !== +obj;
+  };
+
+  // Is a given value a boolean?
+  _.isBoolean = function(obj) {
+    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
+  };
+
+  // Is a given value equal to null?
+  _.isNull = function(obj) {
+    return obj === null;
+  };
+
+  // Is a given variable undefined?
+  _.isUndefined = function(obj) {
+    return obj === void 0;
+  };
+
+  // Shortcut function for checking if an object has a given property directly
+  // on itself (in other words, not on a prototype).
+  _.has = function(obj, key) {
+    return obj != null && hasOwnProperty.call(obj, key);
+  };
+
+  // Utility Functions
+  // -----------------
+
+  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
+  // previous owner. Returns a reference to the Underscore object.
+  _.noConflict = function() {
+    root._ = previousUnderscore;
+    return this;
+  };
+
+  // Keep the identity function around for default iteratees.
+  _.identity = function(value) {
+    return value;
+  };
+
+  _.constant = function(value) {
+    return function() {
+      return value;
+    };
+  };
+
+  _.noop = function(){};
+
+  _.property = function(key) {
+    return function(obj) {
+      return obj[key];
+    };
+  };
+
+  // Returns a predicate for checking whether an object has a given set of `key:value` pairs.
+  _.matches = function(attrs) {
+    var pairs = _.pairs(attrs), length = pairs.length;
+    return function(obj) {
+      if (obj == null) return !length;
+      obj = new Object(obj);
+      for (var i = 0; i < length; i++) {
+        var pair = pairs[i], key = pair[0];
+        if (pair[1] !== obj[key] || !(key in obj)) return false;
+      }
+      return true;
+    };
+  };
+
+  // Run a function **n** times.
+  _.times = function(n, iteratee, context) {
+    var accum = Array(Math.max(0, n));
+    iteratee = createCallback(iteratee, context, 1);
+    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
+    return accum;
+  };
+
+  // Return a random integer between min and max (inclusive).
+  _.random = function(min, max) {
+    if (max == null) {
+      max = min;
+      min = 0;
+    }
+    return min + Math.floor(Math.random() * (max - min + 1));
+  };
+
+  // A (possibly faster) way to get the current timestamp as an integer.
+  _.now = Date.now || function() {
+    return new Date().getTime();
+  };
+
+   // List of HTML entities for escaping.
+  var escapeMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '`': '&#x60;'
+  };
+  var unescapeMap = _.invert(escapeMap);
+
+  // Functions for escaping and unescaping strings to/from HTML interpolation.
+  var createEscaper = function(map) {
+    var escaper = function(match) {
+      return map[match];
+    };
+    // Regexes for identifying a key that needs to be escaped
+    var source = '(?:' + _.keys(map).join('|') + ')';
+    var testRegexp = RegExp(source);
+    var replaceRegexp = RegExp(source, 'g');
+    return function(string) {
+      string = string == null ? '' : '' + string;
+      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
+    };
+  };
+  _.escape = createEscaper(escapeMap);
+  _.unescape = createEscaper(unescapeMap);
+
+  // If the value of the named `property` is a function then invoke it with the
+  // `object` as context; otherwise, return it.
+  _.result = function(object, property) {
+    if (object == null) return void 0;
+    var value = object[property];
+    return _.isFunction(value) ? object[property]() : value;
+  };
+
+  // Generate a unique integer id (unique within the entire client session).
+  // Useful for temporary DOM ids.
+  var idCounter = 0;
+  _.uniqueId = function(prefix) {
+    var id = ++idCounter + '';
+    return prefix ? prefix + id : id;
+  };
+
+  // By default, Underscore uses ERB-style template delimiters, change the
+  // following template settings to use alternative delimiters.
+  _.templateSettings = {
+    evaluate    : /<%([\s\S]+?)%>/g,
+    interpolate : /<%=([\s\S]+?)%>/g,
+    escape      : /<%-([\s\S]+?)%>/g
+  };
+
+  // When customizing `templateSettings`, if you don't want to define an
+  // interpolation, evaluation or escaping regex, we need one that is
+  // guaranteed not to match.
+  var noMatch = /(.)^/;
+
+  // Certain characters need to be escaped so that they can be put into a
+  // string literal.
+  var escapes = {
+    "'":      "'",
+    '\\':     '\\',
+    '\r':     'r',
+    '\n':     'n',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
+
+  var escapeChar = function(match) {
+    return '\\' + escapes[match];
+  };
+
+  // JavaScript micro-templating, similar to John Resig's implementation.
+  // Underscore templating handles arbitrary delimiters, preserves whitespace,
+  // and correctly escapes quotes within interpolated code.
+  // NB: `oldSettings` only exists for backwards compatibility.
+  _.template = function(text, settings, oldSettings) {
+    if (!settings && oldSettings) settings = oldSettings;
+    settings = _.defaults({}, settings, _.templateSettings);
+
+    // Combine delimiters into one regular expression via alternation.
+    var matcher = RegExp([
+      (settings.escape || noMatch).source,
+      (settings.interpolate || noMatch).source,
+      (settings.evaluate || noMatch).source
+    ].join('|') + '|$', 'g');
+
+    // Compile the template source, escaping string literals appropriately.
+    var index = 0;
+    var source = "__p+='";
+    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+      source += text.slice(index, offset).replace(escaper, escapeChar);
+      index = offset + match.length;
+
+      if (escape) {
+        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
+      } else if (interpolate) {
+        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
+      } else if (evaluate) {
+        source += "';\n" + evaluate + "\n__p+='";
+      }
+
+      // Adobe VMs need the match returned to produce the correct offest.
+      return match;
+    });
+    source += "';\n";
+
+    // If a variable is not specified, place data values in local scope.
+    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
+
+    source = "var __t,__p='',__j=Array.prototype.join," +
+      "print=function(){__p+=__j.call(arguments,'');};\n" +
+      source + 'return __p;\n';
+
+    try {
+      var render = new Function(settings.variable || 'obj', '_', source);
+    } catch (e) {
+      e.source = source;
+      throw e;
+    }
+
+    var template = function(data) {
+      return render.call(this, data, _);
+    };
+
+    // Provide the compiled source as a convenience for precompilation.
+    var argument = settings.variable || 'obj';
+    template.source = 'function(' + argument + '){\n' + source + '}';
+
+    return template;
+  };
+
+  // Add a "chain" function. Start chaining a wrapped Underscore object.
+  _.chain = function(obj) {
+    var instance = _(obj);
+    instance._chain = true;
+    return instance;
+  };
+
+  // OOP
+  // ---------------
+  // If Underscore is called as a function, it returns a wrapped object that
+  // can be used OO-style. This wrapper holds altered versions of all the
+  // underscore functions. Wrapped objects may be chained.
+
+  // Helper function to continue chaining intermediate results.
+  var result = function(obj) {
+    return this._chain ? _(obj).chain() : obj;
+  };
+
+  // Add your own custom functions to the Underscore object.
+  _.mixin = function(obj) {
+    _.each(_.functions(obj), function(name) {
+      var func = _[name] = obj[name];
+      _.prototype[name] = function() {
+        var args = [this._wrapped];
+        push.apply(args, arguments);
+        return result.call(this, func.apply(_, args));
+      };
+    });
+  };
+
+  // Add all of the Underscore functions to the wrapper object.
+  _.mixin(_);
+
+  // Add all mutator Array functions to the wrapper.
+  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      var obj = this._wrapped;
+      method.apply(obj, arguments);
+      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
+      return result.call(this, obj);
+    };
+  });
+
+  // Add all accessor Array functions to the wrapper.
+  _.each(['concat', 'join', 'slice'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      return result.call(this, method.apply(this._wrapped, arguments));
+    };
+  });
+
+  // Extracts the result from a wrapped and chained object.
+  _.prototype.value = function() {
+    return this._wrapped;
+  };
+
+  // AMD registration happens at the end for compatibility with AMD loaders
+  // that may not enforce next-turn semantics on modules. Even though general
+  // practice for AMD registration is to be anonymous, underscore registers
+  // as a named module because, like jQuery, it is a base library that is
+  // popular enough to be bundled in a third party lib, but not be part of
+  // an AMD load request. Those cases could generate an error when an
+  // anonymous define() is called outside of a loader request.
+  if (typeof define === 'function' && define.amd) {
+    define('underscore', [], function() {
+      return _;
+    });
+  }
+}.call(this));
+
+; browserify_shim__define__module__export__(typeof underscore != "undefined" ? underscore : window.underscore);
 
 }).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js","/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js","/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js","/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/index.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/index.js":[function(require,module,exports){
 window.name = "NG_DEFER_BOOTSTRAP!";
 
-//window._ = require('underscore');
+window._ = require('underscore');
 // window.$ = require('jquery');
 window.lang = require('./app/lang');
 
@@ -33976,7 +35226,7 @@ require("toggles");
 // require("retina");
 // require("jqueryCookies");
 // require("tagsInput");
-require("custom");
+// require("custom");
 
 
 
@@ -33986,7 +35236,7 @@ angular.element().ready(function() {
     angular.resumeBootstrap([App['name']]);
 });
 
-},{"./app/app.module":"/var/www/html/angular/try-intranet-bracket/bracket/app/app.module.js","./app/lang":"/var/www/html/angular/try-intranet-bracket/bracket/app/lang/index.js","angular":"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular/angular.js","angular-bootstrap":"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular-bootstrap/ui-bootstrap.js","angular-ui-router":"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular-ui-router/release/angular-ui-router.js","bootstrap":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js","custom":"/var/www/html/angular/try-intranet-bracket/bracket/custom.js","jquery":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js","jqueryUi":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js","jqueryValidate":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-validate/dist/jquery.validate.js","toggles":"/var/www/html/angular/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js"}],"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular-bootstrap/ui-bootstrap.js":[function(require,module,exports){
+},{"./app/app.module":"/var/www/html/try-intranet-bracket/bracket/app/app.module.js","./app/lang":"/var/www/html/try-intranet-bracket/bracket/app/lang/index.js","angular":"/var/www/html/try-intranet-bracket/bracket/node_modules/angular/angular.js","angular-bootstrap":"/var/www/html/try-intranet-bracket/bracket/node_modules/angular-bootstrap/ui-bootstrap.js","angular-ui-router":"/var/www/html/try-intranet-bracket/bracket/node_modules/angular-ui-router/release/angular-ui-router.js","bootstrap":"/var/www/html/try-intranet-bracket/bracket/bower_components/bootstrap/dist/js/bootstrap.js","jquery":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery/dist/jquery.js","jqueryUi":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-ui/jquery-ui.js","jqueryValidate":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-validate/dist/jquery.validate.js","toggles":"/var/www/html/try-intranet-bracket/bracket/bower_components/jquery-toggles/toggles.js","underscore":"/var/www/html/try-intranet-bracket/bracket/bower_components/underscore/underscore.js"}],"/var/www/html/try-intranet-bracket/bracket/node_modules/angular-bootstrap/ui-bootstrap.js":[function(require,module,exports){
 /*
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
@@ -38104,7 +39354,7 @@ angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCac
     "</ul>");
 }]);
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular-ui-router/release/angular-ui-router.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/node_modules/angular-ui-router/release/angular-ui-router.js":[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.11
@@ -41764,7 +43014,7 @@ angular.module('ui.router.state')
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
 
-},{}],"/var/www/html/angular/try-intranet-bracket/bracket/node_modules/angular/angular.js":[function(require,module,exports){
+},{}],"/var/www/html/try-intranet-bracket/bracket/node_modules/angular/angular.js":[function(require,module,exports){
 /**
  * @license AngularJS v1.3.4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -67680,4 +68930,4 @@ var styleDirective = valueFn({
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
-},{}]},{},["/var/www/html/angular/try-intranet-bracket/bracket/index.js"]);
+},{}]},{},["/var/www/html/try-intranet-bracket/bracket/index.js"]);

@@ -1,6 +1,6 @@
 window.name = "NG_DEFER_BOOTSTRAP!";
 
-//window._ = require('underscore');
+window._ = require('underscore');
 // window.$ = require('jquery');
 window.lang = require('./app/lang');
 
@@ -21,7 +21,7 @@ require("toggles");
 // require("retina");
 // require("jqueryCookies");
 // require("tagsInput");
-require("custom");
+// require("custom");
 
 
 

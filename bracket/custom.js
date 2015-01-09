@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 jQuery(window).load(function() {
 
     // Page Preloader
@@ -8,7 +8,7 @@ jQuery(window).load(function() {
             'overflow': 'visible'
         });
     });
-});
+});*/
 
 // jQuery(document).ready(function() {
 

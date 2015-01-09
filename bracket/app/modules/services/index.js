@@ -1,5 +1,8 @@
 'use strict';
 
+var util = require('../../util');
+var api = require('../../util/api');
+
 var Service = angular.module('app.service', [])
     .service('UserService', ['$http', function($http) {
         return {
@@ -182,6 +185,64 @@ var Service = angular.module('app.service', [])
                 return xhr.send(fd);
             }
         };
+    }])
+    .service('UserIdentification', ['$http', '$state', '$q', '$rootScope', function($http, $state, $q, $rootScope) {
+        var defer = $q.defer(),
+            getAppDetail = function() {
+                var defer = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: api.getDetails,
+                    params: {
+                        companyId: util.loggedInUser.companyProfile.company._id
+                    }
+                }).success(function(data) {
+                    util.appDetails = data.data;
+                    //$scope.loading = false;
+                    defer.resolve();
+                }).error(function() {
+                    defer.reject();
+                    // console.log(arguments);
+                });
+                return defer.promise;
+            },
+            identifyUser = function() {
+                var defer = $q.defer();
+                $http({
+                    url: api.identifyUser,
+                    method: 'GET'
+                }).success(function(response) {
+                    if (response.success) {
+                        //console.log(response.data);
+                        util.loggedInUser = response.data;
+                        defer.resolve();
+                        //loadHome();
+                    } else {
+                        defer.reject();
+                    }
+
+                }).error(function(error) {
+                    defer.reject();
+                });
+                return defer.promise;
+            };
+
+
+        //checking login status
+        if (!util.loggedInUser) {
+            $q.all([
+                getAppDetail(),
+                identifyUser()
+            ]).then(function() {
+                    $rootScope.stopMainLoading = true;
+                    defer.resolve();
+                },
+                function() {
+                    $state.go('login');
+                    defer.reject();
+                })
+        }
+        return defer.promise;
     }]);
 
 module.exports = Service;

@@ -35,7 +35,7 @@
     <div class="col-sm-12">
 
       <div class="table-responsive">
-        <table class="table table-striped mb30">
+        <table class="table table-hover mb30">
           <thead class="attender-list-padding">
             <tr>
               <th>#</th>
@@ -58,7 +58,7 @@
               <td>{{eachAttender.companyProfile.gender | gender}}</td>
               <td>
                 <div ng-show="eachAttender.companyProfile.manager._id" class="cursor-pointer" ng-click="loadAttendiesView(eachAttender.companyProfile.manager._id)">
-                  <img ng-src="{{eachAttender.companyProfile.manager.personalProfile.photoUrl | url}}" alt="" ng-show="eachAttender.companyProfile.manager.photoUrl" onerror="this.onerror=null;this.src='./resources/images/user.png';" class="small-profile-picture">
+                  <img ng-src="{{eachAttender.companyProfile.manager.personalProfile.photoUrl | url}}" alt="" ng-show="eachAttender.companyProfile.manager.photoUrl" onerror="this.onerror=null;this.src='./images/user.png';" class="small-profile-picture">
                   <span class="manager-details">{{eachAttender.companyProfile.manager.companyProfile.name | name}}</span>
                 </div>
               </td>

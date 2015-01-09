@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <div class="col-sm-9 upload-image-group">
               <div class="change-img profile-picture-container">
-                <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                <img class="speaker-picture-small" ng-src="{{employee.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./images/user.png';">
               </div>
               <div ng-click="activateChangeEvent()" class="change-btn change-img-btn">
                 <input class="upload" type="file" id="choose" />
@@ -271,7 +271,7 @@
                 <li ng-repeat="manager in employee.managers" class="clearfix">
                   <div class="clear-both">
                     <div class="col-sm-2 clearfix">
-                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                      <img style="width: 100%" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./images/user.png';">
                     </div>
                     <div class="col-sm-8 no-padding-left clearfix">
                       <div>{{manager.companyProfile.name | name}}</div>
@@ -297,7 +297,7 @@
                 <li ng-repeat="manager in managers">
                   <div class="clear-both">
                     <div class="col-sm-2 clearfix">
-                      <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./resources/images/user.png';">
+                      <img class="col-sm-12" ng-src="{{manager.personalProfile.photoUrl | url}}" onerror="this.onerror=null;this.src='./images/user.png';">
                     </div>
                     <div class="col-sm-8 no-padding-left clearfix">
                       <div>{{manager.companyProfile.name | name}}</div>

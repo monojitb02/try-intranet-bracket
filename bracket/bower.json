@@ -23,6 +23,8 @@
     "jquery-validate": "~1.13.1",
     "jquery-ui": "~1.11.2",
     "bootstrap": "~3.3.1",
-    "jquery-toggles": "~3.1.4"
+    "jquery-toggles": "~3.1.4",
+    "underscore": "~1.7.0",
+    "md5": "~0.1.3"
   }
 }

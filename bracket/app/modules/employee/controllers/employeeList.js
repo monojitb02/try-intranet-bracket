@@ -108,7 +108,6 @@ module.exports = function($scope, $http, $location, UserService) {
     };
     $scope.userBlock = function(id, index) {
         $http.put(util.api.blockUser, {
-            senderId: util.loggedInUser._id,
             _id: id,
             blocked: true
         }).success(function(response) {
@@ -120,7 +119,6 @@ module.exports = function($scope, $http, $location, UserService) {
 
     $scope.userUnblock = function(id, index) {
         $http.put(util.api.blockUser, {
-            senderId: util.loggedInUser._id,
             _id: id,
             blocked: false
         }).success(function(response) {
