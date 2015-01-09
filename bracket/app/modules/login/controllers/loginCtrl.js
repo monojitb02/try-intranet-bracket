@@ -113,7 +113,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
             } else {
                 $rootScope.stopMainLoading = true;
             }
-
         }).error(function(error) {
             $rootScope.stopMainLoading = true;
         });
@@ -188,11 +187,21 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                         }
                     });
                 }
-            }).error(function() {});
+            }).error(function() {
+                $scope.errors = [lang.networkError];
+                $scope.showErrors = true;
+                util.errorMessageTimeout({
+                    success: function() {
+                        console.log('here');
+                        $scope.errors = [];
+                        $scope.showErrors = false;
+                    }
+                });
+            });
         }
     };
 
-    $scope.showSubscribe = function() {
+    /*$scope.showSubscribe = function() {
         $location.path("/subscribe");
-    }
+    }*/
 }

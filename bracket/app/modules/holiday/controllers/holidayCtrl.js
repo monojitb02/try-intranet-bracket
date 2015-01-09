@@ -5,34 +5,34 @@ module.exports = function($scope, $http, $location) {
     var clearSuccess = function() {
         $scope.success = '';
         $scope.errors = [];
-        $scope.$apply();
+        //$scope.$apply();
     };
-
-    $('#HolidayDetails').validate({
-        rules: {
-            name: 'required',
-            startDate: 'required',
-        },
-        messages: {
-            name: lang.validationMessages.name,
-            startDate: lang.validationMessages.date,
-        },
-        highlight: function(element) {
-            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
-        },
-        errorPlacement: function(error, element) {
-            if (element.attr('name') == 'gender') {
-                error.insertAfter($(element).parent().parent());
-            } else {
-                error.insertAfter(element);
+    $scope.$on('$viewContentLoaded', function() {
+        $('#HolidayDetails').validate({
+            rules: {
+                name: 'required',
+                startDate: 'required',
+            },
+            messages: {
+                name: lang.validationMessages.name,
+                startDate: lang.validationMessages.date,
+            },
+            highlight: function(element) {
+                $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr('name') == 'gender') {
+                    error.insertAfter($(element).parent().parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            success: function(element) {
+                $(element).closest('.form-control').removeClass('has-error');
+                $(element).closest('label').remove();
             }
-        },
-        success: function(element) {
-            $(element).closest('.form-control').removeClass('has-error');
-            $(element).closest('label').remove();
-        }
+        });
     });
-
     var init = function() {
 
             $scope.isAdmin = (util.loggedInUser.companyProfile.role.trueName === 'admin') ? true : false;
@@ -59,7 +59,7 @@ module.exports = function($scope, $http, $location) {
                 }).success(function(response) {
                     if (response.success) {
                         deletedHoliday = $scope.allHolidays.splice(index, 1);
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         $scope.allHolidays.push(deletedHoliday[0]);
                         $scope.errors = [lang.networkError];
@@ -69,7 +69,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             }
@@ -120,11 +120,10 @@ module.exports = function($scope, $http, $location) {
             /**
              * end of datePicker function
              */
-            $scope.$apply();
+            //$scope.$apply();
         };
 
-    $scope.addAttendance = function() {
-
+    $scope.addHoliday = function() {
 
         if ($('#HolidayDetails').valid()) {
             $scope.loading = true;
@@ -149,7 +148,7 @@ module.exports = function($scope, $http, $location) {
                             }
                         });
                         // $location.path('/holiday/list');
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         if (_.values(response.errfor).length > 0) {
                             $scope.errors = _.values(response.errfor);
@@ -164,7 +163,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             } else {
@@ -182,7 +181,7 @@ module.exports = function($scope, $http, $location) {
                             }
                         });
                         // $location.path('/holiday/list');
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         if (_.values(response.errfor).length > 0) {
                             $scope.errors = _.values(response.errfor);
@@ -197,7 +196,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             }
@@ -205,10 +204,14 @@ module.exports = function($scope, $http, $location) {
 
     };
 
-    $http.get(util.api.viewHolidays + '?senderId=' + util.loggedInUser._id).success(function(response) {
+    $http({
+        method: 'GET',
+        url: api.viewHolidays
+    }).success(function(response) {
         $scope.allHolidays = response.data;
-
         init();
-    })
+    }).error(function() {
+
+    });
 
 };

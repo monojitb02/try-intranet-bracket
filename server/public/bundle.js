@@ -2110,34 +2110,34 @@ module.exports = function($scope, $http, $location) {
     var clearSuccess = function() {
         $scope.success = '';
         $scope.errors = [];
-        $scope.$apply();
+        //$scope.$apply();
     };
-
-    $('#HolidayDetails').validate({
-        rules: {
-            name: 'required',
-            startDate: 'required',
-        },
-        messages: {
-            name: lang.validationMessages.name,
-            startDate: lang.validationMessages.date,
-        },
-        highlight: function(element) {
-            $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
-        },
-        errorPlacement: function(error, element) {
-            if (element.attr('name') == 'gender') {
-                error.insertAfter($(element).parent().parent());
-            } else {
-                error.insertAfter(element);
+    $scope.$on('$viewContentLoaded', function() {
+        $('#HolidayDetails').validate({
+            rules: {
+                name: 'required',
+                startDate: 'required',
+            },
+            messages: {
+                name: lang.validationMessages.name,
+                startDate: lang.validationMessages.date,
+            },
+            highlight: function(element) {
+                $(element).closest('.form-control').removeClass('has-success').addClass('has-error');
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr('name') == 'gender') {
+                    error.insertAfter($(element).parent().parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            success: function(element) {
+                $(element).closest('.form-control').removeClass('has-error');
+                $(element).closest('label').remove();
             }
-        },
-        success: function(element) {
-            $(element).closest('.form-control').removeClass('has-error');
-            $(element).closest('label').remove();
-        }
+        });
     });
-
     var init = function() {
 
             $scope.isAdmin = (util.loggedInUser.companyProfile.role.trueName === 'admin') ? true : false;
@@ -2164,7 +2164,7 @@ module.exports = function($scope, $http, $location) {
                 }).success(function(response) {
                     if (response.success) {
                         deletedHoliday = $scope.allHolidays.splice(index, 1);
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         $scope.allHolidays.push(deletedHoliday[0]);
                         $scope.errors = [lang.networkError];
@@ -2174,7 +2174,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             }
@@ -2225,11 +2225,10 @@ module.exports = function($scope, $http, $location) {
             /**
              * end of datePicker function
              */
-            $scope.$apply();
+            //$scope.$apply();
         };
 
-    $scope.addAttendance = function() {
-
+    $scope.addHoliday = function() {
 
         if ($('#HolidayDetails').valid()) {
             $scope.loading = true;
@@ -2254,7 +2253,7 @@ module.exports = function($scope, $http, $location) {
                             }
                         });
                         // $location.path('/holiday/list');
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         if (_.values(response.errfor).length > 0) {
                             $scope.errors = _.values(response.errfor);
@@ -2269,7 +2268,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             } else {
@@ -2287,7 +2286,7 @@ module.exports = function($scope, $http, $location) {
                             }
                         });
                         // $location.path('/holiday/list');
-                        $scope.$apply();
+                        //$scope.$apply();
                     } else {
                         if (_.values(response.errfor).length > 0) {
                             $scope.errors = _.values(response.errfor);
@@ -2302,7 +2301,7 @@ module.exports = function($scope, $http, $location) {
                                 clearSuccess();
                             }
                         });
-                        $scope.$apply();
+                        //$scope.$apply();
                     }
                 })
             }
@@ -2310,11 +2309,15 @@ module.exports = function($scope, $http, $location) {
 
     };
 
-    $http.get(util.api.viewHolidays + '?senderId=' + util.loggedInUser._id).success(function(response) {
+    $http({
+        method: 'GET',
+        url: api.viewHolidays
+    }).success(function(response) {
         $scope.allHolidays = response.data;
-
         init();
-    })
+    }).error(function() {
+
+    });
 
 };
 
@@ -2342,7 +2345,7 @@ module.exports = function($stateProvider, $locationProvider, $urlRouterProvider)
 };
 
 },{"../templates/holiday.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/holiday/templates/holiday.html":[function(require,module,exports){
-module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i>Holiday List</h2>\n  </div>\n\n\n\n  <div class="contentpanel">\n\n    <div id="form_fillup" class="panel panel-default">\n\n      <!-- <div class="panel-heading">\n      \n      \n        <h4 class="panel-title">Method 2: Fillup the form</h4>\n      \n      </div> -->\n\n      <div ng-show="isAdmin" class="panel-body">\n\n        <div ng-show="showErrors">\n          <div ng-repeat="error in errors" class="text-center error">{{error}}</div>\n        </div>\n\n        <div ng-show="success">\n          <div class="text-center text-success">{{success}}</div>\n        </div>\n\n        <form id="HolidayDetails" class="form-inline">\n\n          <div class="form-group col-sm-5">\n            <label class="col-sm-3 control-label">Date\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <div class="input-group col-sm-12 pull-left">\n                <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n                <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n              </div>\n            </div>\n\n          </div>\n\n          <div class="form-group col-sm-6">\n            <label class="col-sm-3 control-label">Name\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <input name="name" type="text" ng-model="holidayDetails.purpose" placeholder="Name" class="form-control full-width" />\n            </div>\n          </div>\n\n        </form>\n\n        <div class="form-group">\n          <div class="row">\n            <div class="form-button-group col-sm-6 col-sm-offset-4">\n              <button class="btn btn-primary" ng-click="addAttendance()">\n                Submit\n                <span ng-show="loading">\n                  <i class="fa fa-spin fa-spinner"></i>\n                </span>\n              </button>\n              <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class="blank-div"></div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-striped mb30">\n          <thead>\n            <tr>\n              <th>Sl. No.</th>\n              <th>Date</th>\n              <th>Week day</th>\n              <th>Name</th>\n              <th ng-if="isAdmin">Actions</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="eachHoliday in allHolidays">\n              <td>{{$index+1}}</td>\n              <td>{{eachHoliday.date | date:\'MMM d, y\'}}</td>\n              <td>{{eachHoliday.date | date:\'EEEE\'}}</td>\n              <td>{{eachHoliday.purpose}}</td>\n              <td ng-if="isAdmin" class="action-td">\n\n                <a class="btn btn-primary cursor-pointer" ng-click="loadHolidayEditView(eachHoliday)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="deleteHoliday(eachHoliday._id, $index)">\n                  <i class="fa fa-warning icon"></i>Delete\n                </a>\n              </td>\n\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n    </div>\n</section>\n';
+module.exports = '<section>\n\n  <div class="pageheader clearfix">\n    <h2 class="pull-left"><i class="fa fa-list"></i>Holiday List</h2>\n  </div>\n\n\n\n  <div class="contentpanel">\n\n    <div id="form_fillup" class="panel panel-default">\n\n      <!-- <div class="panel-heading">\n      \n      \n        <h4 class="panel-title">Method 2: Fillup the form</h4>\n      \n      </div> -->\n\n      <div ng-show="isAdmin" class="panel-body">\n\n        <div ng-show="showErrors">\n          <div ng-repeat="error in errors" class="text-center error">{{error}}</div>\n        </div>\n\n        <div ng-show="success">\n          <div class="text-center text-success">{{success}}</div>\n        </div>\n\n        <form id="HolidayDetails" class="form-inline">\n\n          <div class="form-group col-sm-5">\n            <label class="col-sm-3 control-label">Date\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <div class="input-group col-sm-12 pull-left">\n                <input name="startDate" type="text" class="form-control disabled-input-with-border" datepicker-popup="{{format}}" ng-model="startdt" is-open="startOpened" min-date="minDate" datepicker-options="dateOptions" date-disabled="startDisabled(date, mode)" ng-required="true" close-text="Close" disabled="disabled" />\n\n                <span class="input-group-btn">\n                  <button type="button" class="btn btn-default" ng-click="startOpen($event)"><i class="glyphicon glyphicon-calendar"></i>\n                  </button>\n                </span>\n              </div>\n            </div>\n\n          </div>\n\n          <div class="form-group col-sm-6">\n            <label class="col-sm-3 control-label">Name\n              <span class="asterisk">*</span>\n            </label>\n\n            <div class="col-sm-8">\n\n              <input name="name" type="text" ng-model="holidayDetails.purpose" placeholder="Name" class="form-control full-width" />\n            </div>\n          </div>\n\n        </form>\n\n        <div class="form-group">\n          <div class="row">\n            <div class="form-button-group col-sm-6 col-sm-offset-4">\n              <button class="btn btn-primary" ng-click="addHoliday()">\n                Submit\n                <span ng-show="loading">\n                  <i class="fa fa-spin fa-spinner"></i>\n                </span>\n              </button>\n              <button class="btn btn-default" ng-click="cancel()">Cancel</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n      <div class="blank-div"></div>\n\n      <div class="table-responsive">\n        <table class="table table-hidaction table-striped mb30">\n          <thead>\n            <tr>\n              <th>Sl. No.</th>\n              <th>Date</th>\n              <th>Week day</th>\n              <th>Name</th>\n              <th ng-if="isAdmin">Actions</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr ng-repeat="eachHoliday in allHolidays">\n              <td>{{$index+1}}</td>\n              <td>{{eachHoliday.date | date:\'MMM d, y\'}}</td>\n              <td>{{eachHoliday.date | date:\'EEEE\'}}</td>\n              <td>{{eachHoliday.purpose}}</td>\n              <td ng-if="isAdmin" class="action-td">\n\n                <a class="btn btn-primary cursor-pointer" ng-click="loadHolidayEditView(eachHoliday)">\n                  <i class="fa fa-edit icon"></i>Edit\n                </a>\n                <a class="btn btn-danger cursor-pointer" ng-click="deleteHoliday(eachHoliday._id, $index)">\n                  <i class="fa fa-warning icon"></i>Delete\n                </a>\n              </td>\n\n            </tr>\n          </tbody>\n        </table>\n      </div>\n\n    </div>\n</section>\n';
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/leave/controllers/leaveAccountCtrl.js":[function(require,module,exports){
 'use strict';
 
@@ -3182,7 +3185,6 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
             } else {
                 $rootScope.stopMainLoading = true;
             }
-
         }).error(function(error) {
             $rootScope.stopMainLoading = true;
         });
@@ -3257,13 +3259,23 @@ module.exports = function($scope, $rootScope, $http, $state, $modal) {
                         }
                     });
                 }
-            }).error(function() {});
+            }).error(function() {
+                $scope.errors = [lang.networkError];
+                $scope.showErrors = true;
+                util.errorMessageTimeout({
+                    success: function() {
+                        console.log('here');
+                        $scope.errors = [];
+                        $scope.showErrors = false;
+                    }
+                });
+            });
         }
     };
 
-    $scope.showSubscribe = function() {
+    /*$scope.showSubscribe = function() {
         $location.path("/subscribe");
-    }
+    }*/
 }
 
 },{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../../../util/api":"/var/www/html/try-intranet-bracket/bracket/app/util/api.js"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/login/login.module.js":[function(require,module,exports){
@@ -3508,80 +3520,58 @@ module.exports = App;
 'use strict';
 
 
-module.exports = function($stateProvider, $urlRouterProvider, $http, $rootScope, $q, $state) {
+
+module.exports = function($stateProvider, $urlRouterProvider, $httpProvider, $q, $state) {
+    var util = require('../../../util');
+    var interceptor = function($q, $injector) {
+        return {
+            request: function(config) {
+                //console.log('request', config);
+                return config;
+            },
+
+            requestError: function(rejection) {
+                // do something on error
+                /*if (canRecover(rejection)) {
+                    return responseOrNewPromise
+                }*/
+                return $q.reject(rejection);
+            },
+
+            response: function(result) {
+                //console.log('response', result);
+                /*result.data.splice(0, 10).forEach(function (repo) {
+                    console.log(repo.name);
+                })*/
+                return result;
+            },
+
+            responseError: function(rejection) {
+                //console.log('Failed with', rejection.status);
+                if (rejection.status === 401) {
+                    util.appDetails = null;
+                    util.loggedInUser = null;
+                    var $state = $injector.get('$state');
+                    $state.go('login');
+                }
+                return $q.reject(rejection);
+            }
+        }
+    };
     $stateProvider
         .state('app', {
             template: require('../templates/panel.html'),
-            controller: 'panelCtrl',
-            resolve: {
-                app: function() {
-                    var defer = $q.defer(),
-                        getAppDetail = function() {
-                            var defer = $q.defer();
-                            $http({
-                                method: 'GET',
-                                url: api.getDetails,
-                                params: {
-                                    companyId: util.loggedInUser.companyProfile.company._id
-                                }
-                            }).success(function(data) {
-                                util.appDetails = data.data;
-                                //$scope.loading = false;
-                                defer.resolve();
-                            }).error(function() {
-                                defer.reject();
-                                // console.log(arguments);
-                            });
-                            return defer.promise;
-                        },
-                        identifyUser = function() {
-                            var defer = $q.defer();
-                            $http({
-                                url: api.identifyUser,
-                                method: 'GET'
-                            }).success(function(response) {
-                                if (response.success) {
-                                    //console.log(response.data);
-                                    util.loggedInUser = response.data;
-                                    defer.resolve();
-                                    //loadHome();
-                                } else {
-                                    defer.reject();
-                                }
-
-                            }).error(function(error) {
-                                defer.reject();
-                            });
-                            return defer.promise;
-                        };
-
-
-                    //checking login status
-                    if (!util.loggedInUser) {
-                        $q.all([
-                            getAppDetail(),
-                            identifyUser()
-                        ]).then(function() {
-                                $rootScope.stopMainLoading = true;
-                                defer.resolve();
-                            },
-                            function() {
-                                $state.go('login');
-                                defer.reject();
-                            })
-                    }
-                    return defer.promise;
-                }
-            }
+            controller: 'panelCtrl'
         });
 
     $urlRouterProvider.otherwise(function($injector) {
         var $state = $injector.get('$state');
         $state.go('login');
     });
+    $httpProvider.interceptors.push(interceptor);
 };
 
-},{"../templates/panel.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
+},{"../../../util":"/var/www/html/try-intranet-bracket/bracket/app/util/index.js","../templates/panel.html":"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html"}],"/var/www/html/try-intranet-bracket/bracket/app/modules/panel/templates/panel.html":[function(require,module,exports){
 module.exports = '<section>\n  <div class="leftpanel sticky-leftpanel">\n\n    <div class="logopanel text-center">\n      <h1><span>[</span> intranet <span>]</span></h1>\n    </div>\n    <!-- logopanel -->\n\n    <div class="leftpanelinner">\n\n\n      <!-- This is only visible to small devices -->\n      <div class="visible-xs hidden-sm hidden-md hidden-lg">\n        <div class="media userlogged">\n          <img alt="" src="images/photos/loggeduser.png" class="media-object">\n          <div class="media-body">\n            <h4>John Doe</h4>\n            <!-- <span>"Life is so..."</span>-->\n          </div>\n        </div>\n\n        <h5 class="sidebartitle actitle">Account</h5>\n        <ul class="nav nav-pills nav-stacked nav-bracket mb30">\n          <li><a href="profile.html"><i class="fa fa-user"></i> <span>My Profile</span></a>\n          </li>\n          <li><a href=""><i class="fa fa-cog"></i> <span>Account Settings</span></a>\n          </li>\n          <li ng-click="logout()"><a href=""><i class="fa fa-sign-out"></i> <span>Log Out</span></a>\n          </li>\n        </ul>\n      </div>\n\n\n      <h5 class="sidebartitle">Navigation</h5>\n      <ul class="nav nav-pills nav-stacked nav-bracket">\n        <li class="">\n          <a href="#/home">\n            <i class="fa fa-home"></i> <span>Dashboard</span>\n          </a>\n        </li>\n\n        <!-- Employee Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.employee.view || permissions.employee.add"  ng-if="checkForEmployeeModule()" -->\n          <a ng-click="toggleMenuSlide($event)"><i class="fa fa-users"></i><span>Employees</span></a>\n          <ul class="children">\n            <li ng-click="showEmpList()">\n              <!-- ng-if="permissions.employee.view" -->\n              <a href="#/employee/list"><i class="fa fa-caret-right"></i>Employees List</a>\n            </li>\n            <li ng-click="addEmployees()">\n              <!-- ng-if="permissions.employee.add"  -->\n              <a href="#/employee/add"><i class="fa fa-caret-right"></i>Add Employee</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Employee Module ENDS -->\n\n        <!-- Attendance Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.attendance.view || permissions.attendance.add"  ng-if="checkForAttendanceModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-clock-o"></i> <span>Attendance</span>\n          </a>\n          <ul class="children">\n            <li ng-click="viewAttendance()">\n              <!-- ng-if="permissions.attendance.view" -->\n              <a href="#/attendance/list"><i class="fa fa-caret-right"></i>Show Attendance</a>\n            </li>\n            <li ng-click="showAddAttendance()">\n              <!-- ng-if="permissions.attendance.add" -->\n              <a href="#/attendance/add"><i class="fa fa-caret-right"></i>Add Attendance</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Attendance Module ENDS -->\n\n        <!-- Leave Module -->\n        <li class="nav-parent">\n          <!-- ng-if="permissions.leave.view || permissions.leave.apply || permissions.leave.manage"  ng-if="checkForLeaveModule()" -->\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-users"></i> <span>Leave</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showRequests()">\n              <!-- ng-if="permissions.leave.manage" -->\n              <a href="#/leave/requests"><i class="fa fa-caret-right"></i>Show Requests</a>\n            </li>\n            <li ng-click="requestLeave()">\n              <!-- ng-if="permissions.leave.apply" -->\n              <a href="#/leave/apply"><i class="fa fa-caret-right"></i>Apply For Leave</a>\n            </li>\n            <li ng-click="showLeaveAccount()">\n              <!-- ng-if="permissions.leave.view" -->\n              <a href="#/leave/account"><i class="fa fa-caret-right"></i>Leave Account</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Leave Module ENDS -->\n\n        <!-- Holiday Module -->\n        <li class="nav">\n          <a href="#/holiday">\n            <i class="fa fa-list"></i>\n            <span>Holiday List</span>\n          </a>\n        </li>\n        <!-- Holiday Module ENDS -->\n\n        <!-- Settings Module -->\n        <li class="nav-parent">\n          <a ng-click="toggleMenuSlide($event)">\n            <i class="fa fa-cog"></i>\n            <span>Settings</span>\n          </a>\n          <ul class="children">\n            <li ng-click="showDesignations()">\n              <a href="#/employee/designation"><i class="fa fa-caret-right"></i>Designation</a>\n            </li>\n          </ul>\n        </li>\n        <!-- Settings Module ENDS -->\n\n      </ul>\n\n    </div>\n    <!-- leftpanelinner -->\n  </div>\n  <!-- leftpanel -->\n\n  <div class="mainpanel">\n\n    <div class="headerbar">\n\n      <a class="menutoggle" ng-click="toggleMenu()"><i class="fa fa-bars"></i></a>\n      <!-- \n        <form class="searchform" action="index.html" method="post">\n          <input type="text" class="form-control" name="keyword" placeholder="Search here..." />\n        </form>\n      -->\n      <div class="header-right">\n        <ul class="headermenu">\n          <li>\n            <div class="btn-group">\n              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">\n                <img src="images/photos/loggeduser.png" alt="" /> John Doe\n                <span class="caret"></span>\n              </button>\n              <ul class="dropdown-menu dropdown-menu-usermenu pull-right">\n                <li><a href="#/profile"><i class="glyphicon glyphicon-user"></i> My Profile</a>\n                </li>\n                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a>\n                </li>\n                <li ng-click="logout()"><a href=""><i class="glyphicon glyphicon-log-out"></i> Log Out</a>\n                </li>\n              </ul>\n            </div>\n          </li>\n        </ul>\n      </div>\n      <!-- header-right -->\n\n    </div>\n    <!-- headerbar -->\n\n    <div ui-view="pages" class="page-content">\n\n    </div>\n\n    <!-- contentpanel -->\n\n  </div>\n  <!-- mainpanel -->\n\n</section>\n';
 },{}],"/var/www/html/try-intranet-bracket/bracket/app/modules/profile/controllers/profileCtrl.js":[function(require,module,exports){
 'use strict';

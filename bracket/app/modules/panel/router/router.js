@@ -1,75 +1,53 @@
 'use strict';
 
 
-module.exports = function($stateProvider, $urlRouterProvider, $http, $rootScope, $q, $state) {
+
+module.exports = function($stateProvider, $urlRouterProvider, $httpProvider, $q, $state) {
+    var util = require('../../../util');
+    var interceptor = function($q, $injector) {
+        return {
+            request: function(config) {
+                //console.log('request', config);
+                return config;
+            },
+
+            requestError: function(rejection) {
+                // do something on error
+                /*if (canRecover(rejection)) {
+                    return responseOrNewPromise
+                }*/
+                return $q.reject(rejection);
+            },
+
+            response: function(result) {
+                //console.log('response', result);
+                /*result.data.splice(0, 10).forEach(function (repo) {
+                    console.log(repo.name);
+                })*/
+                return result;
+            },
+
+            responseError: function(rejection) {
+                //console.log('Failed with', rejection.status);
+                if (rejection.status === 401) {
+                    util.appDetails = null;
+                    util.loggedInUser = null;
+                    var $state = $injector.get('$state');
+                    $state.go('login');
+                }
+                return $q.reject(rejection);
+            }
+        }
+    };
     $stateProvider
         .state('app', {
             template: require('../templates/panel.html'),
-            controller: 'panelCtrl',
-            resolve: {
-                app: function() {
-                    var defer = $q.defer(),
-                        getAppDetail = function() {
-                            var defer = $q.defer();
-                            $http({
-                                method: 'GET',
-                                url: api.getDetails,
-                                params: {
-                                    companyId: util.loggedInUser.companyProfile.company._id
-                                }
-                            }).success(function(data) {
-                                util.appDetails = data.data;
-                                //$scope.loading = false;
-                                defer.resolve();
-                            }).error(function() {
-                                defer.reject();
-                                // console.log(arguments);
-                            });
-                            return defer.promise;
-                        },
-                        identifyUser = function() {
-                            var defer = $q.defer();
-                            $http({
-                                url: api.identifyUser,
-                                method: 'GET'
-                            }).success(function(response) {
-                                if (response.success) {
-                                    //console.log(response.data);
-                                    util.loggedInUser = response.data;
-                                    defer.resolve();
-                                    //loadHome();
-                                } else {
-                                    defer.reject();
-                                }
-
-                            }).error(function(error) {
-                                defer.reject();
-                            });
-                            return defer.promise;
-                        };
-
-
-                    //checking login status
-                    if (!util.loggedInUser) {
-                        $q.all([
-                            getAppDetail(),
-                            identifyUser()
-                        ]).then(function() {
-                                $rootScope.stopMainLoading = true;
-                                defer.resolve();
-                            },
-                            function() {
-                                $state.go('login');
-                                defer.reject();
-                            })
-                    }
-                    return defer.promise;
-                }
-            }
+            controller: 'panelCtrl'
         });
 
     $urlRouterProvider.otherwise(function($injector) {
         var $state = $injector.get('$state');
         $state.go('login');
     });
+    $httpProvider.interceptors.push(interceptor);
 };
