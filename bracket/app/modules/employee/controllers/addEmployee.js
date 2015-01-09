@@ -85,7 +85,7 @@ module.exports = function($scope, $rootScope, $state, $http, $location, $modal) 
                 $scope.selectedDesignation = $scope.designations[0];
             }
 
-            $scope.roles = _.filter(util.appDetails.roles, function(eachRole) {
+            $scope.roles = util.appDetails.roles.filter(function(eachRole) {
                 if (!util.loggedInUser.companyProfile.manager) {
                     return eachRole;
                 } else if (eachRole.name !== 'admin') {
